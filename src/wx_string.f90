@@ -12,7 +12,7 @@ module wx_string
     implicit none
 
     private
-    public :: wxString_CreateUTF8, wxString_Delete
+    public :: wxString_CreateUTF8, wxString_Delete, wxString_GetUTF8, wxString_Length
     public :: to_wxstring, from_wxstring
 
     !> @brief C interface bindings for wxFFI string functions
@@ -96,7 +96,7 @@ contains
         type(c_ptr) :: c_str
         integer(c_size_t) :: length
         character(len=1, kind=c_char), dimension(:), pointer :: char_array
-        integer :: i
+        integer :: i, len_int
 
         ! Handle null pointer
         if (.not. c_associated(ptr)) then
@@ -117,9 +117,10 @@ contains
         ! Associate Fortran pointer with C array
         call c_f_pointer(c_str, char_array, [length])
 
-        ! Allocate and copy characters
-        allocate(character(len=length) :: fstring)
-        do i = 1, int(length)
+        ! Allocate and copy characters (convert length once for efficiency)
+        len_int = int(length, kind=kind(len_int))
+        allocate(character(len=len_int) :: fstring)
+        do i = 1, len_int
             fstring(i:i) = char_array(i)
         end do
     end function from_wxstring

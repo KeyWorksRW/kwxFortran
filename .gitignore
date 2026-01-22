@@ -2,3 +2,10 @@
 .vscode/
 
 build/
+
+# Fortran compilation artifacts
+*.mod
+*.o
+*.a
+*.so
+*.dll

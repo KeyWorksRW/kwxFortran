@@ -1,37 +1,42 @@
-# wxFFI Architecture Reference (AI Agent Guide)
+# kwxFFI Architecture Reference (AI Agent Guide)
 
-> **Purpose**: This document explains how wxFFI works for AI agents assisting with language port development. Read this before analyzing or modifying any language binding code.
+> **Purpose**: This document explains how kwxFFI works for AI agents assisting with language port development. Read this before analyzing or modifying any language binding code.
 
 ## Overview
 
-wxFFI is a C-callable interface layer that wraps wxWidgets C++ classes. It enables any language with a Foreign Function Interface (FFI) to call wxWidgets functionality without needing C++ interop.
+kwxFFI (wxWidgets Foreign Function Interface) is a C-callable interface layer that wraps wxWidgets C++ classes. It enables any language with a Foreign Function Interface (FFI) to call wxWidgets functionality without needing C++ interop.
 
-**Key insight**: wxFFI is the shared foundation for all language ports (kwxLuaJIT, kwxRust, kwxFortran, kwxGO, kwxJulia, kwxPerl). All language bindings call the same C functions exposed by wxFFI.
+**Key insight**: kwxFFI is the shared foundation for all language ports (kwxLuaJIT, kwxRust, kwxFortran, kwxGO, kwxJulia, kwxPerl). All language bindings call the same C functions exposed by kwxFFI.
 
 ## Directory Structure
 
 ```
-wxFFI/
+kwxFFI/
 ├── include/
-│   ├── wrapper.h        # Main header, includes all wxWidgets headers
-│   ├── wxffi_def.h      # Export macros (EXPORT, WXFFI_FUNC, etc.)
-│   ├── wxffi_types.h    # Type macros (TClass, TString, TBool, etc.)
-│   ├── wxffi_glue.h     # Function declarations (9000+ lines)
-│   ├── managed.h        # Memory management helpers
+│   ├── wrapper.h        # Precompiled header with all wxWidgets includes and helper classes
+│   ├── wxffi_def.h      # Export macros (EXPORT, WXFFI_FUNC, WXFFI_EXPORT, etc.)
+│   ├── wxffi_types.h    # Type macros (TClass, TString, TBool, TPoint, etc.)
+│   ├── wxffi_glue.h     # All C wrapper function declarations (7500+ lines)
+│   ├── wxffi_grid.h     # Callback types and helper class for custom grid data sources
 │   └── wxc_types.h      # Additional type definitions
 ├── src/
-│   ├── wrapper.cpp      # Application class (ELJApp), closures, event handling
+│   ├── wrapper.cpp      # Closures, callbacks, and event handling
 │   ├── wx_*.cpp         # Per-control implementation files
 │   ├── defs.cpp         # wxWidgets constants exported as functions
 │   └── std.cpp          # C++ to C type conversion helpers
+├── examples/
+│   └── CApp/            # Reference implementation for application startup
+│       ├── kwxApp.h     # Pure C interface for wxWidgets app lifecycle
+│       ├── kwxApp.cpp   # Implementation (hidden from C callers)
+│       └── example_main.c  # Example usage from pure C
 └── CMakeLists.txt
 ```
 
 ## Build Requirements
 
-- **wxWidgets 3.3.0 or later** (enforced via `#if !wxCHECK_VERSION(3, 3, 0)`)
+- **wxWidgets 3.3.1 or later** (enforced via `#if !wxCHECK_VERSION(3, 3, 1)`)
 - **UTF-8 mode enabled**: `wxUSE_UNICODE_UTF8 = 1` in wxWidgets setup.h
-- Compiles to: `wxffi.dll` (Windows), `libwxffi.so` (Linux), `libwxffi.dylib` (macOS)
+- Compiles to: `kwxffi.dll` (Windows), `libkwxffi.so` (Linux), `libkwxffi.dylib` (macOS)
 
 ## Core Concepts
 
@@ -66,7 +71,7 @@ extern "C"
 
 ### 3. Type Macros (wxffi_types.h)
 
-wxFFI uses macros to abstract types for portability:
+kwxFFI uses macros to abstract types for portability:
 
 | Macro | Default Expansion | Purpose |
 |-------|-------------------|---------|
@@ -84,7 +89,7 @@ When `WXC_USE_TYPED_INTERFACE` is defined, `TClass(tp)` expands to the actual ty
 
 ### 4. String Handling
 
-**Critical**: wxFFI uses `wxString*` (pointer to wxString) for string parameters:
+**Critical**: kwxFFI uses `wxString*` (pointer to wxString) for string parameters:
 
 ```cpp
 // Input: caller passes wxString*, function dereferences
@@ -109,7 +114,7 @@ EXPORT wxString* wxTextCtrl_GetValue(void* self)
 
 ### 5. Object Lifetime Management
 
-wxFFI provides several patterns for memory management:
+kwxFFI provides two patterns for memory management:
 
 #### Pattern A: wxWidgets owns the object
 Most UI elements (windows, controls) are owned by their parent and deleted automatically:
@@ -123,13 +128,6 @@ Some objects must be explicitly deleted:
 wxString* str = wxTextCtrl_GetValue(ctrl);
 // ... use str ...
 wxString_Delete(str);  // Must call to avoid leak
-```
-
-#### Pattern C: ManagedPtr wrapper
-For objects needing deferred cleanup (managed.h):
-```cpp
-TClass(wxManagedPtr) wxManagedPtr_CreateFromBitmap(TClass(wxBitmap) obj);
-void wxManagedPtr_Delete(TSelf(wxManagedPtr) self);
 ```
 
 ### 6. Constants and Enums
@@ -189,34 +187,58 @@ EXPORT void wxWindow_GetSize(wxWindow* self, int* w, int* h)
 
 ## Application Lifecycle
 
-wxFFI provides ELJApp (inherits wxApp) as the application class:
+kwxFFI provides a pure C interface for application startup via `kwxApp` (see `examples/CApp/`):
 
-```cpp
-// wrapper.cpp
-IMPLEMENT_APP_NO_MAIN(ELJApp);
+```c
+// From kwxApp.h - the C interface foreign languages use
+int kwxApp_Initialize(int argc, char** argv);  // Call once before any wx functions
+int kwxApp_MainLoop(void);                     // Run event loop, blocks until exit
+void kwxApp_ExitMainLoop(void);                // Call from event handler to quit
+void kwxApp_Shutdown(void);                    // Optional cleanup
 
-// Key functions:
-bool ELJApp::OnInit();      // Initializes idle timer, runs init closure
-int ELJApp::OnExit();       // Cleans up idle timer
-void ELJApp::HandleEvent(); // Invokes closures for events
+// Application properties
+void kwxApp_SetAppName(const char* name);
+void kwxApp_SetTopWindow(void* window);
+void kwxApp_SetExitOnFrameDelete(int flag);
+
+// Idle timer for periodic background tasks
+typedef void (*kwxApp_IdleCallback)(void* data);
+void kwxApp_SetIdleCallback(int interval_ms, kwxApp_IdleCallback callback, void* data);
 ```
+
+The implementation (`kwxApp.cpp`) contains a hidden `kwxAppImpl : wxApp` subclass. Foreign languages never see the C++ code—they only use the C interface.
 
 ## File Organization by Category
 
 | File Pattern | Contents |
 |--------------|----------|
 | `wx_<control>.cpp` | Single control implementation (wx_button, wx_textctrl, etc.) |
-| `wrapper.cpp` | App class, closures, idle timer |
+| `wrapper.cpp` | Closures, callbacks, helper classes |
 | `defs.cpp` | Constant exports |
 | `std.cpp` | C++/C type conversions |
-| `managed.cpp` | Memory management helpers |
 | `wx_event.cpp` | Event classes and event type exports |
+| `examples/CApp/` | Reference implementation for app startup |
 
-## How Language Bindings Use wxFFI
+## Helper Classes (kwx* prefix)
+
+Several classes in `wrapper.h` derive from wxWidgets classes to support callbacks:
+
+| Class | Purpose |
+|-------|--------|
+| `wxClosure` | Reference-counted wrapper for foreign function pointer + data |
+| `wxCallback` | Connects to wxWidgets event system, invokes closures |
+| `kwxDropTarget` | Drag-and-drop target with foreign callbacks |
+| `kwxTextDropTarget` | Text-specific drop target |
+| `kwxFileDropTarget` | File-specific drop target |
+| `kwxDragDataObject` | Custom data object with foreign callbacks |
+
+Note: Older "ELJ" prefix classes from wxHaskell origins have been renamed to "kwx" prefix.
+
+## How Language Bindings Use kwxFFI
 
 Each language binding:
 
-1. **Loads the shared library**: `wxffi.dll` / `libwxffi.so`
+1. **Loads the shared library**: `kwxffi.dll` / `libkwxffi.so`
 2. **Declares function signatures**: Maps C signatures to language types
 3. **Wraps in OO classes**: Creates idiomatic class wrappers
 4. **Manages memory**: Handles wxString creation/deletion, cleanup
@@ -245,21 +267,28 @@ ffi.cdef[[
 - Deprecated API removed
 - Pre-3.0 compatibility code removed
 - UTF-8 strings only (wxUSE_UNICODE_UTF8)
-- Targets wxWidgets 3.3+ exclusively
+- Targets wxWidgets 3.3.1+ exclusively
+- ELJ* classes renamed to kwx* prefix
+- Pure C application startup via kwxApp (no IMPLEMENT_APP_NO_MAIN needed)
 
 ## Common Patterns for AI Analysis
 
 When analyzing language binding code, look for:
 
-1. **FFI loading**: How the binding loads wxffi library
-2. **Type mapping**: How C types map to language types (especially `void*` → object)
-3. **String conversion**: How UTF-8 strings convert to/from wxString*
-4. **Event binding**: How callbacks/closures are implemented
-5. **Memory management**: Who owns allocated objects, when cleanup happens
+1. **FFI loading**: How the binding loads kwxffi library
+2. **App initialization**: Uses kwxApp_Initialize() / kwxApp_MainLoop() pattern
+3. **Type mapping**: How C types map to language types (especially `void*` → object)
+4. **String conversion**: How UTF-8 strings convert to/from wxString*
+5. **Event binding**: How callbacks/closures are implemented
+6. **Memory management**: Who owns allocated objects, when cleanup happens
 
 ## Debugging Tips
 
-- All exported symbols start with `wx` or `exp`
+- Exported symbols start with `wx` (functions), `exp` (constants), or `kwxApp_` (app lifecycle)
 - Check if wxWidgets was built with `wxUSE_UNICODE_UTF8=1`
 - String issues often come from missing wxString creation/deletion
 - Event issues often come from incorrect closure setup
+
+## Credits
+
+This project is based on the FFI layer from [wxHaskell](https://codeberg.org/wxHaskell/wxHaskell).

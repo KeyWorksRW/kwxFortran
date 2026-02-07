@@ -53,6 +53,12 @@ module wxffi_types
     type, extends(wxWindow_t), public :: wxComboBox_t
     end type wxComboBox_t
 
+    type, extends(wxWindow_t), public :: wxStatusBar_t
+    end type wxStatusBar_t
+
+    type, extends(wxWindow_t), public :: wxToolBar_t
+    end type wxToolBar_t
+
     ! Layout types (sizers)
     type, public :: wxSizer_t
         type(c_ptr) :: ptr = c_null_ptr

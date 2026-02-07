@@ -15,4 +15,8 @@ set( FORTRAN_SOURCES
     src/wx_app.f90            # App wrapper (depends on wxffi_types, wxffi_bindings)
     src/wx_window.f90         # Window wrapper (depends on types, bindings, constants, string)
     src/wx_frame.f90          # Frame wrapper (depends on types, bindings, constants, string)
+    src/wx_controls.f90       # Control wrappers (depends on types, bindings, constants, string)
+    src/wx_menus.f90          # Menu wrappers (depends on types, bindings, constants, string)
+    src/wx_sizers.f90         # Sizer wrappers (depends on types, bindings, constants)
+    src/wx_events.f90         # Event wrappers (depends on types, bindings, constants, string)
 )

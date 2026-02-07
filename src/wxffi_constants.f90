@@ -45,6 +45,77 @@ module wxffi_constants
     public :: wxLEFT, wxRIGHT, wxUP, wxDOWN, wxTOP, wxBOTTOM, wxALL
 
     !---------------------------------------------------------------------------
+    ! TextCtrl styles
+    !---------------------------------------------------------------------------
+    public :: wxTE_READONLY, wxTE_MULTILINE, wxTE_PASSWORD, wxTE_PROCESS_ENTER
+
+    !---------------------------------------------------------------------------
+    ! Button styles
+    !---------------------------------------------------------------------------
+    public :: wxBU_EXACTFIT, wxBU_LEFT, wxBU_TOP, wxBU_RIGHT, wxBU_BOTTOM
+
+    !---------------------------------------------------------------------------
+    ! StaticText styles
+    !---------------------------------------------------------------------------
+    public :: wxST_NO_AUTORESIZE
+
+    !---------------------------------------------------------------------------
+    ! Window styles
+    !---------------------------------------------------------------------------
+    public :: wxTAB_TRAVERSAL
+
+    !---------------------------------------------------------------------------
+    ! Event types (command events)
+    !---------------------------------------------------------------------------
+    public :: wxEVT_COMMAND_BUTTON_CLICKED
+    public :: wxEVT_COMMAND_CHECKBOX_CLICKED
+    public :: wxEVT_COMMAND_CHOICE_SELECTED
+    public :: wxEVT_COMMAND_TEXT_UPDATED
+    public :: wxEVT_COMMAND_TEXT_ENTER
+    public :: wxEVT_COMMAND_MENU_SELECTED
+
+    !---------------------------------------------------------------------------
+    ! Phase 5: Additional event types
+    !---------------------------------------------------------------------------
+    public :: wxEVT_COMMAND_LISTBOX_SELECTED
+    public :: wxEVT_COMMAND_LISTBOX_DOUBLECLICKED
+    public :: wxEVT_COMMAND_RADIOBUTTON_SELECTED
+    public :: wxEVT_COMMAND_COMBOBOX_SELECTED
+    public :: wxEVT_COMMAND_TOOL_CLICKED
+
+    !---------------------------------------------------------------------------
+    ! ListBox styles
+    !---------------------------------------------------------------------------
+    public :: wxLB_SINGLE, wxLB_MULTIPLE, wxLB_EXTENDED, wxLB_SORT
+    public :: wxLB_NEEDED_SB, wxLB_ALWAYS_SB
+
+    !---------------------------------------------------------------------------
+    ! ComboBox styles
+    !---------------------------------------------------------------------------
+    public :: wxCB_SIMPLE, wxCB_SORT, wxCB_READONLY, wxCB_DROPDOWN
+
+    !---------------------------------------------------------------------------
+    ! RadioButton styles
+    !---------------------------------------------------------------------------
+    public :: wxRB_GROUP
+
+    !---------------------------------------------------------------------------
+    ! Menu item kinds
+    !---------------------------------------------------------------------------
+    public :: wxITEM_SEPARATOR, wxITEM_NORMAL, wxITEM_CHECK, wxITEM_RADIO
+
+    !---------------------------------------------------------------------------
+    ! Toolbar styles
+    !---------------------------------------------------------------------------
+    public :: wxTB_HORIZONTAL, wxTB_VERTICAL, wxTB_FLAT
+    public :: wxTB_TEXT, wxTB_NODIVIDER
+
+    !---------------------------------------------------------------------------
+    ! StatusBar styles
+    !---------------------------------------------------------------------------
+    public :: wxST_SIZEGRIP
+
+    !---------------------------------------------------------------------------
     ! Special values
     !---------------------------------------------------------------------------
     public :: wxDefaultCoord
@@ -350,6 +421,275 @@ module wxffi_constants
             import :: c_int
             integer(c_int) :: wxDefaultCoord
         end function wxDefaultCoord
+
+        !-----------------------------------------------------------------------
+        ! TextCtrl styles
+        !-----------------------------------------------------------------------
+        function wxTE_READONLY() bind(C, name="expwxTE_READONLY")
+            import :: c_int
+            integer(c_int) :: wxTE_READONLY
+        end function wxTE_READONLY
+
+        function wxTE_MULTILINE() bind(C, name="expwxTE_MULTILINE")
+            import :: c_int
+            integer(c_int) :: wxTE_MULTILINE
+        end function wxTE_MULTILINE
+
+        function wxTE_PASSWORD() bind(C, name="expwxTE_PASSWORD")
+            import :: c_int
+            integer(c_int) :: wxTE_PASSWORD
+        end function wxTE_PASSWORD
+
+        function wxTE_PROCESS_ENTER() bind(C, name="expwxTE_PROCESS_ENTER")
+            import :: c_int
+            integer(c_int) :: wxTE_PROCESS_ENTER
+        end function wxTE_PROCESS_ENTER
+
+        !-----------------------------------------------------------------------
+        ! Button styles
+        !-----------------------------------------------------------------------
+        function wxBU_EXACTFIT() bind(C, name="expwxBU_EXACTFIT")
+            import :: c_int
+            integer(c_int) :: wxBU_EXACTFIT
+        end function wxBU_EXACTFIT
+
+        function wxBU_LEFT() bind(C, name="expwxBU_LEFT")
+            import :: c_int
+            integer(c_int) :: wxBU_LEFT
+        end function wxBU_LEFT
+
+        function wxBU_TOP() bind(C, name="expwxBU_TOP")
+            import :: c_int
+            integer(c_int) :: wxBU_TOP
+        end function wxBU_TOP
+
+        function wxBU_RIGHT() bind(C, name="expwxBU_RIGHT")
+            import :: c_int
+            integer(c_int) :: wxBU_RIGHT
+        end function wxBU_RIGHT
+
+        function wxBU_BOTTOM() bind(C, name="expwxBU_BOTTOM")
+            import :: c_int
+            integer(c_int) :: wxBU_BOTTOM
+        end function wxBU_BOTTOM
+
+        !-----------------------------------------------------------------------
+        ! StaticText styles
+        !-----------------------------------------------------------------------
+        function wxST_NO_AUTORESIZE() bind(C, name="expwxST_NO_AUTORESIZE")
+            import :: c_int
+            integer(c_int) :: wxST_NO_AUTORESIZE
+        end function wxST_NO_AUTORESIZE
+
+        !-----------------------------------------------------------------------
+        ! Window styles
+        !-----------------------------------------------------------------------
+        function wxTAB_TRAVERSAL() bind(C, name="expwxTAB_TRAVERSAL")
+            import :: c_int
+            integer(c_int) :: wxTAB_TRAVERSAL
+        end function wxTAB_TRAVERSAL
+
+        !-----------------------------------------------------------------------
+        ! Event types
+        !-----------------------------------------------------------------------
+        function wxEVT_COMMAND_BUTTON_CLICKED() &
+            bind(C, name="expwxEVT_COMMAND_BUTTON_CLICKED")
+            import :: c_int
+            integer(c_int) :: wxEVT_COMMAND_BUTTON_CLICKED
+        end function wxEVT_COMMAND_BUTTON_CLICKED
+
+        function wxEVT_COMMAND_CHECKBOX_CLICKED() &
+            bind(C, name="expwxEVT_COMMAND_CHECKBOX_CLICKED")
+            import :: c_int
+            integer(c_int) :: wxEVT_COMMAND_CHECKBOX_CLICKED
+        end function wxEVT_COMMAND_CHECKBOX_CLICKED
+
+        function wxEVT_COMMAND_CHOICE_SELECTED() &
+            bind(C, name="expwxEVT_COMMAND_CHOICE_SELECTED")
+            import :: c_int
+            integer(c_int) :: wxEVT_COMMAND_CHOICE_SELECTED
+        end function wxEVT_COMMAND_CHOICE_SELECTED
+
+        function wxEVT_COMMAND_TEXT_UPDATED() &
+            bind(C, name="expwxEVT_COMMAND_TEXT_UPDATED")
+            import :: c_int
+            integer(c_int) :: wxEVT_COMMAND_TEXT_UPDATED
+        end function wxEVT_COMMAND_TEXT_UPDATED
+
+        function wxEVT_COMMAND_TEXT_ENTER() &
+            bind(C, name="expwxEVT_COMMAND_TEXT_ENTER")
+            import :: c_int
+            integer(c_int) :: wxEVT_COMMAND_TEXT_ENTER
+        end function wxEVT_COMMAND_TEXT_ENTER
+
+        function wxEVT_COMMAND_MENU_SELECTED() &
+            bind(C, name="expwxEVT_COMMAND_MENU_SELECTED")
+            import :: c_int
+            integer(c_int) :: wxEVT_COMMAND_MENU_SELECTED
+        end function wxEVT_COMMAND_MENU_SELECTED
+
+        !-----------------------------------------------------------------------
+        ! Additional event types (Phase 5)
+        !-----------------------------------------------------------------------
+
+        function wxEVT_COMMAND_LISTBOX_SELECTED() &
+            bind(C, name="expwxEVT_COMMAND_LISTBOX_SELECTED")
+            import :: c_int
+            integer(c_int) :: wxEVT_COMMAND_LISTBOX_SELECTED
+        end function wxEVT_COMMAND_LISTBOX_SELECTED
+
+        function wxEVT_COMMAND_LISTBOX_DOUBLECLICKED() &
+            bind(C, name="expwxEVT_COMMAND_LISTBOX_DOUBLECLICKED")
+            import :: c_int
+            integer(c_int) :: wxEVT_COMMAND_LISTBOX_DOUBLECLICKED
+        end function wxEVT_COMMAND_LISTBOX_DOUBLECLICKED
+
+        function wxEVT_COMMAND_RADIOBUTTON_SELECTED() &
+            bind(C, name="expwxEVT_COMMAND_RADIOBUTTON_SELECTED")
+            import :: c_int
+            integer(c_int) :: wxEVT_COMMAND_RADIOBUTTON_SELECTED
+        end function wxEVT_COMMAND_RADIOBUTTON_SELECTED
+
+        function wxEVT_COMMAND_COMBOBOX_SELECTED() &
+            bind(C, name="expwxEVT_COMMAND_COMBOBOX_SELECTED")
+            import :: c_int
+            integer(c_int) :: wxEVT_COMMAND_COMBOBOX_SELECTED
+        end function wxEVT_COMMAND_COMBOBOX_SELECTED
+
+        function wxEVT_COMMAND_TOOL_CLICKED() &
+            bind(C, name="expwxEVT_COMMAND_TOOL_CLICKED")
+            import :: c_int
+            integer(c_int) :: wxEVT_COMMAND_TOOL_CLICKED
+        end function wxEVT_COMMAND_TOOL_CLICKED
+
+        !-----------------------------------------------------------------------
+        ! ListBox styles
+        !-----------------------------------------------------------------------
+
+        function wxLB_SINGLE() bind(C, name="expwxLB_SINGLE")
+            import :: c_int
+            integer(c_int) :: wxLB_SINGLE
+        end function wxLB_SINGLE
+
+        function wxLB_MULTIPLE() bind(C, name="expwxLB_MULTIPLE")
+            import :: c_int
+            integer(c_int) :: wxLB_MULTIPLE
+        end function wxLB_MULTIPLE
+
+        function wxLB_EXTENDED() bind(C, name="expwxLB_EXTENDED")
+            import :: c_int
+            integer(c_int) :: wxLB_EXTENDED
+        end function wxLB_EXTENDED
+
+        function wxLB_SORT() bind(C, name="expwxLB_SORT")
+            import :: c_int
+            integer(c_int) :: wxLB_SORT
+        end function wxLB_SORT
+
+        function wxLB_NEEDED_SB() bind(C, name="expwxLB_NEEDED_SB")
+            import :: c_int
+            integer(c_int) :: wxLB_NEEDED_SB
+        end function wxLB_NEEDED_SB
+
+        function wxLB_ALWAYS_SB() bind(C, name="expwxLB_ALWAYS_SB")
+            import :: c_int
+            integer(c_int) :: wxLB_ALWAYS_SB
+        end function wxLB_ALWAYS_SB
+
+        !-----------------------------------------------------------------------
+        ! ComboBox styles
+        !-----------------------------------------------------------------------
+
+        function wxCB_SIMPLE() bind(C, name="expwxCB_SIMPLE")
+            import :: c_int
+            integer(c_int) :: wxCB_SIMPLE
+        end function wxCB_SIMPLE
+
+        function wxCB_SORT() bind(C, name="expwxCB_SORT")
+            import :: c_int
+            integer(c_int) :: wxCB_SORT
+        end function wxCB_SORT
+
+        function wxCB_READONLY() bind(C, name="expwxCB_READONLY")
+            import :: c_int
+            integer(c_int) :: wxCB_READONLY
+        end function wxCB_READONLY
+
+        function wxCB_DROPDOWN() bind(C, name="expwxCB_DROPDOWN")
+            import :: c_int
+            integer(c_int) :: wxCB_DROPDOWN
+        end function wxCB_DROPDOWN
+
+        !-----------------------------------------------------------------------
+        ! RadioButton styles
+        !-----------------------------------------------------------------------
+
+        function wxRB_GROUP() bind(C, name="expwxRB_GROUP")
+            import :: c_int
+            integer(c_int) :: wxRB_GROUP
+        end function wxRB_GROUP
+
+        !-----------------------------------------------------------------------
+        ! Menu item kinds
+        !-----------------------------------------------------------------------
+
+        function wxITEM_SEPARATOR() bind(C, name="expwxITEM_SEPARATOR")
+            import :: c_int
+            integer(c_int) :: wxITEM_SEPARATOR
+        end function wxITEM_SEPARATOR
+
+        function wxITEM_NORMAL() bind(C, name="expwxITEM_NORMAL")
+            import :: c_int
+            integer(c_int) :: wxITEM_NORMAL
+        end function wxITEM_NORMAL
+
+        function wxITEM_CHECK() bind(C, name="expwxITEM_CHECK")
+            import :: c_int
+            integer(c_int) :: wxITEM_CHECK
+        end function wxITEM_CHECK
+
+        function wxITEM_RADIO() bind(C, name="expwxITEM_RADIO")
+            import :: c_int
+            integer(c_int) :: wxITEM_RADIO
+        end function wxITEM_RADIO
+
+        !-----------------------------------------------------------------------
+        ! Toolbar styles
+        !-----------------------------------------------------------------------
+
+        function wxTB_HORIZONTAL() bind(C, name="expwxTB_HORIZONTAL")
+            import :: c_int
+            integer(c_int) :: wxTB_HORIZONTAL
+        end function wxTB_HORIZONTAL
+
+        function wxTB_VERTICAL() bind(C, name="expwxTB_VERTICAL")
+            import :: c_int
+            integer(c_int) :: wxTB_VERTICAL
+        end function wxTB_VERTICAL
+
+        function wxTB_FLAT() bind(C, name="expwxTB_FLAT")
+            import :: c_int
+            integer(c_int) :: wxTB_FLAT
+        end function wxTB_FLAT
+
+        function wxTB_TEXT() bind(C, name="expwxTB_TEXT")
+            import :: c_int
+            integer(c_int) :: wxTB_TEXT
+        end function wxTB_TEXT
+
+        function wxTB_NODIVIDER() bind(C, name="expwxTB_NODIVIDER")
+            import :: c_int
+            integer(c_int) :: wxTB_NODIVIDER
+        end function wxTB_NODIVIDER
+
+        !-----------------------------------------------------------------------
+        ! StatusBar styles
+        !-----------------------------------------------------------------------
+
+        function wxST_SIZEGRIP() bind(C, name="expwxST_SIZEGRIP")
+            import :: c_int
+            integer(c_int) :: wxST_SIZEGRIP
+        end function wxST_SIZEGRIP
 
     end interface
 

@@ -143,8 +143,24 @@ set_target_properties( minimal PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/$<CONFIG>
 )
 
+add_executable( hello examples/hello.f90 )
+target_link_libraries( hello PRIVATE kwxFortran kwxFFI )
+
+set_target_properties( hello PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/$<CONFIG>
+)
+
+add_executable( controls_demo examples/controls_demo.f90 )
+target_link_libraries( controls_demo PRIVATE kwxFortran kwxFFI )
+
+set_target_properties( controls_demo PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/$<CONFIG>
+)
+
 # Use Windows GUI subsystem (no console window) but keep main() entry point
 # Fortran's "program" statement generates main(), not WinMain()
 if( WIN32 )
     target_link_options( minimal PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup" )
+    target_link_options( hello PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup" )
+    target_link_options( controls_demo PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup" )
 endif()

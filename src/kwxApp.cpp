@@ -76,6 +76,39 @@ static kwxIdleTimer *g_idleTimer = nullptr;
 /*-----------------------------------------------------------------------------
     The wxApp subclass (hidden from C callers)
 -----------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------
+    Closure callback types (from kwxFFI wrapper.h)
+    Duplicated here so kwxApp.cpp can be self-contained without including
+    wrapper.h which pulls in all of wxWidgets headers.
+-----------------------------------------------------------------------------*/
+typedef void(_cdecl *ClosureFun)(void *_fun, void *_data, void *_evt);
+
+// Forward declarations of kwxFFI closure/callback classes
+class wxClosure;
+class wxCallback;
+
+// We need wxClosure/wxCallback for event handling. These are provided by kwxFFI.
+// Import them here via the extern declarations.
+extern "C"
+{
+    wxClosure *wxClosure_Create(ClosureFun fun, void *data);
+    void *wxClosure_GetData(wxClosure *closure);
+}
+
+// wxCallback wraps a wxClosure and invokes it when an event fires.
+// This minimal declaration matches the kwxFFI wxCallback class.
+class wxCallback : public wxObject
+{
+private:
+    wxClosure *m_closure;
+
+public:
+    wxCallback(wxClosure *closure);
+    ~wxCallback();
+    void Invoke(wxEvent *event);
+    wxClosure *GetClosure();
+};
+
 class kwxAppImpl : public wxApp
 {
 public:
@@ -101,11 +134,23 @@ public:
         return wxApp::OnExit();
     }
 
+    // Routes events through the closure/callback system to foreign functions
+    void HandleEvent(wxEvent &evt);
+
     // Prevent wxApp from failing on foreign language command line args
     void OnInitCmdLine(wxCmdLineParser &parser) override { parser.SetCmdLine(""); }
 
     bool OnCmdLineParsed(wxCmdLineParser &) override { return true; }
 };
+
+void kwxAppImpl::HandleEvent(wxEvent &evt)
+{
+    wxCallback *callback = (wxCallback *)(evt.m_callbackUserData);
+    if (callback)
+    {
+        callback->Invoke(&evt);
+    }
+}
 
 // This is the actual wxApp instance
 wxIMPLEMENT_APP_NO_MAIN(kwxAppImpl);
@@ -398,6 +443,58 @@ extern "C"
     KWXAPP_API void kwxApp_FreeString(char *str)
     {
         free(str);
+    }
+
+    /*-------------------------------------------------------------------------
+        Event Handler Connection
+        Uses kwxAppImpl::HandleEvent to route wxWidgets events to closures.
+        This follows the same pattern as SampleApp in kwxFFI examples.
+
+        Trampoline: kwxFFI's ~wxClosure() calls the closure function one last
+        time with evt=nullptr as a cleanup signal.  Fortran callbacks don't
+        expect this, so we interpose a C trampoline that absorbs the null
+        call, frees the wrapper struct, and never forwards it to Fortran.
+
+        kwxApp_Connect accepts (fun, data) directly — the Fortran side does
+        NOT need to call wxClosure_Create.
+    -------------------------------------------------------------------------*/
+
+    struct FortranClosure
+    {
+        ClosureFun fortran_fun;
+        void *user_data;
+    };
+
+    static void _cdecl fortran_trampoline(void * /*fun*/, void *data, void *evt)
+    {
+        auto *fc = static_cast<FortranClosure *>(data);
+        if (!evt)
+        {
+            // Cleanup call from ~wxClosure — free our wrapper, don't call Fortran
+            delete fc;
+            return;
+        }
+        fc->fortran_fun((void *)fc->fortran_fun, fc->user_data, evt);
+    }
+
+    KWXAPP_API int kwxApp_Connect(void *obj, int first, int last, int type,
+                                  ClosureFun fun, void *data)
+    {
+        auto *fc = new FortranClosure{fun, data};
+        wxClosure *closure = wxClosure_Create(fortran_trampoline, fc);
+        auto *callback = new wxCallback(closure);
+        ((wxEvtHandler *)obj)
+            ->Connect(first, last, type,
+                      (wxObjectEventFunction)&kwxAppImpl::HandleEvent,
+                      callback);
+        return 0;
+    }
+
+    KWXAPP_API int kwxApp_Disconnect(void *obj, int first, int last, int type)
+    {
+        return (int)((wxEvtHandler *)obj)
+            ->Disconnect(first, last, type,
+                         (wxObjectEventFunction)&kwxAppImpl::HandleEvent);
     }
 
 } // extern "C"

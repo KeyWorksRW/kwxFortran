@@ -41,6 +41,43 @@ module wxffi_bindings
     public :: wxFrame_GetClientAreaOrigin_left, wxFrame_GetClientAreaOrigin_top
 
     !---------------------------------------------------------------------------
+    ! wxButton functions
+    !---------------------------------------------------------------------------
+    public :: wxButton_Create, wxButton_SetDefault
+
+    !---------------------------------------------------------------------------
+    ! wxTextCtrl functions
+    !---------------------------------------------------------------------------
+    public :: wxTextCtrl_Create, wxTextCtrl_GetValue
+    public :: wxTextCtrl_SetValue, wxTextCtrl_ChangeValue
+    public :: wxTextCtrl_Clear, wxTextCtrl_WriteText, wxTextCtrl_AppendText
+    public :: wxTextCtrl_IsModified, wxTextCtrl_IsEditable
+    public :: wxTextCtrl_GetNumberOfLines
+
+    !---------------------------------------------------------------------------
+    ! wxStaticText functions
+    !---------------------------------------------------------------------------
+    public :: wxStaticText_Create
+
+    !---------------------------------------------------------------------------
+    ! wxPanel functions
+    !---------------------------------------------------------------------------
+    public :: wxPanel_Create, wxPanel_SetFocus
+
+    !---------------------------------------------------------------------------
+    ! wxBoxSizer functions
+    !---------------------------------------------------------------------------
+    public :: wxBoxSizer_Create, wxBoxSizer_GetOrientation
+
+    !---------------------------------------------------------------------------
+    ! wxSizer functions (base class for all sizers)
+    !---------------------------------------------------------------------------
+    public :: wxSizer_AddWindow, wxSizer_AddSizer, wxSizer_Add
+    public :: wxSizer_AddSpacer, wxSizer_AddStretchSpacer
+    public :: wxSizer_Layout, wxSizer_Fit, wxSizer_SetSizeHints
+    public :: wxSizer_SetMinSize
+
+    !---------------------------------------------------------------------------
     ! wxWindow functions (base class for all UI elements)
     !---------------------------------------------------------------------------
     public :: wxWindow_Create, wxWindow_Destroy, wxWindow_DestroyChildren
@@ -66,6 +103,100 @@ module wxffi_bindings
     public :: wxWindow_IsTopLevel
     public :: wxWindow_Freeze, wxWindow_Thaw
     public :: wxWindow_Lower, wxWindow_Raise
+
+    !---------------------------------------------------------------------------
+    ! Event connection functions (from kwxApp)
+    !---------------------------------------------------------------------------
+    public :: kwxApp_Connect, kwxApp_Disconnect
+
+    !---------------------------------------------------------------------------
+    ! wxClosure functions (from kwxFFI)
+    !---------------------------------------------------------------------------
+    public :: wxClosure_Create, wxClosure_GetData
+
+    !---------------------------------------------------------------------------
+    ! wxEvent functions (base event class)
+    !---------------------------------------------------------------------------
+    public :: wxEvent_GetEventType, wxEvent_GetId, wxEvent_Skip
+    public :: wxEvent_GetTimestamp, wxEvent_GetSkipped
+    public :: wxEvent_GetEventObject, wxEvent_IsCommandEvent
+
+    !---------------------------------------------------------------------------
+    ! wxCommandEvent functions
+    !---------------------------------------------------------------------------
+    public :: wxCommandEvent_GetString, wxCommandEvent_GetSelection
+    public :: wxCommandEvent_GetInt, wxCommandEvent_GetExtraLong
+    public :: wxCommandEvent_IsChecked, wxCommandEvent_IsSelection
+
+    !---------------------------------------------------------------------------
+    ! wxCheckBox functions
+    !---------------------------------------------------------------------------
+    public :: wxCheckBox_Create, wxCheckBox_SetValue, wxCheckBox_GetValue
+
+    !---------------------------------------------------------------------------
+    ! wxRadioButton functions
+    !---------------------------------------------------------------------------
+    public :: wxRadioButton_Create
+    public :: wxRadioButton_SetValue, wxRadioButton_GetValue
+
+    !---------------------------------------------------------------------------
+    ! wxChoice functions
+    !---------------------------------------------------------------------------
+    public :: wxChoice_Create, wxChoice_Append, wxChoice_Delete, wxChoice_Clear
+    public :: wxChoice_GetCount, wxChoice_GetSelection, wxChoice_SetSelection
+    public :: wxChoice_FindString, wxChoice_GetString, wxChoice_SetString
+
+    !---------------------------------------------------------------------------
+    ! wxListBox functions
+    !---------------------------------------------------------------------------
+    public :: wxListBox_Create, wxListBox_Clear, wxListBox_Delete
+    public :: wxListBox_GetCount, wxListBox_GetString, wxListBox_SetString
+    public :: wxListBox_FindString, wxListBox_IsSelected
+    public :: wxListBox_SetSelection, wxListBox_GetSelection
+    public :: wxListBox_Append
+
+    !---------------------------------------------------------------------------
+    ! wxComboBox functions
+    !---------------------------------------------------------------------------
+    public :: wxComboBox_Create, wxComboBox_GetValue, wxComboBox_SetValue
+    public :: wxComboBox_Append, wxComboBox_Delete, wxComboBox_Clear
+    public :: wxComboBox_GetCount, wxComboBox_GetSelection, wxComboBox_SetSelection
+    public :: wxComboBox_FindString, wxComboBox_GetString, wxComboBox_SetString
+    public :: wxComboBox_Copy, wxComboBox_Cut, wxComboBox_Paste
+
+    !---------------------------------------------------------------------------
+    ! wxMenu functions
+    !---------------------------------------------------------------------------
+    public :: wxMenu_Create, wxMenu_DeletePointer
+    public :: wxMenu_Append, wxMenu_AppendSeparator, wxMenu_AppendRadioItem
+    public :: wxMenu_Enable, wxMenu_Check
+    public :: wxMenu_IsEnabled, wxMenu_IsChecked
+    public :: wxMenu_GetMenuItemCount
+    public :: wxMenu_SetTitle, wxMenu_GetTitle
+
+    !---------------------------------------------------------------------------
+    ! wxMenuBar functions
+    !---------------------------------------------------------------------------
+    public :: wxMenuBar_Create, wxMenuBar_Append
+    public :: wxMenuBar_GetMenuCount, wxMenuBar_GetMenu
+    public :: wxMenuBar_EnableTop
+
+    !---------------------------------------------------------------------------
+    ! wxMenuItem functions
+    !---------------------------------------------------------------------------
+    public :: wxMenuItem_Create, wxMenuItem_CreateEx, wxMenuItem_Delete
+    public :: wxMenuItem_GetId, wxMenuItem_IsSeparator
+    public :: wxMenuItem_SetItemLabel, wxMenuItem_GetItemLabel
+    public :: wxMenuItem_SetCheckable, wxMenuItem_IsChecked
+    public :: wxMenuItem_Check, wxMenuItem_Enable, wxMenuItem_IsEnabled
+
+    !---------------------------------------------------------------------------
+    ! wxStatusBar functions
+    !---------------------------------------------------------------------------
+    public :: wxStatusBar_Create
+    public :: wxStatusBar_SetFieldsCount, wxStatusBar_GetFieldsCount
+    public :: wxStatusBar_SetStatusText, wxStatusBar_GetStatusText
+    public :: wxStatusBar_SetMinHeight
 
     interface
 
@@ -584,6 +715,946 @@ module wxffi_bindings
             import :: c_ptr
             type(c_ptr), value :: window
         end subroutine wxWindow_Raise
+
+        !-----------------------------------------------------------------------
+        ! wxButton
+        !-----------------------------------------------------------------------
+        function wxButton_Create(parent, id, text, x, y, w, h, style) &
+            bind(C, name="wxButton_Create")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: parent
+            integer(c_int), value :: id
+            type(c_ptr), value :: text    ! wxString*
+            integer(c_int), value :: x, y, w, h, style
+            type(c_ptr) :: wxButton_Create
+        end function wxButton_Create
+
+        subroutine wxButton_SetDefault(self) bind(C, name="wxButton_SetDefault")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxButton_SetDefault
+
+        !-----------------------------------------------------------------------
+        ! wxTextCtrl
+        !-----------------------------------------------------------------------
+        function wxTextCtrl_Create(parent, id, text, x, y, w, h, style) &
+            bind(C, name="wxTextCtrl_Create")
+            import :: c_ptr, c_int, c_long
+            type(c_ptr), value :: parent
+            integer(c_int), value :: id
+            type(c_ptr), value :: text    ! wxString*
+            integer(c_int), value :: x, y, w, h
+            integer(c_long), value :: style
+            type(c_ptr) :: wxTextCtrl_Create
+        end function wxTextCtrl_Create
+
+        function wxTextCtrl_GetValue(self) bind(C, name="wxTextCtrl_GetValue")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr) :: wxTextCtrl_GetValue  ! wxString* (caller must delete)
+        end function wxTextCtrl_GetValue
+
+        subroutine wxTextCtrl_SetValue(self, value) &
+            bind(C, name="wxTextCtrl_SetValue")
+            import :: c_ptr
+            type(c_ptr), value :: self, value  ! value is wxString*
+        end subroutine wxTextCtrl_SetValue
+
+        subroutine wxTextCtrl_ChangeValue(self, value) &
+            bind(C, name="wxTextCtrl_ChangeValue")
+            import :: c_ptr
+            type(c_ptr), value :: self, value  ! value is wxString*
+        end subroutine wxTextCtrl_ChangeValue
+
+        subroutine wxTextCtrl_Clear(self) bind(C, name="wxTextCtrl_Clear")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxTextCtrl_Clear
+
+        subroutine wxTextCtrl_WriteText(self, text) &
+            bind(C, name="wxTextCtrl_WriteText")
+            import :: c_ptr
+            type(c_ptr), value :: self, text  ! text is wxString*
+        end subroutine wxTextCtrl_WriteText
+
+        subroutine wxTextCtrl_AppendText(self, text) &
+            bind(C, name="wxTextCtrl_AppendText")
+            import :: c_ptr
+            type(c_ptr), value :: self, text  ! text is wxString*
+        end subroutine wxTextCtrl_AppendText
+
+        function wxTextCtrl_IsModified(self) bind(C, name="wxTextCtrl_IsModified")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxTextCtrl_IsModified
+        end function wxTextCtrl_IsModified
+
+        function wxTextCtrl_IsEditable(self) bind(C, name="wxTextCtrl_IsEditable")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxTextCtrl_IsEditable
+        end function wxTextCtrl_IsEditable
+
+        function wxTextCtrl_GetNumberOfLines(self) &
+            bind(C, name="wxTextCtrl_GetNumberOfLines")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxTextCtrl_GetNumberOfLines
+        end function wxTextCtrl_GetNumberOfLines
+
+        !-----------------------------------------------------------------------
+        ! wxStaticText
+        !-----------------------------------------------------------------------
+        function wxStaticText_Create(parent, id, text, x, y, w, h, style) &
+            bind(C, name="wxStaticText_Create")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: parent
+            integer(c_int), value :: id
+            type(c_ptr), value :: text    ! wxString*
+            integer(c_int), value :: x, y, w, h, style
+            type(c_ptr) :: wxStaticText_Create
+        end function wxStaticText_Create
+
+        !-----------------------------------------------------------------------
+        ! wxPanel
+        !-----------------------------------------------------------------------
+        function wxPanel_Create(parent, id, x, y, w, h, style) &
+            bind(C, name="wxPanel_Create")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: parent
+            integer(c_int), value :: id, x, y, w, h, style
+            type(c_ptr) :: wxPanel_Create
+        end function wxPanel_Create
+
+        subroutine wxPanel_SetFocus(self) bind(C, name="wxPanel_SetFocus")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxPanel_SetFocus
+
+        !-----------------------------------------------------------------------
+        ! wxBoxSizer
+        !-----------------------------------------------------------------------
+        function wxBoxSizer_Create(orient) bind(C, name="wxBoxSizer_Create")
+            import :: c_ptr, c_int
+            integer(c_int), value :: orient
+            type(c_ptr) :: wxBoxSizer_Create
+        end function wxBoxSizer_Create
+
+        function wxBoxSizer_GetOrientation(self) &
+            bind(C, name="wxBoxSizer_GetOrientation")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxBoxSizer_GetOrientation
+        end function wxBoxSizer_GetOrientation
+
+        !-----------------------------------------------------------------------
+        ! wxSizer (base class)
+        !-----------------------------------------------------------------------
+        subroutine wxSizer_AddWindow(self, window, option, flag, border, &
+            userData) bind(C, name="wxSizer_AddWindow")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self, window
+            integer(c_int), value :: option, flag, border
+            type(c_ptr), value :: userData
+        end subroutine wxSizer_AddWindow
+
+        subroutine wxSizer_AddSizer(self, sizer, option, flag, border, &
+            userData) bind(C, name="wxSizer_AddSizer")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self, sizer
+            integer(c_int), value :: option, flag, border
+            type(c_ptr), value :: userData
+        end subroutine wxSizer_AddSizer
+
+        subroutine wxSizer_Add(self, width, height, option, flag, border, &
+            userData) bind(C, name="wxSizer_Add")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: width, height, option, flag, border
+            type(c_ptr), value :: userData
+        end subroutine wxSizer_Add
+
+        subroutine wxSizer_AddSpacer(self, size) &
+            bind(C, name="wxSizer_AddSpacer")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: size
+        end subroutine wxSizer_AddSpacer
+
+        subroutine wxSizer_AddStretchSpacer(self, prop) &
+            bind(C, name="wxSizer_AddStretchSpacer")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: prop
+        end subroutine wxSizer_AddStretchSpacer
+
+        subroutine wxSizer_Layout(self) bind(C, name="wxSizer_Layout")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxSizer_Layout
+
+        subroutine wxSizer_Fit(self, window) bind(C, name="wxSizer_Fit")
+            import :: c_ptr
+            type(c_ptr), value :: self, window
+        end subroutine wxSizer_Fit
+
+        subroutine wxSizer_SetSizeHints(self, window) &
+            bind(C, name="wxSizer_SetSizeHints")
+            import :: c_ptr
+            type(c_ptr), value :: self, window
+        end subroutine wxSizer_SetSizeHints
+
+        subroutine wxSizer_SetMinSize(self, width, height) &
+            bind(C, name="wxSizer_SetMinSize")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: width, height
+        end subroutine wxSizer_SetMinSize
+
+        !-----------------------------------------------------------------------
+        ! kwxApp Event Connection
+        ! Routes events through kwxAppImpl::HandleEvent → wxCallback → wxClosure
+        !-----------------------------------------------------------------------
+
+        ! Connect an event handler
+        ! obj: wxEvtHandler* (window/control to connect to)
+        ! first: first window ID to match (-1 for any)
+        ! last: last window ID to match (-1 for same as first)
+        ! type: event type (from expEVT_COMMAND_* constants)
+        ! fun: ClosureFun callback function pointer
+        ! data: user data pointer (passed through to callback)
+        function kwxApp_Connect(obj, first, last, type, fun, data) &
+            bind(C, name="kwxApp_Connect")
+            import :: c_ptr, c_funptr, c_int
+            type(c_ptr), value :: obj
+            integer(c_int), value :: first, last, type
+            type(c_funptr), value :: fun
+            type(c_ptr), value :: data
+            integer(c_int) :: kwxApp_Connect
+        end function kwxApp_Connect
+
+        ! Disconnect an event handler
+        function kwxApp_Disconnect(obj, first, last, type) &
+            bind(C, name="kwxApp_Disconnect")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: obj
+            integer(c_int), value :: first, last, type
+            integer(c_int) :: kwxApp_Disconnect
+        end function kwxApp_Disconnect
+
+        !-----------------------------------------------------------------------
+        ! wxClosure - Reference-counted callback wrapper
+        !-----------------------------------------------------------------------
+
+        ! Create a closure that wraps a foreign function pointer and user data
+        ! fun: procedure pointer matching ClosureFun signature
+        !      void (*)(void* fun, void* data, void* evt)
+        ! data: user data pointer passed to callback
+        function wxClosure_Create(fun, data) bind(C, name="wxClosure_Create")
+            import :: c_ptr, c_funptr
+            type(c_funptr), value :: fun
+            type(c_ptr), value :: data
+            type(c_ptr) :: wxClosure_Create
+        end function wxClosure_Create
+
+        ! Get the user data pointer from a closure
+        function wxClosure_GetData(closure) bind(C, name="wxClosure_GetData")
+            import :: c_ptr
+            type(c_ptr), value :: closure
+            type(c_ptr) :: wxClosure_GetData
+        end function wxClosure_GetData
+
+        !-----------------------------------------------------------------------
+        ! wxEvent - Base event class accessors
+        !-----------------------------------------------------------------------
+
+        function wxEvent_GetEventType(self) bind(C, name="wxEvent_GetEventType")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxEvent_GetEventType
+        end function wxEvent_GetEventType
+
+        function wxEvent_GetId(self) bind(C, name="wxEvent_GetId")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxEvent_GetId
+        end function wxEvent_GetId
+
+        subroutine wxEvent_Skip(self) bind(C, name="wxEvent_Skip")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxEvent_Skip
+
+        function wxEvent_GetTimestamp(self) bind(C, name="wxEvent_GetTimestamp")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxEvent_GetTimestamp
+        end function wxEvent_GetTimestamp
+
+        function wxEvent_GetSkipped(self) bind(C, name="wxEvent_GetSkipped")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxEvent_GetSkipped
+        end function wxEvent_GetSkipped
+
+        function wxEvent_GetEventObject(self) bind(C, name="wxEvent_GetEventObject")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr) :: wxEvent_GetEventObject
+        end function wxEvent_GetEventObject
+
+        function wxEvent_IsCommandEvent(self) bind(C, name="wxEvent_IsCommandEvent")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxEvent_IsCommandEvent
+        end function wxEvent_IsCommandEvent
+
+        !-----------------------------------------------------------------------
+        ! wxCommandEvent - Command event accessors
+        !-----------------------------------------------------------------------
+
+        ! Returns wxString* (caller must delete)
+        function wxCommandEvent_GetString(self) &
+            bind(C, name="wxCommandEvent_GetString")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr) :: wxCommandEvent_GetString
+        end function wxCommandEvent_GetString
+
+        function wxCommandEvent_GetSelection(self) &
+            bind(C, name="wxCommandEvent_GetSelection")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxCommandEvent_GetSelection
+        end function wxCommandEvent_GetSelection
+
+        function wxCommandEvent_GetInt(self) &
+            bind(C, name="wxCommandEvent_GetInt")
+            import :: c_ptr, c_long
+            type(c_ptr), value :: self
+            integer(c_long) :: wxCommandEvent_GetInt
+        end function wxCommandEvent_GetInt
+
+        function wxCommandEvent_GetExtraLong(self) &
+            bind(C, name="wxCommandEvent_GetExtraLong")
+            import :: c_ptr, c_long
+            type(c_ptr), value :: self
+            integer(c_long) :: wxCommandEvent_GetExtraLong
+        end function wxCommandEvent_GetExtraLong
+
+        function wxCommandEvent_IsChecked(self) &
+            bind(C, name="wxCommandEvent_IsChecked")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxCommandEvent_IsChecked
+        end function wxCommandEvent_IsChecked
+
+        function wxCommandEvent_IsSelection(self) &
+            bind(C, name="wxCommandEvent_IsSelection")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxCommandEvent_IsSelection
+        end function wxCommandEvent_IsSelection
+
+        !-----------------------------------------------------------------------
+        ! wxCheckBox
+        !-----------------------------------------------------------------------
+
+        function wxCheckBox_Create(parent, id, text, x, y, w, h, style) &
+            bind(C, name="wxCheckBox_Create")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: parent
+            integer(c_int), value :: id
+            type(c_ptr), value :: text
+            integer(c_int), value :: x, y, w, h, style
+            type(c_ptr) :: wxCheckBox_Create
+        end function wxCheckBox_Create
+
+        subroutine wxCheckBox_SetValue(self, val) &
+            bind(C, name="wxCheckBox_SetValue")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: val
+        end subroutine wxCheckBox_SetValue
+
+        function wxCheckBox_GetValue(self) &
+            bind(C, name="wxCheckBox_GetValue")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxCheckBox_GetValue
+        end function wxCheckBox_GetValue
+
+        !-----------------------------------------------------------------------
+        ! wxRadioButton
+        !-----------------------------------------------------------------------
+
+        function wxRadioButton_Create(parent, id, label, x, y, w, h, style) &
+            bind(C, name="wxRadioButton_Create")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: parent
+            integer(c_int), value :: id
+            type(c_ptr), value :: label
+            integer(c_int), value :: x, y, w, h, style
+            type(c_ptr) :: wxRadioButton_Create
+        end function wxRadioButton_Create
+
+        subroutine wxRadioButton_SetValue(self, val) &
+            bind(C, name="wxRadioButton_SetValue")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: val
+        end subroutine wxRadioButton_SetValue
+
+        function wxRadioButton_GetValue(self) &
+            bind(C, name="wxRadioButton_GetValue")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxRadioButton_GetValue
+        end function wxRadioButton_GetValue
+
+        !-----------------------------------------------------------------------
+        ! wxChoice
+        !-----------------------------------------------------------------------
+
+        function wxChoice_Create(parent, id, x, y, w, h, count, items, &
+            style) bind(C, name="wxChoice_Create")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: parent
+            integer(c_int), value :: id, x, y, w, h, count, style
+            type(c_ptr), value :: items
+            type(c_ptr) :: wxChoice_Create
+        end function wxChoice_Create
+
+        subroutine wxChoice_Append(self, item) &
+            bind(C, name="wxChoice_Append")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr), value :: item
+        end subroutine wxChoice_Append
+
+        subroutine wxChoice_Delete(self, index) &
+            bind(C, name="wxChoice_Delete")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+        end subroutine wxChoice_Delete
+
+        subroutine wxChoice_Clear(self) bind(C, name="wxChoice_Clear")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxChoice_Clear
+
+        function wxChoice_GetCount(self) &
+            bind(C, name="wxChoice_GetCount")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxChoice_GetCount
+        end function wxChoice_GetCount
+
+        function wxChoice_GetSelection(self) &
+            bind(C, name="wxChoice_GetSelection")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxChoice_GetSelection
+        end function wxChoice_GetSelection
+
+        subroutine wxChoice_SetSelection(self, index) &
+            bind(C, name="wxChoice_SetSelection")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+        end subroutine wxChoice_SetSelection
+
+        function wxChoice_FindString(self, str) &
+            bind(C, name="wxChoice_FindString")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            type(c_ptr), value :: str
+            integer(c_int) :: wxChoice_FindString
+        end function wxChoice_FindString
+
+        function wxChoice_GetString(self, index) &
+            bind(C, name="wxChoice_GetString")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+            type(c_ptr) :: wxChoice_GetString
+        end function wxChoice_GetString
+
+        subroutine wxChoice_SetString(self, index, str) &
+            bind(C, name="wxChoice_SetString")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+            type(c_ptr), value :: str
+        end subroutine wxChoice_SetString
+
+        !-----------------------------------------------------------------------
+        ! wxListBox
+        !-----------------------------------------------------------------------
+
+        function wxListBox_Create(parent, id, x, y, w, h, count, items, &
+            style) bind(C, name="wxListBox_Create")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: parent
+            integer(c_int), value :: id, x, y, w, h, count, style
+            type(c_ptr), value :: items
+            type(c_ptr) :: wxListBox_Create
+        end function wxListBox_Create
+
+        subroutine wxListBox_Clear(self) bind(C, name="wxListBox_Clear")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxListBox_Clear
+
+        subroutine wxListBox_Delete(self, index) &
+            bind(C, name="wxListBox_Delete")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+        end subroutine wxListBox_Delete
+
+        function wxListBox_GetCount(self) &
+            bind(C, name="wxListBox_GetCount")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxListBox_GetCount
+        end function wxListBox_GetCount
+
+        function wxListBox_GetString(self, index) &
+            bind(C, name="wxListBox_GetString")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+            type(c_ptr) :: wxListBox_GetString
+        end function wxListBox_GetString
+
+        subroutine wxListBox_SetString(self, index, str) &
+            bind(C, name="wxListBox_SetString")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+            type(c_ptr), value :: str
+        end subroutine wxListBox_SetString
+
+        function wxListBox_FindString(self, str) &
+            bind(C, name="wxListBox_FindString")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            type(c_ptr), value :: str
+            integer(c_int) :: wxListBox_FindString
+        end function wxListBox_FindString
+
+        function wxListBox_IsSelected(self, index) &
+            bind(C, name="wxListBox_IsSelected")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+            integer(c_int) :: wxListBox_IsSelected
+        end function wxListBox_IsSelected
+
+        subroutine wxListBox_SetSelection(self, index, sel) &
+            bind(C, name="wxListBox_SetSelection")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index, sel
+        end subroutine wxListBox_SetSelection
+
+        function wxListBox_GetSelection(self) &
+            bind(C, name="wxListBox_GetSelection")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxListBox_GetSelection
+        end function wxListBox_GetSelection
+
+        subroutine wxListBox_Append(self, item) &
+            bind(C, name="wxListBox_Append")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr), value :: item
+        end subroutine wxListBox_Append
+
+        !-----------------------------------------------------------------------
+        ! wxComboBox
+        !-----------------------------------------------------------------------
+
+        function wxComboBox_Create(parent, id, text, x, y, w, h, count, &
+            items, style) bind(C, name="wxComboBox_Create")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: parent
+            integer(c_int), value :: id
+            type(c_ptr), value :: text
+            integer(c_int), value :: x, y, w, h, count, style
+            type(c_ptr), value :: items
+            type(c_ptr) :: wxComboBox_Create
+        end function wxComboBox_Create
+
+        function wxComboBox_GetValue(self) &
+            bind(C, name="wxComboBox_GetValue")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr) :: wxComboBox_GetValue
+        end function wxComboBox_GetValue
+
+        subroutine wxComboBox_SetValue(self, value) &
+            bind(C, name="wxComboBox_SetValue")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr), value :: value
+        end subroutine wxComboBox_SetValue
+
+        subroutine wxComboBox_Append(self, item) &
+            bind(C, name="wxComboBox_Append")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr), value :: item
+        end subroutine wxComboBox_Append
+
+        subroutine wxComboBox_Delete(self, index) &
+            bind(C, name="wxComboBox_Delete")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+        end subroutine wxComboBox_Delete
+
+        subroutine wxComboBox_Clear(self) bind(C, name="wxComboBox_Clear")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxComboBox_Clear
+
+        function wxComboBox_GetCount(self) &
+            bind(C, name="wxComboBox_GetCount")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxComboBox_GetCount
+        end function wxComboBox_GetCount
+
+        function wxComboBox_GetSelection(self) &
+            bind(C, name="wxComboBox_GetSelection")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxComboBox_GetSelection
+        end function wxComboBox_GetSelection
+
+        subroutine wxComboBox_SetSelection(self, index) &
+            bind(C, name="wxComboBox_SetSelection")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+        end subroutine wxComboBox_SetSelection
+
+        function wxComboBox_FindString(self, s) &
+            bind(C, name="wxComboBox_FindString")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            type(c_ptr), value :: s
+            integer(c_int) :: wxComboBox_FindString
+        end function wxComboBox_FindString
+
+        function wxComboBox_GetString(self, index) &
+            bind(C, name="wxComboBox_GetString")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+            type(c_ptr) :: wxComboBox_GetString
+        end function wxComboBox_GetString
+
+        subroutine wxComboBox_SetString(self, index, s) &
+            bind(C, name="wxComboBox_SetString")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: index
+            type(c_ptr), value :: s
+        end subroutine wxComboBox_SetString
+
+        subroutine wxComboBox_Copy(self) bind(C, name="wxComboBox_Copy")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxComboBox_Copy
+
+        subroutine wxComboBox_Cut(self) bind(C, name="wxComboBox_Cut")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxComboBox_Cut
+
+        subroutine wxComboBox_Paste(self) bind(C, name="wxComboBox_Paste")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxComboBox_Paste
+
+        !-----------------------------------------------------------------------
+        ! wxMenu
+        !-----------------------------------------------------------------------
+
+        function wxMenu_Create(title, style) &
+            bind(C, name="wxMenu_Create")
+            import :: c_ptr, c_long
+            type(c_ptr), value :: title
+            integer(c_long), value :: style
+            type(c_ptr) :: wxMenu_Create
+        end function wxMenu_Create
+
+        subroutine wxMenu_DeletePointer(self) &
+            bind(C, name="wxMenu_DeletePointer")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxMenu_DeletePointer
+
+        function wxMenu_Append(self, id, text, help, isCheckable) &
+            bind(C, name="wxMenu_Append")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: id
+            type(c_ptr), value :: text
+            type(c_ptr), value :: help
+            integer(c_int), value :: isCheckable
+            type(c_ptr) :: wxMenu_Append
+        end function wxMenu_Append
+
+        subroutine wxMenu_AppendSeparator(self) &
+            bind(C, name="wxMenu_AppendSeparator")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxMenu_AppendSeparator
+
+        subroutine wxMenu_AppendRadioItem(self, id, text, help) &
+            bind(C, name="wxMenu_AppendRadioItem")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: id
+            type(c_ptr), value :: text
+            type(c_ptr), value :: help
+        end subroutine wxMenu_AppendRadioItem
+
+        subroutine wxMenu_Enable(self, id, enable) &
+            bind(C, name="wxMenu_Enable")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: id, enable
+        end subroutine wxMenu_Enable
+
+        subroutine wxMenu_Check(self, id, check) &
+            bind(C, name="wxMenu_Check")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: id, check
+        end subroutine wxMenu_Check
+
+        function wxMenu_IsEnabled(self, id) &
+            bind(C, name="wxMenu_IsEnabled")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: id
+            integer(c_int) :: wxMenu_IsEnabled
+        end function wxMenu_IsEnabled
+
+        function wxMenu_IsChecked(self, id) &
+            bind(C, name="wxMenu_IsChecked")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: id
+            integer(c_int) :: wxMenu_IsChecked
+        end function wxMenu_IsChecked
+
+        function wxMenu_GetMenuItemCount(self) &
+            bind(C, name="wxMenu_GetMenuItemCount")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxMenu_GetMenuItemCount
+        end function wxMenu_GetMenuItemCount
+
+        subroutine wxMenu_SetTitle(self, title) &
+            bind(C, name="wxMenu_SetTitle")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr), value :: title
+        end subroutine wxMenu_SetTitle
+
+        function wxMenu_GetTitle(self) &
+            bind(C, name="wxMenu_GetTitle")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr) :: wxMenu_GetTitle
+        end function wxMenu_GetTitle
+
+        !-----------------------------------------------------------------------
+        ! wxMenuBar
+        !-----------------------------------------------------------------------
+
+        function wxMenuBar_Create(style) &
+            bind(C, name="wxMenuBar_Create")
+            import :: c_ptr, c_int
+            integer(c_int), value :: style
+            type(c_ptr) :: wxMenuBar_Create
+        end function wxMenuBar_Create
+
+        function wxMenuBar_Append(self, menu, title) &
+            bind(C, name="wxMenuBar_Append")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            type(c_ptr), value :: menu
+            type(c_ptr), value :: title
+            integer(c_int) :: wxMenuBar_Append
+        end function wxMenuBar_Append
+
+        function wxMenuBar_GetMenuCount(self) &
+            bind(C, name="wxMenuBar_GetMenuCount")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxMenuBar_GetMenuCount
+        end function wxMenuBar_GetMenuCount
+
+        function wxMenuBar_GetMenu(self, pos) &
+            bind(C, name="wxMenuBar_GetMenu")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: pos
+            type(c_ptr) :: wxMenuBar_GetMenu
+        end function wxMenuBar_GetMenu
+
+        subroutine wxMenuBar_EnableTop(self, pos, enable) &
+            bind(C, name="wxMenuBar_EnableTop")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: pos, enable
+        end subroutine wxMenuBar_EnableTop
+
+        !-----------------------------------------------------------------------
+        ! wxMenuItem
+        !-----------------------------------------------------------------------
+
+        function wxMenuItem_Create() &
+            bind(C, name="wxMenuItem_Create")
+            import :: c_ptr
+            type(c_ptr) :: wxMenuItem_Create
+        end function wxMenuItem_Create
+
+        function wxMenuItem_CreateEx(id, text, helpstr, itemkind, submenu) &
+            bind(C, name="wxMenuItem_CreateEx")
+            import :: c_ptr, c_int
+            integer(c_int), value :: id, itemkind
+            type(c_ptr), value :: text, helpstr, submenu
+            type(c_ptr) :: wxMenuItem_CreateEx
+        end function wxMenuItem_CreateEx
+
+        subroutine wxMenuItem_Delete(self) &
+            bind(C, name="wxMenuItem_Delete")
+            import :: c_ptr
+            type(c_ptr), value :: self
+        end subroutine wxMenuItem_Delete
+
+        function wxMenuItem_GetId(self) &
+            bind(C, name="wxMenuItem_GetId")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxMenuItem_GetId
+        end function wxMenuItem_GetId
+
+        function wxMenuItem_IsSeparator(self) &
+            bind(C, name="wxMenuItem_IsSeparator")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxMenuItem_IsSeparator
+        end function wxMenuItem_IsSeparator
+
+        subroutine wxMenuItem_SetItemLabel(self, str) &
+            bind(C, name="wxMenuItem_SetItemLabel")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr), value :: str
+        end subroutine wxMenuItem_SetItemLabel
+
+        function wxMenuItem_GetItemLabel(self) &
+            bind(C, name="wxMenuItem_GetItemLabel")
+            import :: c_ptr
+            type(c_ptr), value :: self
+            type(c_ptr) :: wxMenuItem_GetItemLabel
+        end function wxMenuItem_GetItemLabel
+
+        subroutine wxMenuItem_SetCheckable(self, checkable) &
+            bind(C, name="wxMenuItem_SetCheckable")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: checkable
+        end subroutine wxMenuItem_SetCheckable
+
+        function wxMenuItem_IsChecked(self) &
+            bind(C, name="wxMenuItem_IsChecked")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxMenuItem_IsChecked
+        end function wxMenuItem_IsChecked
+
+        subroutine wxMenuItem_Check(self, check) &
+            bind(C, name="wxMenuItem_Check")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: check
+        end subroutine wxMenuItem_Check
+
+        subroutine wxMenuItem_Enable(self, enable) &
+            bind(C, name="wxMenuItem_Enable")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: enable
+        end subroutine wxMenuItem_Enable
+
+        function wxMenuItem_IsEnabled(self) &
+            bind(C, name="wxMenuItem_IsEnabled")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxMenuItem_IsEnabled
+        end function wxMenuItem_IsEnabled
+
+        !-----------------------------------------------------------------------
+        ! wxStatusBar
+        !-----------------------------------------------------------------------
+
+        function wxStatusBar_Create(parent, id, x, y, w, h, style) &
+            bind(C, name="wxStatusBar_Create")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: parent
+            integer(c_int), value :: id, x, y, w, h, style
+            type(c_ptr) :: wxStatusBar_Create
+        end function wxStatusBar_Create
+
+        subroutine wxStatusBar_SetFieldsCount(self, number, widths) &
+            bind(C, name="wxStatusBar_SetFieldsCount")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: number
+            type(c_ptr), value :: widths
+        end subroutine wxStatusBar_SetFieldsCount
+
+        function wxStatusBar_GetFieldsCount(self) &
+            bind(C, name="wxStatusBar_GetFieldsCount")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int) :: wxStatusBar_GetFieldsCount
+        end function wxStatusBar_GetFieldsCount
+
+        subroutine wxStatusBar_SetStatusText(self, text, number) &
+            bind(C, name="wxStatusBar_SetStatusText")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            type(c_ptr), value :: text
+            integer(c_int), value :: number
+        end subroutine wxStatusBar_SetStatusText
+
+        function wxStatusBar_GetStatusText(self, number) &
+            bind(C, name="wxStatusBar_GetStatusText")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: number
+            type(c_ptr) :: wxStatusBar_GetStatusText
+        end function wxStatusBar_GetStatusText
+
+        subroutine wxStatusBar_SetMinHeight(self, height) &
+            bind(C, name="wxStatusBar_SetMinHeight")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: height
+        end subroutine wxStatusBar_SetMinHeight
 
     end interface
 

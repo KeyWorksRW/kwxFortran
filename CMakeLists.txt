@@ -63,9 +63,6 @@ set(FETCHCONTENT_QUIET ON)
 
 message( STATUS "Fetching kwxFFI and wxWidgets (this may take awhile) ..." )
 
-# Build kwxFFI as static library so it can be linked into kwxFortranFFI
-set( BUILD_SHARED_LIBS OFF CACHE BOOL "Build kwxFFI as static library" FORCE )
-
 FetchContent_Declare(
     kwxFFI
     GIT_REPOSITORY https://github.com/KeyWorksRW/kwxFFI.git
@@ -145,3 +142,9 @@ target_link_libraries( minimal PRIVATE kwxFortran kwxFFI )
 set_target_properties( minimal PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/$<CONFIG>
 )
+
+# Use Windows GUI subsystem (no console window) but keep main() entry point
+# Fortran's "program" statement generates main(), not WinMain()
+if( WIN32 )
+    target_link_options( minimal PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup" )
+endif()

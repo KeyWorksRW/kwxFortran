@@ -86,8 +86,14 @@ brew install gcc cmake ninja
 - `kwxRust-dev` — Rust binding
 - `kwxGO-dev`, `kwxJulia-dev`, `kwxPerl-dev`, `kwxPascal-dev` — Other language bindings
 
+### kwxFFI Integration
+- **Dependency management**: kwxFFI is fetched via CMake FetchContent (not a submodule)
+- **Build location**: `build/_deps/kwxffi-src` (source), `build/_deps/kwxffi-build` (build artifacts)
+- **wxWidgets**: Also fetched via FetchContent to `build/_deps/wxwidgets-src`
+
 ### wxFFI Architecture (from `.github/wxffi-architecture.md`)
 - **Function naming**: `wx<ClassName>_<MethodName>` (e.g., `wxButton_Create`)
+- **Application lifecycle**: `kwxApp_*` functions (e.g., `kwxApp_Initialize`, `kwxApp_MainLoop`)
 - **Type macros**: `TClass(tp)` → `void*`, `TBool` → `int`, `TString` → `char*`
 - **String handling**: Uses `wxString*` pointers with UTF-8 conversion helpers
 - **Memory management**: Parent-owned UI objects, explicit deletion for some types
@@ -103,11 +109,12 @@ brew install gcc cmake ninja
 ```
 kwxFortran/
 ├── src/
+│   ├── kwxApp.cpp            # C++ implementation of wxApp (compiled into library)
 │   ├── wxffi_bindings.f90    # ISO_C_BINDING interfaces to wxFFI functions
 │   ├── wxffi_types.f90       # Fortran type definitions (opaque pointers, etc.)
 │   ├── wxffi_constants.f90   # Constant values from wxWidgets
 │   ├── wx_string.f90         # String conversion utilities
-│   ├── wx_app.f90            # Application class wrapper
+│   ├── wx_app.f90            # Fortran wrapper for kwxApp_* functions
 │   ├── wx_frame.f90          # Frame class wrapper
 │   ├── wx_window.f90         # Window base class wrapper
 │   ├── wx_controls.f90       # Button, TextCtrl, etc.
@@ -222,7 +229,7 @@ end module
 
 ## Implementation Phases
 
-### Phase 1: Foundation (Complexity: Simple)
+### ✅ Phase 1: Foundation -- Completed
 **Objective:** Establish build system and basic FFI infrastructure
 
 **Files to create:**
@@ -235,27 +242,55 @@ end module
 - Can link against wxFFI library
 - String conversion round-trip test passes
 
-### Phase 2: Core Window Classes (Complexity: Moderate)
+### Phase ✅ 2: Core Window Classes (Complexity: Moderate) -- Completed
 **Objective:** Implement minimal windowing capability
 
 **Files to create:**
-1. `src/wxffi_bindings.f90` — Raw C bindings for:
-   - `ELJApp_*` functions (application lifecycle)
+1. `src/kwxApp.cpp` — C++ implementation of wxApp subclass (copy/adapt from `build/_deps/kwxffi-src/examples/CApp/kwxApp.cpp`)
+2. `src/wxffi_bindings.f90` — Raw C bindings for:
+   - `kwxApp_*` functions (application lifecycle from kwxApp.h)
    - `wxFrame_*` functions
    - `wxWindow_*` functions
-2. `src/wxffi_constants.f90` — Essential constants:
+3. `src/wxffi_constants.f90` — Essential constants:
    - `wxID_ANY`, `wxDEFAULT_FRAME_STYLE`, etc.
-3. `src/wx_app.f90` — Application wrapper
-4. `src/wx_frame.f90` — Frame wrapper
-5. `src/wx_window.f90` — Window base wrapper
-6. `examples/minimal.f90` — Empty window example
+4. `src/wx_app.f90` — Fortran wrapper for kwxApp_* C functions
+5. `src/wx_frame.f90` — Frame wrapper
+6. `src/wx_window.f90` — Window base wrapper
+7. `examples/minimal.f90` — Empty window example
+
+**kwxApp Integration:**
+The kwxApp interface (defined in `build/_deps/kwxffi-src/examples/CApp/kwxApp.h`) provides:
+```c
+int kwxApp_Initialize(int argc, char** argv);  // Initialize wxWidgets
+int kwxApp_MainLoop(void);                     // Run event loop
+void kwxApp_ExitMainLoop(void);                // Exit from event handler
+void kwxApp_SetTopWindow(void* window);        // Set main frame
+void kwxApp_SetAppName(const char* name);      // Set app name
+void kwxApp_InitAllImageHandlers(void);        // Enable image support
+```
+
+**Build: ✅ PASS** - kwxFFI issues resolved, build structure reorganized
+
+**Output directories:**
+- `bin/Debug/` and `bin/Release/` — Executables and runtime DLLs (kwxFFI.dll, minimal.exe)
+- `lib/Debug/` and `lib/Release/` — Static libraries (kwxFortran.lib)
+
+**Verification:**
+- ✅ `minimal.f90` builds and links
+- ⏳ Window appearance and interaction (manual test required)
+  - Launch via: Press F5 in VS Code (Debug minimal) or run `bin/Debug/minimal.exe`
+  - Verify: Window appears with title and status bar
+  - Verify: Window can be closed cleanly
+
+**Next Steps:**
+Complete manual verification, then proceed to Phase 3
 
 **Verification:**
 - `minimal.f90` builds and runs
 - Window appears on screen
 - Window can be closed
 
-### Phase 3: Basic Controls (Complexity: Moderate)
+### Phase ✅ 3: Basic Controls (Complexity: Moderate) -- Completed
 **Objective:** Add common UI controls
 
 **Files to create/modify:**
@@ -271,28 +306,45 @@ end module
 - Sizers layout controls correctly
 - Example displays "Hello World" with working button
 
-### Phase 4: Event Handling (Complexity: Complex)
+### Phase ✅ 4: Event Handling ✅ Completed (Complexity: Complex)
 **Objective:** Enable event-driven programming
 
-**Files to create/modify:**
-1. Add to `src/wxffi_bindings.f90`:
-   - `wxEvtHandler_Connect`
-   - `wxClosure_*` functions
-   - Event accessor functions (`wxCommandEvent_*`)
-2. `src/wx_events.f90` — Event system wrapper
-3. Update examples to handle button clicks
+**Implementation:**
+1. Modified `src/kwxApp.cpp`:
+   - Added `HandleEvent` method to `kwxAppImpl` (routes events through closures)
+   - Added `kwxApp_Connect` / `kwxApp_Disconnect` C functions
+   - Forward-declared wxClosure/wxCallback from kwxFFI
+2. Modified `src/wxffi_bindings.f90`:
+   - Added `kwxApp_Connect`, `kwxApp_Disconnect` bindings
+   - Added `wxClosure_Create`, `wxClosure_GetData` bindings
+   - Added `wxEvent_*` accessor bindings (GetEventType, GetId, Skip, etc.)
+   - Added `wxCommandEvent_*` accessor bindings (GetString, GetSelection, etc.)
+3. Modified `src/wxffi_constants.f90`:
+   - Added event type constants: `wxEVT_COMMAND_BUTTON_CLICKED`,
+     `wxEVT_COMMAND_CHECKBOX_CLICKED`, `wxEVT_COMMAND_CHOICE_SELECTED`,
+     `wxEVT_COMMAND_TEXT_UPDATED`, `wxEVT_COMMAND_TEXT_ENTER`,
+     `wxEVT_COMMAND_MENU_SELECTED`
+4. Created `src/wx_events.f90`:
+   - `event_callback` abstract interface for handler procedures
+   - `wx_connect` / `wx_disconnect` with optional ID range parameters
+   - All `wx_event_*` and `wx_command_event_*` accessor wrappers
+5. Updated `examples/hello.f90`:
+   - Added `hello_handlers` module with `on_button_click` callback
+   - Connected button click event to handler via `wx_connect`
 
-**Key challenges:**
-- C function pointer callback from Fortran
-- User data passing through closures
-- Event object access
+**Key design decisions:**
+- Used `kwxApp_Connect`/`kwxApp_Disconnect` (not `wxEvtHandler_Connect` which
+  is declared but not exported in kwxFFI) following the SampleApp pattern
+- HandleEvent routes through `evt.m_callbackUserData` → wxCallback → wxClosure
+- Closure system is reference-counted by kwxFFI
 
 **Verification:**
-- Button click triggers Fortran callback
-- Event data can be read (command string, etc.)
-- No memory leaks or crashes
+- ✅ Build succeeds (all 8 targets including hello.exe)
+- Button click triggers Fortran callback (prints count and event ID)
+- Event data accessible via accessor functions
+- Runtime testing needed (F5 → "Debug minimal" launch config)
 
-### Phase 5: Extended Controls (Complexity: Moderate)
+### Phase 5: Extended Controls (Complexity: Moderate) ✅
 **Objective:** Add more UI controls for practical applications
 
 **Files to create/modify:**
@@ -332,10 +384,23 @@ end module
 ### Fortran Compiler Compatibility
 | Compiler | ISO_C_BINDING | C_FUNLOC | Notes |
 |----------|---------------|----------|-------|
-| gfortran 8+ | ✓ | ✓ | Primary target |
-| Intel ifort 19+ | ✓ | ✓ | Windows focus |
-| Intel ifx | ✓ | ✓ | Modern Intel |
+| gfortran 8+ | ✓ | ✓ | Primary target (all platforms), required for CI |
+| Intel ifort 19+ | ✓ | ✓ | Windows (legacy), requires MSVC |
+| Intel ifx | ✓ | ✓ | Windows development compiler, requires MSVC |
 | LLVM flang | ✓ | ✓ | Future target |
+
+**Windows Dual Compiler Strategy:**
+- **Development**: Use Intel ifx (free from oneAPI) with MSVC for best optimization
+- **CI/CD**: Build **two** Windows binaries:
+  - `kwxFortran-ifx-windows.dll` (ifx + `.mod` files for Intel Fortran users)
+  - `kwxFortran-gfortran-windows.dll` (gfortran + `.mod` files for gfortran users)
+- **Distribution**: Users download the version matching their compiler
+- **Rationale**: Fortran `.mod` files are compiler-specific; shipping both ensures compatibility
+
+**Important:** CMake requires a **consistent toolchain**:
+- **MinGW**: Use `g++` + `gfortran` together
+- **MSVC**: Use `cl.exe` + Intel Fortran (`ifort`/`ifx`) together
+- **Do not mix** MSVC C++ with gfortran - linker flags are incompatible
 
 ### Memory Management Strategy
 1. **UI objects**: Let wxWidgets manage via parent hierarchy

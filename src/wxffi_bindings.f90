@@ -499,10 +499,10 @@ module wxffi_bindings
             type(c_ptr), value :: window, point
         end subroutine wxWindow_SetPosition
 
-        subroutine wxWindow_Move(window, x, y) bind(C, name="wxWindow_Move")
+        subroutine wxWindow_Move(window, x, y, flags) bind(C, name="wxWindow_Move")
             import :: c_ptr, c_int
             type(c_ptr), value :: window
-            integer(c_int), value :: x, y
+            integer(c_int), value :: x, y, flags
         end subroutine wxWindow_Move
 
         function wxWindow_GetClientSize(window) bind(C, name="wxWindow_GetClientSize")
@@ -589,10 +589,10 @@ module wxffi_bindings
             integer(c_int) :: wxWindow_HasFocus
         end function wxWindow_HasFocus
 
-        subroutine wxWindow_Refresh(window, eraseBackground, rect) &
+        subroutine wxWindow_Refresh(window, eraseBackground) &
             bind(C, name="wxWindow_Refresh")
             import :: c_ptr, c_int
-            type(c_ptr), value :: window, rect
+            type(c_ptr), value :: window
             integer(c_int), value :: eraseBackground
         end subroutine wxWindow_Refresh
 
@@ -980,9 +980,10 @@ module wxffi_bindings
             integer(c_int) :: wxEvent_GetId
         end function wxEvent_GetId
 
-        subroutine wxEvent_Skip(self) bind(C, name="wxEvent_Skip")
-            import :: c_ptr
+        subroutine wxEvent_Skip(self, skip) bind(C, name="wxEvent_Skip")
+            import :: c_ptr, c_int
             type(c_ptr), value :: self
+            integer(c_int), value :: skip
         end subroutine wxEvent_Skip
 
         function wxEvent_GetTimestamp(self) bind(C, name="wxEvent_GetTimestamp")

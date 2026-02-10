@@ -100,7 +100,7 @@ program hello
         proportion=0, flag=ior(wxALIGN_CENTER(), wxALL()), border=10)
 
     ! Connect button click event to handler
-    call wx_connect(button, wxEVT_COMMAND_BUTTON_CLICKED(), on_button_click)
+    call wx_connect(button, wxEVT_BUTTON(), on_button_click)
 
     ! Add a stretch spacer to push everything up
     call wx_sizer_add_stretch_spacer(main_sizer)

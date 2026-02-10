@@ -83,31 +83,18 @@ static kwxIdleTimer *g_idleTimer = nullptr;
 -----------------------------------------------------------------------------*/
 typedef void(_cdecl *ClosureFun)(void *_fun, void *_data, void *_evt);
 
-// Forward declarations of kwxFFI closure/callback classes
+// Forward declaration — wxClosure is an opaque type from kwxFFI
 class wxClosure;
-class wxCallback;
 
-// We need wxClosure/wxCallback for event handling. These are provided by kwxFFI.
-// Import them here via the extern declarations.
+// kwxFFI exports for closure creation and event handler connection.
+// wxEvtHandler_Connect internally creates wxCallback (a kwxFFI-private class)
+// and wires it to kwxEventHandler::HandleEvent, so we never touch wxCallback.
 extern "C"
 {
     wxClosure *wxClosure_Create(ClosureFun fun, void *data);
-    void *wxClosure_GetData(wxClosure *closure);
+    int wxEvtHandler_Connect(void *obj, int first, int last, int type, void *closure);
+    int wxEvtHandler_Disconnect(void *obj, int first, int last, int type, void *data);
 }
-
-// wxCallback wraps a wxClosure and invokes it when an event fires.
-// This minimal declaration matches the kwxFFI wxCallback class.
-class wxCallback : public wxObject
-{
-private:
-    wxClosure *m_closure;
-
-public:
-    wxCallback(wxClosure *closure);
-    ~wxCallback();
-    void Invoke(wxEvent *event);
-    wxClosure *GetClosure();
-};
 
 class kwxAppImpl : public wxApp
 {
@@ -134,23 +121,11 @@ public:
         return wxApp::OnExit();
     }
 
-    // Routes events through the closure/callback system to foreign functions
-    void HandleEvent(wxEvent &evt);
-
     // Prevent wxApp from failing on foreign language command line args
     void OnInitCmdLine(wxCmdLineParser &parser) override { parser.SetCmdLine(""); }
 
     bool OnCmdLineParsed(wxCmdLineParser &) override { return true; }
 };
-
-void kwxAppImpl::HandleEvent(wxEvent &evt)
-{
-    wxCallback *callback = (wxCallback *)(evt.m_callbackUserData);
-    if (callback)
-    {
-        callback->Invoke(&evt);
-    }
-}
 
 // This is the actual wxApp instance
 wxIMPLEMENT_APP_NO_MAIN(kwxAppImpl);
@@ -482,19 +457,12 @@ extern "C"
     {
         auto *fc = new FortranClosure{fun, data};
         wxClosure *closure = wxClosure_Create(fortran_trampoline, fc);
-        auto *callback = new wxCallback(closure);
-        ((wxEvtHandler *)obj)
-            ->Connect(first, last, type,
-                      (wxObjectEventFunction)&kwxAppImpl::HandleEvent,
-                      callback);
-        return 0;
+        return wxEvtHandler_Connect(obj, first, last, type, closure);
     }
 
     KWXAPP_API int kwxApp_Disconnect(void *obj, int first, int last, int type)
     {
-        return (int)((wxEvtHandler *)obj)
-            ->Disconnect(first, last, type,
-                         (wxObjectEventFunction)&kwxAppImpl::HandleEvent);
+        return wxEvtHandler_Disconnect(obj, first, last, type, nullptr);
     }
 
 } // extern "C"

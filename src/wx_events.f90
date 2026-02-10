@@ -17,7 +17,7 @@
 !   end subroutine
 !
 !   ! Connect it to a button
-!   call wx_connect(button, wxEVT_COMMAND_BUTTON_CLICKED(), on_click)
+!   call wx_connect(button, wxEVT_BUTTON(), on_click)
 !
 ! Event Handler Signature:
 !   The callback procedure must match the ClosureFun C signature:
@@ -75,15 +75,15 @@ contains
     !
     ! Parameters:
     !   window     - The window/control to connect to (required)
-    !   event_type - Event type constant, e.g. wxEVT_COMMAND_BUTTON_CLICKED()
+    !   event_type - Event type constant, e.g. wxEVT_BUTTON()
     !   handler    - Fortran procedure matching event_callback interface
     !   user_data  - Optional user data pointer (default: c_null_ptr)
     !   id         - Optional window ID to match (default: wxID_ANY)
     !   last_id    - Optional last ID for range (default: same as id)
     !
     ! Example:
-    !   call wx_connect(button, wxEVT_COMMAND_BUTTON_CLICKED(), on_click)
-    !   call wx_connect(frame, wxEVT_COMMAND_MENU_SELECTED(), on_menu, id=101)
+    !   call wx_connect(button, wxEVT_BUTTON(), on_click)
+    !   call wx_connect(frame, wxEVT_MENU(), on_menu, id=101)
     !---------------------------------------------------------------------------
     subroutine wx_connect(window, event_type, handler, user_data, id, last_id)
         class(wxWindow_t), intent(in) :: window
@@ -196,11 +196,17 @@ contains
     !---------------------------------------------------------------------------
     ! Mark event as skipped (allow parent handlers to process it)
     !---------------------------------------------------------------------------
-    subroutine wx_event_skip(evt)
+    subroutine wx_event_skip(evt, skip)
         type(c_ptr), intent(in) :: evt
+        logical, intent(in), optional :: skip
+        integer(c_int) :: c_skip
 
         if (.not. c_associated(evt)) return
-        call wxEvent_Skip(evt)
+        c_skip = 1_c_int  ! Default: skip = true
+        if (present(skip)) then
+            if (.not. skip) c_skip = 0_c_int
+        end if
+        call wxEvent_Skip(evt, c_skip)
     end subroutine wx_event_skip
 
     !---------------------------------------------------------------------------

@@ -133,11 +133,15 @@ contains
     !---------------------------------------------------------------------------
     ! Move window to a new position
     !---------------------------------------------------------------------------
-    subroutine wx_window_move(window, x, y)
+    subroutine wx_window_move(window, x, y, flags)
         class(wxWindow_t), intent(in) :: window
         integer, intent(in) :: x, y
+        integer, intent(in), optional :: flags
+        integer(c_int) :: c_flags
 
-        call wxWindow_Move(window%ptr, int(x, c_int), int(y, c_int))
+        c_flags = 0_c_int
+        if (present(flags)) c_flags = int(flags, c_int)
+        call wxWindow_Move(window%ptr, int(x, c_int), int(y, c_int), c_flags)
     end subroutine wx_window_move
 
     !---------------------------------------------------------------------------
@@ -182,7 +186,7 @@ contains
             if (.not. erase_background) c_erase = 0
         end if
 
-        call wxWindow_Refresh(window%ptr, c_erase, c_null_ptr)
+        call wxWindow_Refresh(window%ptr, c_erase)
     end subroutine wx_window_refresh
 
     !---------------------------------------------------------------------------

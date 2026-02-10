@@ -67,21 +67,21 @@ module wxffi_constants
     !---------------------------------------------------------------------------
     ! Event types (command events)
     !---------------------------------------------------------------------------
-    public :: wxEVT_COMMAND_BUTTON_CLICKED
-    public :: wxEVT_COMMAND_CHECKBOX_CLICKED
-    public :: wxEVT_COMMAND_CHOICE_SELECTED
-    public :: wxEVT_COMMAND_TEXT_UPDATED
-    public :: wxEVT_COMMAND_TEXT_ENTER
-    public :: wxEVT_COMMAND_MENU_SELECTED
+    public :: wxEVT_BUTTON
+    public :: wxEVT_CHECKBOX
+    public :: wxEVT_CHOICE
+    public :: wxEVT_TEXT
+    public :: wxEVT_TEXT_ENTER
+    public :: wxEVT_MENU
 
     !---------------------------------------------------------------------------
     ! Phase 5: Additional event types
     !---------------------------------------------------------------------------
-    public :: wxEVT_COMMAND_LISTBOX_SELECTED
-    public :: wxEVT_COMMAND_LISTBOX_DOUBLECLICKED
-    public :: wxEVT_COMMAND_RADIOBUTTON_SELECTED
-    public :: wxEVT_COMMAND_COMBOBOX_SELECTED
-    public :: wxEVT_COMMAND_TOOL_CLICKED
+    public :: wxEVT_LISTBOX
+    public :: wxEVT_LISTBOX_DCLICK
+    public :: wxEVT_RADIOBUTTON
+    public :: wxEVT_COMBOBOX
+    public :: wxEVT_TOOL
 
     !---------------------------------------------------------------------------
     ! ListBox styles
@@ -492,75 +492,75 @@ module wxffi_constants
         !-----------------------------------------------------------------------
         ! Event types
         !-----------------------------------------------------------------------
-        function wxEVT_COMMAND_BUTTON_CLICKED() &
-            bind(C, name="expwxEVT_COMMAND_BUTTON_CLICKED")
+        function wxEVT_BUTTON() &
+            bind(C, name="expwxEVT_BUTTON")
             import :: c_int
-            integer(c_int) :: wxEVT_COMMAND_BUTTON_CLICKED
-        end function wxEVT_COMMAND_BUTTON_CLICKED
+            integer(c_int) :: wxEVT_BUTTON
+        end function wxEVT_BUTTON
 
-        function wxEVT_COMMAND_CHECKBOX_CLICKED() &
-            bind(C, name="expwxEVT_COMMAND_CHECKBOX_CLICKED")
+        function wxEVT_CHECKBOX() &
+            bind(C, name="expwxEVT_CHECKBOX")
             import :: c_int
-            integer(c_int) :: wxEVT_COMMAND_CHECKBOX_CLICKED
-        end function wxEVT_COMMAND_CHECKBOX_CLICKED
+            integer(c_int) :: wxEVT_CHECKBOX
+        end function wxEVT_CHECKBOX
 
-        function wxEVT_COMMAND_CHOICE_SELECTED() &
-            bind(C, name="expwxEVT_COMMAND_CHOICE_SELECTED")
+        function wxEVT_CHOICE() &
+            bind(C, name="expwxEVT_CHOICE")
             import :: c_int
-            integer(c_int) :: wxEVT_COMMAND_CHOICE_SELECTED
-        end function wxEVT_COMMAND_CHOICE_SELECTED
+            integer(c_int) :: wxEVT_CHOICE
+        end function wxEVT_CHOICE
 
-        function wxEVT_COMMAND_TEXT_UPDATED() &
-            bind(C, name="expwxEVT_COMMAND_TEXT_UPDATED")
+        function wxEVT_TEXT() &
+            bind(C, name="expwxEVT_TEXT")
             import :: c_int
-            integer(c_int) :: wxEVT_COMMAND_TEXT_UPDATED
-        end function wxEVT_COMMAND_TEXT_UPDATED
+            integer(c_int) :: wxEVT_TEXT
+        end function wxEVT_TEXT
 
-        function wxEVT_COMMAND_TEXT_ENTER() &
-            bind(C, name="expwxEVT_COMMAND_TEXT_ENTER")
+        function wxEVT_TEXT_ENTER() &
+            bind(C, name="expwxEVT_TEXT_ENTER")
             import :: c_int
-            integer(c_int) :: wxEVT_COMMAND_TEXT_ENTER
-        end function wxEVT_COMMAND_TEXT_ENTER
+            integer(c_int) :: wxEVT_TEXT_ENTER
+        end function wxEVT_TEXT_ENTER
 
-        function wxEVT_COMMAND_MENU_SELECTED() &
-            bind(C, name="expwxEVT_COMMAND_MENU_SELECTED")
+        function wxEVT_MENU() &
+            bind(C, name="expwxEVT_MENU")
             import :: c_int
-            integer(c_int) :: wxEVT_COMMAND_MENU_SELECTED
-        end function wxEVT_COMMAND_MENU_SELECTED
+            integer(c_int) :: wxEVT_MENU
+        end function wxEVT_MENU
 
         !-----------------------------------------------------------------------
         ! Additional event types (Phase 5)
         !-----------------------------------------------------------------------
 
-        function wxEVT_COMMAND_LISTBOX_SELECTED() &
-            bind(C, name="expwxEVT_COMMAND_LISTBOX_SELECTED")
+        function wxEVT_LISTBOX() &
+            bind(C, name="expwxEVT_LISTBOX")
             import :: c_int
-            integer(c_int) :: wxEVT_COMMAND_LISTBOX_SELECTED
-        end function wxEVT_COMMAND_LISTBOX_SELECTED
+            integer(c_int) :: wxEVT_LISTBOX
+        end function wxEVT_LISTBOX
 
-        function wxEVT_COMMAND_LISTBOX_DOUBLECLICKED() &
-            bind(C, name="expwxEVT_COMMAND_LISTBOX_DOUBLECLICKED")
+        function wxEVT_LISTBOX_DCLICK() &
+            bind(C, name="expwxEVT_LISTBOX_DCLICK")
             import :: c_int
-            integer(c_int) :: wxEVT_COMMAND_LISTBOX_DOUBLECLICKED
-        end function wxEVT_COMMAND_LISTBOX_DOUBLECLICKED
+            integer(c_int) :: wxEVT_LISTBOX_DCLICK
+        end function wxEVT_LISTBOX_DCLICK
 
-        function wxEVT_COMMAND_RADIOBUTTON_SELECTED() &
-            bind(C, name="expwxEVT_COMMAND_RADIOBUTTON_SELECTED")
+        function wxEVT_RADIOBUTTON() &
+            bind(C, name="expwxEVT_RADIOBUTTON")
             import :: c_int
-            integer(c_int) :: wxEVT_COMMAND_RADIOBUTTON_SELECTED
-        end function wxEVT_COMMAND_RADIOBUTTON_SELECTED
+            integer(c_int) :: wxEVT_RADIOBUTTON
+        end function wxEVT_RADIOBUTTON
 
-        function wxEVT_COMMAND_COMBOBOX_SELECTED() &
-            bind(C, name="expwxEVT_COMMAND_COMBOBOX_SELECTED")
+        function wxEVT_COMBOBOX() &
+            bind(C, name="expwxEVT_COMBOBOX")
             import :: c_int
-            integer(c_int) :: wxEVT_COMMAND_COMBOBOX_SELECTED
-        end function wxEVT_COMMAND_COMBOBOX_SELECTED
+            integer(c_int) :: wxEVT_COMBOBOX
+        end function wxEVT_COMBOBOX
 
-        function wxEVT_COMMAND_TOOL_CLICKED() &
-            bind(C, name="expwxEVT_COMMAND_TOOL_CLICKED")
+        function wxEVT_TOOL() &
+            bind(C, name="expwxEVT_TOOL")
             import :: c_int
-            integer(c_int) :: wxEVT_COMMAND_TOOL_CLICKED
-        end function wxEVT_COMMAND_TOOL_CLICKED
+            integer(c_int) :: wxEVT_TOOL
+        end function wxEVT_TOOL
 
         !-----------------------------------------------------------------------
         ! ListBox styles

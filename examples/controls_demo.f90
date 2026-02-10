@@ -200,15 +200,15 @@ program controls_demo
     call wx_frame_set_menu_bar(frame, menubar)
 
     ! Connect menu events
-    call wx_connect(frame, wxEVT_COMMAND_MENU_SELECTED(), on_exit, &
+    call wx_connect(frame, wxEVT_MENU(), on_exit, &
         id=wxID_EXIT())
-    call wx_connect(frame, wxEVT_COMMAND_MENU_SELECTED(), on_about, &
+    call wx_connect(frame, wxEVT_MENU(), on_about, &
         id=wxID_ABOUT())
-    call wx_connect(frame, wxEVT_COMMAND_MENU_SELECTED(), on_menu_item, &
+    call wx_connect(frame, wxEVT_MENU(), on_menu_item, &
         id=wxID_NEW())
-    call wx_connect(frame, wxEVT_COMMAND_MENU_SELECTED(), on_menu_item, &
+    call wx_connect(frame, wxEVT_MENU(), on_menu_item, &
         id=wxID_OPEN())
-    call wx_connect(frame, wxEVT_COMMAND_MENU_SELECTED(), on_menu_item, &
+    call wx_connect(frame, wxEVT_MENU(), on_menu_item, &
         id=wxID_SAVE())
 
     !===================================================================
@@ -303,19 +303,19 @@ program controls_demo
     ! Connect control events
     !===================================================================
 
-    call wx_connect(checkbox, wxEVT_COMMAND_CHECKBOX_CLICKED(), &
+    call wx_connect(checkbox, wxEVT_CHECKBOX(), &
         on_checkbox_toggle)
-    call wx_connect(radio1, wxEVT_COMMAND_RADIOBUTTON_SELECTED(), &
+    call wx_connect(radio1, wxEVT_RADIOBUTTON(), &
         on_radio_selected)
-    call wx_connect(radio2, wxEVT_COMMAND_RADIOBUTTON_SELECTED(), &
+    call wx_connect(radio2, wxEVT_RADIOBUTTON(), &
         on_radio_selected)
-    call wx_connect(radio3, wxEVT_COMMAND_RADIOBUTTON_SELECTED(), &
+    call wx_connect(radio3, wxEVT_RADIOBUTTON(), &
         on_radio_selected)
-    call wx_connect(choice, wxEVT_COMMAND_CHOICE_SELECTED(), &
+    call wx_connect(choice, wxEVT_CHOICE(), &
         on_choice_selected)
-    call wx_connect(listbox, wxEVT_COMMAND_LISTBOX_SELECTED(), &
+    call wx_connect(listbox, wxEVT_LISTBOX(), &
         on_listbox_selected)
-    call wx_connect(combobox, wxEVT_COMMAND_COMBOBOX_SELECTED(), &
+    call wx_connect(combobox, wxEVT_COMBOBOX(), &
         on_combobox_selected)
 
     !===================================================================

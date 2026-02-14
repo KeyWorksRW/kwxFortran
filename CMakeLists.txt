@@ -23,6 +23,11 @@ set( CMAKE_CXX_STANDARD 23 )
 set( CMAKE_CXX_STANDARD_REQUIRED True )
 set( CMAKE_CXX_EXTENSIONS OFF )
 
+# Default to Release build if not specified
+if( NOT CMAKE_BUILD_TYPE )
+    set( CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE )
+endif()
+
 # ###################### Options #######################
 # Only generate compile_commands.json for local development
 if ( NOT DEFINED ENV{CI} )

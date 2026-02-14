@@ -23,14 +23,14 @@ For the complete kwxFFI C API reference, see `.github/wxffi-architecture.md`.
 - **kwxFFI**: Fetched via CMake `FetchContent` (not a submodule)
 - **wxWidgets**: Fetched transitively through kwxFFI's own FetchContent
 
-### Build commands
-```
-# Debug (default)
-cd build && ninja
+### Build Configuration Policy
 
-# Release
-cd build && ninja -f build-Release.ninja
-```
+**kwxFortran is always built as a STATIC library in Release mode by default.**
+
+- Static linking simplifies deployment (single executable per example)
+- Release mode is appropriate for production builds
+- Debug builds are available but not the default
+- Do NOT change to SHARED/DLL without explicit justification
 
 ### Output directories
 | Artifact | Location |

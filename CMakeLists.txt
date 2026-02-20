@@ -13,7 +13,7 @@ set( PROJECT_VERSION_BUILD ${BUILD_NUM} )
 set( PROJECT_VERSION_YEAR ${PROJECT_YEAR} )
 
 project( kwxFortran
-    LANGUAGES CXX Fortran
+    LANGUAGES CXX C Fortran
     VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}.${PROJECT_VERSION_BUILD}
     DESCRIPTION "kwxFortran - Fortran bindings for wxWidgets via kwxFFI"
     HOMEPAGE_URL "https://github.com/KeyWorksRW/wxUiEditor" )
@@ -23,9 +23,48 @@ set( CMAKE_CXX_STANDARD 23 )
 set( CMAKE_CXX_STANDARD_REQUIRED True )
 set( CMAKE_CXX_EXTENSIONS OFF )
 
+# Global default: all Fortran targets write .mod files here (per-target property
+# Fortran_MODULE_DIRECTORY on kwxFortran also sets this, but setting it globally
+# ensures example executables and any future targets never fall back to src/).
+set( CMAKE_Fortran_MODULE_DIRECTORY "${CMAKE_BINARY_DIR}/modules" )
+
 # Default to Release build if not specified
 if( NOT CMAKE_BUILD_TYPE )
     set( CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE )
+endif()
+
+# ###################### Compiler ABI Detection #######################
+# On Windows, ifx uses MSVC ABI (cl/clang-cl) while gfortran uses GNU ABI (g++/clang++).
+# Detect which ABI is in use to set correct output dirs and wxWidgets include paths.
+# On Linux/macOS, both compilers use GNU ABI — no branching needed.
+if( WIN32 )
+    if( MSVC OR CMAKE_CXX_SIMULATE_ID STREQUAL "MSVC" )
+        set( KWXF_MSVC_ABI TRUE )
+        set( KWXF_BIN_DIR "${PROJECT_SOURCE_DIR}/bin" )
+        set( KWXF_LIB_DIR "${PROJECT_SOURCE_DIR}/lib" )
+        message( STATUS "Compiler ABI: MSVC (ifx + cl/clang-cl)" )
+    else()
+        set( KWXF_MSVC_ABI FALSE )
+        set( KWXF_BIN_DIR "${PROJECT_SOURCE_DIR}/bin-mingw" )
+        set( KWXF_LIB_DIR "${PROJECT_SOURCE_DIR}/lib-mingw" )
+        message( STATUS "Compiler ABI: GNU (gfortran + g++/clang++)" )
+    endif()
+else()
+    set( KWXF_BIN_DIR "${PROJECT_SOURCE_DIR}/bin" )
+    set( KWXF_LIB_DIR "${PROJECT_SOURCE_DIR}/lib" )
+endif()
+
+# Validate compiler pairing on Windows
+if( WIN32 )
+    if( CMAKE_Fortran_COMPILER_ID STREQUAL "Intel" AND NOT KWXF_MSVC_ABI )
+        message( FATAL_ERROR
+            "ifx on Windows requires cl.exe or clang-cl as the C++ compiler.\n"
+            "Use the ninja-ifx or ninja-ifx-clangcl preset." )
+    elseif( CMAKE_Fortran_COMPILER_ID STREQUAL "GNU" AND KWXF_MSVC_ABI )
+        message( FATAL_ERROR
+            "gfortran on Windows requires g++ or clang++ (GNU mode, not clang-cl).\n"
+            "Use the ninja-gfortran-mingw preset." )
+    endif()
 endif()
 
 # ###################### Options #######################
@@ -82,9 +121,9 @@ FetchContent_MakeAvailable( kwxFFI )
 
 # Override kwxFFI output directories to place DLLs in root bin/ directory
 set_target_properties( kwxFFI PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/$<CONFIG>"
-    LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/$<CONFIG>"
-    RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/$<CONFIG>"
+    ARCHIVE_OUTPUT_DIRECTORY "${KWXF_BIN_DIR}/$<CONFIG>"
+    LIBRARY_OUTPUT_DIRECTORY "${KWXF_BIN_DIR}/$<CONFIG>"
+    RUNTIME_OUTPUT_DIRECTORY "${KWXF_BIN_DIR}/$<CONFIG>"
 )
 
 message( NOTICE "kwxFFI has been fetched and configured." )
@@ -116,9 +155,16 @@ target_include_directories( kwxFortran PRIVATE
 )
 
 if( WIN32 )
-    target_include_directories( kwxFortran PRIVATE
-        ${WX_BUILD_DIR}/lib/vc_x64_lib/mswu
-    )
+    if( KWXF_MSVC_ABI )
+        target_include_directories( kwxFortran PRIVATE
+            ${WX_BUILD_DIR}/lib/vc_x64_lib/mswu
+        )
+    else()
+        # MinGW/gfortran: wxWidgets uses gcc_x64_lib for 64-bit MinGW builds
+        target_include_directories( kwxFortran PRIVATE
+            ${WX_BUILD_DIR}/lib/gcc_x64_lib/mswu
+        )
+    endif()
 elseif( APPLE )
     target_include_directories( kwxFortran PRIVATE
         ${WX_BUILD_DIR}/lib/osx_cocoa-unicode-static
@@ -131,7 +177,7 @@ endif()
 
 set_target_properties( kwxFortran PROPERTIES
     Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/modules
-    ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib/$<CONFIG>
+    ARCHIVE_OUTPUT_DIRECTORY ${KWXF_LIB_DIR}/$<CONFIG>
 )
 
 # Make Fortran modules available to dependents
@@ -141,31 +187,27 @@ target_include_directories( kwxFortran PUBLIC
 
 # ###################### Examples #######################
 
-add_executable( minimal examples/minimal.f90 )
-target_link_libraries( minimal PRIVATE kwxFortran kwxFFI )
+set( EXAMPLE_TARGETS minimal hello controls_demo demo )
 
-set_target_properties( minimal PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/$<CONFIG>
-)
+foreach( example ${EXAMPLE_TARGETS} )
+    add_executable( ${example} examples/${example}.f90 )
+    target_link_libraries( ${example} PRIVATE kwxFortran kwxFFI )
+    set_target_properties( ${example} PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY ${KWXF_BIN_DIR}/$<CONFIG>
+    )
+endforeach()
 
-add_executable( hello examples/hello.f90 )
-target_link_libraries( hello PRIVATE kwxFortran kwxFFI )
-
-set_target_properties( hello PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/$<CONFIG>
-)
-
-add_executable( controls_demo examples/controls_demo.f90 )
-target_link_libraries( controls_demo PRIVATE kwxFortran kwxFFI )
-
-set_target_properties( controls_demo PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin/$<CONFIG>
-)
-
-# Use Windows GUI subsystem (no console window) but keep main() entry point
-# Fortran's "program" statement generates main(), not WinMain()
+# Suppress console window for GUI apps (no WinMain — Fortran generates main())
 if( WIN32 )
-    target_link_options( minimal PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup" )
-    target_link_options( hello PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup" )
-    target_link_options( controls_demo PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup" )
+    if( KWXF_MSVC_ABI )
+        # MSVC/clang-cl linker flags
+        foreach( example ${EXAMPLE_TARGETS} )
+            target_link_options( ${example} PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup" )
+        endforeach()
+    else()
+        # MinGW linker flag (-mwindows sets subsystem and suppresses console)
+        foreach( example ${EXAMPLE_TARGETS} )
+            target_link_options( ${example} PRIVATE "-mwindows" )
+        endforeach()
+    endif()
 endif()

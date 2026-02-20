@@ -7,7 +7,7 @@
 !
 ! Usage:
 !   use wx_sizers
-!   use wxffi_constants
+!   use kwx_constants
 !   type(wxBoxSizer_t) :: sizer
 !   sizer = wx_box_sizer_create(wxVERTICAL())
 !   call wx_sizer_add_window(sizer, my_button, proportion=0, flag=wxALL(), border=5)
@@ -15,9 +15,9 @@
 
 module wx_sizers
     use, intrinsic :: iso_c_binding
-    use wxffi_types
-    use wxffi_bindings
-    use wxffi_constants
+    use kwx_types
+    use kwx_bindings
+    use kwx_constants
     implicit none
     private
 

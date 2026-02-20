@@ -1,4 +1,4 @@
-! wxffi_bindings.f90 - Raw C bindings for wxFFI functions
+! kwx_bindings.f90 - Raw C bindings for wxFFI functions
 ! Part of kwxFortran - Fortran bindings for wxWidgets via wxFFI
 !
 ! This module provides ISO_C_BINDING interfaces to the raw C functions
@@ -10,7 +10,7 @@
 !   - kwxApp_<FunctionName> for application lifecycle functions
 !   - expwx<ConstantName> for constant value functions
 
-module wxffi_bindings
+module kwx_bindings
     use, intrinsic :: iso_c_binding
     implicit none
     private
@@ -28,6 +28,12 @@ module wxffi_bindings
     public :: kwxApp_Pending, kwxApp_Dispatch, kwxApp_Yield, kwxApp_SafeYield
     public :: kwxApp_InitAllImageHandlers, kwxApp_Bell
     public :: kwxApp_FreeString
+    public :: kwxApp_GetOsVersion
+    public :: kwxApp_GetOsDescription, kwxApp_GetUserId, kwxApp_GetUserName
+    public :: kwxApp_EnableTooltips, kwxApp_SetTooltipDelay
+    public :: kwxApp_Sleep, kwxApp_MilliSleep
+    public :: kwxApp_FindWindowById, kwxApp_FindWindowByLabel, kwxApp_FindWindowByName
+    public :: kwxApp_SetIdleCallback, kwxApp_GetIdleInterval
 
     !---------------------------------------------------------------------------
     ! wxFrame functions
@@ -37,8 +43,28 @@ module wxffi_bindings
     public :: wxFrame_SetStatusText, wxFrame_SetStatusWidths
     public :: wxFrame_CreateToolBar, wxFrame_GetToolBar, wxFrame_SetToolBar
     public :: wxFrame_GetMenuBar, wxFrame_SetMenuBar
-    public :: wxFrame_Restore
+    public :: wxFrame_Restore, wxFrame_Maximize, wxFrame_Iconize
+    public :: wxFrame_IsMaximized, wxFrame_IsIconized
+    public :: wxFrame_GetIcon, wxFrame_SetIcon
     public :: wxFrame_GetClientAreaOrigin_left, wxFrame_GetClientAreaOrigin_top
+    public :: wxFrame_FindItemInMenuBar, wxFrame_ProcessCommand
+    public :: wxFrame_SetStatusBarPane, wxFrame_GetStatusBarPane
+    public :: wxFrame_PushStatusText, wxFrame_PopStatusText
+
+    !---------------------------------------------------------------------------
+    ! wxTopLevelWindow functions (inherited by wxFrame and wxDialog)
+    !---------------------------------------------------------------------------
+    public :: wxTopLevelWindow_EnableCloseButton
+    public :: wxTopLevelWindow_GetTitle, wxTopLevelWindow_SetTitle
+    public :: wxTopLevelWindow_IsActive
+    public :: wxTopLevelWindow_Iconize, wxTopLevelWindow_IsIconized
+    public :: wxTopLevelWindow_Maximize, wxTopLevelWindow_IsMaximized
+    public :: wxTopLevelWindow_Restore
+    public :: wxTopLevelWindow_CenterOnScreen
+    public :: wxTopLevelWindow_ShowFullScreen, wxTopLevelWindow_IsFullScreen
+    public :: wxTopLevelWindow_EnableMaximizeButton, wxTopLevelWindow_EnableMinimizeButton
+    public :: wxTopLevelWindow_SetMinSize, wxTopLevelWindow_SetMaxSize
+    public :: wxTopLevelWindow_RequestUserAttention
 
     !---------------------------------------------------------------------------
     ! wxButton functions
@@ -53,6 +79,7 @@ module wxffi_bindings
     public :: wxTextCtrl_Clear, wxTextCtrl_WriteText, wxTextCtrl_AppendText
     public :: wxTextCtrl_IsModified, wxTextCtrl_IsEditable
     public :: wxTextCtrl_GetNumberOfLines
+    public :: wxTextEntry_SetHint
 
     !---------------------------------------------------------------------------
     ! wxStaticText functions
@@ -84,13 +111,13 @@ module wxffi_bindings
     public :: wxWindow_Close, wxWindow_Show, wxWindow_Hide
     public :: wxWindow_Enable, wxWindow_Disable, wxWindow_IsEnabled, wxWindow_IsShown
     public :: wxWindow_SetSize, wxWindow_GetSize, wxWindow_GetPosition
-    public :: wxWindow_SetPosition, wxWindow_Move
+    public :: wxWindow_Move
     public :: wxWindow_GetClientSize, wxWindow_SetClientSize
     public :: wxWindow_GetBestSize, wxWindow_GetEffectiveMinSize
     public :: wxWindow_GetId, wxWindow_SetId
     public :: wxWindow_GetLabel, wxWindow_SetLabel
     public :: wxWindow_GetName, wxWindow_SetName
-    public :: wxWindow_GetParent, wxWindow_GetTopLevelParent
+    public :: wxWindow_GetParent
     public :: wxWindow_SetFocus, wxWindow_HasFocus
     public :: wxWindow_Refresh, wxWindow_Update
     public :: wxWindow_SetBackgroundColour, wxWindow_GetBackgroundColour
@@ -105,12 +132,12 @@ module wxffi_bindings
     public :: wxWindow_Lower, wxWindow_Raise
 
     !---------------------------------------------------------------------------
-    ! Event connection functions (from kwxApp)
+    ! Event connection functions (wxEvtHandler)
     !---------------------------------------------------------------------------
-    public :: kwxApp_Connect, kwxApp_Disconnect
+    public :: wxEvtHandler_Connect, wxEvtHandler_Disconnect
 
     !---------------------------------------------------------------------------
-    ! wxClosure functions (from kwxFFI)
+    ! wxClosure functions (from kwxFFI wrapper.cpp)
     !---------------------------------------------------------------------------
     public :: wxClosure_Create, wxClosure_GetData
 
@@ -197,6 +224,11 @@ module wxffi_bindings
     public :: wxStatusBar_SetFieldsCount, wxStatusBar_GetFieldsCount
     public :: wxStatusBar_SetStatusText, wxStatusBar_GetStatusText
     public :: wxStatusBar_SetMinHeight
+
+    !---------------------------------------------------------------------------
+    ! wxMessageBox (standalone dialog function)
+    !---------------------------------------------------------------------------
+    public :: kwxMessageBox
 
     interface
 
@@ -307,6 +339,93 @@ module wxffi_bindings
         end subroutine kwxApp_FreeString
 
         !-----------------------------------------------------------------------
+        ! kwxApp - New functions added in kwxFFI refactor (#23)
+        !-----------------------------------------------------------------------
+
+        function kwxApp_GetOsVersion(major, minor) bind(C, name="kwxApp_GetOsVersion")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: major, minor
+            integer(c_int) :: kwxApp_GetOsVersion
+        end function kwxApp_GetOsVersion
+
+        ! Returns char* that caller must free with kwxApp_FreeString
+        function kwxApp_GetOsDescription() bind(C, name="kwxApp_GetOsDescription")
+            import :: c_ptr
+            type(c_ptr) :: kwxApp_GetOsDescription
+        end function kwxApp_GetOsDescription
+
+        ! Returns char* that caller must free with kwxApp_FreeString
+        function kwxApp_GetUserId() bind(C, name="kwxApp_GetUserId")
+            import :: c_ptr
+            type(c_ptr) :: kwxApp_GetUserId
+        end function kwxApp_GetUserId
+
+        ! Returns char* that caller must free with kwxApp_FreeString
+        function kwxApp_GetUserName() bind(C, name="kwxApp_GetUserName")
+            import :: c_ptr
+            type(c_ptr) :: kwxApp_GetUserName
+        end function kwxApp_GetUserName
+
+        subroutine kwxApp_EnableTooltips(enable) bind(C, name="kwxApp_EnableTooltips")
+            import :: c_int
+            integer(c_int), value :: enable
+        end subroutine kwxApp_EnableTooltips
+
+        subroutine kwxApp_SetTooltipDelay(milliseconds) bind(C, name="kwxApp_SetTooltipDelay")
+            import :: c_int
+            integer(c_int), value :: milliseconds
+        end subroutine kwxApp_SetTooltipDelay
+
+        subroutine kwxApp_Sleep(seconds) bind(C, name="kwxApp_Sleep")
+            import :: c_int
+            integer(c_int), value :: seconds
+        end subroutine kwxApp_Sleep
+
+        subroutine kwxApp_MilliSleep(milliseconds) bind(C, name="kwxApp_MilliSleep")
+            import :: c_int
+            integer(c_int), value :: milliseconds
+        end subroutine kwxApp_MilliSleep
+
+        ! Find window by integer ID; parent can be c_null_ptr for top-level search
+        function kwxApp_FindWindowById(id, parent) bind(C, name="kwxApp_FindWindowById")
+            import :: c_ptr, c_int
+            integer(c_int), value :: id
+            type(c_ptr), value :: parent
+            type(c_ptr) :: kwxApp_FindWindowById
+        end function kwxApp_FindWindowById
+
+        ! Find window by label (user-visible text); label is null-terminated UTF-8
+        function kwxApp_FindWindowByLabel(label, parent) &
+            bind(C, name="kwxApp_FindWindowByLabel")
+            import :: c_ptr
+            type(c_ptr), value :: label, parent
+            type(c_ptr) :: kwxApp_FindWindowByLabel
+        end function kwxApp_FindWindowByLabel
+
+        ! Find window by name (programmatic, set via SetName)
+        function kwxApp_FindWindowByName(name, parent) &
+            bind(C, name="kwxApp_FindWindowByName")
+            import :: c_ptr
+            type(c_ptr), value :: name, parent
+            type(c_ptr) :: kwxApp_FindWindowByName
+        end function kwxApp_FindWindowByName
+
+        ! Set periodic idle callback; interval_ms=0 disables;
+        ! callback_func is void (*)(void* data) — NOT ClosureFun
+        subroutine kwxApp_SetIdleCallback(interval_ms, callback_func, callback_data) &
+            bind(C, name="kwxApp_SetIdleCallback")
+            import :: c_ptr, c_int, c_funptr
+            integer(c_int), value :: interval_ms
+            type(c_funptr), value :: callback_func
+            type(c_ptr), value :: callback_data
+        end subroutine kwxApp_SetIdleCallback
+
+        function kwxApp_GetIdleInterval() bind(C, name="kwxApp_GetIdleInterval")
+            import :: c_int
+            integer(c_int) :: kwxApp_GetIdleInterval
+        end function kwxApp_GetIdleInterval
+
+        !-----------------------------------------------------------------------
         ! wxFrame - Top-level window with optional menu, toolbar, status bar
         !-----------------------------------------------------------------------
 
@@ -409,6 +528,206 @@ module wxffi_bindings
         end function wxFrame_GetClientAreaOrigin_top
 
         !-----------------------------------------------------------------------
+        ! wxFrame - New functions added in kwxFFI refactor (#23)
+        !-----------------------------------------------------------------------
+
+        subroutine wxFrame_Maximize(frame) bind(C, name="wxFrame_Maximize")
+            import :: c_ptr
+            type(c_ptr), value :: frame
+        end subroutine wxFrame_Maximize
+
+        subroutine wxFrame_Iconize(frame) bind(C, name="wxFrame_Iconize")
+            import :: c_ptr
+            type(c_ptr), value :: frame
+        end subroutine wxFrame_Iconize
+
+        function wxFrame_IsMaximized(frame) bind(C, name="wxFrame_IsMaximized")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: frame
+            integer(c_int) :: wxFrame_IsMaximized
+        end function wxFrame_IsMaximized
+
+        function wxFrame_IsIconized(frame) bind(C, name="wxFrame_IsIconized")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: frame
+            integer(c_int) :: wxFrame_IsIconized
+        end function wxFrame_IsIconized
+
+        function wxFrame_GetIcon(frame) bind(C, name="wxFrame_GetIcon")
+            import :: c_ptr
+            type(c_ptr), value :: frame
+            type(c_ptr) :: wxFrame_GetIcon
+        end function wxFrame_GetIcon
+
+        subroutine wxFrame_SetIcon(frame, icon) bind(C, name="wxFrame_SetIcon")
+            import :: c_ptr
+            type(c_ptr), value :: frame, icon
+        end subroutine wxFrame_SetIcon
+
+        function wxFrame_FindItemInMenuBar(frame, menu_id) &
+            bind(C, name="wxFrame_FindItemInMenuBar")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: frame
+            integer(c_int), value :: menu_id
+            type(c_ptr) :: wxFrame_FindItemInMenuBar
+        end function wxFrame_FindItemInMenuBar
+
+        subroutine wxFrame_ProcessCommand(frame, id) bind(C, name="wxFrame_ProcessCommand")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: frame
+            integer(c_int), value :: id
+        end subroutine wxFrame_ProcessCommand
+
+        subroutine wxFrame_SetStatusBarPane(frame, n) bind(C, name="wxFrame_SetStatusBarPane")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: frame
+            integer(c_int), value :: n
+        end subroutine wxFrame_SetStatusBarPane
+
+        function wxFrame_GetStatusBarPane(frame) bind(C, name="wxFrame_GetStatusBarPane")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: frame
+            integer(c_int) :: wxFrame_GetStatusBarPane
+        end function wxFrame_GetStatusBarPane
+
+        subroutine wxFrame_PushStatusText(frame, text, field) &
+            bind(C, name="wxFrame_PushStatusText")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: frame, text
+            integer(c_int), value :: field
+        end subroutine wxFrame_PushStatusText
+
+        subroutine wxFrame_PopStatusText(frame, field) bind(C, name="wxFrame_PopStatusText")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: frame
+            integer(c_int), value :: field
+        end subroutine wxFrame_PopStatusText
+
+        !-----------------------------------------------------------------------
+        ! wxTopLevelWindow - Base class for wxFrame, wxDialog
+        ! Any wxFrame* or wxDialog* can be passed as the first argument.
+        !-----------------------------------------------------------------------
+
+        function wxTopLevelWindow_EnableCloseButton(window, enable) &
+            bind(C, name="wxTopLevelWindow_EnableCloseButton")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int), value :: enable
+            integer(c_int) :: wxTopLevelWindow_EnableCloseButton
+        end function wxTopLevelWindow_EnableCloseButton
+
+        ! GetTitle returns wxString* — caller must delete with wxString_Delete
+        function wxTopLevelWindow_GetTitle(window) bind(C, name="wxTopLevelWindow_GetTitle")
+            import :: c_ptr
+            type(c_ptr), value :: window
+            type(c_ptr) :: wxTopLevelWindow_GetTitle
+        end function wxTopLevelWindow_GetTitle
+
+        subroutine wxTopLevelWindow_SetTitle(window, title) &
+            bind(C, name="wxTopLevelWindow_SetTitle")
+            import :: c_ptr
+            type(c_ptr), value :: window, title
+        end subroutine wxTopLevelWindow_SetTitle
+
+        function wxTopLevelWindow_IsActive(window) bind(C, name="wxTopLevelWindow_IsActive")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int) :: wxTopLevelWindow_IsActive
+        end function wxTopLevelWindow_IsActive
+
+        subroutine wxTopLevelWindow_Iconize(window, iconize) &
+            bind(C, name="wxTopLevelWindow_Iconize")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int), value :: iconize
+        end subroutine wxTopLevelWindow_Iconize
+
+        function wxTopLevelWindow_IsIconized(window) bind(C, name="wxTopLevelWindow_IsIconized")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int) :: wxTopLevelWindow_IsIconized
+        end function wxTopLevelWindow_IsIconized
+
+        subroutine wxTopLevelWindow_Maximize(window, maximize) &
+            bind(C, name="wxTopLevelWindow_Maximize")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int), value :: maximize
+        end subroutine wxTopLevelWindow_Maximize
+
+        function wxTopLevelWindow_IsMaximized(window) bind(C, name="wxTopLevelWindow_IsMaximized")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int) :: wxTopLevelWindow_IsMaximized
+        end function wxTopLevelWindow_IsMaximized
+
+        subroutine wxTopLevelWindow_Restore(window) bind(C, name="wxTopLevelWindow_Restore")
+            import :: c_ptr
+            type(c_ptr), value :: window
+        end subroutine wxTopLevelWindow_Restore
+
+        ! direction: wxBOTH (default), wxHORIZONTAL, wxVERTICAL
+        subroutine wxTopLevelWindow_CenterOnScreen(window, direction) &
+            bind(C, name="wxTopLevelWindow_CenterOnScreen")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int), value :: direction
+        end subroutine wxTopLevelWindow_CenterOnScreen
+
+        function wxTopLevelWindow_ShowFullScreen(window, show, style) &
+            bind(C, name="wxTopLevelWindow_ShowFullScreen")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int), value :: show, style
+            integer(c_int) :: wxTopLevelWindow_ShowFullScreen
+        end function wxTopLevelWindow_ShowFullScreen
+
+        function wxTopLevelWindow_IsFullScreen(window) &
+            bind(C, name="wxTopLevelWindow_IsFullScreen")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int) :: wxTopLevelWindow_IsFullScreen
+        end function wxTopLevelWindow_IsFullScreen
+
+        function wxTopLevelWindow_EnableMaximizeButton(window, enable) &
+            bind(C, name="wxTopLevelWindow_EnableMaximizeButton")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int), value :: enable
+            integer(c_int) :: wxTopLevelWindow_EnableMaximizeButton
+        end function wxTopLevelWindow_EnableMaximizeButton
+
+        function wxTopLevelWindow_EnableMinimizeButton(window, enable) &
+            bind(C, name="wxTopLevelWindow_EnableMinimizeButton")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int), value :: enable
+            integer(c_int) :: wxTopLevelWindow_EnableMinimizeButton
+        end function wxTopLevelWindow_EnableMinimizeButton
+
+        subroutine wxTopLevelWindow_SetMinSize(window, width, height) &
+            bind(C, name="wxTopLevelWindow_SetMinSize")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int), value :: width, height
+        end subroutine wxTopLevelWindow_SetMinSize
+
+        subroutine wxTopLevelWindow_SetMaxSize(window, width, height) &
+            bind(C, name="wxTopLevelWindow_SetMaxSize")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int), value :: width, height
+        end subroutine wxTopLevelWindow_SetMaxSize
+
+        ! flags: wxUSER_ATTENTION_INFO (default) or wxUSER_ATTENTION_ERROR
+        subroutine wxTopLevelWindow_RequestUserAttention(window, flags) &
+            bind(C, name="wxTopLevelWindow_RequestUserAttention")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: window
+            integer(c_int), value :: flags
+        end subroutine wxTopLevelWindow_RequestUserAttention
+
+        !-----------------------------------------------------------------------
         ! wxWindow - Base class for all UI elements
         !-----------------------------------------------------------------------
 
@@ -494,11 +813,6 @@ module wxffi_bindings
             type(c_ptr) :: wxWindow_GetPosition
         end function wxWindow_GetPosition
 
-        subroutine wxWindow_SetPosition(window, point) bind(C, name="wxWindow_SetPosition")
-            import :: c_ptr
-            type(c_ptr), value :: window, point
-        end subroutine wxWindow_SetPosition
-
         subroutine wxWindow_Move(window, x, y, flags) bind(C, name="wxWindow_Move")
             import :: c_ptr, c_int
             type(c_ptr), value :: window
@@ -570,13 +884,6 @@ module wxffi_bindings
             type(c_ptr), value :: window
             type(c_ptr) :: wxWindow_GetParent
         end function wxWindow_GetParent
-
-        function wxWindow_GetTopLevelParent(window) &
-            bind(C, name="wxWindow_GetTopLevelParent")
-            import :: c_ptr
-            type(c_ptr), value :: window
-            type(c_ptr) :: wxWindow_GetTopLevelParent
-        end function wxWindow_GetTopLevelParent
 
         subroutine wxWindow_SetFocus(window) bind(C, name="wxWindow_SetFocus")
             import :: c_ptr
@@ -802,6 +1109,14 @@ module wxffi_bindings
             integer(c_int) :: wxTextCtrl_GetNumberOfLines
         end function wxTextCtrl_GetNumberOfLines
 
+        function wxTextEntry_SetHint(self, hint) &
+            bind(C, name="wxTextEntry_SetHint")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self   ! wxTextEntry* (wxTextCtrl* is compatible)
+            type(c_ptr), value :: hint   ! wxString*
+            integer(c_int) :: wxTextEntry_SetHint
+        end function wxTextEntry_SetHint
+
         !-----------------------------------------------------------------------
         ! wxStaticText
         !-----------------------------------------------------------------------
@@ -912,35 +1227,37 @@ module wxffi_bindings
         end subroutine wxSizer_SetMinSize
 
         !-----------------------------------------------------------------------
-        ! kwxApp Event Connection
-        ! Routes events through kwxAppImpl::HandleEvent → wxCallback → wxClosure
+        ! wxEvtHandler Event Connection
+        ! wxEvtHandler_Connect wraps a wxClosure* into a wxCallback and connects
+        ! it to the wxEvtHandler (window/control). Create closure first with
+        ! wxClosure_Create(fun, data).
         !-----------------------------------------------------------------------
 
         ! Connect an event handler
-        ! obj: wxEvtHandler* (window/control to connect to)
-        ! first: first window ID to match (-1 for any)
-        ! last: last window ID to match (-1 for same as first)
-        ! type: event type (from expEVT_COMMAND_* constants)
-        ! fun: ClosureFun callback function pointer
-        ! data: user data pointer (passed through to callback)
-        function kwxApp_Connect(obj, first, last, type, fun, data) &
-            bind(C, name="kwxApp_Connect")
-            import :: c_ptr, c_funptr, c_int
-            type(c_ptr), value :: obj
-            integer(c_int), value :: first, last, type
-            type(c_funptr), value :: fun
-            type(c_ptr), value :: data
-            integer(c_int) :: kwxApp_Connect
-        end function kwxApp_Connect
-
-        ! Disconnect an event handler
-        function kwxApp_Disconnect(obj, first, last, type) &
-            bind(C, name="kwxApp_Disconnect")
+        ! obj   : wxEvtHandler* (window/control to connect to)
+        ! first : first window ID to match (-1 for any)
+        ! last  : last window ID to match (-1 for same as first)
+        ! type  : event type (from expEVT_COMMAND_* constants)
+        ! closure: wxClosure* from wxClosure_Create(fun, data)
+        function wxEvtHandler_Connect(obj, first, last, type, closure) &
+            bind(C, name="wxEvtHandler_Connect")
             import :: c_ptr, c_int
             type(c_ptr), value :: obj
             integer(c_int), value :: first, last, type
-            integer(c_int) :: kwxApp_Disconnect
-        end function kwxApp_Disconnect
+            type(c_ptr), value :: closure
+            integer(c_int) :: wxEvtHandler_Connect
+        end function wxEvtHandler_Connect
+
+        ! Disconnect an event handler
+        ! data: wxObject* user data to match (c_null_ptr to match any)
+        function wxEvtHandler_Disconnect(self, first, last, type, data) &
+            bind(C, name="wxEvtHandler_Disconnect")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: self
+            integer(c_int), value :: first, last, type
+            type(c_ptr), value :: data
+            integer(c_int) :: wxEvtHandler_Disconnect
+        end function wxEvtHandler_Disconnect
 
         !-----------------------------------------------------------------------
         ! wxClosure - Reference-counted callback wrapper
@@ -1657,6 +1974,21 @@ module wxffi_bindings
             integer(c_int), value :: height
         end subroutine wxStatusBar_SetMinHeight
 
+        !-----------------------------------------------------------------------
+        ! wxMessageBox - standalone message box dialog
+        !-----------------------------------------------------------------------
+        function kwxMessageBox(message, caption, style, parent, x, y) &
+            bind(C, name="kwxMessageBox")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: message    ! wxString*
+            type(c_ptr), value :: caption    ! wxString*
+            integer(c_int), value :: style
+            type(c_ptr), value :: parent     ! wxWindow* (can be null)
+            integer(c_int), value :: x
+            integer(c_int), value :: y
+            integer(c_int) :: kwxMessageBox
+        end function kwxMessageBox
+
     end interface
 
-end module wxffi_bindings
+end module kwx_bindings

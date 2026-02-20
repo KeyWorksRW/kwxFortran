@@ -12,8 +12,8 @@
 program minimal
     use wx_app
     use wx_frame
-    use wxffi_types
-    use wxffi_constants
+    use kwx_types
+    use kwx_constants
     implicit none
 
     type(wxFrame_t) :: main_frame

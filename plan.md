@@ -110,9 +110,9 @@ brew install gcc cmake ninja
 kwxFortran/
 ├── src/
 │   ├── kwxApp.cpp            # C++ implementation of wxApp (compiled into library)
-│   ├── wxffi_bindings.f90    # ISO_C_BINDING interfaces to wxFFI functions
-│   ├── wxffi_types.f90       # Fortran type definitions (opaque pointers, etc.)
-│   ├── wxffi_constants.f90   # Constant values from wxWidgets
+│   ├── kwx_bindings.f90    # ISO_C_BINDING interfaces to wxFFI functions
+│   ├── kwx_types.f90       # Fortran type definitions (opaque pointers, etc.)
+│   ├── kwx_constants.f90   # Constant values from wxWidgets
 │   ├── wx_string.f90         # String conversion utilities
 │   ├── wx_app.f90            # Fortran wrapper for kwxApp_* functions
 │   ├── wx_frame.f90          # Frame class wrapper
@@ -134,7 +134,7 @@ kwxFortran/
 
 #### 1. ISO_C_BINDING for C Interoperability
 ```fortran
-module wxffi_bindings
+module kwx_bindings
     use, intrinsic :: iso_c_binding
     implicit none
 
@@ -154,7 +154,7 @@ end module
 
 #### 2. Opaque Pointer Types
 ```fortran
-module wxffi_types
+module kwx_types
     use, intrinsic :: iso_c_binding
     implicit none
 
@@ -234,7 +234,7 @@ end module
 
 **Files to create:**
 1. `CMakeLists.txt` — CMake build with FetchContent for wxFFI
-2. `src/wxffi_types.f90` — Opaque pointer types
+2. `src/kwx_types.f90` — Opaque pointer types
 3. `src/wx_string.f90` — String conversion helpers
 
 **Verification:**
@@ -247,11 +247,11 @@ end module
 
 **Files to create:**
 1. `src/kwxApp.cpp` — C++ implementation of wxApp subclass (copy/adapt from `build/_deps/kwxffi-src/examples/CApp/kwxApp.cpp`)
-2. `src/wxffi_bindings.f90` — Raw C bindings for:
+2. `src/kwx_bindings.f90` — Raw C bindings for:
    - `kwxApp_*` functions (application lifecycle from kwxApp.h)
    - `wxFrame_*` functions
    - `wxWindow_*` functions
-3. `src/wxffi_constants.f90` — Essential constants:
+3. `src/kwx_constants.f90` — Essential constants:
    - `wxID_ANY`, `wxDEFAULT_FRAME_STYLE`, etc.
 4. `src/wx_app.f90` — Fortran wrapper for kwxApp_* C functions
 5. `src/wx_frame.f90` — Frame wrapper
@@ -294,7 +294,7 @@ Complete manual verification, then proceed to Phase 3
 **Objective:** Add common UI controls
 
 **Files to create/modify:**
-1. Add to `src/wxffi_bindings.f90`:
+1. Add to `src/kwx_bindings.f90`:
    - `wxButton_*`, `wxTextCtrl_*`, `wxStaticText_*`
    - `wxPanel_*`, `wxBoxSizer_*`
 2. `src/wx_controls.f90` — Control wrappers
@@ -314,12 +314,12 @@ Complete manual verification, then proceed to Phase 3
    - Added `HandleEvent` method to `kwxAppImpl` (routes events through closures)
    - Added `kwxApp_Connect` / `kwxApp_Disconnect` C functions
    - Forward-declared wxClosure/wxCallback from kwxFFI
-2. Modified `src/wxffi_bindings.f90`:
+2. Modified `src/kwx_bindings.f90`:
    - Added `kwxApp_Connect`, `kwxApp_Disconnect` bindings
    - Added `wxClosure_Create`, `wxClosure_GetData` bindings
    - Added `wxEvent_*` accessor bindings (GetEventType, GetId, Skip, etc.)
    - Added `wxCommandEvent_*` accessor bindings (GetString, GetSelection, etc.)
-3. Modified `src/wxffi_constants.f90`:
+3. Modified `src/kwx_constants.f90`:
    - Added event type constants: `wxEVT_COMMAND_BUTTON_CLICKED`,
      `wxEVT_COMMAND_CHECKBOX_CLICKED`, `wxEVT_COMMAND_CHOICE_SELECTED`,
      `wxEVT_COMMAND_TEXT_UPDATED`, `wxEVT_COMMAND_TEXT_ENTER`,

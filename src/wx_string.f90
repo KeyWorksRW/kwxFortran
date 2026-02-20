@@ -12,7 +12,7 @@
 
 module wx_string
     use, intrinsic :: iso_c_binding
-    use wxffi_types
+    use kwx_types
     implicit none
     private
 
@@ -28,12 +28,13 @@ module wx_string
             type(c_ptr) :: wxString_CreateUTF8
         end function wxString_CreateUTF8
 
-        ! Get UTF-8 C string from wxString*
-        function wxString_GetUTF8(wx_str) bind(C, name="wxString_GetUtf8")
-            import :: c_ptr
+        ! Copy UTF-8 string into buffer; if buffer is C_NULL_PTR, returns length only
+        function wxString_GetString(wx_str, buffer) bind(C, name="wxString_GetString")
+            import :: c_ptr, c_int
             type(c_ptr), value :: wx_str
-            type(c_ptr) :: wxString_GetUTF8
-        end function wxString_GetUTF8
+            type(c_ptr), value :: buffer
+            integer(c_int) :: wxString_GetString
+        end function wxString_GetString
 
         ! Delete wxString*
         subroutine wxString_Delete_C(wx_str) bind(C, name="wxString_Delete")
@@ -77,9 +78,8 @@ contains
     function from_wxstring(wx_str_ptr) result(fstring)
         type(c_ptr), intent(in) :: wx_str_ptr
         character(len=:), allocatable :: fstring
-        type(c_ptr) :: c_str_ptr
         integer(c_int) :: str_len
-        character(kind=c_char), pointer :: c_str_array(:)
+        character(kind=c_char), allocatable, target :: buffer(:)
         integer :: i
 
         if (.not. c_associated(wx_str_ptr)) then
@@ -87,27 +87,22 @@ contains
             return
         end if
 
-        ! Get UTF-8 C string pointer
-        c_str_ptr = wxString_GetUTF8(wx_str_ptr)
-        if (.not. c_associated(c_str_ptr)) then
-            allocate(character(len=0) :: fstring)
-            return
-        end if
-
-        ! Get string length
-        str_len = wxString_Length(wx_str_ptr)
+        ! Get string length (pass C_NULL_PTR to query length only)
+        str_len = wxString_GetString(wx_str_ptr, c_null_ptr)
 
         if (str_len == 0) then
             allocate(character(len=0) :: fstring)
             return
         end if
 
-        ! Convert C string to Fortran string
-        call c_f_pointer(c_str_ptr, c_str_array, [str_len])
+        ! Allocate buffer and copy UTF-8 content
+        allocate(buffer(str_len))
+        str_len = wxString_GetString(wx_str_ptr, c_loc(buffer))
 
+        ! Convert C buffer to Fortran string
         allocate(character(len=str_len) :: fstring)
         do i = 1, str_len
-            fstring(i:i) = c_str_array(i)
+            fstring(i:i) = buffer(i)
         end do
     end function from_wxstring
 

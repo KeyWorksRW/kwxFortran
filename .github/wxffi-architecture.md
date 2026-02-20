@@ -135,7 +135,7 @@ wxString_Delete(str);  // Must call to avoid leak
 wxWidgets constants are exposed as functions returning int:
 
 ```cpp
-// In defs.cpp
+// In kwx_defs.cpp
 EXPORT int expwxDEFAULT_FRAME_STYLE() { return (int) wxDEFAULT_FRAME_STYLE; }
 EXPORT int expwxTE_MULTILINE() { return (int) wxTE_MULTILINE; }
 EXPORT int expwxALIGN_CENTER() { return (int) wxALIGN_CENTER; }
@@ -148,8 +148,8 @@ Naming: `exp<CONSTANT_NAME>()` - prefix "exp" for "export"
 Events use a closure-based callback system:
 
 ```cpp
-// Closure types (wrapper.h)
-typedef void(_cdecl *ClosureFun)(void* _fun, void* _data, void* _evt);
+// Closure types (kwx_wrapper.h)
+typedef void (*ClosureFun)(void* closureFun, void* data, void* event);
 
 // wxClosure class wraps callback + user data
 class wxClosure {
@@ -162,6 +162,33 @@ class wxClosure {
 Event type constants are exposed similarly to other constants:
 ```cpp
 EXPORT int expEVT_COMMAND_BUTTON_CLICKED() { return (int) wxEVT_BUTTON; }
+```
+
+#### wxClosure Destructor Cleanup Call
+
+**Critical**: When a `wxClosure` is destroyed (e.g., at app shutdown), its destructor calls the registered callback **one final time with `event = nullptr`**:
+
+```cpp
+wxClosure::~wxClosure()
+{
+    // call for the last time with a nullptr event. Give opportunity to clean up resources
+    if (m_fun)
+    {
+        m_fun((void*) m_fun, m_data, nullptr);
+    }
+}
+```
+
+This is intentional — it gives language bindings an opportunity to release any resources tied to the closure. By the time this fires, the wxWidgets window hierarchy has already been torn down.
+
+**All language binding event handlers MUST guard against the null event.** Accessing any widget from a null-event call will crash because the controls are already destroyed.
+
+Required pattern in every callback:
+```c
+void my_handler(void* fun, void* data, void* event) {
+    if (event == NULL) return;   // cleanup call — widgets already destroyed
+    // ... normal event handling ...
+}
 ```
 
 ### 8. Common Parameter Patterns
@@ -213,15 +240,15 @@ The implementation (`kwxApp.cpp`) contains a hidden `kwxAppImpl : wxApp` subclas
 | File Pattern | Contents |
 |--------------|----------|
 | `wx_<control>.cpp` | Single control implementation (wx_button, wx_textctrl, etc.) |
-| `wrapper.cpp` | Closures, callbacks, helper classes |
-| `defs.cpp` | Constant exports |
-| `std.cpp` | C++/C type conversions |
+| `kwx_wrapper.cpp` | Closures, callbacks, helper classes |
+| `kwx_defs.cpp` | Constant exports |
+| `kwx_std.cpp` | C++/C type conversions |
 | `wx_event.cpp` | Event classes and event type exports |
 | `examples/CApp/` | Reference implementation for app startup |
 
 ## Helper Classes (kwx* prefix)
 
-Several classes in `wrapper.h` derive from wxWidgets classes to support callbacks:
+Several classes in `kwx_wrapper.h` derive from wxWidgets classes to support callbacks:
 
 | Class | Purpose |
 |-------|--------|

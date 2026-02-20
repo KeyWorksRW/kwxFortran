@@ -12,8 +12,8 @@
 
 module wx_app
     use, intrinsic :: iso_c_binding
-    use wxffi_types
-    use wxffi_bindings
+    use kwx_types
+    use kwx_bindings
     implicit none
     private
 
@@ -35,6 +35,12 @@ module wx_app
 
     ! Utilities
     public :: wx_init_all_image_handlers, wx_bell
+    public :: wx_sleep, wx_milli_sleep
+    public :: wx_enable_tooltips, wx_set_tooltip_delay
+    public :: wx_get_os_version
+    public :: wx_get_os_description, wx_get_user_id, wx_get_user_name
+    public :: wx_find_window_by_id, wx_find_window_by_label, wx_find_window_by_name
+    public :: wx_set_idle_callback, wx_get_idle_interval
 
 contains
 
@@ -284,5 +290,217 @@ contains
     subroutine wx_bell()
         call kwxApp_Bell()
     end subroutine wx_bell
+
+    !---------------------------------------------------------------------------
+    ! Sleep for a given number of seconds
+    !---------------------------------------------------------------------------
+    subroutine wx_sleep(seconds)
+        integer, intent(in) :: seconds
+        call kwxApp_Sleep(int(seconds, c_int))
+    end subroutine wx_sleep
+
+    !---------------------------------------------------------------------------
+    ! Sleep for a given number of milliseconds
+    !---------------------------------------------------------------------------
+    subroutine wx_milli_sleep(milliseconds)
+        integer, intent(in) :: milliseconds
+        call kwxApp_MilliSleep(int(milliseconds, c_int))
+    end subroutine wx_milli_sleep
+
+    !---------------------------------------------------------------------------
+    ! Enable or disable tooltips globally
+    !---------------------------------------------------------------------------
+    subroutine wx_enable_tooltips(enable)
+        logical, intent(in) :: enable
+        integer(c_int) :: c_enable
+
+        c_enable = 0
+        if (enable) c_enable = 1
+        call kwxApp_EnableTooltips(c_enable)
+    end subroutine wx_enable_tooltips
+
+    !---------------------------------------------------------------------------
+    ! Set tooltip delay in milliseconds
+    !---------------------------------------------------------------------------
+    subroutine wx_set_tooltip_delay(milliseconds)
+        integer, intent(in) :: milliseconds
+        call kwxApp_SetTooltipDelay(int(milliseconds, c_int))
+    end subroutine wx_set_tooltip_delay
+
+    !---------------------------------------------------------------------------
+    ! Get OS version
+    ! Returns OS type integer; major/minor are optional output integers
+    !---------------------------------------------------------------------------
+    function wx_get_os_version(major, minor) result(os_type)
+        integer, intent(out), optional :: major, minor
+        integer :: os_type
+        integer(c_int), target :: c_major, c_minor
+        type(c_ptr) :: p_major, p_minor
+
+        ! Pass pointers if caller wants the values
+        if (present(major)) then
+            p_major = c_loc(c_major)
+        else
+            p_major = c_null_ptr
+        end if
+        if (present(minor)) then
+            p_minor = c_loc(c_minor)
+        else
+            p_minor = c_null_ptr
+        end if
+
+        os_type = int(kwxApp_GetOsVersion(p_major, p_minor))
+        if (present(major)) major = int(c_major)
+        if (present(minor)) minor = int(c_minor)
+    end function wx_get_os_version
+
+    !---------------------------------------------------------------------------
+    ! Get OS description string
+    !---------------------------------------------------------------------------
+    function wx_get_os_description() result(desc)
+        use, intrinsic :: iso_c_binding, only: c_ptr, c_f_pointer, c_null_char
+        character(len=:), allocatable :: desc
+        type(c_ptr) :: c_str
+        character(kind=c_char, len=512), pointer :: f_str
+        integer :: n
+
+        c_str = kwxApp_GetOsDescription()
+        if (.not. c_associated(c_str)) then
+            desc = ""
+            return
+        end if
+        call c_f_pointer(c_str, f_str)
+        n = index(f_str, c_null_char) - 1
+        if (n <= 0) n = len(f_str)
+        desc = f_str(1:n)
+        call kwxApp_FreeString(c_str)
+    end function wx_get_os_description
+
+    !---------------------------------------------------------------------------
+    ! Get user login ID
+    !---------------------------------------------------------------------------
+    function wx_get_user_id() result(uid)
+        use, intrinsic :: iso_c_binding, only: c_ptr, c_f_pointer, c_null_char
+        character(len=:), allocatable :: uid
+        type(c_ptr) :: c_str
+        character(kind=c_char, len=256), pointer :: f_str
+        integer :: n
+
+        c_str = kwxApp_GetUserId()
+        if (.not. c_associated(c_str)) then
+            uid = ""
+            return
+        end if
+        call c_f_pointer(c_str, f_str)
+        n = index(f_str, c_null_char) - 1
+        if (n <= 0) n = len(f_str)
+        uid = f_str(1:n)
+        call kwxApp_FreeString(c_str)
+    end function wx_get_user_id
+
+    !---------------------------------------------------------------------------
+    ! Get user display name
+    !---------------------------------------------------------------------------
+    function wx_get_user_name() result(uname)
+        use, intrinsic :: iso_c_binding, only: c_ptr, c_f_pointer, c_null_char
+        character(len=:), allocatable :: uname
+        type(c_ptr) :: c_str
+        character(kind=c_char, len=256), pointer :: f_str
+        integer :: n
+
+        c_str = kwxApp_GetUserName()
+        if (.not. c_associated(c_str)) then
+            uname = ""
+            return
+        end if
+        call c_f_pointer(c_str, f_str)
+        n = index(f_str, c_null_char) - 1
+        if (n <= 0) n = len(f_str)
+        uname = f_str(1:n)
+        call kwxApp_FreeString(c_str)
+    end function wx_get_user_name
+
+    !---------------------------------------------------------------------------
+    ! Find a window by its integer ID
+    ! parent: search only children of this window (optional, default: all windows)
+    ! Returns wxWindow_t (check %is_valid() before use)
+    !---------------------------------------------------------------------------
+    function wx_find_window_by_id(id, parent) result(window)
+        integer, intent(in) :: id
+        type(wxWindow_t), intent(in), optional :: parent
+        type(wxWindow_t) :: window
+        type(c_ptr) :: parent_ptr
+
+        if (present(parent)) then
+            parent_ptr = parent%ptr
+        else
+            parent_ptr = c_null_ptr
+        end if
+        window%ptr = kwxApp_FindWindowById(int(id, c_int), parent_ptr)
+    end function wx_find_window_by_id
+
+    !---------------------------------------------------------------------------
+    ! Find a window by its user-visible label
+    !---------------------------------------------------------------------------
+    function wx_find_window_by_label(label, parent) result(window)
+        character(len=*), intent(in) :: label
+        type(wxWindow_t), intent(in), optional :: parent
+        type(wxWindow_t) :: window
+        type(c_ptr) :: parent_ptr
+        ! Convert to null-terminated C string
+        character(kind=c_char, len=len(label)+1), target :: c_label
+
+        c_label = label // c_null_char
+        if (present(parent)) then
+            parent_ptr = parent%ptr
+        else
+            parent_ptr = c_null_ptr
+        end if
+        window%ptr = kwxApp_FindWindowByLabel(c_loc(c_label), parent_ptr)
+    end function wx_find_window_by_label
+
+    !---------------------------------------------------------------------------
+    ! Find a window by its programmatic name (set with SetName)
+    !---------------------------------------------------------------------------
+    function wx_find_window_by_name(name, parent) result(window)
+        character(len=*), intent(in) :: name
+        type(wxWindow_t), intent(in), optional :: parent
+        type(wxWindow_t) :: window
+        type(c_ptr) :: parent_ptr
+        character(kind=c_char, len=len(name)+1), target :: c_name
+
+        c_name = name // c_null_char
+        if (present(parent)) then
+            parent_ptr = parent%ptr
+        else
+            parent_ptr = c_null_ptr
+        end if
+        window%ptr = kwxApp_FindWindowByName(c_loc(c_name), parent_ptr)
+    end function wx_find_window_by_name
+
+    !---------------------------------------------------------------------------
+    ! Set idle callback
+    ! interval_ms: polling interval in ms (0 = disabled)
+    ! callback:    c_funptr to a subroutine(data) bind(C) — one-arg idle callback
+    ! data:        optional opaque data pointer passed to callback
+    !---------------------------------------------------------------------------
+    subroutine wx_set_idle_callback(interval_ms, callback, data)
+        integer, intent(in) :: interval_ms
+        type(c_funptr), intent(in), value :: callback
+        type(c_ptr), intent(in), optional :: data
+        type(c_ptr) :: data_ptr
+
+        data_ptr = c_null_ptr
+        if (present(data)) data_ptr = data
+        call kwxApp_SetIdleCallback(int(interval_ms, c_int), callback, data_ptr)
+    end subroutine wx_set_idle_callback
+
+    !---------------------------------------------------------------------------
+    ! Get current idle callback interval (0 if disabled)
+    !---------------------------------------------------------------------------
+    function wx_get_idle_interval() result(interval_ms)
+        integer :: interval_ms
+        interval_ms = int(kwxApp_GetIdleInterval())
+    end function wx_get_idle_interval
 
 end module wx_app

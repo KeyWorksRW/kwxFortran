@@ -121,8 +121,8 @@ program controls_demo
     use wx_sizers
     use wx_window
     use wx_events
-    use wxffi_types
-    use wxffi_constants
+    use kwx_types
+    use kwx_constants
     use controls_demo_handlers
     implicit none
 

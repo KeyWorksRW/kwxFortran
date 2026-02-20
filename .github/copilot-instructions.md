@@ -44,10 +44,10 @@ For the complete kwxFFI C API reference, see `.github/wxffi-architecture.md`.
 ```
 src/
   kwxApp.cpp            # C++ wxApp subclass (compiled into kwxFortran.lib)
-  wxffi_types.f90       # Opaque pointer types (wxFrame_t, wxButton_t, etc.)
+  kwx_types.f90       # Opaque pointer types (wxFrame_t, wxButton_t, etc.)
   wx_string.f90         # Fortran ↔ wxString* conversion utilities
-  wxffi_bindings.f90    # Raw ISO_C_BINDING interfaces to kwxFFI C functions
-  wxffi_constants.f90   # wxWidgets constants (wxID_ANY, wxDEFAULT_FRAME_STYLE, etc.)
+  kwx_bindings.f90    # Raw ISO_C_BINDING interfaces to kwxFFI C functions
+  kwx_constants.f90   # wxWidgets constants (wxID_ANY, wxDEFAULT_FRAME_STYLE, etc.)
   wx_app.f90            # High-level Fortran wrapper for application lifecycle
   wx_window.f90         # Window base class wrapper
   wx_frame.f90          # Frame (top-level window) wrapper
@@ -60,13 +60,13 @@ file_list.cmake         # Source file lists (included by CMakeLists.txt)
 
 ### Module dependency order (enforced by compile order in file_list.cmake)
 ```
-wxffi_types         ← no project dependencies
-wx_string           ← depends on wxffi_types
-wxffi_bindings      ← depends on iso_c_binding only
-wxffi_constants     ← depends on iso_c_binding only
-wx_app              ← depends on wxffi_types, wxffi_bindings
-wx_window           ← depends on wxffi_types, wxffi_bindings, wxffi_constants, wx_string
-wx_frame            ← depends on wxffi_types, wxffi_bindings, wxffi_constants, wx_string
+kwx_types         ← no project dependencies
+wx_string           ← depends on kwx_types
+kwx_bindings      ← depends on iso_c_binding only
+kwx_constants     ← depends on iso_c_binding only
+wx_app              ← depends on kwx_types, kwx_bindings
+wx_window           ← depends on kwx_types, kwx_bindings, kwx_constants, wx_string
+wx_frame            ← depends on kwx_types, kwx_bindings, kwx_constants, wx_string
 ```
 
 When adding new modules, place them in `file_list.cmake` *after* their dependencies.
@@ -75,14 +75,14 @@ When adding new modules, place them in `file_list.cmake` *after* their dependenc
 
 Every wxFFI function is bound at two levels:
 
-1. **`wxffi_bindings.f90`** — Raw `bind(C)` interface declarations matching the C function signatures exactly. These use `c_ptr`, `c_int`, etc.
+1. **`kwx_bindings.f90`** — Raw `bind(C)` interface declarations matching the C function signatures exactly. These use `c_ptr`, `c_int`, etc.
 
 2. **`wx_*.f90` wrapper modules** — Idiomatic Fortran API with optional parameters, string conversion, type-safe wrappers, and default values.
 
 Example: Creating a frame
 
 ```fortran
-! Layer 1 (wxffi_bindings.f90) — raw C binding
+! Layer 1 (kwx_bindings.f90) — raw C binding
 function wxFrame_Create(parent, id, title, x, y, w, h, style) &
     bind(C, name="wxFrame_Create")
     import :: c_ptr, c_int
@@ -104,7 +104,7 @@ end function
 
 ### Type system
 
-All wxWidgets objects are opaque `c_ptr` values wrapped in Fortran derived types defined in `wxffi_types.f90`:
+All wxWidgets objects are opaque `c_ptr` values wrapped in Fortran derived types defined in `kwx_types.f90`:
 
 ```fortran
 type :: wxWindow_t
@@ -139,7 +139,7 @@ For return values, use `from_wxstring()` to extract content, then `wxString_Dele
 wxWidgets constants are exposed by kwxFFI as C functions prefixed with `exp`:
 
 ```fortran
-! In wxffi_constants.f90
+! In kwx_constants.f90
 function wxID_ANY() bind(C, name="expwxID_ANY")
     import :: c_int
     integer(c_int) :: wxID_ANY
@@ -147,6 +147,33 @@ end function
 ```
 
 These are callable as regular Fortran functions: `id = wxID_ANY()`.
+
+### Event handler callbacks
+
+Events use kwxFFI's closure system. Every Fortran event handler has this signature (matching `ClosureFun` in `kwx_wrapper.h`):
+
+```fortran
+subroutine my_handler(fun, data, evt) bind(C)
+    use, intrinsic :: iso_c_binding, only: c_ptr, c_associated
+    type(c_ptr), value :: fun, data, evt
+    ! ...
+end subroutine
+```
+
+**Critical — null event guard**: When `wxClosure` is destroyed at app shutdown, it calls every registered callback one final time with `evt = C_NULL_PTR`. By that point the wxWidgets window hierarchy is already torn down. Any callback that touches a widget without this guard will crash.
+
+Every event handler **must** return immediately when `evt` is null:
+
+```fortran
+subroutine my_handler(fun, data, evt) bind(C)
+    type(c_ptr), value :: fun, data, evt
+
+    if (.not. c_associated(evt)) return   ! cleanup call — widgets already destroyed
+    ! ... normal event handling ...
+end subroutine
+```
+
+The only exception is handlers that do not access any widget (e.g., a handler that only calls `wx_exit_main_loop()` — a pure signal with no widget dependency).
 
 ### Application lifecycle
 
@@ -175,7 +202,7 @@ The C++ side (`src/kwxApp.cpp`) contains the hidden `kwxAppImpl : wxApp` subclas
 ### Naming
 | Entity | Convention | Example |
 |--------|-----------|---------|
-| Modules | `snake_case` | `wx_frame`, `wxffi_bindings` |
+| Modules | `snake_case` | `wx_frame`, `kwx_bindings` |
 | Types | `PascalCase_t` suffix | `wxFrame_t`, `wxButton_t` |
 | Wrapper functions | `wx_<class>_<action>` | `wx_frame_create`, `wx_frame_show` |
 | Raw bindings | Match C name exactly | `wxFrame_Create`, `kwxApp_Initialize` |
@@ -183,9 +210,9 @@ The C++ side (`src/kwxApp.cpp`) contains the hidden `kwxAppImpl : wxApp` subclas
 
 ### Adding a new wxWidgets class binding
 
-1. Add the type to `wxffi_types.f90` (with `is_valid` method)
-2. Add raw `bind(C)` interfaces to `wxffi_bindings.f90`
-3. Add any needed constants to `wxffi_constants.f90`
+1. Add the type to `kwx_types.f90` (with `is_valid` method)
+2. Add raw `bind(C)` interfaces to `kwx_bindings.f90`
+3. Add any needed constants to `kwx_constants.f90`
 4. Create `wx_<class>.f90` with idiomatic Fortran wrappers
 5. Add the new `.f90` file to `file_list.cmake` in dependency order
 6. Update `examples/` to exercise the new class

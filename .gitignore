@@ -5,3 +5,6 @@ build/
 bin/
 lib/
 .shared/
+
+# Fortran compiled module interface files — generated in build/modules/, never in src/
+*.mod

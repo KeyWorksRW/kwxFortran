@@ -7,7 +7,7 @@
 !
 ! Usage:
 !   use wx_events
-!   use wxffi_constants
+!   use kwx_constants
 !
 !   ! Define a handler with bind(C)
 !   subroutine on_click(fun, data, evt) bind(C)
@@ -31,8 +31,8 @@
 
 module wx_events
     use, intrinsic :: iso_c_binding
-    use wxffi_types
-    use wxffi_bindings
+    use kwx_types
+    use kwx_bindings
     use wx_string
     implicit none
     private
@@ -122,9 +122,10 @@ contains
 
         c_type = int(event_type, c_int)
 
-        ! Connect — kwxApp_Connect wraps fun+data in a trampoline closure
-        ! that absorbs the null-event cleanup call from ~wxClosure
-        dummy = kwxApp_Connect(window%ptr, c_first, c_last, c_type, fptr, data_ptr)
+        ! Connect — create a wxClosure wrapping fun+data, then connect it
+        ! wxClosure_Create(fun, data) returns wxClosure* owned by wxCallback
+        dummy = wxEvtHandler_Connect(window%ptr, c_first, c_last, c_type, &
+            wxClosure_Create(fptr, data_ptr))
     end subroutine wx_connect
 
     !---------------------------------------------------------------------------
@@ -158,7 +159,8 @@ contains
 
         c_type = int(event_type, c_int)
 
-        dummy = kwxApp_Disconnect(window%ptr, c_first, c_last, c_type)
+        ! Disconnect — 5th arg is wxObject* user data, pass null to match any
+        dummy = wxEvtHandler_Disconnect(window%ptr, c_first, c_last, c_type, c_null_ptr)
     end subroutine wx_disconnect
 
     !===========================================================================

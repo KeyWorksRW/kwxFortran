@@ -1,15 +1,15 @@
-! wxffi_constants.f90 - wxWidgets constants for Fortran
+! kwx_constants.f90 - wxWidgets constants for Fortran
 ! Part of kwxFortran - Fortran bindings for wxWidgets via wxFFI
 !
 ! This module provides access to wxWidgets constants which are exported
 ! by kwxFFI as functions (e.g., expwxID_ANY() returns the value of wxID_ANY).
 !
 ! Usage:
-!   use wxffi_constants
+!   use kwx_constants
 !   integer :: my_style
 !   my_style = wxDEFAULT_FRAME_STYLE()
 
-module wxffi_constants
+module kwx_constants
     use, intrinsic :: iso_c_binding
     implicit none
     private
@@ -36,7 +36,7 @@ module wxffi_constants
     !---------------------------------------------------------------------------
     public :: wxALIGN_LEFT, wxALIGN_RIGHT, wxALIGN_TOP, wxALIGN_BOTTOM
     public :: wxALIGN_CENTER, wxALIGN_CENTER_HORIZONTAL, wxALIGN_CENTER_VERTICAL
-    public :: wxEXPAND, wxGROW, wxSHRINK, wxSHAPED, wxFIXED_MINSIZE
+    public :: wxEXPAND, wxGROW, wxSHRINK, wxSHAPED
 
     !---------------------------------------------------------------------------
     ! Direction/orientation
@@ -82,6 +82,7 @@ module wxffi_constants
     public :: wxEVT_RADIOBUTTON
     public :: wxEVT_COMBOBOX
     public :: wxEVT_TOOL
+    public :: wxEVT_CLOSE_WINDOW
 
     !---------------------------------------------------------------------------
     ! ListBox styles
@@ -114,6 +115,12 @@ module wxffi_constants
     ! StatusBar styles
     !---------------------------------------------------------------------------
     public :: wxST_SIZEGRIP
+
+    !---------------------------------------------------------------------------
+    ! MessageBox / dialog button flags
+    !---------------------------------------------------------------------------
+    public :: wxOK, wxCANCEL, wxYES, wxNO, wxYES_NO
+    public :: wxICON_INFORMATION, wxICON_WARNING, wxICON_ERROR, wxICON_QUESTION
 
     !---------------------------------------------------------------------------
     ! Special values
@@ -356,11 +363,6 @@ module wxffi_constants
             integer(c_int) :: wxSHAPED
         end function wxSHAPED
 
-        function wxFIXED_MINSIZE() bind(C, name="expwxFIXED_MINSIZE")
-            import :: c_int
-            integer(c_int) :: wxFIXED_MINSIZE
-        end function wxFIXED_MINSIZE
-
         !-----------------------------------------------------------------------
         ! Direction/orientation
         !-----------------------------------------------------------------------
@@ -562,6 +564,13 @@ module wxffi_constants
             integer(c_int) :: wxEVT_TOOL
         end function wxEVT_TOOL
 
+        ! Note: exported as expEVT_CLOSE_WINDOW (no 'wx' prefix) in kwxFFI
+        function wxEVT_CLOSE_WINDOW() &
+            bind(C, name="expEVT_CLOSE_WINDOW")
+            import :: c_int
+            integer(c_int) :: wxEVT_CLOSE_WINDOW
+        end function wxEVT_CLOSE_WINDOW
+
         !-----------------------------------------------------------------------
         ! ListBox styles
         !-----------------------------------------------------------------------
@@ -691,6 +700,55 @@ module wxffi_constants
             integer(c_int) :: wxST_SIZEGRIP
         end function wxST_SIZEGRIP
 
+        !-----------------------------------------------------------------------
+        ! MessageBox / dialog button flags
+        !-----------------------------------------------------------------------
+
+        function wxOK() bind(C, name="expwxOK")
+            import :: c_int
+            integer(c_int) :: wxOK
+        end function wxOK
+
+        function wxCANCEL() bind(C, name="expwxCANCEL")
+            import :: c_int
+            integer(c_int) :: wxCANCEL
+        end function wxCANCEL
+
+        function wxYES() bind(C, name="expwxYES")
+            import :: c_int
+            integer(c_int) :: wxYES
+        end function wxYES
+
+        function wxNO() bind(C, name="expwxNO")
+            import :: c_int
+            integer(c_int) :: wxNO
+        end function wxNO
+
+        function wxYES_NO() bind(C, name="expwxYES_NO")
+            import :: c_int
+            integer(c_int) :: wxYES_NO
+        end function wxYES_NO
+
+        function wxICON_INFORMATION() bind(C, name="expwxICON_INFORMATION")
+            import :: c_int
+            integer(c_int) :: wxICON_INFORMATION
+        end function wxICON_INFORMATION
+
+        function wxICON_WARNING() bind(C, name="expwxICON_WARNING")
+            import :: c_int
+            integer(c_int) :: wxICON_WARNING
+        end function wxICON_WARNING
+
+        function wxICON_ERROR() bind(C, name="expwxICON_ERROR")
+            import :: c_int
+            integer(c_int) :: wxICON_ERROR
+        end function wxICON_ERROR
+
+        function wxICON_QUESTION() bind(C, name="expwxICON_QUESTION")
+            import :: c_int
+            integer(c_int) :: wxICON_QUESTION
+        end function wxICON_QUESTION
+
     end interface
 
-end module wxffi_constants
+end module kwx_constants

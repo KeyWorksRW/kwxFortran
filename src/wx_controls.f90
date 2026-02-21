@@ -9,15 +9,15 @@
 !
 ! Usage:
 !   use wx_controls
-!   use wxffi_constants
+!   use kwx_constants
 !   type(wxButton_t) :: btn
 !   btn = wx_button_create("Click Me", parent=panel)
 
 module wx_controls
     use, intrinsic :: iso_c_binding
-    use wxffi_types
-    use wxffi_bindings
-    use wxffi_constants
+    use kwx_types
+    use kwx_bindings
+    use kwx_constants
     use wx_string
     implicit none
     private
@@ -33,6 +33,7 @@ module wx_controls
     public :: wx_text_ctrl_write_text, wx_text_ctrl_append_text
     public :: wx_text_ctrl_is_modified, wx_text_ctrl_is_editable
     public :: wx_text_ctrl_get_number_of_lines
+    public :: wx_text_ctrl_set_hint
 
     ! wxStaticText
     public :: wx_static_text_create
@@ -309,6 +310,20 @@ contains
 
         n = int(wxTextCtrl_GetNumberOfLines(ctrl%ptr))
     end function wx_text_ctrl_get_number_of_lines
+
+    !---------------------------------------------------------------------------
+    ! Set hint (placeholder) text shown when control is empty
+    !---------------------------------------------------------------------------
+    subroutine wx_text_ctrl_set_hint(ctrl, hint)
+        type(wxTextCtrl_t), intent(in) :: ctrl
+        character(len=*), intent(in) :: hint
+        type(c_ptr) :: hint_ptr
+        integer(c_int) :: dummy
+
+        hint_ptr = to_wxstring(hint)
+        dummy = wxTextEntry_SetHint(ctrl%ptr, hint_ptr)
+        call wxString_Delete(hint_ptr)
+    end subroutine wx_text_ctrl_set_hint
 
     !===========================================================================
     ! wxStaticText

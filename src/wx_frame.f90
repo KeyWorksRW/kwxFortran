@@ -7,16 +7,16 @@
 !
 ! Usage:
 !   use wx_frame
-!   use wxffi_constants
+!   use kwx_constants
 !   type(wxFrame_t) :: frame
 !   frame = wx_frame_create(title="My App", width=800, height=600)
 !   call wx_frame_show(frame)
 
 module wx_frame
     use, intrinsic :: iso_c_binding
-    use wxffi_types
-    use wxffi_bindings
-    use wxffi_constants
+    use kwx_types
+    use kwx_bindings
+    use kwx_constants
     use wx_string
     implicit none
     private
@@ -37,6 +37,18 @@ module wx_frame
 
     ! Window operations (inherited from wxWindow)
     public :: wx_frame_center, wx_frame_set_size
+
+    ! Top-level window operations (wxTopLevelWindow)
+    public :: wx_frame_restore
+    public :: wx_frame_maximize, wx_frame_iconize
+    public :: wx_frame_is_maximized, wx_frame_is_iconized
+    public :: wx_frame_show_full_screen, wx_frame_is_full_screen
+    public :: wx_frame_get_title, wx_frame_set_title
+    public :: wx_frame_is_active
+    public :: wx_frame_enable_close_button
+    public :: wx_frame_enable_maximize_button, wx_frame_enable_minimize_button
+    public :: wx_frame_request_user_attention
+    public :: wx_frame_push_status_text, wx_frame_pop_status_text
 
 contains
 
@@ -251,5 +263,191 @@ contains
 
         call wxWindow_SetSize(frame%ptr, c_x, c_y, c_w, c_h, c_flags)
     end subroutine wx_frame_set_size
+
+    !---------------------------------------------------------------------------
+    ! Restore the frame from maximized or iconized state
+    !---------------------------------------------------------------------------
+    subroutine wx_frame_restore(frame)
+        type(wxFrame_t), intent(in) :: frame
+        call wxFrame_Restore(frame%ptr)
+    end subroutine wx_frame_restore
+
+    !---------------------------------------------------------------------------
+    ! Maximize the frame
+    !---------------------------------------------------------------------------
+    subroutine wx_frame_maximize(frame)
+        type(wxFrame_t), intent(in) :: frame
+        call wxFrame_Maximize(frame%ptr)
+    end subroutine wx_frame_maximize
+
+    !---------------------------------------------------------------------------
+    ! Iconize (minimize) the frame
+    !---------------------------------------------------------------------------
+    subroutine wx_frame_iconize(frame)
+        type(wxFrame_t), intent(in) :: frame
+        call wxFrame_Iconize(frame%ptr)
+    end subroutine wx_frame_iconize
+
+    !---------------------------------------------------------------------------
+    ! Check if the frame is maximized
+    !---------------------------------------------------------------------------
+    logical function wx_frame_is_maximized(frame)
+        type(wxFrame_t), intent(in) :: frame
+        wx_frame_is_maximized = (wxFrame_IsMaximized(frame%ptr) /= 0)
+    end function wx_frame_is_maximized
+
+    !---------------------------------------------------------------------------
+    ! Check if the frame is iconized (minimized)
+    !---------------------------------------------------------------------------
+    logical function wx_frame_is_iconized(frame)
+        type(wxFrame_t), intent(in) :: frame
+        wx_frame_is_iconized = (wxFrame_IsIconized(frame%ptr) /= 0)
+    end function wx_frame_is_iconized
+
+    !---------------------------------------------------------------------------
+    ! Show or hide fullscreen mode
+    ! style: fullscreen style flags (default: 0)
+    !---------------------------------------------------------------------------
+    logical function wx_frame_show_full_screen(frame, show, style)
+        type(wxFrame_t), intent(in) :: frame
+        logical, intent(in) :: show
+        integer, intent(in), optional :: style
+        integer(c_int) :: c_show, c_style
+
+        c_show = 0
+        if (show) c_show = 1
+        c_style = 0
+        if (present(style)) c_style = int(style, c_int)
+
+        wx_frame_show_full_screen = &
+            (wxTopLevelWindow_ShowFullScreen(frame%ptr, c_show, c_style) /= 0)
+    end function wx_frame_show_full_screen
+
+    !---------------------------------------------------------------------------
+    ! Check if the frame is in fullscreen mode
+    !---------------------------------------------------------------------------
+    logical function wx_frame_is_full_screen(frame)
+        type(wxFrame_t), intent(in) :: frame
+        wx_frame_is_full_screen = (wxTopLevelWindow_IsFullScreen(frame%ptr) /= 0)
+    end function wx_frame_is_full_screen
+
+    !---------------------------------------------------------------------------
+    ! Get the frame title
+    !---------------------------------------------------------------------------
+    function wx_frame_get_title(frame) result(title)
+        type(wxFrame_t), intent(in) :: frame
+        character(len=:), allocatable :: title
+        type(c_ptr) :: ws
+
+        ws = wxTopLevelWindow_GetTitle(frame%ptr)
+        title = from_wxstring(ws)
+        call wxString_Delete(ws)
+    end function wx_frame_get_title
+
+    !---------------------------------------------------------------------------
+    ! Set the frame title
+    !---------------------------------------------------------------------------
+    subroutine wx_frame_set_title(frame, title)
+        type(wxFrame_t), intent(in) :: frame
+        character(len=*), intent(in) :: title
+        type(c_ptr) :: ws
+
+        ws = to_wxstring(title)
+        call wxTopLevelWindow_SetTitle(frame%ptr, ws)
+        call wxString_Delete(ws)
+    end subroutine wx_frame_set_title
+
+    !---------------------------------------------------------------------------
+    ! Check if the frame is the active (focused) top-level window
+    !---------------------------------------------------------------------------
+    logical function wx_frame_is_active(frame)
+        type(wxFrame_t), intent(in) :: frame
+        wx_frame_is_active = (wxTopLevelWindow_IsActive(frame%ptr) /= 0)
+    end function wx_frame_is_active
+
+    !---------------------------------------------------------------------------
+    ! Enable or disable the close button
+    !---------------------------------------------------------------------------
+    subroutine wx_frame_enable_close_button(frame, enable)
+        type(wxFrame_t), intent(in) :: frame
+        logical, intent(in) :: enable
+        integer(c_int) :: c_enable, dummy
+
+        c_enable = 0
+        if (enable) c_enable = 1
+        dummy = wxTopLevelWindow_EnableCloseButton(frame%ptr, c_enable)
+    end subroutine wx_frame_enable_close_button
+
+    !---------------------------------------------------------------------------
+    ! Enable or disable the maximize button
+    !---------------------------------------------------------------------------
+    subroutine wx_frame_enable_maximize_button(frame, enable)
+        type(wxFrame_t), intent(in) :: frame
+        logical, intent(in) :: enable
+        integer(c_int) :: c_enable, dummy
+
+        c_enable = 0
+        if (enable) c_enable = 1
+        dummy = wxTopLevelWindow_EnableMaximizeButton(frame%ptr, c_enable)
+    end subroutine wx_frame_enable_maximize_button
+
+    !---------------------------------------------------------------------------
+    ! Enable or disable the minimize button
+    !---------------------------------------------------------------------------
+    subroutine wx_frame_enable_minimize_button(frame, enable)
+        type(wxFrame_t), intent(in) :: frame
+        logical, intent(in) :: enable
+        integer(c_int) :: c_enable, dummy
+
+        c_enable = 0
+        if (enable) c_enable = 1
+        dummy = wxTopLevelWindow_EnableMinimizeButton(frame%ptr, c_enable)
+    end subroutine wx_frame_enable_minimize_button
+
+    !---------------------------------------------------------------------------
+    ! Request user attention (flash taskbar button on Windows)
+    ! flags: 0 for info, 1 for error
+    !---------------------------------------------------------------------------
+    subroutine wx_frame_request_user_attention(frame, flags)
+        type(wxFrame_t), intent(in) :: frame
+        integer, intent(in), optional :: flags
+        integer(c_int) :: c_flags
+
+        c_flags = 0
+        if (present(flags)) c_flags = int(flags, c_int)
+        call wxTopLevelWindow_RequestUserAttention(frame%ptr, c_flags)
+    end subroutine wx_frame_request_user_attention
+
+    !---------------------------------------------------------------------------
+    ! Push status text (saves current text, sets new text in field)
+    ! field: status bar field index (default: 0)
+    !---------------------------------------------------------------------------
+    subroutine wx_frame_push_status_text(frame, text, field)
+        type(wxFrame_t), intent(in) :: frame
+        character(len=*), intent(in) :: text
+        integer, intent(in), optional :: field
+        type(c_ptr) :: ws
+        integer(c_int) :: c_field
+
+        c_field = 0
+        if (present(field)) c_field = int(field, c_int)
+        ws = to_wxstring(text)
+        call wxFrame_PushStatusText(frame%ptr, ws, c_field)
+        call wxString_Delete(ws)
+    end subroutine wx_frame_push_status_text
+
+    !---------------------------------------------------------------------------
+    ! Pop status text (restores text saved by push_status_text)
+    ! field: status bar field index (default: 0)
+    !---------------------------------------------------------------------------
+    subroutine wx_frame_pop_status_text(frame, field)
+        type(wxFrame_t), intent(in) :: frame
+        integer, intent(in), optional :: field
+        integer(c_int) :: c_field
+
+        c_field = 0
+        if (present(field)) c_field = int(field, c_int)
+        call wxFrame_PopStatusText(frame%ptr, c_field)
+    end subroutine wx_frame_pop_status_text
 
 end module wx_frame

@@ -8,8 +8,44 @@
     "configurePresets": [
         {
             "name": "ninja-multi",
-            "displayName": "Ninja Multi-Config",
-            "description": "Default build using Ninja Multi-Config generator",
+            "displayName": "Ninja Multi-Config (ifx + MSVC)",
+            "description": "Default: ifx + cl.exe, outputs to build/ and bin/",
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_Fortran_COMPILER": "ifx",
+                "CMAKE_C_COMPILER": "cl",
+                "CMAKE_CXX_COMPILER": "cl"
+            }
+        },
+        {
+            "name": "ninja-ifx-clangcl",
+            "displayName": "Ninja Multi-Config (ifx + clang-cl)",
+            "description": "ifx + clang-cl (MSVC ABI), outputs to build/ and bin/",
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_Fortran_COMPILER": "ifx",
+                "CMAKE_C_COMPILER": "clang-cl",
+                "CMAKE_CXX_COMPILER": "clang-cl"
+            }
+        },
+        {
+            "name": "ninja-gfortran-mingw",
+            "displayName": "Ninja Multi-Config (gfortran + MinGW)",
+            "description": "gfortran + g++ (GNU ABI), outputs to build-mingw/ and bin-mingw/",
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "${sourceDir}/build-mingw",
+            "cacheVariables": {
+                "CMAKE_Fortran_COMPILER": "gfortran",
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "ninja-unix",
+            "displayName": "Ninja Multi-Config (Linux/macOS)",
+            "description": "Default for non-Windows platforms",
             "generator": "Ninja Multi-Config",
             "binaryDir": "${sourceDir}/build"
         }

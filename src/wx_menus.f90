@@ -8,7 +8,7 @@
 !
 ! Usage:
 !   use wx_menus
-!   use wxffi_constants
+!   use kwx_constants
 !   type(wxMenu_t)    :: file_menu
 !   type(wxMenuBar_t) :: menubar
 !
@@ -20,9 +20,9 @@
 
 module wx_menus
     use, intrinsic :: iso_c_binding
-    use wxffi_types
-    use wxffi_bindings
-    use wxffi_constants
+    use kwx_types
+    use kwx_bindings
+    use kwx_constants
     use wx_string
     implicit none
     private

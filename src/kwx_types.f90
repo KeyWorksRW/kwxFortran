@@ -1,11 +1,11 @@
-! wxffi_types.f90 - Opaque pointer types for wxWidgets objects
+! kwx_types.f90 - Opaque pointer types for wxWidgets objects
 ! Part of kwxFortran - Fortran bindings for wxWidgets via wxFFI
 !
 ! This module defines type-safe wrappers around C pointers for wxWidgets objects.
 ! All wxWidgets objects are represented as opaque pointers (type(c_ptr)) internally,
 ! but wrapped in Fortran derived types for type safety and inheritance hierarchy.
 
-module wxffi_types
+module kwx_types
     use, intrinsic :: iso_c_binding
     implicit none
     private
@@ -161,4 +161,4 @@ contains
         valid = c_associated(self%ptr)
     end function wxString_is_valid
 
-end module wxffi_types
+end module kwx_types

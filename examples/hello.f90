@@ -41,8 +41,8 @@ program hello
     use wx_sizers
     use wx_window
     use wx_events
-    use wxffi_types
-    use wxffi_constants
+    use kwx_types
+    use kwx_constants
     use hello_handlers
     implicit none
 

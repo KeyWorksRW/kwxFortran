@@ -1,0 +1,5 @@
+{
+    "mod_dirs": ["build/modules"],
+    "source_dirs": ["src", "examples"],
+    "incl_suffixes": [".f90", ".F90"]
+}

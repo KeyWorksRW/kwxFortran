@@ -495,37 +495,37 @@ module kwx_constants
         ! Event types
         !-----------------------------------------------------------------------
         function wxEVT_BUTTON() &
-            bind(C, name="expwxEVT_BUTTON")
+            bind(C, name="expEVT_BUTTON")
             import :: c_int
             integer(c_int) :: wxEVT_BUTTON
         end function wxEVT_BUTTON
 
         function wxEVT_CHECKBOX() &
-            bind(C, name="expwxEVT_CHECKBOX")
+            bind(C, name="expEVT_CHECKBOX")
             import :: c_int
             integer(c_int) :: wxEVT_CHECKBOX
         end function wxEVT_CHECKBOX
 
         function wxEVT_CHOICE() &
-            bind(C, name="expwxEVT_CHOICE")
+            bind(C, name="expEVT_CHOICE")
             import :: c_int
             integer(c_int) :: wxEVT_CHOICE
         end function wxEVT_CHOICE
 
         function wxEVT_TEXT() &
-            bind(C, name="expwxEVT_TEXT")
+            bind(C, name="expEVT_TEXT")
             import :: c_int
             integer(c_int) :: wxEVT_TEXT
         end function wxEVT_TEXT
 
         function wxEVT_TEXT_ENTER() &
-            bind(C, name="expwxEVT_TEXT_ENTER")
+            bind(C, name="expEVT_TEXT_ENTER")
             import :: c_int
             integer(c_int) :: wxEVT_TEXT_ENTER
         end function wxEVT_TEXT_ENTER
 
         function wxEVT_MENU() &
-            bind(C, name="expwxEVT_MENU")
+            bind(C, name="expEVT_MENU")
             import :: c_int
             integer(c_int) :: wxEVT_MENU
         end function wxEVT_MENU
@@ -535,31 +535,31 @@ module kwx_constants
         !-----------------------------------------------------------------------
 
         function wxEVT_LISTBOX() &
-            bind(C, name="expwxEVT_LISTBOX")
+            bind(C, name="expEVT_LISTBOX")
             import :: c_int
             integer(c_int) :: wxEVT_LISTBOX
         end function wxEVT_LISTBOX
 
         function wxEVT_LISTBOX_DCLICK() &
-            bind(C, name="expwxEVT_LISTBOX_DCLICK")
+            bind(C, name="expEVT_LISTBOX_DCLICK")
             import :: c_int
             integer(c_int) :: wxEVT_LISTBOX_DCLICK
         end function wxEVT_LISTBOX_DCLICK
 
         function wxEVT_RADIOBUTTON() &
-            bind(C, name="expwxEVT_RADIOBUTTON")
+            bind(C, name="expEVT_RADIOBUTTON")
             import :: c_int
             integer(c_int) :: wxEVT_RADIOBUTTON
         end function wxEVT_RADIOBUTTON
 
         function wxEVT_COMBOBOX() &
-            bind(C, name="expwxEVT_COMBOBOX")
+            bind(C, name="expEVT_COMBOBOX")
             import :: c_int
             integer(c_int) :: wxEVT_COMBOBOX
         end function wxEVT_COMBOBOX
 
         function wxEVT_TOOL() &
-            bind(C, name="expwxEVT_TOOL")
+            bind(C, name="expEVT_TOOL")
             import :: c_int
             integer(c_int) :: wxEVT_TOOL
         end function wxEVT_TOOL

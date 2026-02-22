@@ -13,7 +13,6 @@
 module wx_app
     use, intrinsic :: iso_c_binding
     use kwx_types
-    use kwx_bindings
     implicit none
     private
 
@@ -41,6 +40,189 @@ module wx_app
     public :: wx_get_os_description, wx_get_user_id, wx_get_user_name
     public :: wx_find_window_by_id, wx_find_window_by_label, wx_find_window_by_name
     public :: wx_set_idle_callback, wx_get_idle_interval
+
+    !---------------------------------------------------------------------------
+    ! Private C bindings for kwxApp_* functions (from kwxApp.cpp, not in kwxFFI)
+    !---------------------------------------------------------------------------
+    interface
+        function kwxApp_Initialize(argc, argv) bind(C, name="kwxApp_Initialize")
+            import :: c_int, c_ptr
+            integer(c_int), value :: argc
+            type(c_ptr), value :: argv
+            integer(c_int) :: kwxApp_Initialize
+        end function kwxApp_Initialize
+
+        function kwxApp_MainLoop() bind(C, name="kwxApp_MainLoop")
+            import :: c_int
+            integer(c_int) :: kwxApp_MainLoop
+        end function kwxApp_MainLoop
+
+        subroutine kwxApp_ExitMainLoop() bind(C, name="kwxApp_ExitMainLoop")
+        end subroutine kwxApp_ExitMainLoop
+
+        subroutine kwxApp_Shutdown() bind(C, name="kwxApp_Shutdown")
+        end subroutine kwxApp_Shutdown
+
+        function kwxApp_IsTerminating() bind(C, name="kwxApp_IsTerminating")
+            import :: c_int
+            integer(c_int) :: kwxApp_IsTerminating
+        end function kwxApp_IsTerminating
+
+        function kwxApp_GetAppName() bind(C, name="kwxApp_GetAppName")
+            import :: c_ptr
+            type(c_ptr) :: kwxApp_GetAppName
+        end function kwxApp_GetAppName
+
+        subroutine kwxApp_SetAppName(name) bind(C, name="kwxApp_SetAppName")
+            import :: c_char
+            character(kind=c_char), dimension(*), intent(in) :: name
+        end subroutine kwxApp_SetAppName
+
+        function kwxApp_GetVendorName() bind(C, name="kwxApp_GetVendorName")
+            import :: c_ptr
+            type(c_ptr) :: kwxApp_GetVendorName
+        end function kwxApp_GetVendorName
+
+        subroutine kwxApp_SetVendorName(name) bind(C, name="kwxApp_SetVendorName")
+            import :: c_char
+            character(kind=c_char), dimension(*), intent(in) :: name
+        end subroutine kwxApp_SetVendorName
+
+        function kwxApp_GetTopWindow() bind(C, name="kwxApp_GetTopWindow")
+            import :: c_ptr
+            type(c_ptr) :: kwxApp_GetTopWindow
+        end function kwxApp_GetTopWindow
+
+        subroutine kwxApp_SetTopWindow(window) bind(C, name="kwxApp_SetTopWindow")
+            import :: c_ptr
+            type(c_ptr), value :: window
+        end subroutine kwxApp_SetTopWindow
+
+        subroutine kwxApp_SetExitOnFrameDelete(flag) bind(C, name="kwxApp_SetExitOnFrameDelete")
+            import :: c_int
+            integer(c_int), value :: flag
+        end subroutine kwxApp_SetExitOnFrameDelete
+
+        function kwxApp_GetExitOnFrameDelete() bind(C, name="kwxApp_GetExitOnFrameDelete")
+            import :: c_int
+            integer(c_int) :: kwxApp_GetExitOnFrameDelete
+        end function kwxApp_GetExitOnFrameDelete
+
+        subroutine kwxApp_GetDisplaySize(width, height) bind(C, name="kwxApp_GetDisplaySize")
+            import :: c_int
+            integer(c_int), intent(out) :: width, height
+        end subroutine kwxApp_GetDisplaySize
+
+        subroutine kwxApp_GetMousePosition(x, y) bind(C, name="kwxApp_GetMousePosition")
+            import :: c_int
+            integer(c_int), intent(out) :: x, y
+        end subroutine kwxApp_GetMousePosition
+
+        function kwxApp_Pending() bind(C, name="kwxApp_Pending")
+            import :: c_int
+            integer(c_int) :: kwxApp_Pending
+        end function kwxApp_Pending
+
+        subroutine kwxApp_Dispatch() bind(C, name="kwxApp_Dispatch")
+        end subroutine kwxApp_Dispatch
+
+        function kwxApp_Yield() bind(C, name="kwxApp_Yield")
+            import :: c_int
+            integer(c_int) :: kwxApp_Yield
+        end function kwxApp_Yield
+
+        function kwxApp_SafeYield(window) bind(C, name="kwxApp_SafeYield")
+            import :: c_int, c_ptr
+            type(c_ptr), value :: window
+            integer(c_int) :: kwxApp_SafeYield
+        end function kwxApp_SafeYield
+
+        subroutine kwxApp_InitAllImageHandlers() bind(C, name="kwxApp_InitAllImageHandlers")
+        end subroutine kwxApp_InitAllImageHandlers
+
+        subroutine kwxApp_Bell() bind(C, name="kwxApp_Bell")
+        end subroutine kwxApp_Bell
+
+        subroutine kwxApp_FreeString(str) bind(C, name="kwxApp_FreeString")
+            import :: c_ptr
+            type(c_ptr), value :: str
+        end subroutine kwxApp_FreeString
+
+        function kwxApp_GetOsVersion(major, minor) bind(C, name="kwxApp_GetOsVersion")
+            import :: c_ptr, c_int
+            type(c_ptr), value :: major, minor
+            integer(c_int) :: kwxApp_GetOsVersion
+        end function kwxApp_GetOsVersion
+
+        function kwxApp_GetOsDescription() bind(C, name="kwxApp_GetOsDescription")
+            import :: c_ptr
+            type(c_ptr) :: kwxApp_GetOsDescription
+        end function kwxApp_GetOsDescription
+
+        function kwxApp_GetUserId() bind(C, name="kwxApp_GetUserId")
+            import :: c_ptr
+            type(c_ptr) :: kwxApp_GetUserId
+        end function kwxApp_GetUserId
+
+        function kwxApp_GetUserName() bind(C, name="kwxApp_GetUserName")
+            import :: c_ptr
+            type(c_ptr) :: kwxApp_GetUserName
+        end function kwxApp_GetUserName
+
+        subroutine kwxApp_EnableTooltips(enable) bind(C, name="kwxApp_EnableTooltips")
+            import :: c_int
+            integer(c_int), value :: enable
+        end subroutine kwxApp_EnableTooltips
+
+        subroutine kwxApp_SetTooltipDelay(milliseconds) bind(C, name="kwxApp_SetTooltipDelay")
+            import :: c_int
+            integer(c_int), value :: milliseconds
+        end subroutine kwxApp_SetTooltipDelay
+
+        subroutine kwxApp_Sleep(seconds) bind(C, name="kwxApp_Sleep")
+            import :: c_int
+            integer(c_int), value :: seconds
+        end subroutine kwxApp_Sleep
+
+        subroutine kwxApp_MilliSleep(milliseconds) bind(C, name="kwxApp_MilliSleep")
+            import :: c_int
+            integer(c_int), value :: milliseconds
+        end subroutine kwxApp_MilliSleep
+
+        function kwxApp_FindWindowById(id, parent) bind(C, name="kwxApp_FindWindowById")
+            import :: c_ptr, c_int
+            integer(c_int), value :: id
+            type(c_ptr), value :: parent
+            type(c_ptr) :: kwxApp_FindWindowById
+        end function kwxApp_FindWindowById
+
+        function kwxApp_FindWindowByLabel(label, parent) &
+            bind(C, name="kwxApp_FindWindowByLabel")
+            import :: c_ptr
+            type(c_ptr), value :: label, parent
+            type(c_ptr) :: kwxApp_FindWindowByLabel
+        end function kwxApp_FindWindowByLabel
+
+        function kwxApp_FindWindowByName(name, parent) &
+            bind(C, name="kwxApp_FindWindowByName")
+            import :: c_ptr
+            type(c_ptr), value :: name, parent
+            type(c_ptr) :: kwxApp_FindWindowByName
+        end function kwxApp_FindWindowByName
+
+        subroutine kwxApp_SetIdleCallback(interval_ms, callback_func, callback_data) &
+            bind(C, name="kwxApp_SetIdleCallback")
+            import :: c_ptr, c_int, c_funptr
+            integer(c_int), value :: interval_ms
+            type(c_funptr), value :: callback_func
+            type(c_ptr), value :: callback_data
+        end subroutine kwxApp_SetIdleCallback
+
+        function kwxApp_GetIdleInterval() bind(C, name="kwxApp_GetIdleInterval")
+            import :: c_int
+            integer(c_int) :: kwxApp_GetIdleInterval
+        end function kwxApp_GetIdleInterval
+    end interface
 
 contains
 

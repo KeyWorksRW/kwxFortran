@@ -21,16 +21,16 @@
 module wx_menus
     use, intrinsic :: iso_c_binding
     use kwx_types
-    use kwx_bindings
-    use kwx_constants
-    use wx_string
+    use kwxffi
+    use wx_string, only: to_wxstring, from_wxstring
     implicit none
     private
 
     ! wxMenu
     public :: wx_menu_create, wx_menu_delete
     public :: wx_menu_append, wx_menu_append_separator
-    public :: wx_menu_append_check_item, wx_menu_append_radio_item
+    public :: wx_menu_append_check_item
+    ! wx_menu_append_radio_item — blocked on kwxFFI#32 (wxMenu_AppendRadioItem missing)
     public :: wx_menu_enable, wx_menu_check
     public :: wx_menu_is_enabled, wx_menu_is_checked
     public :: wx_menu_get_item_count
@@ -101,7 +101,7 @@ contains
         character(len=*), intent(in) :: text
         character(len=*), intent(in), optional :: help
 
-        type(c_ptr) :: text_ptr, help_ptr, result_ptr
+        type(c_ptr) :: text_ptr, help_ptr
 
         text_ptr = to_wxstring(text)
         if (present(help)) then
@@ -110,8 +110,8 @@ contains
             help_ptr = to_wxstring("")
         end if
 
-        result_ptr = wxMenu_Append(menu%ptr, int(id, c_int), text_ptr, &
-            help_ptr, 0)
+        call wxMenu_Append(menu%ptr, int(id, c_int), text_ptr, &
+            help_ptr, 0_c_int)
         call wxString_Delete(text_ptr)
         call wxString_Delete(help_ptr)
     end subroutine wx_menu_append
@@ -134,30 +134,6 @@ contains
         character(len=*), intent(in) :: text
         character(len=*), intent(in), optional :: help
 
-        type(c_ptr) :: text_ptr, help_ptr, result_ptr
-
-        text_ptr = to_wxstring(text)
-        if (present(help)) then
-            help_ptr = to_wxstring(help)
-        else
-            help_ptr = to_wxstring("")
-        end if
-
-        result_ptr = wxMenu_Append(menu%ptr, int(id, c_int), text_ptr, &
-            help_ptr, 1)
-        call wxString_Delete(text_ptr)
-        call wxString_Delete(help_ptr)
-    end subroutine wx_menu_append_check_item
-
-    !---------------------------------------------------------------------------
-    ! Append a radio menu item
-    !---------------------------------------------------------------------------
-    subroutine wx_menu_append_radio_item(menu, id, text, help)
-        type(wxMenu_t), intent(in) :: menu
-        integer, intent(in) :: id
-        character(len=*), intent(in) :: text
-        character(len=*), intent(in), optional :: help
-
         type(c_ptr) :: text_ptr, help_ptr
 
         text_ptr = to_wxstring(text)
@@ -167,11 +143,19 @@ contains
             help_ptr = to_wxstring("")
         end if
 
-        call wxMenu_AppendRadioItem(menu%ptr, int(id, c_int), text_ptr, &
+        call wxMenu_AppendCheckItem(menu%ptr, int(id, c_int), text_ptr, &
             help_ptr)
         call wxString_Delete(text_ptr)
         call wxString_Delete(help_ptr)
-    end subroutine wx_menu_append_radio_item
+    end subroutine wx_menu_append_check_item
+
+    !---------------------------------------------------------------------------
+    ! Append a radio menu item
+    !---------------------------------------------------------------------------
+    ! TODO: Requires wxMenu_AppendRadioItem in kwxFFI (not yet available)
+    ! subroutine wx_menu_append_radio_item(menu, id, text, help)
+    !     ...
+    ! end subroutine wx_menu_append_radio_item
 
     !---------------------------------------------------------------------------
     ! Enable or disable a menu item
@@ -319,26 +303,34 @@ contains
         type(wxMenu_t), intent(in), optional :: submenu
         type(wxMenuItem_t) :: item
 
-        type(c_ptr) :: text_ptr, help_ptr, sub_ptr
-        integer(c_int) :: c_kind
+        type(c_ptr) :: text_ptr, help_ptr
 
-        c_kind = wxITEM_NORMAL()
-        sub_ptr = c_null_ptr
+        ! Create default menu item, then configure via setters
+        item%ptr = wxMenuItem_Create()
 
-        if (present(kind)) c_kind = int(kind, c_int)
-        if (present(submenu)) sub_ptr = submenu%ptr
+        call wxMenuItem_SetId(item%ptr, int(id, c_int))
 
         text_ptr = to_wxstring(text)
+        call wxMenuItem_SetItemLabel(item%ptr, text_ptr)
+        call wxString_Delete(text_ptr)
+
         if (present(help)) then
             help_ptr = to_wxstring(help)
-        else
-            help_ptr = to_wxstring("")
+            call wxMenuItem_SetHelp(item%ptr, help_ptr)
+            call wxString_Delete(help_ptr)
         end if
 
-        item%ptr = wxMenuItem_CreateEx(int(id, c_int), text_ptr, help_ptr, &
-            c_kind, sub_ptr)
-        call wxString_Delete(text_ptr)
-        call wxString_Delete(help_ptr)
+        if (present(kind)) then
+            ! wxITEM_CHECK = 1 — use SetCheckable for check items
+            if (kind == wxITEM_CHECK()) then
+                call wxMenuItem_SetCheckable(item%ptr, 1_c_int)
+            end if
+            ! wxITEM_RADIO not settable via kwxFFI yet (issue #32)
+        end if
+
+        if (present(submenu)) then
+            call wxMenuItem_SetSubMenu(item%ptr, submenu%ptr)
+        end if
     end function wx_menuitem_create
 
     !---------------------------------------------------------------------------

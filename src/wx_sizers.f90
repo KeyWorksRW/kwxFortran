@@ -16,8 +16,7 @@
 module wx_sizers
     use, intrinsic :: iso_c_binding
     use kwx_types
-    use kwx_bindings
-    use kwx_constants
+    use kwxffi
     implicit none
     private
 

@@ -15,9 +15,8 @@
 module wx_frame
     use, intrinsic :: iso_c_binding
     use kwx_types
-    use kwx_bindings
-    use kwx_constants
-    use wx_string
+    use kwxffi
+    use wx_string, only: to_wxstring, from_wxstring
     implicit none
     private
 
@@ -277,7 +276,7 @@ contains
     !---------------------------------------------------------------------------
     subroutine wx_frame_maximize(frame)
         type(wxFrame_t), intent(in) :: frame
-        call wxFrame_Maximize(frame%ptr)
+        call wxTopLevelWindow_Maximize(frame%ptr, 1_c_int)
     end subroutine wx_frame_maximize
 
     !---------------------------------------------------------------------------
@@ -285,7 +284,8 @@ contains
     !---------------------------------------------------------------------------
     subroutine wx_frame_iconize(frame)
         type(wxFrame_t), intent(in) :: frame
-        call wxFrame_Iconize(frame%ptr)
+        integer(c_int) :: dummy
+        dummy = wxTopLevelWindow_Iconize(frame%ptr, 1_c_int)
     end subroutine wx_frame_iconize
 
     !---------------------------------------------------------------------------
@@ -293,7 +293,7 @@ contains
     !---------------------------------------------------------------------------
     logical function wx_frame_is_maximized(frame)
         type(wxFrame_t), intent(in) :: frame
-        wx_frame_is_maximized = (wxFrame_IsMaximized(frame%ptr) /= 0)
+        wx_frame_is_maximized = (wxTopLevelWindow_IsMaximized(frame%ptr) /= 0)
     end function wx_frame_is_maximized
 
     !---------------------------------------------------------------------------
@@ -301,7 +301,7 @@ contains
     !---------------------------------------------------------------------------
     logical function wx_frame_is_iconized(frame)
         type(wxFrame_t), intent(in) :: frame
-        wx_frame_is_iconized = (wxFrame_IsIconized(frame%ptr) /= 0)
+        wx_frame_is_iconized = (wxTopLevelWindow_IsIconized(frame%ptr) /= 0)
     end function wx_frame_is_iconized
 
     !---------------------------------------------------------------------------

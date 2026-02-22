@@ -7,9 +7,8 @@
 module wx_dialogs
     use, intrinsic :: iso_c_binding
     use kwx_types
-    use kwx_bindings, only: kwxMessageBox
-    use kwx_constants
-    use wx_string, only: to_wxstring, wxString_Delete
+    use kwxffi
+    use wx_string, only: to_wxstring, from_wxstring
     implicit none
     private
 

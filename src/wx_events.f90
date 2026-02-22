@@ -32,8 +32,8 @@
 module wx_events
     use, intrinsic :: iso_c_binding
     use kwx_types
-    use kwx_bindings
-    use wx_string
+    use kwxffi, wxClosure_C_ptr => wxClosure_Create  ! rename to keep our c_funptr version below
+    use wx_string, only: to_wxstring, from_wxstring
     implicit none
     private
 
@@ -63,6 +63,19 @@ module wx_events
 
     ! Make the abstract interface public so users can declare handler procedures
     public :: event_callback
+
+    !---------------------------------------------------------------------------
+    ! Private C bindings for wxClosure (not in generated kwxffi module)
+    !---------------------------------------------------------------------------
+    interface
+        ! Create a closure that wraps a foreign function pointer and user data
+        function wxClosure_Create(fun, data) bind(C, name="wxClosure_Create")
+            import :: c_ptr, c_funptr
+            type(c_funptr), value :: fun
+            type(c_ptr), value :: data
+            type(c_ptr) :: wxClosure_Create
+        end function wxClosure_Create
+    end interface
 
 contains
 
@@ -159,8 +172,8 @@ contains
 
         c_type = int(event_type, c_int)
 
-        ! Disconnect — 5th arg is wxObject* user data, pass null to match any
-        dummy = wxEvtHandler_Disconnect(window%ptr, c_first, c_last, c_type, c_null_ptr)
+        ! Disconnect — 5th arg is id filter, 0 matches any
+        dummy = wxEvtHandler_Disconnect(window%ptr, c_first, c_last, c_type, 0_c_int)
     end subroutine wx_disconnect
 
     !===========================================================================

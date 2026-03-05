@@ -136,11 +136,40 @@ set( WX_BUILD_DIR ${CMAKE_BINARY_DIR}/_deps/wxwidgets-build )
 message( STATUS "wxWidgets sources: " ${WX_SRC_DIR} )
 message( STATUS "wxWidgets build: " ${WX_BUILD_DIR} )
 
+# ###################### kwxgen — Fortran binding generator #######################
+
+add_subdirectory( ${kwxFFI_SOURCE_DIR}/tools/kwxgen kwxgen-build )
+
+set( KWXFFI_HEADERS
+    ${kwxFFI_SOURCE_DIR}/include/kwx_classes.h
+    ${kwxFFI_SOURCE_DIR}/include/kwx_events.h
+    ${kwxFFI_SOURCE_DIR}/include/kwx_keys.h
+    ${kwxFFI_SOURCE_DIR}/include/kwx_constants.h
+)
+
+add_custom_command(
+    OUTPUT  ${CMAKE_SOURCE_DIR}/wx/kwxffi_gen.f90
+    COMMAND kwxgen generate
+                --headers ${kwxFFI_SOURCE_DIR}/include
+                --defs    ${kwxFFI_SOURCE_DIR}/src/kwx_defs.cpp
+                --lang    fortran
+                --out     ${CMAKE_SOURCE_DIR}/wx/
+    DEPENDS kwxgen ${KWXFFI_HEADERS}
+    COMMENT "Generating Fortran bindings via kwxgen"
+)
+
+add_custom_target( generate_fortran_bindings ALL
+    DEPENDS ${CMAKE_SOURCE_DIR}/wx/kwxffi_gen.f90
+)
+
 # ###################### Fortran Library Target #######################
 
 include(file_list.cmake)
 
 add_library( kwxFortran STATIC ${CXX_SOURCES} ${FORTRAN_SOURCES} )
+
+# Generated bindings must exist before compiling Fortran sources
+add_dependencies( kwxFortran generate_fortran_bindings )
 
 # Define export macro for kwxApp.cpp on Windows
 target_compile_definitions( kwxFortran PRIVATE KWXFORTRAN_EXPORTS )

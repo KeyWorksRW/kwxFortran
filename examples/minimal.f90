@@ -42,7 +42,8 @@ program minimal
     end if
 
     ! Center the frame on screen
-    call wx_frame_center(main_frame)
+    ! TODO: restore once kwxFFI exports wxWindow_CentreOnParent or wxWindow_Centre
+    ! call wx_frame_center(main_frame)
 
     ! Create a status bar with 1 field
     call wx_frame_create_status_bar(main_frame)

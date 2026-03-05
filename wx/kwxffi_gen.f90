@@ -8,1542 +8,1542 @@ module kwxffi
     ! Events
 
     integer(c_int) function wxEVT_ACTIVATE() &
-        bind(C, name='expEVT_ACTIVATE')
+        bind(C, name='exp_wxEVT_ACTIVATE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_ACTIVATE_APP() &
-        bind(C, name='expEVT_ACTIVATE_APP')
+        bind(C, name='exp_wxEVT_ACTIVATE_APP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_ALLOW_DND() &
-        bind(C, name='expEVT_AUINOTEBOOK_ALLOW_DND')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_ALLOW_DND')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_BEGIN_DRAG() &
-        bind(C, name='expEVT_AUINOTEBOOK_BEGIN_DRAG')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_BEGIN_DRAG')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_BG_DCLICK() &
-        bind(C, name='expEVT_AUINOTEBOOK_BG_DCLICK')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_BG_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_BUTTON() &
-        bind(C, name='expEVT_AUINOTEBOOK_BUTTON')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_BUTTON')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_DRAG_DONE() &
-        bind(C, name='expEVT_AUINOTEBOOK_DRAG_DONE')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_DRAG_DONE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_DRAG_MOTION() &
-        bind(C, name='expEVT_AUINOTEBOOK_DRAG_MOTION')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_DRAG_MOTION')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_END_DRAG() &
-        bind(C, name='expEVT_AUINOTEBOOK_END_DRAG')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_END_DRAG')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_PAGE_CHANGED() &
-        bind(C, name='expEVT_AUINOTEBOOK_PAGE_CHANGED')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_PAGE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_PAGE_CHANGING() &
-        bind(C, name='expEVT_AUINOTEBOOK_PAGE_CHANGING')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_PAGE_CHANGING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_PAGE_CLOSE() &
-        bind(C, name='expEVT_AUINOTEBOOK_PAGE_CLOSE')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_PAGE_CLOSE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_PAGE_CLOSED() &
-        bind(C, name='expEVT_AUINOTEBOOK_PAGE_CLOSED')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_PAGE_CLOSED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_TAB_MIDDLE_DOWN() &
-        bind(C, name='expEVT_AUINOTEBOOK_TAB_MIDDLE_DOWN')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_TAB_MIDDLE_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_TAB_MIDDLE_UP() &
-        bind(C, name='expEVT_AUINOTEBOOK_TAB_MIDDLE_UP')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_TAB_MIDDLE_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_TAB_RIGHT_DOWN() &
-        bind(C, name='expEVT_AUINOTEBOOK_TAB_RIGHT_DOWN')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_TAB_RIGHT_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUINOTEBOOK_TAB_RIGHT_UP() &
-        bind(C, name='expEVT_AUINOTEBOOK_TAB_RIGHT_UP')
+        bind(C, name='exp_wxEVT_AUINOTEBOOK_TAB_RIGHT_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUITOOLBAR_BEGIN_DRAG() &
-        bind(C, name='expEVT_AUITOOLBAR_BEGIN_DRAG')
+        bind(C, name='exp_wxEVT_AUITOOLBAR_BEGIN_DRAG')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUITOOLBAR_MIDDLE_CLICK() &
-        bind(C, name='expEVT_AUITOOLBAR_MIDDLE_CLICK')
+        bind(C, name='exp_wxEVT_AUITOOLBAR_MIDDLE_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUITOOLBAR_OVERFLOW_CLICK() &
-        bind(C, name='expEVT_AUITOOLBAR_OVERFLOW_CLICK')
+        bind(C, name='exp_wxEVT_AUITOOLBAR_OVERFLOW_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUITOOLBAR_RIGHT_CLICK() &
-        bind(C, name='expEVT_AUITOOLBAR_RIGHT_CLICK')
+        bind(C, name='exp_wxEVT_AUITOOLBAR_RIGHT_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUITOOLBAR_TOOL_DROPDOWN() &
-        bind(C, name='expEVT_AUITOOLBAR_TOOL_DROPDOWN')
+        bind(C, name='exp_wxEVT_AUITOOLBAR_TOOL_DROPDOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUI_FIND_MANAGER() &
-        bind(C, name='expEVT_AUI_FIND_MANAGER')
+        bind(C, name='exp_wxEVT_AUI_FIND_MANAGER')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUI_PANE_BUTTON() &
-        bind(C, name='expEVT_AUI_PANE_BUTTON')
+        bind(C, name='exp_wxEVT_AUI_PANE_BUTTON')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUI_PANE_CLOSE() &
-        bind(C, name='expEVT_AUI_PANE_CLOSE')
+        bind(C, name='exp_wxEVT_AUI_PANE_CLOSE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUI_PANE_MAXIMIZE() &
-        bind(C, name='expEVT_AUI_PANE_MAXIMIZE')
+        bind(C, name='exp_wxEVT_AUI_PANE_MAXIMIZE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUI_PANE_RESTORE() &
-        bind(C, name='expEVT_AUI_PANE_RESTORE')
+        bind(C, name='exp_wxEVT_AUI_PANE_RESTORE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUI_RENDER() &
-        bind(C, name='expEVT_AUI_RENDER')
+        bind(C, name='exp_wxEVT_AUI_RENDER')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUX1_DCLICK() &
-        bind(C, name='expEVT_AUX1_DCLICK')
+        bind(C, name='exp_wxEVT_AUX1_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUX1_DOWN() &
-        bind(C, name='expEVT_AUX1_DOWN')
+        bind(C, name='exp_wxEVT_AUX1_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUX1_UP() &
-        bind(C, name='expEVT_AUX1_UP')
+        bind(C, name='exp_wxEVT_AUX1_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUX2_DCLICK() &
-        bind(C, name='expEVT_AUX2_DCLICK')
+        bind(C, name='exp_wxEVT_AUX2_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUX2_DOWN() &
-        bind(C, name='expEVT_AUX2_DOWN')
+        bind(C, name='exp_wxEVT_AUX2_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_AUX2_UP() &
-        bind(C, name='expEVT_AUX2_UP')
+        bind(C, name='exp_wxEVT_AUX2_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_BUTTON() &
-        bind(C, name='expEVT_BUTTON')
+        bind(C, name='exp_wxEVT_BUTTON')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CALCULATE_LAYOUT() &
-        bind(C, name='expEVT_CALCULATE_LAYOUT')
+        bind(C, name='exp_wxEVT_CALCULATE_LAYOUT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CALENDAR_DAY_CHANGED() &
-        bind(C, name='expEVT_CALENDAR_DAY_CHANGED')
+        bind(C, name='exp_wxEVT_CALENDAR_DAY_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CALENDAR_DOUBLECLICKED() &
-        bind(C, name='expEVT_CALENDAR_DOUBLECLICKED')
+        bind(C, name='exp_wxEVT_CALENDAR_DOUBLECLICKED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CALENDAR_MONTH_CHANGED() &
-        bind(C, name='expEVT_CALENDAR_MONTH_CHANGED')
+        bind(C, name='exp_wxEVT_CALENDAR_MONTH_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CALENDAR_PAGE_CHANGED() &
-        bind(C, name='expEVT_CALENDAR_PAGE_CHANGED')
+        bind(C, name='exp_wxEVT_CALENDAR_PAGE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CALENDAR_SEL_CHANGED() &
-        bind(C, name='expEVT_CALENDAR_SEL_CHANGED')
+        bind(C, name='exp_wxEVT_CALENDAR_SEL_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CALENDAR_WEEKDAY_CLICKED() &
-        bind(C, name='expEVT_CALENDAR_WEEKDAY_CLICKED')
+        bind(C, name='exp_wxEVT_CALENDAR_WEEKDAY_CLICKED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CALENDAR_WEEK_CLICKED() &
-        bind(C, name='expEVT_CALENDAR_WEEK_CLICKED')
+        bind(C, name='exp_wxEVT_CALENDAR_WEEK_CLICKED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CALENDAR_YEAR_CHANGED() &
-        bind(C, name='expEVT_CALENDAR_YEAR_CHANGED')
+        bind(C, name='exp_wxEVT_CALENDAR_YEAR_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CHAR() &
-        bind(C, name='expEVT_CHAR')
+        bind(C, name='exp_wxEVT_CHAR')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CHAR_HOOK() &
-        bind(C, name='expEVT_CHAR_HOOK')
+        bind(C, name='exp_wxEVT_CHAR_HOOK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CHECKBOX() &
-        bind(C, name='expEVT_CHECKBOX')
+        bind(C, name='exp_wxEVT_CHECKBOX')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CHECKLISTBOX() &
-        bind(C, name='expEVT_CHECKLISTBOX')
+        bind(C, name='exp_wxEVT_CHECKLISTBOX')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CHILD_FOCUS() &
-        bind(C, name='expEVT_CHILD_FOCUS')
+        bind(C, name='exp_wxEVT_CHILD_FOCUS')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CHOICE() &
-        bind(C, name='expEVT_CHOICE')
+        bind(C, name='exp_wxEVT_CHOICE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CHOICEBOOK_PAGE_CHANGED() &
-        bind(C, name='expEVT_CHOICEBOOK_PAGE_CHANGED')
+        bind(C, name='exp_wxEVT_CHOICEBOOK_PAGE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CHOICEBOOK_PAGE_CHANGING() &
-        bind(C, name='expEVT_CHOICEBOOK_PAGE_CHANGING')
+        bind(C, name='exp_wxEVT_CHOICEBOOK_PAGE_CHANGING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CLIPBOARD_CHANGED() &
-        bind(C, name='expEVT_CLIPBOARD_CHANGED')
+        bind(C, name='exp_wxEVT_CLIPBOARD_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CLOSE_WINDOW() &
-        bind(C, name='expEVT_CLOSE_WINDOW')
+        bind(C, name='exp_wxEVT_CLOSE_WINDOW')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_COLLAPSIBLEPANE_CHANGED() &
-        bind(C, name='expEVT_COLLAPSIBLEPANE_CHANGED')
+        bind(C, name='exp_wxEVT_COLLAPSIBLEPANE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_COLOURPICKER_CHANGED() &
-        bind(C, name='expEVT_COLOURPICKER_CHANGED')
+        bind(C, name='exp_wxEVT_COLOURPICKER_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_COMBOBOX() &
-        bind(C, name='expEVT_COMBOBOX')
+        bind(C, name='exp_wxEVT_COMBOBOX')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_COMBOBOX_CLOSEUP() &
-        bind(C, name='expEVT_COMBOBOX_CLOSEUP')
+        bind(C, name='exp_wxEVT_COMBOBOX_CLOSEUP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_COMBOBOX_DROPDOWN() &
-        bind(C, name='expEVT_COMBOBOX_DROPDOWN')
+        bind(C, name='exp_wxEVT_COMBOBOX_DROPDOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CONTEXT_MENU() &
-        bind(C, name='expEVT_CONTEXT_MENU')
+        bind(C, name='exp_wxEVT_CONTEXT_MENU')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_CREATE() &
-        bind(C, name='expEVT_CREATE')
+        bind(C, name='exp_wxEVT_CREATE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DATAVIEW_ITEM_ACTIVATED() &
-        bind(C, name='expEVT_DATAVIEW_ITEM_ACTIVATED')
+        bind(C, name='exp_wxEVT_DATAVIEW_ITEM_ACTIVATED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DATAVIEW_ITEM_COLLAPSED() &
-        bind(C, name='expEVT_DATAVIEW_ITEM_COLLAPSED')
+        bind(C, name='exp_wxEVT_DATAVIEW_ITEM_COLLAPSED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DATAVIEW_ITEM_COLLAPSING() &
-        bind(C, name='expEVT_DATAVIEW_ITEM_COLLAPSING')
+        bind(C, name='exp_wxEVT_DATAVIEW_ITEM_COLLAPSING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DATAVIEW_ITEM_EDITING_DONE() &
-        bind(C, name='expEVT_DATAVIEW_ITEM_EDITING_DONE')
+        bind(C, name='exp_wxEVT_DATAVIEW_ITEM_EDITING_DONE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DATAVIEW_ITEM_EDITING_STARTED() &
-        bind(C, name='expEVT_DATAVIEW_ITEM_EDITING_STARTED')
+        bind(C, name='exp_wxEVT_DATAVIEW_ITEM_EDITING_STARTED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DATAVIEW_ITEM_EXPANDED() &
-        bind(C, name='expEVT_DATAVIEW_ITEM_EXPANDED')
+        bind(C, name='exp_wxEVT_DATAVIEW_ITEM_EXPANDED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DATAVIEW_ITEM_EXPANDING() &
-        bind(C, name='expEVT_DATAVIEW_ITEM_EXPANDING')
+        bind(C, name='exp_wxEVT_DATAVIEW_ITEM_EXPANDING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DATAVIEW_ITEM_VALUE_CHANGED() &
-        bind(C, name='expEVT_DATAVIEW_ITEM_VALUE_CHANGED')
+        bind(C, name='exp_wxEVT_DATAVIEW_ITEM_VALUE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DATAVIEW_SELECTION_CHANGED() &
-        bind(C, name='expEVT_DATAVIEW_SELECTION_CHANGED')
+        bind(C, name='exp_wxEVT_DATAVIEW_SELECTION_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DATE_CHANGED() &
-        bind(C, name='expEVT_DATE_CHANGED')
+        bind(C, name='exp_wxEVT_DATE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DELETE() &
-        bind(C, name='expEVT_DELETE')
+        bind(C, name='exp_wxEVT_DELETE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DESTROY() &
-        bind(C, name='expEVT_DESTROY')
+        bind(C, name='exp_wxEVT_DESTROY')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DETAILED_HELP() &
-        bind(C, name='expEVT_DETAILED_HELP')
+        bind(C, name='exp_wxEVT_DETAILED_HELP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DIRPICKER_CHANGED() &
-        bind(C, name='expEVT_DIRPICKER_CHANGED')
+        bind(C, name='exp_wxEVT_DIRPICKER_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DISPLAY_CHANGED() &
-        bind(C, name='expEVT_DISPLAY_CHANGED')
+        bind(C, name='exp_wxEVT_DISPLAY_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_DROP_FILES() &
-        bind(C, name='expEVT_DROP_FILES')
+        bind(C, name='exp_wxEVT_DROP_FILES')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_END_PROCESS() &
-        bind(C, name='expEVT_END_PROCESS')
+        bind(C, name='exp_wxEVT_END_PROCESS')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_END_SESSION() &
-        bind(C, name='expEVT_END_SESSION')
+        bind(C, name='exp_wxEVT_END_SESSION')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_ENTER_WINDOW() &
-        bind(C, name='expEVT_ENTER_WINDOW')
+        bind(C, name='exp_wxEVT_ENTER_WINDOW')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_ERASE_BACKGROUND() &
-        bind(C, name='expEVT_ERASE_BACKGROUND')
+        bind(C, name='exp_wxEVT_ERASE_BACKGROUND')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_FILECTRL_FILEACTIVATED() &
-        bind(C, name='expEVT_FILECTRL_FILEACTIVATED')
+        bind(C, name='exp_wxEVT_FILECTRL_FILEACTIVATED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_FILECTRL_FILTERCHANGED() &
-        bind(C, name='expEVT_FILECTRL_FILTERCHANGED')
+        bind(C, name='exp_wxEVT_FILECTRL_FILTERCHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_FILECTRL_FOLDERCHANGED() &
-        bind(C, name='expEVT_FILECTRL_FOLDERCHANGED')
+        bind(C, name='exp_wxEVT_FILECTRL_FOLDERCHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_FILECTRL_SELECTIONCHANGED() &
-        bind(C, name='expEVT_FILECTRL_SELECTIONCHANGED')
+        bind(C, name='exp_wxEVT_FILECTRL_SELECTIONCHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_FILEPICKER_CHANGED() &
-        bind(C, name='expEVT_FILEPICKER_CHANGED')
+        bind(C, name='exp_wxEVT_FILEPICKER_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_FIRST() &
-        bind(C, name='expEVT_FIRST')
+        bind(C, name='exp_wxEVT_FIRST')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_FONTPICKER_CHANGED() &
-        bind(C, name='expEVT_FONTPICKER_CHANGED')
+        bind(C, name='exp_wxEVT_FONTPICKER_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_FSWATCHER() &
-        bind(C, name='expEVT_FSWATCHER')
+        bind(C, name='exp_wxEVT_FSWATCHER')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_CELL_BEGIN_DRAG() &
-        bind(C, name='expEVT_GRID_CELL_BEGIN_DRAG')
+        bind(C, name='exp_wxEVT_GRID_CELL_BEGIN_DRAG')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_CELL_CHANGE() &
-        bind(C, name='expEVT_GRID_CELL_CHANGE')
+        bind(C, name='exp_wxEVT_GRID_CELL_CHANGE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_CELL_CHANGED() &
-        bind(C, name='expEVT_GRID_CELL_CHANGED')
+        bind(C, name='exp_wxEVT_GRID_CELL_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_CELL_CHANGING() &
-        bind(C, name='expEVT_GRID_CELL_CHANGING')
+        bind(C, name='exp_wxEVT_GRID_CELL_CHANGING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_CELL_LEFT_CLICK() &
-        bind(C, name='expEVT_GRID_CELL_LEFT_CLICK')
+        bind(C, name='exp_wxEVT_GRID_CELL_LEFT_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_CELL_LEFT_DCLICK() &
-        bind(C, name='expEVT_GRID_CELL_LEFT_DCLICK')
+        bind(C, name='exp_wxEVT_GRID_CELL_LEFT_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_CELL_RIGHT_CLICK() &
-        bind(C, name='expEVT_GRID_CELL_RIGHT_CLICK')
+        bind(C, name='exp_wxEVT_GRID_CELL_RIGHT_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_CELL_RIGHT_DCLICK() &
-        bind(C, name='expEVT_GRID_CELL_RIGHT_DCLICK')
+        bind(C, name='exp_wxEVT_GRID_CELL_RIGHT_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_COL_MOVE() &
-        bind(C, name='expEVT_GRID_COL_MOVE')
+        bind(C, name='exp_wxEVT_GRID_COL_MOVE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_COL_SIZE() &
-        bind(C, name='expEVT_GRID_COL_SIZE')
+        bind(C, name='exp_wxEVT_GRID_COL_SIZE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_COL_SORT() &
-        bind(C, name='expEVT_GRID_COL_SORT')
+        bind(C, name='exp_wxEVT_GRID_COL_SORT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_EDITOR_CREATED() &
-        bind(C, name='expEVT_GRID_EDITOR_CREATED')
+        bind(C, name='exp_wxEVT_GRID_EDITOR_CREATED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_EDITOR_HIDDEN() &
-        bind(C, name='expEVT_GRID_EDITOR_HIDDEN')
+        bind(C, name='exp_wxEVT_GRID_EDITOR_HIDDEN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_EDITOR_SHOWN() &
-        bind(C, name='expEVT_GRID_EDITOR_SHOWN')
+        bind(C, name='exp_wxEVT_GRID_EDITOR_SHOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_LABEL_LEFT_CLICK() &
-        bind(C, name='expEVT_GRID_LABEL_LEFT_CLICK')
+        bind(C, name='exp_wxEVT_GRID_LABEL_LEFT_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_LABEL_LEFT_DCLICK() &
-        bind(C, name='expEVT_GRID_LABEL_LEFT_DCLICK')
+        bind(C, name='exp_wxEVT_GRID_LABEL_LEFT_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_LABEL_RIGHT_CLICK() &
-        bind(C, name='expEVT_GRID_LABEL_RIGHT_CLICK')
+        bind(C, name='exp_wxEVT_GRID_LABEL_RIGHT_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_LABEL_RIGHT_DCLICK() &
-        bind(C, name='expEVT_GRID_LABEL_RIGHT_DCLICK')
+        bind(C, name='exp_wxEVT_GRID_LABEL_RIGHT_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_RANGE_SELECT() &
-        bind(C, name='expEVT_GRID_RANGE_SELECT')
+        bind(C, name='exp_wxEVT_GRID_RANGE_SELECT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_ROW_SIZE() &
-        bind(C, name='expEVT_GRID_ROW_SIZE')
+        bind(C, name='exp_wxEVT_GRID_ROW_SIZE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_GRID_SELECT_CELL() &
-        bind(C, name='expEVT_GRID_SELECT_CELL')
+        bind(C, name='exp_wxEVT_GRID_SELECT_CELL')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_HELP() &
-        bind(C, name='expEVT_HELP')
+        bind(C, name='exp_wxEVT_HELP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_HIBERNATE() &
-        bind(C, name='expEVT_HIBERNATE')
+        bind(C, name='exp_wxEVT_HIBERNATE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_HOTKEY() &
-        bind(C, name='expEVT_HOTKEY')
+        bind(C, name='exp_wxEVT_HOTKEY')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_HTML_CELL_CLICKED() &
-        bind(C, name='expEVT_HTML_CELL_CLICKED')
+        bind(C, name='exp_wxEVT_HTML_CELL_CLICKED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_HTML_CELL_MOUSE_HOVER() &
-        bind(C, name='expEVT_HTML_CELL_MOUSE_HOVER')
+        bind(C, name='exp_wxEVT_HTML_CELL_MOUSE_HOVER')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_HTML_LINK_CLICKED() &
-        bind(C, name='expEVT_HTML_LINK_CLICKED')
+        bind(C, name='exp_wxEVT_HTML_LINK_CLICKED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_HTML_SET_TITLE() &
-        bind(C, name='expEVT_HTML_SET_TITLE')
+        bind(C, name='exp_wxEVT_HTML_SET_TITLE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_HYPERLINK() &
-        bind(C, name='expEVT_HYPERLINK')
+        bind(C, name='exp_wxEVT_HYPERLINK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_ICONIZE() &
-        bind(C, name='expEVT_ICONIZE')
+        bind(C, name='exp_wxEVT_ICONIZE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_IDLE() &
-        bind(C, name='expEVT_IDLE')
+        bind(C, name='exp_wxEVT_IDLE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_INIT_DIALOG() &
-        bind(C, name='expEVT_INIT_DIALOG')
+        bind(C, name='exp_wxEVT_INIT_DIALOG')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_INPUT_SINK() &
-        bind(C, name='expEVT_INPUT_SINK')
+        bind(C, name='exp_wxEVT_INPUT_SINK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_JOY_BUTTON_DOWN() &
-        bind(C, name='expEVT_JOY_BUTTON_DOWN')
+        bind(C, name='exp_wxEVT_JOY_BUTTON_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_JOY_BUTTON_UP() &
-        bind(C, name='expEVT_JOY_BUTTON_UP')
+        bind(C, name='exp_wxEVT_JOY_BUTTON_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_JOY_MOVE() &
-        bind(C, name='expEVT_JOY_MOVE')
+        bind(C, name='exp_wxEVT_JOY_MOVE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_JOY_ZMOVE() &
-        bind(C, name='expEVT_JOY_ZMOVE')
+        bind(C, name='exp_wxEVT_JOY_ZMOVE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_KEY_DOWN() &
-        bind(C, name='expEVT_KEY_DOWN')
+        bind(C, name='exp_wxEVT_KEY_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_KEY_UP() &
-        bind(C, name='expEVT_KEY_UP')
+        bind(C, name='exp_wxEVT_KEY_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_KILL_FOCUS() &
-        bind(C, name='expEVT_KILL_FOCUS')
+        bind(C, name='exp_wxEVT_KILL_FOCUS')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LEAVE_WINDOW() &
-        bind(C, name='expEVT_LEAVE_WINDOW')
+        bind(C, name='exp_wxEVT_LEAVE_WINDOW')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LEFT_DCLICK() &
-        bind(C, name='expEVT_LEFT_DCLICK')
+        bind(C, name='exp_wxEVT_LEFT_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LEFT_DOWN() &
-        bind(C, name='expEVT_LEFT_DOWN')
+        bind(C, name='exp_wxEVT_LEFT_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LEFT_UP() &
-        bind(C, name='expEVT_LEFT_UP')
+        bind(C, name='exp_wxEVT_LEFT_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LISTBOOK_PAGE_CHANGED() &
-        bind(C, name='expEVT_LISTBOOK_PAGE_CHANGED')
+        bind(C, name='exp_wxEVT_LISTBOOK_PAGE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LISTBOOK_PAGE_CHANGING() &
-        bind(C, name='expEVT_LISTBOOK_PAGE_CHANGING')
+        bind(C, name='exp_wxEVT_LISTBOOK_PAGE_CHANGING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LISTBOX() &
-        bind(C, name='expEVT_LISTBOX')
+        bind(C, name='exp_wxEVT_LISTBOX')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LISTBOX_DCLICK() &
-        bind(C, name='expEVT_LISTBOX_DCLICK')
+        bind(C, name='exp_wxEVT_LISTBOX_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_BEGIN_DRAG() &
-        bind(C, name='expEVT_LIST_BEGIN_DRAG')
+        bind(C, name='exp_wxEVT_LIST_BEGIN_DRAG')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_BEGIN_LABEL_EDIT() &
-        bind(C, name='expEVT_LIST_BEGIN_LABEL_EDIT')
+        bind(C, name='exp_wxEVT_LIST_BEGIN_LABEL_EDIT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_BEGIN_RDRAG() &
-        bind(C, name='expEVT_LIST_BEGIN_RDRAG')
+        bind(C, name='exp_wxEVT_LIST_BEGIN_RDRAG')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_COL_CLICK() &
-        bind(C, name='expEVT_LIST_COL_CLICK')
+        bind(C, name='exp_wxEVT_LIST_COL_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_DELETE_ALL_ITEMS() &
-        bind(C, name='expEVT_LIST_DELETE_ALL_ITEMS')
+        bind(C, name='exp_wxEVT_LIST_DELETE_ALL_ITEMS')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_DELETE_ITEM() &
-        bind(C, name='expEVT_LIST_DELETE_ITEM')
+        bind(C, name='exp_wxEVT_LIST_DELETE_ITEM')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_END_LABEL_EDIT() &
-        bind(C, name='expEVT_LIST_END_LABEL_EDIT')
+        bind(C, name='exp_wxEVT_LIST_END_LABEL_EDIT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_INSERT_ITEM() &
-        bind(C, name='expEVT_LIST_INSERT_ITEM')
+        bind(C, name='exp_wxEVT_LIST_INSERT_ITEM')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_ITEM_ACTIVATED() &
-        bind(C, name='expEVT_LIST_ITEM_ACTIVATED')
+        bind(C, name='exp_wxEVT_LIST_ITEM_ACTIVATED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_ITEM_DESELECTED() &
-        bind(C, name='expEVT_LIST_ITEM_DESELECTED')
+        bind(C, name='exp_wxEVT_LIST_ITEM_DESELECTED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_ITEM_FOCUSED() &
-        bind(C, name='expEVT_LIST_ITEM_FOCUSED')
+        bind(C, name='exp_wxEVT_LIST_ITEM_FOCUSED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_ITEM_MIDDLE_CLICK() &
-        bind(C, name='expEVT_LIST_ITEM_MIDDLE_CLICK')
+        bind(C, name='exp_wxEVT_LIST_ITEM_MIDDLE_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_ITEM_RIGHT_CLICK() &
-        bind(C, name='expEVT_LIST_ITEM_RIGHT_CLICK')
+        bind(C, name='exp_wxEVT_LIST_ITEM_RIGHT_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_ITEM_SELECTED() &
-        bind(C, name='expEVT_LIST_ITEM_SELECTED')
+        bind(C, name='exp_wxEVT_LIST_ITEM_SELECTED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_LIST_KEY_DOWN() &
-        bind(C, name='expEVT_LIST_KEY_DOWN')
+        bind(C, name='exp_wxEVT_LIST_KEY_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MAXIMIZE() &
-        bind(C, name='expEVT_MAXIMIZE')
+        bind(C, name='exp_wxEVT_MAXIMIZE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MENU() &
-        bind(C, name='expEVT_MENU')
+        bind(C, name='exp_wxEVT_MENU')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MENU_CLOSE() &
-        bind(C, name='expEVT_MENU_CLOSE')
+        bind(C, name='exp_wxEVT_MENU_CLOSE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MENU_HIGHLIGHT() &
-        bind(C, name='expEVT_MENU_HIGHLIGHT')
+        bind(C, name='exp_wxEVT_MENU_HIGHLIGHT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MENU_OPEN() &
-        bind(C, name='expEVT_MENU_OPEN')
+        bind(C, name='exp_wxEVT_MENU_OPEN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MIDDLE_DCLICK() &
-        bind(C, name='expEVT_MIDDLE_DCLICK')
+        bind(C, name='exp_wxEVT_MIDDLE_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MIDDLE_DOWN() &
-        bind(C, name='expEVT_MIDDLE_DOWN')
+        bind(C, name='exp_wxEVT_MIDDLE_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MIDDLE_UP() &
-        bind(C, name='expEVT_MIDDLE_UP')
+        bind(C, name='exp_wxEVT_MIDDLE_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MOTION() &
-        bind(C, name='expEVT_MOTION')
+        bind(C, name='exp_wxEVT_MOTION')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MOUSEWHEEL() &
-        bind(C, name='expEVT_MOUSEWHEEL')
+        bind(C, name='exp_wxEVT_MOUSEWHEEL')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MOUSE_CAPTURE_CHANGED() &
-        bind(C, name='expEVT_MOUSE_CAPTURE_CHANGED')
+        bind(C, name='exp_wxEVT_MOUSE_CAPTURE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MOUSE_CAPTURE_LOST() &
-        bind(C, name='expEVT_MOUSE_CAPTURE_LOST')
+        bind(C, name='exp_wxEVT_MOUSE_CAPTURE_LOST')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MOVE() &
-        bind(C, name='expEVT_MOVE')
+        bind(C, name='exp_wxEVT_MOVE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MOVE_END() &
-        bind(C, name='expEVT_MOVE_END')
+        bind(C, name='exp_wxEVT_MOVE_END')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MOVE_START() &
-        bind(C, name='expEVT_MOVE_START')
+        bind(C, name='exp_wxEVT_MOVE_START')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_MOVING() &
-        bind(C, name='expEVT_MOVING')
+        bind(C, name='exp_wxEVT_MOVING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_NAVIGATION_KEY() &
-        bind(C, name='expEVT_NAVIGATION_KEY')
+        bind(C, name='exp_wxEVT_NAVIGATION_KEY')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_NC_PAINT() &
-        bind(C, name='expEVT_NC_PAINT')
+        bind(C, name='exp_wxEVT_NC_PAINT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_NOTEBOOK_PAGE_CHANGED() &
-        bind(C, name='expEVT_NOTEBOOK_PAGE_CHANGED')
+        bind(C, name='exp_wxEVT_NOTEBOOK_PAGE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_NOTEBOOK_PAGE_CHANGING() &
-        bind(C, name='expEVT_NOTEBOOK_PAGE_CHANGING')
+        bind(C, name='exp_wxEVT_NOTEBOOK_PAGE_CHANGING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_NULL() &
-        bind(C, name='expEVT_NULL')
+        bind(C, name='exp_wxEVT_NULL')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_PAINT() &
-        bind(C, name='expEVT_PAINT')
+        bind(C, name='exp_wxEVT_PAINT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_PALETTE_CHANGED() &
-        bind(C, name='expEVT_PALETTE_CHANGED')
+        bind(C, name='exp_wxEVT_PALETTE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_PG_CHANGED() &
-        bind(C, name='expEVT_PG_CHANGED')
+        bind(C, name='exp_wxEVT_PG_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_PG_CHANGING() &
-        bind(C, name='expEVT_PG_CHANGING')
+        bind(C, name='exp_wxEVT_PG_CHANGING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_PG_DOUBLE_CLICK() &
-        bind(C, name='expEVT_PG_DOUBLE_CLICK')
+        bind(C, name='exp_wxEVT_PG_DOUBLE_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_PG_HIGHLIGHTED() &
-        bind(C, name='expEVT_PG_HIGHLIGHTED')
+        bind(C, name='exp_wxEVT_PG_HIGHLIGHTED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_PG_ITEM_COLLAPSED() &
-        bind(C, name='expEVT_PG_ITEM_COLLAPSED')
+        bind(C, name='exp_wxEVT_PG_ITEM_COLLAPSED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_PG_ITEM_EXPANDED() &
-        bind(C, name='expEVT_PG_ITEM_EXPANDED')
+        bind(C, name='exp_wxEVT_PG_ITEM_EXPANDED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_PG_PAGE_CHANGED() &
-        bind(C, name='expEVT_PG_PAGE_CHANGED')
+        bind(C, name='exp_wxEVT_PG_PAGE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_PG_RIGHT_CLICK() &
-        bind(C, name='expEVT_PG_RIGHT_CLICK')
+        bind(C, name='exp_wxEVT_PG_RIGHT_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_PG_SELECTED() &
-        bind(C, name='expEVT_PG_SELECTED')
+        bind(C, name='exp_wxEVT_PG_SELECTED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_POWER_RESUME() &
-        bind(C, name='expEVT_POWER_RESUME')
+        bind(C, name='exp_wxEVT_POWER_RESUME')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_POWER_SUSPENDED() &
-        bind(C, name='expEVT_POWER_SUSPENDED')
+        bind(C, name='exp_wxEVT_POWER_SUSPENDED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_POWER_SUSPENDING() &
-        bind(C, name='expEVT_POWER_SUSPENDING')
+        bind(C, name='exp_wxEVT_POWER_SUSPENDING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_POWER_SUSPEND_CANCEL() &
-        bind(C, name='expEVT_POWER_SUSPEND_CANCEL')
+        bind(C, name='exp_wxEVT_POWER_SUSPEND_CANCEL')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_QUERY_END_SESSION() &
-        bind(C, name='expEVT_QUERY_END_SESSION')
+        bind(C, name='exp_wxEVT_QUERY_END_SESSION')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_QUERY_LAYOUT_INFO() &
-        bind(C, name='expEVT_QUERY_LAYOUT_INFO')
+        bind(C, name='exp_wxEVT_QUERY_LAYOUT_INFO')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_QUERY_NEW_PALETTE() &
-        bind(C, name='expEVT_QUERY_NEW_PALETTE')
+        bind(C, name='exp_wxEVT_QUERY_NEW_PALETTE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_RADIOBOX() &
-        bind(C, name='expEVT_RADIOBOX')
+        bind(C, name='exp_wxEVT_RADIOBOX')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_RADIOBUTTON() &
-        bind(C, name='expEVT_RADIOBUTTON')
+        bind(C, name='exp_wxEVT_RADIOBUTTON')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_RIGHT_DCLICK() &
-        bind(C, name='expEVT_RIGHT_DCLICK')
+        bind(C, name='exp_wxEVT_RIGHT_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_RIGHT_DOWN() &
-        bind(C, name='expEVT_RIGHT_DOWN')
+        bind(C, name='exp_wxEVT_RIGHT_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_RIGHT_UP() &
-        bind(C, name='expEVT_RIGHT_UP')
+        bind(C, name='exp_wxEVT_RIGHT_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SASH_DRAGGED() &
-        bind(C, name='expEVT_SASH_DRAGGED')
+        bind(C, name='exp_wxEVT_SASH_DRAGGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLLBAR() &
-        bind(C, name='expEVT_SCROLLBAR')
+        bind(C, name='exp_wxEVT_SCROLLBAR')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLLWIN_BOTTOM() &
-        bind(C, name='expEVT_SCROLLWIN_BOTTOM')
+        bind(C, name='exp_wxEVT_SCROLLWIN_BOTTOM')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLLWIN_LINEDOWN() &
-        bind(C, name='expEVT_SCROLLWIN_LINEDOWN')
+        bind(C, name='exp_wxEVT_SCROLLWIN_LINEDOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLLWIN_LINEUP() &
-        bind(C, name='expEVT_SCROLLWIN_LINEUP')
+        bind(C, name='exp_wxEVT_SCROLLWIN_LINEUP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLLWIN_PAGEDOWN() &
-        bind(C, name='expEVT_SCROLLWIN_PAGEDOWN')
+        bind(C, name='exp_wxEVT_SCROLLWIN_PAGEDOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLLWIN_PAGEUP() &
-        bind(C, name='expEVT_SCROLLWIN_PAGEUP')
+        bind(C, name='exp_wxEVT_SCROLLWIN_PAGEUP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLLWIN_THUMBRELEASE() &
-        bind(C, name='expEVT_SCROLLWIN_THUMBRELEASE')
+        bind(C, name='exp_wxEVT_SCROLLWIN_THUMBRELEASE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLLWIN_THUMBTRACK() &
-        bind(C, name='expEVT_SCROLLWIN_THUMBTRACK')
+        bind(C, name='exp_wxEVT_SCROLLWIN_THUMBTRACK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLLWIN_TOP() &
-        bind(C, name='expEVT_SCROLLWIN_TOP')
+        bind(C, name='exp_wxEVT_SCROLLWIN_TOP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLL_BOTTOM() &
-        bind(C, name='expEVT_SCROLL_BOTTOM')
+        bind(C, name='exp_wxEVT_SCROLL_BOTTOM')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLL_CHANGED() &
-        bind(C, name='expEVT_SCROLL_CHANGED')
+        bind(C, name='exp_wxEVT_SCROLL_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLL_LINEDOWN() &
-        bind(C, name='expEVT_SCROLL_LINEDOWN')
+        bind(C, name='exp_wxEVT_SCROLL_LINEDOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLL_LINEUP() &
-        bind(C, name='expEVT_SCROLL_LINEUP')
+        bind(C, name='exp_wxEVT_SCROLL_LINEUP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLL_PAGEDOWN() &
-        bind(C, name='expEVT_SCROLL_PAGEDOWN')
+        bind(C, name='exp_wxEVT_SCROLL_PAGEDOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLL_PAGEUP() &
-        bind(C, name='expEVT_SCROLL_PAGEUP')
+        bind(C, name='exp_wxEVT_SCROLL_PAGEUP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLL_THUMBRELEASE() &
-        bind(C, name='expEVT_SCROLL_THUMBRELEASE')
+        bind(C, name='exp_wxEVT_SCROLL_THUMBRELEASE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLL_THUMBTRACK() &
-        bind(C, name='expEVT_SCROLL_THUMBTRACK')
+        bind(C, name='exp_wxEVT_SCROLL_THUMBTRACK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SCROLL_TOP() &
-        bind(C, name='expEVT_SCROLL_TOP')
+        bind(C, name='exp_wxEVT_SCROLL_TOP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SEARCHCTRL_CANCEL_BTN() &
-        bind(C, name='expEVT_SEARCHCTRL_CANCEL_BTN')
+        bind(C, name='exp_wxEVT_SEARCHCTRL_CANCEL_BTN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SEARCHCTRL_SEARCH_BTN() &
-        bind(C, name='expEVT_SEARCHCTRL_SEARCH_BTN')
+        bind(C, name='exp_wxEVT_SEARCHCTRL_SEARCH_BTN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SET_CURSOR() &
-        bind(C, name='expEVT_SET_CURSOR')
+        bind(C, name='exp_wxEVT_SET_CURSOR')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SET_FOCUS() &
-        bind(C, name='expEVT_SET_FOCUS')
+        bind(C, name='exp_wxEVT_SET_FOCUS')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SHOW() &
-        bind(C, name='expEVT_SHOW')
+        bind(C, name='exp_wxEVT_SHOW')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SIZE() &
-        bind(C, name='expEVT_SIZE')
+        bind(C, name='exp_wxEVT_SIZE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SIZING() &
-        bind(C, name='expEVT_SIZING')
+        bind(C, name='exp_wxEVT_SIZING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SLIDER() &
-        bind(C, name='expEVT_SLIDER')
+        bind(C, name='exp_wxEVT_SLIDER')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SOCKET() &
-        bind(C, name='expEVT_SOCKET')
+        bind(C, name='exp_wxEVT_SOCKET')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SORT() &
-        bind(C, name='expEVT_SORT')
+        bind(C, name='exp_wxEVT_SORT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SPIN() &
-        bind(C, name='expEVT_SPIN')
+        bind(C, name='exp_wxEVT_SPIN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SPINCTRL() &
-        bind(C, name='expEVT_SPINCTRL')
+        bind(C, name='exp_wxEVT_SPINCTRL')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SPINCTRLDOUBLE() &
-        bind(C, name='expEVT_SPINCTRLDOUBLE')
+        bind(C, name='exp_wxEVT_SPINCTRLDOUBLE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SPIN_DOWN() &
-        bind(C, name='expEVT_SPIN_DOWN')
+        bind(C, name='exp_wxEVT_SPIN_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SPIN_UP() &
-        bind(C, name='expEVT_SPIN_UP')
+        bind(C, name='exp_wxEVT_SPIN_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SPLITTER_DOUBLECLICKED() &
-        bind(C, name='expEVT_SPLITTER_DOUBLECLICKED')
+        bind(C, name='exp_wxEVT_SPLITTER_DOUBLECLICKED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SPLITTER_SASH_POS_CHANGED() &
-        bind(C, name='expEVT_SPLITTER_SASH_POS_CHANGED')
+        bind(C, name='exp_wxEVT_SPLITTER_SASH_POS_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SPLITTER_SASH_POS_CHANGING() &
-        bind(C, name='expEVT_SPLITTER_SASH_POS_CHANGING')
+        bind(C, name='exp_wxEVT_SPLITTER_SASH_POS_CHANGING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SPLITTER_UNSPLIT() &
-        bind(C, name='expEVT_SPLITTER_UNSPLIT')
+        bind(C, name='exp_wxEVT_SPLITTER_UNSPLIT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_SYS_COLOUR_CHANGED() &
-        bind(C, name='expEVT_SYS_COLOUR_CHANGED')
+        bind(C, name='exp_wxEVT_SYS_COLOUR_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TASKBAR_BALLOON_CLICK() &
-        bind(C, name='expEVT_TASKBAR_BALLOON_CLICK')
+        bind(C, name='exp_wxEVT_TASKBAR_BALLOON_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TASKBAR_BALLOON_TIMEOUT() &
-        bind(C, name='expEVT_TASKBAR_BALLOON_TIMEOUT')
+        bind(C, name='exp_wxEVT_TASKBAR_BALLOON_TIMEOUT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TASKBAR_LEFT_DCLICK() &
-        bind(C, name='expEVT_TASKBAR_LEFT_DCLICK')
+        bind(C, name='exp_wxEVT_TASKBAR_LEFT_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TASKBAR_LEFT_DOWN() &
-        bind(C, name='expEVT_TASKBAR_LEFT_DOWN')
+        bind(C, name='exp_wxEVT_TASKBAR_LEFT_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TASKBAR_LEFT_UP() &
-        bind(C, name='expEVT_TASKBAR_LEFT_UP')
+        bind(C, name='exp_wxEVT_TASKBAR_LEFT_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TASKBAR_MOVE() &
-        bind(C, name='expEVT_TASKBAR_MOVE')
+        bind(C, name='exp_wxEVT_TASKBAR_MOVE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TASKBAR_RIGHT_DCLICK() &
-        bind(C, name='expEVT_TASKBAR_RIGHT_DCLICK')
+        bind(C, name='exp_wxEVT_TASKBAR_RIGHT_DCLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TASKBAR_RIGHT_DOWN() &
-        bind(C, name='expEVT_TASKBAR_RIGHT_DOWN')
+        bind(C, name='exp_wxEVT_TASKBAR_RIGHT_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TASKBAR_RIGHT_UP() &
-        bind(C, name='expEVT_TASKBAR_RIGHT_UP')
+        bind(C, name='exp_wxEVT_TASKBAR_RIGHT_UP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TEXT() &
-        bind(C, name='expEVT_TEXT')
+        bind(C, name='exp_wxEVT_TEXT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TEXT_COPY() &
-        bind(C, name='expEVT_TEXT_COPY')
+        bind(C, name='exp_wxEVT_TEXT_COPY')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TEXT_CUT() &
-        bind(C, name='expEVT_TEXT_CUT')
+        bind(C, name='exp_wxEVT_TEXT_CUT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TEXT_ENTER() &
-        bind(C, name='expEVT_TEXT_ENTER')
+        bind(C, name='exp_wxEVT_TEXT_ENTER')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TEXT_MAXLEN() &
-        bind(C, name='expEVT_TEXT_MAXLEN')
+        bind(C, name='exp_wxEVT_TEXT_MAXLEN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TEXT_PASTE() &
-        bind(C, name='expEVT_TEXT_PASTE')
+        bind(C, name='exp_wxEVT_TEXT_PASTE')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TEXT_URL() &
-        bind(C, name='expEVT_TEXT_URL')
+        bind(C, name='exp_wxEVT_TEXT_URL')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_THREAD() &
-        bind(C, name='expEVT_THREAD')
+        bind(C, name='exp_wxEVT_THREAD')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TIMER() &
-        bind(C, name='expEVT_TIMER')
+        bind(C, name='exp_wxEVT_TIMER')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TOGGLEBUTTON() &
-        bind(C, name='expEVT_TOGGLEBUTTON')
+        bind(C, name='exp_wxEVT_TOGGLEBUTTON')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TOOL() &
-        bind(C, name='expEVT_TOOL')
+        bind(C, name='exp_wxEVT_TOOL')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TOOLBOOK_PAGE_CHANGED() &
-        bind(C, name='expEVT_TOOLBOOK_PAGE_CHANGED')
+        bind(C, name='exp_wxEVT_TOOLBOOK_PAGE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TOOLBOOK_PAGE_CHANGING() &
-        bind(C, name='expEVT_TOOLBOOK_PAGE_CHANGING')
+        bind(C, name='exp_wxEVT_TOOLBOOK_PAGE_CHANGING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TOOL_DROPDOWN() &
-        bind(C, name='expEVT_TOOL_DROPDOWN')
+        bind(C, name='exp_wxEVT_TOOL_DROPDOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TOOL_ENTER() &
-        bind(C, name='expEVT_TOOL_ENTER')
+        bind(C, name='exp_wxEVT_TOOL_ENTER')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TOOL_RCLICKED() &
-        bind(C, name='expEVT_TOOL_RCLICKED')
+        bind(C, name='exp_wxEVT_TOOL_RCLICKED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREEBOOK_NODE_COLLAPSED() &
-        bind(C, name='expEVT_TREEBOOK_NODE_COLLAPSED')
+        bind(C, name='exp_wxEVT_TREEBOOK_NODE_COLLAPSED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREEBOOK_NODE_EXPANDED() &
-        bind(C, name='expEVT_TREEBOOK_NODE_EXPANDED')
+        bind(C, name='exp_wxEVT_TREEBOOK_NODE_EXPANDED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREEBOOK_PAGE_CHANGED() &
-        bind(C, name='expEVT_TREEBOOK_PAGE_CHANGED')
+        bind(C, name='exp_wxEVT_TREEBOOK_PAGE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREEBOOK_PAGE_CHANGING() &
-        bind(C, name='expEVT_TREEBOOK_PAGE_CHANGING')
+        bind(C, name='exp_wxEVT_TREEBOOK_PAGE_CHANGING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREELIST_COLUMN_SORTED() &
-        bind(C, name='expEVT_TREELIST_COLUMN_SORTED')
+        bind(C, name='exp_wxEVT_TREELIST_COLUMN_SORTED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREELIST_ITEM_ACTIVATED() &
-        bind(C, name='expEVT_TREELIST_ITEM_ACTIVATED')
+        bind(C, name='exp_wxEVT_TREELIST_ITEM_ACTIVATED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREELIST_ITEM_CHECKED() &
-        bind(C, name='expEVT_TREELIST_ITEM_CHECKED')
+        bind(C, name='exp_wxEVT_TREELIST_ITEM_CHECKED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREELIST_ITEM_CONTEXT_MENU() &
-        bind(C, name='expEVT_TREELIST_ITEM_CONTEXT_MENU')
+        bind(C, name='exp_wxEVT_TREELIST_ITEM_CONTEXT_MENU')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREELIST_ITEM_EXPANDED() &
-        bind(C, name='expEVT_TREELIST_ITEM_EXPANDED')
+        bind(C, name='exp_wxEVT_TREELIST_ITEM_EXPANDED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREELIST_ITEM_EXPANDING() &
-        bind(C, name='expEVT_TREELIST_ITEM_EXPANDING')
+        bind(C, name='exp_wxEVT_TREELIST_ITEM_EXPANDING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREELIST_SELECTION_CHANGED() &
-        bind(C, name='expEVT_TREELIST_SELECTION_CHANGED')
+        bind(C, name='exp_wxEVT_TREELIST_SELECTION_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_BEGIN_DRAG() &
-        bind(C, name='expEVT_TREE_BEGIN_DRAG')
+        bind(C, name='exp_wxEVT_TREE_BEGIN_DRAG')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_BEGIN_LABEL_EDIT() &
-        bind(C, name='expEVT_TREE_BEGIN_LABEL_EDIT')
+        bind(C, name='exp_wxEVT_TREE_BEGIN_LABEL_EDIT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_BEGIN_RDRAG() &
-        bind(C, name='expEVT_TREE_BEGIN_RDRAG')
+        bind(C, name='exp_wxEVT_TREE_BEGIN_RDRAG')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_DELETE_ITEM() &
-        bind(C, name='expEVT_TREE_DELETE_ITEM')
+        bind(C, name='exp_wxEVT_TREE_DELETE_ITEM')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_END_DRAG() &
-        bind(C, name='expEVT_TREE_END_DRAG')
+        bind(C, name='exp_wxEVT_TREE_END_DRAG')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_END_LABEL_EDIT() &
-        bind(C, name='expEVT_TREE_END_LABEL_EDIT')
+        bind(C, name='exp_wxEVT_TREE_END_LABEL_EDIT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_GET_INFO() &
-        bind(C, name='expEVT_TREE_GET_INFO')
+        bind(C, name='exp_wxEVT_TREE_GET_INFO')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_ITEM_ACTIVATED() &
-        bind(C, name='expEVT_TREE_ITEM_ACTIVATED')
+        bind(C, name='exp_wxEVT_TREE_ITEM_ACTIVATED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_ITEM_COLLAPSED() &
-        bind(C, name='expEVT_TREE_ITEM_COLLAPSED')
+        bind(C, name='exp_wxEVT_TREE_ITEM_COLLAPSED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_ITEM_COLLAPSING() &
-        bind(C, name='expEVT_TREE_ITEM_COLLAPSING')
+        bind(C, name='exp_wxEVT_TREE_ITEM_COLLAPSING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_ITEM_EXPANDED() &
-        bind(C, name='expEVT_TREE_ITEM_EXPANDED')
+        bind(C, name='exp_wxEVT_TREE_ITEM_EXPANDED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_ITEM_EXPANDING() &
-        bind(C, name='expEVT_TREE_ITEM_EXPANDING')
+        bind(C, name='exp_wxEVT_TREE_ITEM_EXPANDING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_ITEM_MIDDLE_CLICK() &
-        bind(C, name='expEVT_TREE_ITEM_MIDDLE_CLICK')
+        bind(C, name='exp_wxEVT_TREE_ITEM_MIDDLE_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_ITEM_RIGHT_CLICK() &
-        bind(C, name='expEVT_TREE_ITEM_RIGHT_CLICK')
+        bind(C, name='exp_wxEVT_TREE_ITEM_RIGHT_CLICK')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_KEY_DOWN() &
-        bind(C, name='expEVT_TREE_KEY_DOWN')
+        bind(C, name='exp_wxEVT_TREE_KEY_DOWN')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_SEL_CHANGED() &
-        bind(C, name='expEVT_TREE_SEL_CHANGED')
+        bind(C, name='exp_wxEVT_TREE_SEL_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_SEL_CHANGING() &
-        bind(C, name='expEVT_TREE_SEL_CHANGING')
+        bind(C, name='exp_wxEVT_TREE_SEL_CHANGING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_TREE_SET_INFO() &
-        bind(C, name='expEVT_TREE_SET_INFO')
+        bind(C, name='exp_wxEVT_TREE_SET_INFO')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_UPDATE_UI() &
-        bind(C, name='expEVT_UPDATE_UI')
+        bind(C, name='exp_wxEVT_UPDATE_UI')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_USER_FIRST() &
-        bind(C, name='expEVT_USER_FIRST')
+        bind(C, name='exp_wxEVT_USER_FIRST')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_VLBOX() &
-        bind(C, name='expEVT_VLBOX')
+        bind(C, name='exp_wxEVT_VLBOX')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WEBVIEW_ERROR() &
-        bind(C, name='expEVT_WEBVIEW_ERROR')
+        bind(C, name='exp_wxEVT_WEBVIEW_ERROR')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WEBVIEW_FULLSCREEN_CHANGED() &
-        bind(C, name='expEVT_WEBVIEW_FULLSCREEN_CHANGED')
+        bind(C, name='exp_wxEVT_WEBVIEW_FULLSCREEN_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WEBVIEW_LOADED() &
-        bind(C, name='expEVT_WEBVIEW_LOADED')
+        bind(C, name='exp_wxEVT_WEBVIEW_LOADED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WEBVIEW_NAVIGATED() &
-        bind(C, name='expEVT_WEBVIEW_NAVIGATED')
+        bind(C, name='exp_wxEVT_WEBVIEW_NAVIGATED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WEBVIEW_NAVIGATING() &
-        bind(C, name='expEVT_WEBVIEW_NAVIGATING')
+        bind(C, name='exp_wxEVT_WEBVIEW_NAVIGATING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WEBVIEW_NEWWINDOW() &
-        bind(C, name='expEVT_WEBVIEW_NEWWINDOW')
+        bind(C, name='exp_wxEVT_WEBVIEW_NEWWINDOW')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WEBVIEW_SCRIPT_MESSAGE_RECEIVED() &
-        bind(C, name='expEVT_WEBVIEW_SCRIPT_MESSAGE_RECEIVED')
+        bind(C, name='exp_wxEVT_WEBVIEW_SCRIPT_MESSAGE_RECEIVED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WEBVIEW_SCRIPT_RESULT() &
-        bind(C, name='expEVT_WEBVIEW_SCRIPT_RESULT')
+        bind(C, name='exp_wxEVT_WEBVIEW_SCRIPT_RESULT')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WEBVIEW_TITLE_CHANGED() &
-        bind(C, name='expEVT_WEBVIEW_TITLE_CHANGED')
+        bind(C, name='exp_wxEVT_WEBVIEW_TITLE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WINDOW_MODAL_DIALOG_CLOSED() &
-        bind(C, name='expEVT_WINDOW_MODAL_DIALOG_CLOSED')
+        bind(C, name='exp_wxEVT_WINDOW_MODAL_DIALOG_CLOSED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WIZARD_CANCEL() &
-        bind(C, name='expEVT_WIZARD_CANCEL')
+        bind(C, name='exp_wxEVT_WIZARD_CANCEL')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WIZARD_FINISHED() &
-        bind(C, name='expEVT_WIZARD_FINISHED')
+        bind(C, name='exp_wxEVT_WIZARD_FINISHED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WIZARD_HELP() &
-        bind(C, name='expEVT_WIZARD_HELP')
+        bind(C, name='exp_wxEVT_WIZARD_HELP')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WIZARD_PAGE_CHANGED() &
-        bind(C, name='expEVT_WIZARD_PAGE_CHANGED')
+        bind(C, name='exp_wxEVT_WIZARD_PAGE_CHANGED')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WIZARD_PAGE_CHANGING() &
-        bind(C, name='expEVT_WIZARD_PAGE_CHANGING')
+        bind(C, name='exp_wxEVT_WIZARD_PAGE_CHANGING')
       import :: c_int
     end function
 
     integer(c_int) function wxEVT_WIZARD_PAGE_SHOWN() &
-        bind(C, name='expEVT_WIZARD_PAGE_SHOWN')
+        bind(C, name='exp_wxEVT_WIZARD_PAGE_SHOWN')
       import :: c_int
     end function
 
@@ -15314,6 +15314,11 @@ module kwxffi
       integer(c_int), value :: collapsed
     end subroutine
 
+    integer(c_int) function expCP_DEFAULT_STYLE() &
+        bind(C, name='expCP_DEFAULT_STYLE')
+      import :: c_int
+    end function
+
     integer(c_int) function expCP_NO_TLW_RESIZE() &
         bind(C, name='expCP_NO_TLW_RESIZE')
       import :: c_int
@@ -18191,21 +18196,6 @@ module kwxffi
       integer(c_int), value :: style
     end subroutine
 
-    ! wxDllLoader
-
-    integer(c_int) function wxDllLoader_LoadLibrary(name, success) &
-        bind(C, name='wxDllLoader_LoadLibrary')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: name
-      type(c_ptr), value :: success
-    end function
-
-    subroutine wxDllLoader_UnloadLibrary(handle) &
-        bind(C, name='wxDllLoader_UnloadLibrary')
-      import :: c_int
-      integer(c_int), value :: handle
-    end subroutine
-
     ! wxDocChildFrame
 
     type(c_ptr) function wxDocChildFrame_Create(doc, view, parent, id, title, x, y, width, height, style) &
@@ -20263,399 +20253,6 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
       integer(c_int), value :: field
-    end subroutine
-
-    ! wxFrameLayout
-
-    subroutine wxFrameLayout_Activate(pObject) &
-        bind(C, name='wxFrameLayout_Activate')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxFrameLayout_AddBar(pObject, pBarWnd, dimInfo, alignment, rowNo, columnPos, name, spyEvents, state) &
-        bind(C, name='wxFrameLayout_AddBar')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBarWnd
-      type(c_ptr), value :: dimInfo
-      integer(c_int), value :: alignment
-      integer(c_int), value :: rowNo
-      integer(c_int), value :: columnPos
-      type(c_ptr), value :: name
-      integer(c_int), value :: spyEvents
-      integer(c_int), value :: state
-    end subroutine
-
-    subroutine wxFrameLayout_AddPlugin(pObject, pPlInfo, paneMask) &
-        bind(C, name='wxFrameLayout_AddPlugin')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pPlInfo
-      integer(c_int), value :: paneMask
-    end subroutine
-
-    subroutine wxFrameLayout_AddPluginBefore(pObject, pNextPlInfo, pPlInfo, paneMask) &
-        bind(C, name='wxFrameLayout_AddPluginBefore')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pNextPlInfo
-      type(c_ptr), value :: pPlInfo
-      integer(c_int), value :: paneMask
-    end subroutine
-
-    subroutine wxFrameLayout_ApplyBarProperties(pObject, pBar) &
-        bind(C, name='wxFrameLayout_ApplyBarProperties')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBar
-    end subroutine
-
-    subroutine wxFrameLayout_CaptureEventsForPane(pObject, toPane) &
-        bind(C, name='wxFrameLayout_CaptureEventsForPane')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: toPane
-    end subroutine
-
-    subroutine wxFrameLayout_CaptureEventsForPlugin(pObject, pPlugin) &
-        bind(C, name='wxFrameLayout_CaptureEventsForPlugin')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pPlugin
-    end subroutine
-
-    type(c_ptr) function wxFrameLayout_Create(pParentFrame, pFrameClient, activateNow) &
-        bind(C, name='wxFrameLayout_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pParentFrame
-      type(c_ptr), value :: pFrameClient
-      integer(c_int), value :: activateNow
-    end function
-
-    subroutine wxFrameLayout_Deactivate(pObject) &
-        bind(C, name='wxFrameLayout_Deactivate')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxFrameLayout_Delete(pObject) &
-        bind(C, name='wxFrameLayout_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxFrameLayout_DestroyBarWindows(pObject) &
-        bind(C, name='wxFrameLayout_DestroyBarWindows')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxFrameLayout_EnableFloating(pObject, enable) &
-        bind(C, name='wxFrameLayout_EnableFloating')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: enable
-    end subroutine
-
-    type(c_ptr) function wxFrameLayout_FindBarByName(pObject, name) &
-        bind(C, name='wxFrameLayout_FindBarByName')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: name
-    end function
-
-    type(c_ptr) function wxFrameLayout_FindBarByWindow(pObject, pWnd) &
-        bind(C, name='wxFrameLayout_FindBarByWindow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pWnd
-    end function
-
-    type(c_ptr) function wxFrameLayout_FindPlugin(pObject, pPlInfo) &
-        bind(C, name='wxFrameLayout_FindPlugin')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pPlInfo
-    end function
-
-    subroutine wxFrameLayout_FirePluginEvent(pObject, event) &
-        bind(C, name='wxFrameLayout_FirePluginEvent')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: event
-    end subroutine
-
-    integer(c_int) function wxFrameLayout_GetBars(pObject, ref) &
-        bind(C, name='wxFrameLayout_GetBars')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: ref
-    end function
-
-    integer(c_int) function wxFrameLayout_GetClientHeight(pObject) &
-        bind(C, name='wxFrameLayout_GetClientHeight')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxFrameLayout_GetClientRect(pObject, x, y, width, height) &
-        bind(C, name='wxFrameLayout_GetClientRect')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    integer(c_int) function wxFrameLayout_GetClientWidth(pObject) &
-        bind(C, name='wxFrameLayout_GetClientWidth')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxFrameLayout_GetFrameClient(pObject) &
-        bind(C, name='wxFrameLayout_GetFrameClient')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxFrameLayout_GetPane(pObject, alignment) &
-        bind(C, name='wxFrameLayout_GetPane')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: alignment
-    end function
-
-    subroutine wxFrameLayout_GetPaneProperties(pObject, props, alignment) &
-        bind(C, name='wxFrameLayout_GetPaneProperties')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: props
-      integer(c_int), value :: alignment
-    end subroutine
-
-    type(c_ptr) function wxFrameLayout_GetParentFrame(pObject) &
-        bind(C, name='wxFrameLayout_GetParentFrame')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxFrameLayout_GetTopPlugin(pObject) &
-        bind(C, name='wxFrameLayout_GetTopPlugin')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxFrameLayout_GetUpdatesManager(pObject) &
-        bind(C, name='wxFrameLayout_GetUpdatesManager')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxFrameLayout_HasTopPlugin(pObject) &
-        bind(C, name='wxFrameLayout_HasTopPlugin')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxFrameLayout_HideBarWindows(pObject) &
-        bind(C, name='wxFrameLayout_HideBarWindows')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxFrameLayout_InverseVisibility(pObject, pBar) &
-        bind(C, name='wxFrameLayout_InverseVisibility')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBar
-    end subroutine
-
-    subroutine wxFrameLayout_OnLButtonDown(pObject, event) &
-        bind(C, name='wxFrameLayout_OnLButtonDown')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: event
-    end subroutine
-
-    subroutine wxFrameLayout_OnLButtonUp(pObject, event) &
-        bind(C, name='wxFrameLayout_OnLButtonUp')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: event
-    end subroutine
-
-    subroutine wxFrameLayout_OnLDblClick(pObject, event) &
-        bind(C, name='wxFrameLayout_OnLDblClick')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: event
-    end subroutine
-
-    subroutine wxFrameLayout_OnMouseMove(pObject, event) &
-        bind(C, name='wxFrameLayout_OnMouseMove')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: event
-    end subroutine
-
-    subroutine wxFrameLayout_OnRButtonDown(pObject, event) &
-        bind(C, name='wxFrameLayout_OnRButtonDown')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: event
-    end subroutine
-
-    subroutine wxFrameLayout_OnRButtonUp(pObject, event) &
-        bind(C, name='wxFrameLayout_OnRButtonUp')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: event
-    end subroutine
-
-    subroutine wxFrameLayout_OnSize(pObject, event) &
-        bind(C, name='wxFrameLayout_OnSize')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: event
-    end subroutine
-
-    subroutine wxFrameLayout_PopAllPlugins(pObject) &
-        bind(C, name='wxFrameLayout_PopAllPlugins')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxFrameLayout_PopPlugin(pObject) &
-        bind(C, name='wxFrameLayout_PopPlugin')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxFrameLayout_PushDefaultPlugins(pObject) &
-        bind(C, name='wxFrameLayout_PushDefaultPlugins')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxFrameLayout_PushPlugin(pObject, pPugin) &
-        bind(C, name='wxFrameLayout_PushPlugin')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pPugin
-    end subroutine
-
-    subroutine wxFrameLayout_RecalcLayout(pObject, repositionBarsNow) &
-        bind(C, name='wxFrameLayout_RecalcLayout')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: repositionBarsNow
-    end subroutine
-
-    integer(c_int) function wxFrameLayout_RedockBar(pObject, pBar, x, y, width, height, pToPane, updateNow) &
-        bind(C, name='wxFrameLayout_RedockBar')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBar
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-      type(c_ptr), value :: pToPane
-      integer(c_int), value :: updateNow
-    end function
-
-    subroutine wxFrameLayout_RefreshNow(pObject, recalcLayout) &
-        bind(C, name='wxFrameLayout_RefreshNow')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: recalcLayout
-    end subroutine
-
-    subroutine wxFrameLayout_ReleaseEventsFromPane(pObject, fromPane) &
-        bind(C, name='wxFrameLayout_ReleaseEventsFromPane')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: fromPane
-    end subroutine
-
-    subroutine wxFrameLayout_ReleaseEventsFromPlugin(pObject, pPlugin) &
-        bind(C, name='wxFrameLayout_ReleaseEventsFromPlugin')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pPlugin
-    end subroutine
-
-    subroutine wxFrameLayout_RemoveBar(pObject, pBar) &
-        bind(C, name='wxFrameLayout_RemoveBar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBar
-    end subroutine
-
-    subroutine wxFrameLayout_RemovePlugin(pObject, pPlInfo) &
-        bind(C, name='wxFrameLayout_RemovePlugin')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pPlInfo
-    end subroutine
-
-    subroutine wxFrameLayout_SetBarState(pObject, pBar, newStatem, updateNow) &
-        bind(C, name='wxFrameLayout_SetBarState')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBar
-      integer(c_int), value :: newStatem
-      integer(c_int), value :: updateNow
-    end subroutine
-
-    subroutine wxFrameLayout_SetFrameClient(pObject, pFrameClient) &
-        bind(C, name='wxFrameLayout_SetFrameClient')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pFrameClient
-    end subroutine
-
-    subroutine wxFrameLayout_SetMargins(pObject, top, bottom, left, right, paneMask) &
-        bind(C, name='wxFrameLayout_SetMargins')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: top
-      integer(c_int), value :: bottom
-      integer(c_int), value :: left
-      integer(c_int), value :: right
-      integer(c_int), value :: paneMask
-    end subroutine
-
-    subroutine wxFrameLayout_SetPaneBackground(pObject, colour) &
-        bind(C, name='wxFrameLayout_SetPaneBackground')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: colour
-    end subroutine
-
-    subroutine wxFrameLayout_SetPaneProperties(pObject, props, paneMask) &
-        bind(C, name='wxFrameLayout_SetPaneProperties')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: props
-      integer(c_int), value :: paneMask
-    end subroutine
-
-    subroutine wxFrameLayout_SetTopPlugin(pObject, pPlugin) &
-        bind(C, name='wxFrameLayout_SetTopPlugin')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pPlugin
-    end subroutine
-
-    subroutine wxFrameLayout_SetUpdatesManager(pObject, pUMgr) &
-        bind(C, name='wxFrameLayout_SetUpdatesManager')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pUMgr
     end subroutine
 
     ! wxGauge
@@ -25722,9 +25319,9 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
-    integer(c_int) function wxListEvent_GetOldItem(pObject) &
-        bind(C, name='wxListEvent_GetOldItem')
-      import :: c_int, c_ptr
+    type(c_ptr) function wxListEvent_GetPoint(pObject) &
+        bind(C, name='wxListEvent_GetPoint')
+      import :: c_ptr
       type(c_ptr), value :: pObject
     end function
 
@@ -27762,6 +27359,13 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
       integer(c_int), value :: bForward
+    end subroutine
+
+    subroutine wxNavigationKeyEvent_SetWindowChange(pObject, bIs) &
+        bind(C, name='wxNavigationKeyEvent_SetWindowChange')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: bIs
     end subroutine
 
     integer(c_int) function wxNavigationKeyEvent_ShouldPropagate(pObject) &
@@ -32026,6 +31630,11 @@ module kwxffi
       integer(c_int), value :: col
     end subroutine
 
+    integer(c_int) function expPGMAN_DEFAULT_STYLE() &
+        bind(C, name='expPGMAN_DEFAULT_STYLE')
+      import :: c_int
+    end function
+
     ! wxPropertySheetDialog
 
     type(c_ptr) function wxPropertySheetDialog_Create(parent, id, title, x, y, width, height, style) &
@@ -32112,6 +31721,11 @@ module kwxffi
       type(c_ptr), value :: pObject
       integer(c_int), value :: border
     end subroutine
+
+    integer(c_int) function expPROPSHEET_DEFAULT() &
+        bind(C, name='expPROPSHEET_DEFAULT')
+      import :: c_int
+    end function
 
     integer(c_int) function expPROPSHEET_NOTEBOOK() &
         bind(C, name='expPROPSHEET_NOTEBOOK')
@@ -36892,20 +36506,20 @@ module kwxffi
 
     type(c_ptr) function wxString_Create(buffer) &
         bind(C, name='wxString_Create')
-      import :: c_int, c_ptr
-      integer(c_int), value :: buffer
+      import :: c_ptr
+      type(c_ptr), value :: buffer
     end function
 
     type(c_ptr) function wxString_CreateUTF8(buffer) &
         bind(C, name='wxString_CreateUTF8')
-      import :: c_int, c_ptr
-      integer(c_int), value :: buffer
+      import :: c_ptr
+      type(c_ptr), value :: buffer
     end function
 
     type(c_ptr) function wxString_CreateLen(buffer, len_) &
         bind(C, name='wxString_CreateLen')
       import :: c_int, c_ptr
-      integer(c_int), value :: buffer
+      type(c_ptr), value :: buffer
       integer(c_int), value :: len_
     end function
 
@@ -36919,7 +36533,7 @@ module kwxffi
         bind(C, name='wxString_GetString')
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
-      integer(c_int), value :: buffer
+      type(c_ptr), value :: buffer
     end function
 
     integer(c_size_t) function wxString_Length(pObject) &
@@ -36967,6 +36581,12 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
     end subroutine
+
+    integer(c_int) function wxTaskBarIcon_IsIconInstalled(pObject) &
+        bind(C, name='wxTaskBarIcon_IsIconInstalled')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
 
     integer(c_int) function wxTaskBarIcon_IsOk(pObject) &
         bind(C, name='wxTaskBarIcon_IsOk')
@@ -39233,6 +38853,16 @@ module kwxffi
       integer(c_int), value :: style
     end function
 
+    integer(c_int) function wxTreeListCtrl_AppendColumn(pObject, title, width, align, flags) &
+        bind(C, name='wxTreeListCtrl_AppendColumn')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: title
+      integer(c_int), value :: width
+      integer(c_int), value :: align
+      integer(c_int), value :: flags
+    end function
+
     integer(c_int) function wxTreeListCtrl_GetColumnCount(pObject) &
         bind(C, name='wxTreeListCtrl_GetColumnCount')
       import :: c_int, c_ptr
@@ -39274,6 +38904,17 @@ module kwxffi
       type(c_ptr), value :: text
     end function
 
+    subroutine wxTreeListCtrl_AppendItem(pObject, parent, text, imageClosed, imageOpened, result_) &
+        bind(C, name='wxTreeListCtrl_AppendItem')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: text
+      integer(c_int), value :: imageClosed
+      integer(c_int), value :: imageOpened
+      type(c_ptr), value :: result_
+    end subroutine
+
     subroutine wxTreeListCtrl_InsertItem(pObject, parent, previous, text, imageClosed, imageOpened, result_) &
         bind(C, name='wxTreeListCtrl_InsertItem')
       import :: c_int, c_ptr
@@ -39308,6 +38949,13 @@ module kwxffi
         bind(C, name='wxTreeListCtrl_DeleteAllItems')
       import :: c_ptr
       type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxTreeListCtrl_GetRootItem(pObject, result_) &
+        bind(C, name='wxTreeListCtrl_GetRootItem')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: result_
     end subroutine
 
     subroutine wxTreeListCtrl_GetItemParent(pObject, item, result_) &
@@ -39349,6 +38997,14 @@ module kwxffi
       type(c_ptr), value :: result_
     end subroutine
 
+    type(c_ptr) function wxTreeListCtrl_GetItemText(pObject, item, col) &
+        bind(C, name='wxTreeListCtrl_GetItemText')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      integer(c_int), value :: col
+    end function
+
     subroutine wxTreeListCtrl_SetItemText(pObject, item, col, text) &
         bind(C, name='wxTreeListCtrl_SetItemText')
       import :: c_int, c_ptr
@@ -39367,6 +39023,13 @@ module kwxffi
       integer(c_int), value :: opened
     end subroutine
 
+    subroutine wxTreeListCtrl_Expand(pObject, item) &
+        bind(C, name='wxTreeListCtrl_Expand')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end subroutine
+
     subroutine wxTreeListCtrl_Collapse(pObject, item) &
         bind(C, name='wxTreeListCtrl_Collapse')
       import :: c_ptr
@@ -39380,6 +39043,13 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: item
     end function
+
+    subroutine wxTreeListCtrl_GetSelection(pObject, result_) &
+        bind(C, name='wxTreeListCtrl_GetSelection')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: result_
+    end subroutine
 
     subroutine wxTreeListCtrl_Select(pObject, item) &
         bind(C, name='wxTreeListCtrl_Select')
@@ -39421,6 +39091,14 @@ module kwxffi
       type(c_ptr), value :: item
     end subroutine
 
+    subroutine wxTreeListCtrl_CheckItem(pObject, item, state) &
+        bind(C, name='wxTreeListCtrl_CheckItem')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      integer(c_int), value :: state
+    end subroutine
+
     subroutine wxTreeListCtrl_UncheckItem(pObject, item) &
         bind(C, name='wxTreeListCtrl_UncheckItem')
       import :: c_ptr
@@ -39458,12 +39136,26 @@ module kwxffi
       integer(c_int), value :: state
     end function
 
+    subroutine wxTreeListCtrl_SetSortColumn(pObject, col, ascendingOrder) &
+        bind(C, name='wxTreeListCtrl_SetSortColumn')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: col
+      integer(c_int), value :: ascendingOrder
+    end subroutine
+
     integer(c_int) function wxTreeListCtrl_GetSortColumn(pObject, col, ascendingOrder) &
         bind(C, name='wxTreeListCtrl_GetSortColumn')
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
       type(c_ptr), value :: col
       integer(c_int), value :: ascendingOrder
+    end function
+
+    type(c_ptr) function wxTreeListCtrl_GetView(pObject) &
+        bind(C, name='wxTreeListCtrl_GetView')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
     end function
 
     type(c_ptr) function wxTreeListCtrl_GetDataView(pObject) &
@@ -39509,6 +39201,11 @@ module kwxffi
         bind(C, name='wxTreeListEvent_IsAllowed')
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function expTL_SINGLE() &
+        bind(C, name='expTL_SINGLE')
+      import :: c_int
     end function
 
     integer(c_int) function expTL_MULTIPLE() &
@@ -39954,6 +39651,11 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
+    integer(c_int) function expWEBVIEW_ZOOM_TINY() &
+        bind(C, name='expWEBVIEW_ZOOM_TINY')
+      import :: c_int
+    end function
+
     integer(c_int) function expWEBVIEW_ZOOM_SMALL() &
         bind(C, name='expWEBVIEW_ZOOM_SMALL')
       import :: c_int
@@ -39984,8 +39686,18 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function expWEBVIEW_RELOAD_DEFAULT() &
+        bind(C, name='expWEBVIEW_RELOAD_DEFAULT')
+      import :: c_int
+    end function
+
     integer(c_int) function expWEBVIEW_RELOAD_NO_CACHE() &
         bind(C, name='expWEBVIEW_RELOAD_NO_CACHE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_FIND_WRAP() &
+        bind(C, name='expWEBVIEW_FIND_WRAP')
       import :: c_int
     end function
 
@@ -40011,6 +39723,11 @@ module kwxffi
 
     integer(c_int) function expWEBVIEW_FIND_DEFAULT() &
         bind(C, name='expWEBVIEW_FIND_DEFAULT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ERR_CONNECTION() &
+        bind(C, name='expWEBVIEW_NAV_ERR_CONNECTION')
       import :: c_int
     end function
 
@@ -40046,6 +39763,11 @@ module kwxffi
 
     integer(c_int) function expWEBVIEW_NAV_ERR_OTHER() &
         bind(C, name='expWEBVIEW_NAV_ERR_OTHER')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ACTION_NONE() &
+        bind(C, name='expWEBVIEW_NAV_ACTION_NONE')
       import :: c_int
     end function
 
@@ -41945,6 +41667,24 @@ module kwxffi
 
     subroutine wxMutexGui_Leave() &
         bind(C, name='wxMutexGui_Leave')
+    end subroutine
+
+    type(c_ptr) function kwxUtf8Buffer_Create(str) &
+        bind(C, name='kwxUtf8Buffer_Create')
+      import :: c_ptr
+      type(c_ptr), value :: str
+    end function
+
+    type(c_ptr) function kwxUtf8Buffer_Data(buf) &
+        bind(C, name='kwxUtf8Buffer_Data')
+      import :: c_ptr
+      type(c_ptr), value :: buf
+    end function
+
+    subroutine kwxUtf8Buffer_Delete(buf) &
+        bind(C, name='kwxUtf8Buffer_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: buf
     end subroutine
 
   end interface

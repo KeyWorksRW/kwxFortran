@@ -61,10 +61,10 @@ contains
     !---------------------------------------------------------------------------
     subroutine on_exit(fun, data, evt) bind(C)
         type(c_ptr), value :: fun, data, evt
-        logical :: dummy
 
         if (.not. c_associated(evt)) return
-        dummy = wx_frame_close(g_frame, force=.true.)
+        ! TODO: restore `dummy = wx_frame_close(...)` once kwxFFI#37 lands
+        call wx_frame_close(g_frame, force=.true.)
     end subroutine on_exit
 
     !---------------------------------------------------------------------------

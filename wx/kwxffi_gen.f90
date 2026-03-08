@@ -8424,6 +8424,8 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end function
 
+    ! wxMessageParameters
+
     subroutine wxMessageParameters_Delete(pObject) &
         bind(C, name='wxMessageParameters_Delete')
       import :: c_ptr
@@ -8665,1276 +8667,6 @@ module kwxffi
       type(c_ptr), value :: text
       integer(c_int), value :: style
     end function
-
-    ! cbAntiflickerPlugin
-
-    type(c_ptr) function cbAntiflickerPlugin_Create(pPanel, paneMask) &
-        bind(C, name='cbAntiflickerPlugin_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pPanel
-      integer(c_int), value :: paneMask
-    end function
-
-    type(c_ptr) function cbAntiflickerPlugin_CreateDefault() &
-        bind(C, name='cbAntiflickerPlugin_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbAntiflickerPlugin_Delete(pObject) &
-        bind(C, name='cbAntiflickerPlugin_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    ! cbBarDragPlugin
-
-    type(c_ptr) function cbBarDragPlugin_Create(pPanel, paneMask) &
-        bind(C, name='cbBarDragPlugin_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pPanel
-      integer(c_int), value :: paneMask
-    end function
-
-    type(c_ptr) function cbBarDragPlugin_CreateDefault() &
-        bind(C, name='cbBarDragPlugin_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbBarDragPlugin_Delete(pObject) &
-        bind(C, name='cbBarDragPlugin_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    ! cbBarHintsPlugin
-
-    type(c_ptr) function cbBarHintsPlugin_Create(pPanel, paneMask) &
-        bind(C, name='cbBarHintsPlugin_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pPanel
-      integer(c_int), value :: paneMask
-    end function
-
-    type(c_ptr) function cbBarHintsPlugin_CreateDefault() &
-        bind(C, name='cbBarHintsPlugin_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbBarHintsPlugin_Delete(pObject) &
-        bind(C, name='cbBarHintsPlugin_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine cbBarHintsPlugin_SetGrooveCount(pObject, nGrooves) &
-        bind(C, name='cbBarHintsPlugin_SetGrooveCount')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: nGrooves
-    end subroutine
-
-    ! cbBarInfo
-
-    type(c_ptr) function cbBarInfo_Create() &
-        bind(C, name='cbBarInfo_Create')
-      import :: c_ptr
-    end function
-
-    subroutine cbBarInfo_Delete(pObject) &
-        bind(C, name='cbBarInfo_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    integer(c_int) function cbBarInfo_IsExpanded(pObject) &
-        bind(C, name='cbBarInfo_IsExpanded')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbBarInfo_IsFixed(pObject) &
-        bind(C, name='cbBarInfo_IsFixed')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbBarSpy
-
-    type(c_ptr) function cbBarSpy_Create(pPanel) &
-        bind(C, name='cbBarSpy_Create')
-      import :: c_ptr
-      type(c_ptr), value :: pPanel
-    end function
-
-    type(c_ptr) function cbBarSpy_CreateDefault() &
-        bind(C, name='cbBarSpy_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbBarSpy_Delete(pObject) &
-        bind(C, name='cbBarSpy_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    integer(c_int) function cbBarSpy_ProcessEvent(pObject, event) &
-        bind(C, name='cbBarSpy_ProcessEvent')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: event
-    end function
-
-    subroutine cbBarSpy_SetBarWindow(pObject, pWnd) &
-        bind(C, name='cbBarSpy_SetBarWindow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pWnd
-    end subroutine
-
-    ! cbCloseBox
-
-    type(c_ptr) function cbCloseBox_Create() &
-        bind(C, name='cbCloseBox_Create')
-      import :: c_ptr
-    end function
-
-    ! cbCollapseBox
-
-    type(c_ptr) function cbCollapseBox_Create() &
-        bind(C, name='cbCollapseBox_Create')
-      import :: c_ptr
-    end function
-
-    ! cbCommonPaneProperties
-
-    subroutine cbCommonPaneProperties_Assign(pObject, other) &
-        bind(C, name='cbCommonPaneProperties_Assign')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: other
-    end subroutine
-
-    integer(c_int) function cbCommonPaneProperties_BarCollapseIconsOn(pObject) &
-        bind(C, name='cbCommonPaneProperties_BarCollapseIconsOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbCommonPaneProperties_BarDragHintsOn(pObject) &
-        bind(C, name='cbCommonPaneProperties_BarDragHintsOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbCommonPaneProperties_BarFloatingOn(pObject) &
-        bind(C, name='cbCommonPaneProperties_BarFloatingOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbCommonPaneProperties_ColProportionsOn(pObject) &
-        bind(C, name='cbCommonPaneProperties_ColProportionsOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbCommonPaneProperties_CreateDefault() &
-        bind(C, name='cbCommonPaneProperties_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbCommonPaneProperties_Delete(pObject) &
-        bind(C, name='cbCommonPaneProperties_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    integer(c_int) function cbCommonPaneProperties_ExactDockPredictionOn(pObject) &
-        bind(C, name='cbCommonPaneProperties_ExactDockPredictionOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbCommonPaneProperties_MinCBarDim(pObject, width, height) &
-        bind(C, name='cbCommonPaneProperties_MinCBarDim')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    integer(c_int) function cbCommonPaneProperties_NonDestructFrictionOn(pObject) &
-        bind(C, name='cbCommonPaneProperties_NonDestructFrictionOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbCommonPaneProperties_OutOfPaneDragOn(pObject) &
-        bind(C, name='cbCommonPaneProperties_OutOfPaneDragOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbCommonPaneProperties_RealTimeUpdatesOn(pObject) &
-        bind(C, name='cbCommonPaneProperties_RealTimeUpdatesOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbCommonPaneProperties_ResizeHandleSize(pObject) &
-        bind(C, name='cbCommonPaneProperties_ResizeHandleSize')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbCommonPaneProperties_RowProportionsOn(pObject) &
-        bind(C, name='cbCommonPaneProperties_RowProportionsOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbCommonPaneProperties_SetBarCollapseIconsOn(pObject, value_) &
-        bind(C, name='cbCommonPaneProperties_SetBarCollapseIconsOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    subroutine cbCommonPaneProperties_SetBarDragHintsOn(pObject, value_) &
-        bind(C, name='cbCommonPaneProperties_SetBarDragHintsOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    subroutine cbCommonPaneProperties_SetBarFloatingOn(pObject, value_) &
-        bind(C, name='cbCommonPaneProperties_SetBarFloatingOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    subroutine cbCommonPaneProperties_SetColProportionsOn(pObject, value_) &
-        bind(C, name='cbCommonPaneProperties_SetColProportionsOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    subroutine cbCommonPaneProperties_SetExactDockPredictionOn(pObject, value_) &
-        bind(C, name='cbCommonPaneProperties_SetExactDockPredictionOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    subroutine cbCommonPaneProperties_SetMinCBarDim(pObject, width, height) &
-        bind(C, name='cbCommonPaneProperties_SetMinCBarDim')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-    end subroutine
-
-    subroutine cbCommonPaneProperties_SetNonDestructFrictionOn(pObject, value_) &
-        bind(C, name='cbCommonPaneProperties_SetNonDestructFrictionOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    subroutine cbCommonPaneProperties_SetOutOfPaneDragOn(pObject, value_) &
-        bind(C, name='cbCommonPaneProperties_SetOutOfPaneDragOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    subroutine cbCommonPaneProperties_SetRealTimeUpdatesOn(pObject, value_) &
-        bind(C, name='cbCommonPaneProperties_SetRealTimeUpdatesOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    subroutine cbCommonPaneProperties_SetResizeHandleSize(pObject, value_) &
-        bind(C, name='cbCommonPaneProperties_SetResizeHandleSize')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    subroutine cbCommonPaneProperties_SetRowProportionsOn(pObject, value_) &
-        bind(C, name='cbCommonPaneProperties_SetRowProportionsOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    subroutine cbCommonPaneProperties_SetShow3DPaneBorderOn(pObject, value_) &
-        bind(C, name='cbCommonPaneProperties_SetShow3DPaneBorderOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    integer(c_int) function cbCommonPaneProperties_Show3DPaneBorderOn(pObject) &
-        bind(C, name='cbCommonPaneProperties_Show3DPaneBorderOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbCustomizeBarEvent
-
-    type(c_ptr) function cbCustomizeBarEvent_Bar(pObject) &
-        bind(C, name='cbCustomizeBarEvent_Bar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbCustomizeBarEvent_ClickPos(pObject, x, y) &
-        bind(C, name='cbCustomizeBarEvent_ClickPos')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
-    ! cbCustomizeLayoutEvent
-
-    subroutine cbCustomizeLayoutEvent_ClickPos(pObject, x, y) &
-        bind(C, name='cbCustomizeLayoutEvent_ClickPos')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
-    ! cbDimInfo
-
-    subroutine cbDimInfo_Assign(pObject, other) &
-        bind(C, name='cbDimInfo_Assign')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: other
-    end subroutine
-
-    type(c_ptr) function cbDimInfo_Create(x, y, isFixed, gap, pDimHandler) &
-        bind(C, name='cbDimInfo_Create')
-      import :: c_int, c_ptr
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: isFixed
-      integer(c_int), value :: gap
-      type(c_ptr), value :: pDimHandler
-    end function
-
-    type(c_ptr) function cbDimInfo_CreateDefault() &
-        bind(C, name='cbDimInfo_CreateDefault')
-      import :: c_ptr
-    end function
-
-    type(c_ptr) function cbDimInfo_CreateWithHandler(pDimHandler, isFixed) &
-        bind(C, name='cbDimInfo_CreateWithHandler')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pDimHandler
-      integer(c_int), value :: isFixed
-    end function
-
-    type(c_ptr) function cbDimInfo_CreateWithInfo(dh_x, dh_y, dv_x, dv_y, f_x, f_y, isFixed, horizGap, vertGap, pDimHandler) &
-        bind(C, name='cbDimInfo_CreateWithInfo')
-      import :: c_int, c_ptr
-      integer(c_int), value :: dh_x
-      integer(c_int), value :: dh_y
-      integer(c_int), value :: dv_x
-      integer(c_int), value :: dv_y
-      integer(c_int), value :: f_x
-      integer(c_int), value :: f_y
-      integer(c_int), value :: isFixed
-      integer(c_int), value :: horizGap
-      integer(c_int), value :: vertGap
-      type(c_ptr), value :: pDimHandler
-    end function
-
-    subroutine cbDimInfo_Delete(pObject) &
-        bind(C, name='cbDimInfo_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    type(c_ptr) function cbDimInfo_GetDimHandler(pObject) &
-        bind(C, name='cbDimInfo_GetDimHandler')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbDockBox
-
-    type(c_ptr) function cbDockBox_Create() &
-        bind(C, name='cbDockBox_Create')
-      import :: c_ptr
-    end function
-
-    ! cbDockPane
-
-    integer(c_int) function cbDockPane_BarPresent(pObject, pBar) &
-        bind(C, name='cbDockPane_BarPresent')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBar
-    end function
-
-    type(c_ptr) function cbDockPane_Create(alignment, pPanel) &
-        bind(C, name='cbDockPane_Create')
-      import :: c_int, c_ptr
-      integer(c_int), value :: alignment
-      type(c_ptr), value :: pPanel
-    end function
-
-    type(c_ptr) function cbDockPane_CreateDefault() &
-        bind(C, name='cbDockPane_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbDockPane_Delete(pObject) &
-        bind(C, name='cbDockPane_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    integer(c_int) function cbDockPane_GetAlignment(pObject) &
-        bind(C, name='cbDockPane_GetAlignment')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbDockPane_GetBarInfoByWindow(pObject, pBarWnd) &
-        bind(C, name='cbDockPane_GetBarInfoByWindow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBarWnd
-    end function
-
-    subroutine cbDockPane_GetBarResizeRange(pObject, pBar, from, till, forLeftHandle) &
-        bind(C, name='cbDockPane_GetBarResizeRange')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBar
-      type(c_ptr), value :: from
-      type(c_ptr), value :: till
-      integer(c_int), value :: forLeftHandle
-    end subroutine
-
-    integer(c_int) function cbDockPane_GetDockingState(pObject) &
-        bind(C, name='cbDockPane_GetDockingState')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbDockPane_GetFirstRow(pObject) &
-        bind(C, name='cbDockPane_GetFirstRow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbDockPane_GetPaneHeight(pObject) &
-        bind(C, name='cbDockPane_GetPaneHeight')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbDockPane_GetRealRect(pObject, x, y, width, height) &
-        bind(C, name='cbDockPane_GetRealRect')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    integer(c_int) function cbDockPane_GetRowList(pObject, ref) &
-        bind(C, name='cbDockPane_GetRowList')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: ref
-    end function
-
-    subroutine cbDockPane_GetRowResizeRange(pObject, pRow, from, till, forUpperHandle) &
-        bind(C, name='cbDockPane_GetRowResizeRange')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pRow
-      type(c_ptr), value :: from
-      type(c_ptr), value :: till
-      integer(c_int), value :: forUpperHandle
-    end subroutine
-
-    integer(c_int) function cbDockPane_HitTestPaneItems(pObject, x, y, ppRow, ppBar) &
-        bind(C, name='cbDockPane_HitTestPaneItems')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      type(c_ptr), value :: ppRow
-      type(c_ptr), value :: ppBar
-    end function
-
-    subroutine cbDockPane_InsertBarByCoord(pObject, pBar, x, y, width, height) &
-        bind(C, name='cbDockPane_InsertBarByCoord')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBar
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-    end subroutine
-
-    subroutine cbDockPane_InsertBarByInfo(pObject, pBarInfo) &
-        bind(C, name='cbDockPane_InsertBarByInfo')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBarInfo
-    end subroutine
-
-    subroutine cbDockPane_InsertBarToRow(pObject, pBar, pIntoRow) &
-        bind(C, name='cbDockPane_InsertBarToRow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBar
-      type(c_ptr), value :: pIntoRow
-    end subroutine
-
-    subroutine cbDockPane_InsertRow(pObject, pRow, pBeforeRow) &
-        bind(C, name='cbDockPane_InsertRow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pRow
-      type(c_ptr), value :: pBeforeRow
-    end subroutine
-
-    integer(c_int) function cbDockPane_IsHorizontal(pObject) &
-        bind(C, name='cbDockPane_IsHorizontal')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbDockPane_MatchesMask(pObject, paneMask) &
-        bind(C, name='cbDockPane_MatchesMask')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: paneMask
-    end function
-
-    subroutine cbDockPane_RemoveBar(pObject, pBar) &
-        bind(C, name='cbDockPane_RemoveBar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pBar
-    end subroutine
-
-    subroutine cbDockPane_RemoveRow(pObject, pRow) &
-        bind(C, name='cbDockPane_RemoveRow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pRow
-    end subroutine
-
-    subroutine cbDockPane_SetBoundsInParent(pObject, x, y, width, height) &
-        bind(C, name='cbDockPane_SetBoundsInParent')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-    end subroutine
-
-    subroutine cbDockPane_SetMargins(pObject, top, bottom, left, right) &
-        bind(C, name='cbDockPane_SetMargins')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: top
-      integer(c_int), value :: bottom
-      integer(c_int), value :: left
-      integer(c_int), value :: right
-    end subroutine
-
-    subroutine cbDockPane_SetPaneWidth(pObject, width) &
-        bind(C, name='cbDockPane_SetPaneWidth')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: width
-    end subroutine
-
-    ! cbDrawBarDecorEvent
-
-    type(c_ptr) function cbDrawBarDecorEvent_Bar(pObject) &
-        bind(C, name='cbDrawBarDecorEvent_Bar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbDrawBarDecorEvent_BoundsInParent(pObject, x, y, width, height) &
-        bind(C, name='cbDrawBarDecorEvent_BoundsInParent')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    type(c_ptr) function cbDrawBarDecorEvent_Dc(pObject) &
-        bind(C, name='cbDrawBarDecorEvent_Dc')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbDrawBarHandlesEvent
-
-    type(c_ptr) function cbDrawBarHandlesEvent_Bar(pObject) &
-        bind(C, name='cbDrawBarHandlesEvent_Bar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbDrawBarHandlesEvent_Dc(pObject) &
-        bind(C, name='cbDrawBarHandlesEvent_Dc')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbDrawHintRectEvent
-
-    integer(c_int) function cbDrawHintRectEvent_EraseRect(pObject) &
-        bind(C, name='cbDrawHintRectEvent_EraseRect')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbDrawHintRectEvent_IsInClient(pObject) &
-        bind(C, name='cbDrawHintRectEvent_IsInClient')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbDrawHintRectEvent_LastTime(pObject) &
-        bind(C, name='cbDrawHintRectEvent_LastTime')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbDrawHintRectEvent_Rect(pObject, x, y, width, height) &
-        bind(C, name='cbDrawHintRectEvent_Rect')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    ! cbDrawPaneBkGroundEvent
-
-    type(c_ptr) function cbDrawPaneBkGroundEvent_Dc(pObject) &
-        bind(C, name='cbDrawPaneBkGroundEvent_Dc')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbDrawPaneDecorEvent
-
-    type(c_ptr) function cbDrawPaneDecorEvent_Dc(pObject) &
-        bind(C, name='cbDrawPaneDecorEvent_Dc')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbDrawRowBkGroundEvent
-
-    type(c_ptr) function cbDrawRowBkGroundEvent_Dc(pObject) &
-        bind(C, name='cbDrawRowBkGroundEvent_Dc')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbDrawRowBkGroundEvent_Row(pObject) &
-        bind(C, name='cbDrawRowBkGroundEvent_Row')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbDrawRowDecorEvent
-
-    type(c_ptr) function cbDrawRowDecorEvent_Dc(pObject) &
-        bind(C, name='cbDrawRowDecorEvent_Dc')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbDrawRowDecorEvent_Row(pObject) &
-        bind(C, name='cbDrawRowDecorEvent_Row')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbDrawRowHandlesEvent
-
-    type(c_ptr) function cbDrawRowHandlesEvent_Dc(pObject) &
-        bind(C, name='cbDrawRowHandlesEvent_Dc')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbDrawRowHandlesEvent_Row(pObject) &
-        bind(C, name='cbDrawRowHandlesEvent_Row')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbDynToolBarDimHandler
-
-    type(c_ptr) function cbDynToolBarDimHandler_Create() &
-        bind(C, name='cbDynToolBarDimHandler_Create')
-      import :: c_ptr
-    end function
-
-    subroutine cbDynToolBarDimHandler_Delete(pObject) &
-        bind(C, name='cbDynToolBarDimHandler_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    ! cbFinishDrawInAreaEvent
-
-    subroutine cbFinishDrawInAreaEvent_Area(pObject, x, y, width, height) &
-        bind(C, name='cbFinishDrawInAreaEvent_Area')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    ! cbFloatedBarWindow
-
-    type(c_ptr) function cbFloatedBarWindow_Create(pObject) &
-        bind(C, name='cbFloatedBarWindow_Create')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbFloatedBarWindow_GetBar(pObject) &
-        bind(C, name='cbFloatedBarWindow_GetBar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbFloatedBarWindow_PositionFloatedWnd(pObject, x, y, width, height) &
-        bind(C, name='cbFloatedBarWindow_PositionFloatedWnd')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-    end subroutine
-
-    subroutine cbFloatedBarWindow_SetBar(pObject, bar) &
-        bind(C, name='cbFloatedBarWindow_SetBar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: bar
-    end subroutine
-
-    subroutine cbFloatedBarWindow_SetLayout(pObject, layout) &
-        bind(C, name='cbFloatedBarWindow_SetLayout')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: layout
-    end subroutine
-
-    ! cbGCUpdatesMgr
-
-    type(c_ptr) function cbGCUpdatesMgr_Create(pPanel) &
-        bind(C, name='cbGCUpdatesMgr_Create')
-      import :: c_ptr
-      type(c_ptr), value :: pPanel
-    end function
-
-    type(c_ptr) function cbGCUpdatesMgr_CreateDefault() &
-        bind(C, name='cbGCUpdatesMgr_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbGCUpdatesMgr_Delete(pObject) &
-        bind(C, name='cbGCUpdatesMgr_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine cbGCUpdatesMgr_UpdateNow(pObject) &
-        bind(C, name='cbGCUpdatesMgr_UpdateNow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    ! cbHintAnimationPlugin
-
-    type(c_ptr) function cbHintAnimationPlugin_Create(pPanel, paneMask) &
-        bind(C, name='cbHintAnimationPlugin_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pPanel
-      integer(c_int), value :: paneMask
-    end function
-
-    type(c_ptr) function cbHintAnimationPlugin_CreateDefault() &
-        bind(C, name='cbHintAnimationPlugin_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbHintAnimationPlugin_Delete(pObject) &
-        bind(C, name='cbHintAnimationPlugin_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    ! cbInsertBarEvent
-
-    type(c_ptr) function cbInsertBarEvent_Bar(pObject) &
-        bind(C, name='cbInsertBarEvent_Bar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbInsertBarEvent_Row(pObject) &
-        bind(C, name='cbInsertBarEvent_Row')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbLayoutRowEvent
-
-    type(c_ptr) function cbLayoutRowEvent_Row(pObject) &
-        bind(C, name='cbLayoutRowEvent_Row')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbLeftDClickEvent
-
-    subroutine cbLeftDClickEvent_Pos(pObject, x, y) &
-        bind(C, name='cbLeftDClickEvent_Pos')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
-    ! cbLeftDownEvent
-
-    subroutine cbLeftDownEvent_Pos(pObject, x, y) &
-        bind(C, name='cbLeftDownEvent_Pos')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
-    ! cbLeftUpEvent
-
-    subroutine cbLeftUpEvent_Pos(pObject, x, y) &
-        bind(C, name='cbLeftUpEvent_Pos')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
-    ! cbMiniButton
-
-    type(c_ptr) function cbMiniButton_Create() &
-        bind(C, name='cbMiniButton_Create')
-      import :: c_ptr
-    end function
-
-    subroutine cbMiniButton_Delete(pObject) &
-        bind(C, name='cbMiniButton_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine cbMiniButton_Dim(pObject, width, height) &
-        bind(C, name='cbMiniButton_Dim')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    integer(c_int) function cbMiniButton_DragStarted(pObject) &
-        bind(C, name='cbMiniButton_DragStarted')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbMiniButton_Enable(pObject, enable) &
-        bind(C, name='cbMiniButton_Enable')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: enable
-    end subroutine
-
-    integer(c_int) function cbMiniButton_Enabled(pObject) &
-        bind(C, name='cbMiniButton_Enabled')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbMiniButton_HitTest(pObject, x, y) &
-        bind(C, name='cbMiniButton_HitTest')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-    end function
-
-    integer(c_int) function cbMiniButton_IsPressed(pObject) &
-        bind(C, name='cbMiniButton_IsPressed')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbMiniButton_Layout(pObject) &
-        bind(C, name='cbMiniButton_Layout')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbMiniButton_Pane(pObject) &
-        bind(C, name='cbMiniButton_Pane')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbMiniButton_Plugin(pObject) &
-        bind(C, name='cbMiniButton_Plugin')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbMiniButton_Pos(pObject, x, y) &
-        bind(C, name='cbMiniButton_Pos')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
-    integer(c_int) function cbMiniButton_Pressed(pObject) &
-        bind(C, name='cbMiniButton_Pressed')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbMiniButton_Refresh(pObject) &
-        bind(C, name='cbMiniButton_Refresh')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine cbMiniButton_Reset(pObject) &
-        bind(C, name='cbMiniButton_Reset')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine cbMiniButton_SetPos(pObject, x, y) &
-        bind(C, name='cbMiniButton_SetPos')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-    end subroutine
-
-    integer(c_int) function cbMiniButton_Visible(pObject) &
-        bind(C, name='cbMiniButton_Visible')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbMiniButton_WasClicked(pObject) &
-        bind(C, name='cbMiniButton_WasClicked')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbMiniButton_Wnd(pObject) &
-        bind(C, name='cbMiniButton_Wnd')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbMotionEvent
-
-    subroutine cbMotionEvent_Pos(pObject, x, y) &
-        bind(C, name='cbMotionEvent_Pos')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
-    ! cbPaneDrawPlugin
-
-    type(c_ptr) function cbPaneDrawPlugin_Create(pPanel, paneMask) &
-        bind(C, name='cbPaneDrawPlugin_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pPanel
-      integer(c_int), value :: paneMask
-    end function
-
-    type(c_ptr) function cbPaneDrawPlugin_CreateDefault() &
-        bind(C, name='cbPaneDrawPlugin_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbPaneDrawPlugin_Delete(pObject) &
-        bind(C, name='cbPaneDrawPlugin_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    ! cbPluginBase
-
-    subroutine cbPluginBase_Delete(pObject) &
-        bind(C, name='cbPluginBase_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    integer(c_int) function cbPluginBase_GetPaneMask(pObject) &
-        bind(C, name='cbPluginBase_GetPaneMask')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbPluginBase_IsReady(pObject) &
-        bind(C, name='cbPluginBase_IsReady')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbPluginBase_Plugin(switchVal) &
-        bind(C, name='cbPluginBase_Plugin')
-      import :: c_int, c_ptr
-      integer(c_int), value :: switchVal
-    end function
-
-    integer(c_int) function cbPluginBase_ProcessEvent(pObject, event) &
-        bind(C, name='cbPluginBase_ProcessEvent')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: event
-    end function
-
-    ! cbPluginEvent
-
-    type(c_ptr) function cbPluginEvent_Pane(pObject) &
-        bind(C, name='cbPluginEvent_Pane')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbRemoveBarEvent
-
-    type(c_ptr) function cbRemoveBarEvent_Bar(pObject) &
-        bind(C, name='cbRemoveBarEvent_Bar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbResizeBarEvent
-
-    type(c_ptr) function cbResizeBarEvent_Bar(pObject) &
-        bind(C, name='cbResizeBarEvent_Bar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbResizeBarEvent_Row(pObject) &
-        bind(C, name='cbResizeBarEvent_Row')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbResizeRowEvent
-
-    integer(c_int) function cbResizeRowEvent_ForUpperHandle(pObject) &
-        bind(C, name='cbResizeRowEvent_ForUpperHandle')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function cbResizeRowEvent_HandleOfs(pObject) &
-        bind(C, name='cbResizeRowEvent_HandleOfs')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function cbResizeRowEvent_Row(pObject) &
-        bind(C, name='cbResizeRowEvent_Row')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbRightDownEvent
-
-    subroutine cbRightDownEvent_Pos(pObject, x, y) &
-        bind(C, name='cbRightDownEvent_Pos')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
-    ! cbRightUpEvent
-
-    subroutine cbRightUpEvent_Pos(pObject, x, y) &
-        bind(C, name='cbRightUpEvent_Pos')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
-    ! cbRowDragPlugin
-
-    type(c_ptr) function cbRowDragPlugin_Create(pPanel, paneMask) &
-        bind(C, name='cbRowDragPlugin_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pPanel
-      integer(c_int), value :: paneMask
-    end function
-
-    type(c_ptr) function cbRowDragPlugin_CreateDefault() &
-        bind(C, name='cbRowDragPlugin_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbRowDragPlugin_Delete(pObject) &
-        bind(C, name='cbRowDragPlugin_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    ! cbRowInfo
-
-    type(c_ptr) function cbRowInfo_Create() &
-        bind(C, name='cbRowInfo_Create')
-      import :: c_ptr
-    end function
-
-    subroutine cbRowInfo_Delete(pObject) &
-        bind(C, name='cbRowInfo_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    type(c_ptr) function cbRowInfo_GetFirstBar(pObject) &
-        bind(C, name='cbRowInfo_GetFirstBar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! cbRowLayoutPlugin
-
-    type(c_ptr) function cbRowLayoutPlugin_Create(pPanel, paneMask) &
-        bind(C, name='cbRowLayoutPlugin_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pPanel
-      integer(c_int), value :: paneMask
-    end function
-
-    type(c_ptr) function cbRowLayoutPlugin_CreateDefault() &
-        bind(C, name='cbRowLayoutPlugin_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbRowLayoutPlugin_Delete(pObject) &
-        bind(C, name='cbRowLayoutPlugin_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    ! cbSimpleCustomizationPlugin
-
-    type(c_ptr) function cbSimpleCustomizationPlugin_Create(pPanel, paneMask) &
-        bind(C, name='cbSimpleCustomizationPlugin_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pPanel
-      integer(c_int), value :: paneMask
-    end function
-
-    type(c_ptr) function cbSimpleCustomizationPlugin_CreateDefault() &
-        bind(C, name='cbSimpleCustomizationPlugin_CreateDefault')
-      import :: c_ptr
-    end function
-
-    subroutine cbSimpleCustomizationPlugin_Delete(pObject) &
-        bind(C, name='cbSimpleCustomizationPlugin_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    ! cbSizeBarWndEvent
-
-    type(c_ptr) function cbSizeBarWndEvent_Bar(pObject) &
-        bind(C, name='cbSizeBarWndEvent_Bar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbSizeBarWndEvent_BoundsInParent(pObject, x, y, width, height) &
-        bind(C, name='cbSizeBarWndEvent_BoundsInParent')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    ! cbStartBarDraggingEvent
-
-    type(c_ptr) function cbStartBarDraggingEvent_Bar(pObject) &
-        bind(C, name='cbStartBarDraggingEvent_Bar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine cbStartBarDraggingEvent_Pos(pObject, x, y) &
-        bind(C, name='cbStartBarDraggingEvent_Pos')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
-    ! cbStartDrawInAreaEvent
-
-    subroutine cbStartDrawInAreaEvent_Area(pObject, x, y, width, height) &
-        bind(C, name='cbStartDrawInAreaEvent_Area')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
 
     ! wxAcceleratorEntry
 
@@ -10207,18 +8939,6 @@ module kwxffi
     integer(c_int) function PopProvider() &
         bind(C, name='PopProvider')
       import :: c_int
-    end function
-
-    subroutine PushProvider(provider) &
-        bind(C, name='PushProvider')
-      import :: c_ptr
-      type(c_ptr), value :: provider
-    end subroutine
-
-    integer(c_int) function RemoveProvider(provider) &
-        bind(C, name='RemoveProvider')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: provider
     end function
 
     ! wxAuiDefaultTabArt
@@ -13975,32 +12695,11 @@ module kwxffi
       type(c_ptr), value :: cmap
     end function
 
-    subroutine wxBitmap_SetDepth(pObject, depth) &
-        bind(C, name='wxBitmap_SetDepth')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: depth
-    end subroutine
-
-    subroutine wxBitmap_SetHeight(pObject, height) &
-        bind(C, name='wxBitmap_SetHeight')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: height
-    end subroutine
-
     subroutine wxBitmap_SetMask(pObject, mask) &
         bind(C, name='wxBitmap_SetMask')
       import :: c_ptr
       type(c_ptr), value :: pObject
       type(c_ptr), value :: mask
-    end subroutine
-
-    subroutine wxBitmap_SetWidth(pObject, width) &
-        bind(C, name='wxBitmap_SetWidth')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: width
     end subroutine
 
     ! wxBitmapButton
@@ -15313,16 +14012,6 @@ module kwxffi
       type(c_ptr), value :: pObject
       integer(c_int), value :: collapsed
     end subroutine
-
-    integer(c_int) function expCP_DEFAULT_STYLE() &
-        bind(C, name='expCP_DEFAULT_STYLE')
-      import :: c_int
-    end function
-
-    integer(c_int) function expCP_NO_TLW_RESIZE() &
-        bind(C, name='expCP_NO_TLW_RESIZE')
-      import :: c_int
-    end function
 
     ! wxCloseEvent
 
@@ -17926,122 +16615,6 @@ module kwxffi
       integer(c_int), value :: hi_long
       integer(c_int), value :: lo_long
     end function
-
-    ! wxDialUpEvent
-
-    integer(c_int) function wxDialUpEvent_IsConnectedEvent(pObject) &
-        bind(C, name='wxDialUpEvent_IsConnectedEvent')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxDialUpEvent_IsOwnEvent(pObject) &
-        bind(C, name='wxDialUpEvent_IsOwnEvent')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! wxDialUpManager
-
-    integer(c_int) function wxDialUpManager_CancelDialing(pObject) &
-        bind(C, name='wxDialUpManager_CancelDialing')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxDialUpManager_Create() &
-        bind(C, name='wxDialUpManager_Create')
-      import :: c_ptr
-    end function
-
-    subroutine wxDialUpManager_Delete(pObject) &
-        bind(C, name='wxDialUpManager_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    integer(c_int) function wxDialUpManager_Dial(pObject, nameOfISP, username, password, async) &
-        bind(C, name='wxDialUpManager_Dial')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: nameOfISP
-      type(c_ptr), value :: username
-      type(c_ptr), value :: password
-      integer(c_int), value :: async
-    end function
-
-    subroutine wxDialUpManager_DisableAutoCheckOnlineStatus(pObject) &
-        bind(C, name='wxDialUpManager_DisableAutoCheckOnlineStatus')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    integer(c_int) function wxDialUpManager_EnableAutoCheckOnlineStatus(pObject, nSeconds) &
-        bind(C, name='wxDialUpManager_EnableAutoCheckOnlineStatus')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: nSeconds
-    end function
-
-    integer(c_int) function wxDialUpManager_GetISPNames(pObject, list) &
-        bind(C, name='wxDialUpManager_GetISPNames')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: list
-    end function
-
-    integer(c_int) function wxDialUpManager_HangUp(pObject) &
-        bind(C, name='wxDialUpManager_HangUp')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxDialUpManager_IsAlwaysOnline(pObject) &
-        bind(C, name='wxDialUpManager_IsAlwaysOnline')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxDialUpManager_IsDialing(pObject) &
-        bind(C, name='wxDialUpManager_IsDialing')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxDialUpManager_IsOk(pObject) &
-        bind(C, name='wxDialUpManager_IsOk')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxDialUpManager_IsOnline(pObject) &
-        bind(C, name='wxDialUpManager_IsOnline')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxDialUpManager_SetConnectCommand(pObject, commandDial, commandHangup) &
-        bind(C, name='wxDialUpManager_SetConnectCommand')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: commandDial
-      type(c_ptr), value :: commandHangup
-    end subroutine
-
-    subroutine wxDialUpManager_SetOnlineStatus(pObject, isOnline) &
-        bind(C, name='wxDialUpManager_SetOnlineStatus')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: isOnline
-    end subroutine
-
-    subroutine wxDialUpManager_SetWellKnownHost(pObject, hostname, portno) &
-        bind(C, name='wxDialUpManager_SetWellKnownHost')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: hostname
-      integer(c_int), value :: portno
-    end subroutine
 
     ! wxDialog
 
@@ -26739,17 +25312,6 @@ module kwxffi
       type(c_ptr), value :: label
     end function
 
-    integer(c_int) function kwxMessageBox(message, caption, style, parent, x, y) &
-        bind(C, name='kwxMessageBox')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: message
-      type(c_ptr), value :: caption
-      integer(c_int), value :: style
-      type(c_ptr), value :: parent
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-    end function
-
     ! wxMetafile
 
     type(c_ptr) function wxMetafile_Create(filePath) &
@@ -27652,51 +26214,6 @@ module kwxffi
       integer(c_int), value :: nPage
     end function
 
-    integer(c_int) function expNB_TOP() &
-        bind(C, name='expNB_TOP')
-      import :: c_int
-    end function
-
-    integer(c_int) function expNB_BOTTOM() &
-        bind(C, name='expNB_BOTTOM')
-      import :: c_int
-    end function
-
-    integer(c_int) function expNB_LEFT() &
-        bind(C, name='expNB_LEFT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expNB_RIGHT() &
-        bind(C, name='expNB_RIGHT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expBK_HITTEST_NOWHERE() &
-        bind(C, name='expBK_HITTEST_NOWHERE')
-      import :: c_int
-    end function
-
-    integer(c_int) function expBK_HITTEST_ONICON() &
-        bind(C, name='expBK_HITTEST_ONICON')
-      import :: c_int
-    end function
-
-    integer(c_int) function expBK_HITTEST_ONLABEL() &
-        bind(C, name='expBK_HITTEST_ONLABEL')
-      import :: c_int
-    end function
-
-    integer(c_int) function expBK_HITTEST_ONITEM() &
-        bind(C, name='expBK_HITTEST_ONITEM')
-      import :: c_int
-    end function
-
-    integer(c_int) function expBK_HITTEST_ONPAGE() &
-        bind(C, name='expBK_HITTEST_ONPAGE')
-      import :: c_int
-    end function
-
     ! wxChoicebook
 
     integer(c_int) function wxChoicebook_AddPage(pObject, pPage, strText, bSelect, imageId) &
@@ -27843,31 +26360,6 @@ module kwxffi
       integer(c_int), value :: nPage
     end function
 
-    integer(c_int) function expCHB_DEFAULT() &
-        bind(C, name='expCHB_DEFAULT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expCHB_TOP() &
-        bind(C, name='expCHB_TOP')
-      import :: c_int
-    end function
-
-    integer(c_int) function expCHB_BOTTOM() &
-        bind(C, name='expCHB_BOTTOM')
-      import :: c_int
-    end function
-
-    integer(c_int) function expCHB_LEFT() &
-        bind(C, name='expCHB_LEFT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expCHB_RIGHT() &
-        bind(C, name='expCHB_RIGHT')
-      import :: c_int
-    end function
-
     ! wxListbook
 
     integer(c_int) function wxListbook_AddPage(pObject, pPage, strText, bSelect, imageId) &
@@ -28012,31 +26504,6 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
       integer(c_int), value :: nPage
-    end function
-
-    integer(c_int) function expLB_DEFAULT() &
-        bind(C, name='expLB_DEFAULT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expLB_TOP() &
-        bind(C, name='expLB_TOP')
-      import :: c_int
-    end function
-
-    integer(c_int) function expLB_BOTTOM() &
-        bind(C, name='expLB_BOTTOM')
-      import :: c_int
-    end function
-
-    integer(c_int) function expLB_LEFT() &
-        bind(C, name='expLB_LEFT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expLB_RIGHT() &
-        bind(C, name='expLB_RIGHT')
-      import :: c_int
     end function
 
     ! wxSimplebook
@@ -28337,16 +26804,6 @@ module kwxffi
       integer(c_int), value :: nPage
     end function
 
-    integer(c_int) function expTBK_BUTTONBAR() &
-        bind(C, name='expTBK_BUTTONBAR')
-      import :: c_int
-    end function
-
-    integer(c_int) function expTBK_HORZ_LAYOUT() &
-        bind(C, name='expTBK_HORZ_LAYOUT')
-      import :: c_int
-    end function
-
     ! wxTreebook
 
     integer(c_int) function wxTreebook_AddPage(pObject, pPage, strText, bSelect, imageId) &
@@ -28542,6 +26999,8 @@ module kwxffi
       type(c_ptr), value :: pObject
       integer(c_int), value :: nPage
     end function
+
+    ! wxDataViewCtrl
 
     type(c_ptr) function wxDataViewCtrl_Create(parent, id, x, y, width, height, style) &
         bind(C, name='wxDataViewCtrl_Create')
@@ -29005,6 +27464,8 @@ module kwxffi
       integer(c_int), value :: flags
     end function
 
+    ! wxDataViewItem
+
     type(c_ptr) function wxDataViewItem_Create(id) &
         bind(C, name='wxDataViewItem_Create')
       import :: c_ptr
@@ -29028,6 +27489,8 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: item
     end function
+
+    ! wxDataViewItemArray
 
     type(c_ptr) function wxDataViewItemArray_Create() &
         bind(C, name='wxDataViewItemArray_Create')
@@ -29066,6 +27529,8 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: arr
     end subroutine
+
+    ! wxDataViewListCtrl
 
     type(c_ptr) function wxDataViewListCtrl_Create(parent, id, x, y, width, height, style) &
         bind(C, name='wxDataViewListCtrl_Create')
@@ -29282,6 +27747,8 @@ module kwxffi
       integer(c_int), value :: row
     end function
 
+    ! wxVariantVector
+
     type(c_ptr) function wxVariantVector_Create() &
         bind(C, name='wxVariantVector_Create')
       import :: c_ptr
@@ -29333,6 +27800,8 @@ module kwxffi
       type(c_ptr), value :: vec
     end subroutine
 
+    ! wxDatePickerCtrl
+
     type(c_ptr) function wxDatePickerCtrl_Create(parent, id, x, y, width, height, style) &
         bind(C, name='wxDatePickerCtrl_Create')
       import :: c_int, c_long, c_ptr
@@ -29374,6 +27843,8 @@ module kwxffi
       type(c_ptr), value :: dt1
       type(c_ptr), value :: dt2
     end function
+
+    ! wxDirPickerCtrl
 
     type(c_ptr) function wxDirPickerCtrl_Create(parent, id, x, y, width, height, path, message, style) &
         bind(C, name='wxDirPickerCtrl_Create')
@@ -29421,6 +27892,8 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
     end function
+
+    ! wxFilePickerCtrl
 
     type(c_ptr) function wxFilePickerCtrl_Create(parent, id, x, y, width, height, path, message, wildcard, style) &
         bind(C, name='wxFilePickerCtrl_Create')
@@ -29470,6 +27943,8 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
+    ! wxFontPickerCtrl
+
     type(c_ptr) function wxFontPickerCtrl_Create(parent, id, initial, x, y, width, height, style) &
         bind(C, name='wxFontPickerCtrl_Create')
       import :: c_int, c_long, c_ptr
@@ -29508,6 +27983,8 @@ module kwxffi
       type(c_ptr), value :: pObject
       integer(c_int), value :: maxSize
     end subroutine
+
+    ! wxTimePickerCtrl
 
     type(c_ptr) function wxTimePickerCtrl_Create(parent, id, x, y, width, height, style) &
         bind(C, name='wxTimePickerCtrl_Create')
@@ -31630,11 +30107,6 @@ module kwxffi
       integer(c_int), value :: col
     end subroutine
 
-    integer(c_int) function expPGMAN_DEFAULT_STYLE() &
-        bind(C, name='expPGMAN_DEFAULT_STYLE')
-      import :: c_int
-    end function
-
     ! wxPropertySheetDialog
 
     type(c_ptr) function wxPropertySheetDialog_Create(parent, id, title, x, y, width, height, style) &
@@ -31721,46 +30193,6 @@ module kwxffi
       type(c_ptr), value :: pObject
       integer(c_int), value :: border
     end subroutine
-
-    integer(c_int) function expPROPSHEET_DEFAULT() &
-        bind(C, name='expPROPSHEET_DEFAULT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expPROPSHEET_NOTEBOOK() &
-        bind(C, name='expPROPSHEET_NOTEBOOK')
-      import :: c_int
-    end function
-
-    integer(c_int) function expPROPSHEET_TOOLBOOK() &
-        bind(C, name='expPROPSHEET_TOOLBOOK')
-      import :: c_int
-    end function
-
-    integer(c_int) function expPROPSHEET_CHOICEBOOK() &
-        bind(C, name='expPROPSHEET_CHOICEBOOK')
-      import :: c_int
-    end function
-
-    integer(c_int) function expPROPSHEET_LISTBOOK() &
-        bind(C, name='expPROPSHEET_LISTBOOK')
-      import :: c_int
-    end function
-
-    integer(c_int) function expPROPSHEET_BUTTONTOOLBOOK() &
-        bind(C, name='expPROPSHEET_BUTTONTOOLBOOK')
-      import :: c_int
-    end function
-
-    integer(c_int) function expPROPSHEET_TREEBOOK() &
-        bind(C, name='expPROPSHEET_TREEBOOK')
-      import :: c_int
-    end function
-
-    integer(c_int) function expPROPSHEET_SHRINKTOFIT() &
-        bind(C, name='expPROPSHEET_SHRINKTOFIT')
-      import :: c_int
-    end function
 
     ! wxQueryLayoutInfoEvent
 
@@ -39203,41 +37635,6 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
-    integer(c_int) function expTL_SINGLE() &
-        bind(C, name='expTL_SINGLE')
-      import :: c_int
-    end function
-
-    integer(c_int) function expTL_MULTIPLE() &
-        bind(C, name='expTL_MULTIPLE')
-      import :: c_int
-    end function
-
-    integer(c_int) function expTL_CHECKBOX() &
-        bind(C, name='expTL_CHECKBOX')
-      import :: c_int
-    end function
-
-    integer(c_int) function expTL_3STATE() &
-        bind(C, name='expTL_3STATE')
-      import :: c_int
-    end function
-
-    integer(c_int) function expTL_USER_3STATE() &
-        bind(C, name='expTL_USER_3STATE')
-      import :: c_int
-    end function
-
-    integer(c_int) function expTL_NO_HEADER() &
-        bind(C, name='expTL_NO_HEADER')
-      import :: c_int
-    end function
-
-    integer(c_int) function expTL_DEFAULT_STYLE() &
-        bind(C, name='expTL_DEFAULT_STYLE')
-      import :: c_int
-    end function
-
     ! wxUpdateUIEvent
 
     subroutine wxUpdateUIEvent_Check(pObject, check) &
@@ -39649,136 +38046,6 @@ module kwxffi
         bind(C, name='wxWebViewEvent_GetString')
       import :: c_ptr
       type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function expWEBVIEW_ZOOM_TINY() &
-        bind(C, name='expWEBVIEW_ZOOM_TINY')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_ZOOM_SMALL() &
-        bind(C, name='expWEBVIEW_ZOOM_SMALL')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_ZOOM_MEDIUM() &
-        bind(C, name='expWEBVIEW_ZOOM_MEDIUM')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_ZOOM_LARGE() &
-        bind(C, name='expWEBVIEW_ZOOM_LARGE')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_ZOOM_LARGEST() &
-        bind(C, name='expWEBVIEW_ZOOM_LARGEST')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_ZOOM_TYPE_LAYOUT() &
-        bind(C, name='expWEBVIEW_ZOOM_TYPE_LAYOUT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_ZOOM_TYPE_TEXT() &
-        bind(C, name='expWEBVIEW_ZOOM_TYPE_TEXT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_RELOAD_DEFAULT() &
-        bind(C, name='expWEBVIEW_RELOAD_DEFAULT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_RELOAD_NO_CACHE() &
-        bind(C, name='expWEBVIEW_RELOAD_NO_CACHE')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_FIND_WRAP() &
-        bind(C, name='expWEBVIEW_FIND_WRAP')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_FIND_ENTIRE_WORD() &
-        bind(C, name='expWEBVIEW_FIND_ENTIRE_WORD')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_FIND_MATCH_CASE() &
-        bind(C, name='expWEBVIEW_FIND_MATCH_CASE')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_FIND_HIGHLIGHT_RESULT() &
-        bind(C, name='expWEBVIEW_FIND_HIGHLIGHT_RESULT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_FIND_BACKWARDS() &
-        bind(C, name='expWEBVIEW_FIND_BACKWARDS')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_FIND_DEFAULT() &
-        bind(C, name='expWEBVIEW_FIND_DEFAULT')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_NAV_ERR_CONNECTION() &
-        bind(C, name='expWEBVIEW_NAV_ERR_CONNECTION')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_NAV_ERR_CERTIFICATE() &
-        bind(C, name='expWEBVIEW_NAV_ERR_CERTIFICATE')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_NAV_ERR_AUTH() &
-        bind(C, name='expWEBVIEW_NAV_ERR_AUTH')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_NAV_ERR_SECURITY() &
-        bind(C, name='expWEBVIEW_NAV_ERR_SECURITY')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_NAV_ERR_NOT_FOUND() &
-        bind(C, name='expWEBVIEW_NAV_ERR_NOT_FOUND')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_NAV_ERR_REQUEST() &
-        bind(C, name='expWEBVIEW_NAV_ERR_REQUEST')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_NAV_ERR_USER_CANCELLED() &
-        bind(C, name='expWEBVIEW_NAV_ERR_USER_CANCELLED')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_NAV_ERR_OTHER() &
-        bind(C, name='expWEBVIEW_NAV_ERR_OTHER')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_NAV_ACTION_NONE() &
-        bind(C, name='expWEBVIEW_NAV_ACTION_NONE')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_NAV_ACTION_USER() &
-        bind(C, name='expWEBVIEW_NAV_ACTION_USER')
-      import :: c_int
-    end function
-
-    integer(c_int) function expWEBVIEW_NAV_ACTION_OTHER() &
-        bind(C, name='expWEBVIEW_NAV_ACTION_OTHER')
-      import :: c_int
     end function
 
     ! wxWindow
@@ -41686,6 +39953,354 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: buf
     end subroutine
+
+    subroutine PushProvider(provider) &
+        bind(C, name='PushProvider')
+      import :: c_ptr
+      type(c_ptr), value :: provider
+    end subroutine
+
+    integer(c_int) function RemoveProvider(provider) &
+        bind(C, name='RemoveProvider')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: provider
+    end function
+
+    integer(c_int) function expCP_DEFAULT_STYLE() &
+        bind(C, name='expCP_DEFAULT_STYLE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expCP_NO_TLW_RESIZE() &
+        bind(C, name='expCP_NO_TLW_RESIZE')
+      import :: c_int
+    end function
+
+    integer(c_int) function kwxMessageBox(message, caption, style, parent, x, y) &
+        bind(C, name='kwxMessageBox')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: message
+      type(c_ptr), value :: caption
+      integer(c_int), value :: style
+      type(c_ptr), value :: parent
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+    end function
+
+    integer(c_int) function expNB_TOP() &
+        bind(C, name='expNB_TOP')
+      import :: c_int
+    end function
+
+    integer(c_int) function expNB_BOTTOM() &
+        bind(C, name='expNB_BOTTOM')
+      import :: c_int
+    end function
+
+    integer(c_int) function expNB_LEFT() &
+        bind(C, name='expNB_LEFT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expNB_RIGHT() &
+        bind(C, name='expNB_RIGHT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expBK_HITTEST_NOWHERE() &
+        bind(C, name='expBK_HITTEST_NOWHERE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expBK_HITTEST_ONICON() &
+        bind(C, name='expBK_HITTEST_ONICON')
+      import :: c_int
+    end function
+
+    integer(c_int) function expBK_HITTEST_ONLABEL() &
+        bind(C, name='expBK_HITTEST_ONLABEL')
+      import :: c_int
+    end function
+
+    integer(c_int) function expBK_HITTEST_ONITEM() &
+        bind(C, name='expBK_HITTEST_ONITEM')
+      import :: c_int
+    end function
+
+    integer(c_int) function expBK_HITTEST_ONPAGE() &
+        bind(C, name='expBK_HITTEST_ONPAGE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expCHB_DEFAULT() &
+        bind(C, name='expCHB_DEFAULT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expCHB_TOP() &
+        bind(C, name='expCHB_TOP')
+      import :: c_int
+    end function
+
+    integer(c_int) function expCHB_BOTTOM() &
+        bind(C, name='expCHB_BOTTOM')
+      import :: c_int
+    end function
+
+    integer(c_int) function expCHB_LEFT() &
+        bind(C, name='expCHB_LEFT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expCHB_RIGHT() &
+        bind(C, name='expCHB_RIGHT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expLB_DEFAULT() &
+        bind(C, name='expLB_DEFAULT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expLB_TOP() &
+        bind(C, name='expLB_TOP')
+      import :: c_int
+    end function
+
+    integer(c_int) function expLB_BOTTOM() &
+        bind(C, name='expLB_BOTTOM')
+      import :: c_int
+    end function
+
+    integer(c_int) function expLB_LEFT() &
+        bind(C, name='expLB_LEFT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expLB_RIGHT() &
+        bind(C, name='expLB_RIGHT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expTBK_BUTTONBAR() &
+        bind(C, name='expTBK_BUTTONBAR')
+      import :: c_int
+    end function
+
+    integer(c_int) function expTBK_HORZ_LAYOUT() &
+        bind(C, name='expTBK_HORZ_LAYOUT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expPGMAN_DEFAULT_STYLE() &
+        bind(C, name='expPGMAN_DEFAULT_STYLE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expPROPSHEET_DEFAULT() &
+        bind(C, name='expPROPSHEET_DEFAULT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expPROPSHEET_NOTEBOOK() &
+        bind(C, name='expPROPSHEET_NOTEBOOK')
+      import :: c_int
+    end function
+
+    integer(c_int) function expPROPSHEET_TOOLBOOK() &
+        bind(C, name='expPROPSHEET_TOOLBOOK')
+      import :: c_int
+    end function
+
+    integer(c_int) function expPROPSHEET_CHOICEBOOK() &
+        bind(C, name='expPROPSHEET_CHOICEBOOK')
+      import :: c_int
+    end function
+
+    integer(c_int) function expPROPSHEET_LISTBOOK() &
+        bind(C, name='expPROPSHEET_LISTBOOK')
+      import :: c_int
+    end function
+
+    integer(c_int) function expPROPSHEET_BUTTONTOOLBOOK() &
+        bind(C, name='expPROPSHEET_BUTTONTOOLBOOK')
+      import :: c_int
+    end function
+
+    integer(c_int) function expPROPSHEET_TREEBOOK() &
+        bind(C, name='expPROPSHEET_TREEBOOK')
+      import :: c_int
+    end function
+
+    integer(c_int) function expPROPSHEET_SHRINKTOFIT() &
+        bind(C, name='expPROPSHEET_SHRINKTOFIT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expTL_SINGLE() &
+        bind(C, name='expTL_SINGLE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expTL_MULTIPLE() &
+        bind(C, name='expTL_MULTIPLE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expTL_CHECKBOX() &
+        bind(C, name='expTL_CHECKBOX')
+      import :: c_int
+    end function
+
+    integer(c_int) function expTL_3STATE() &
+        bind(C, name='expTL_3STATE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expTL_USER_3STATE() &
+        bind(C, name='expTL_USER_3STATE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expTL_NO_HEADER() &
+        bind(C, name='expTL_NO_HEADER')
+      import :: c_int
+    end function
+
+    integer(c_int) function expTL_DEFAULT_STYLE() &
+        bind(C, name='expTL_DEFAULT_STYLE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_ZOOM_TINY() &
+        bind(C, name='expWEBVIEW_ZOOM_TINY')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_ZOOM_SMALL() &
+        bind(C, name='expWEBVIEW_ZOOM_SMALL')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_ZOOM_MEDIUM() &
+        bind(C, name='expWEBVIEW_ZOOM_MEDIUM')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_ZOOM_LARGE() &
+        bind(C, name='expWEBVIEW_ZOOM_LARGE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_ZOOM_LARGEST() &
+        bind(C, name='expWEBVIEW_ZOOM_LARGEST')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_ZOOM_TYPE_LAYOUT() &
+        bind(C, name='expWEBVIEW_ZOOM_TYPE_LAYOUT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_ZOOM_TYPE_TEXT() &
+        bind(C, name='expWEBVIEW_ZOOM_TYPE_TEXT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_RELOAD_DEFAULT() &
+        bind(C, name='expWEBVIEW_RELOAD_DEFAULT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_RELOAD_NO_CACHE() &
+        bind(C, name='expWEBVIEW_RELOAD_NO_CACHE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_FIND_WRAP() &
+        bind(C, name='expWEBVIEW_FIND_WRAP')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_FIND_ENTIRE_WORD() &
+        bind(C, name='expWEBVIEW_FIND_ENTIRE_WORD')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_FIND_MATCH_CASE() &
+        bind(C, name='expWEBVIEW_FIND_MATCH_CASE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_FIND_HIGHLIGHT_RESULT() &
+        bind(C, name='expWEBVIEW_FIND_HIGHLIGHT_RESULT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_FIND_BACKWARDS() &
+        bind(C, name='expWEBVIEW_FIND_BACKWARDS')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_FIND_DEFAULT() &
+        bind(C, name='expWEBVIEW_FIND_DEFAULT')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ERR_CONNECTION() &
+        bind(C, name='expWEBVIEW_NAV_ERR_CONNECTION')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ERR_CERTIFICATE() &
+        bind(C, name='expWEBVIEW_NAV_ERR_CERTIFICATE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ERR_AUTH() &
+        bind(C, name='expWEBVIEW_NAV_ERR_AUTH')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ERR_SECURITY() &
+        bind(C, name='expWEBVIEW_NAV_ERR_SECURITY')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ERR_NOT_FOUND() &
+        bind(C, name='expWEBVIEW_NAV_ERR_NOT_FOUND')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ERR_REQUEST() &
+        bind(C, name='expWEBVIEW_NAV_ERR_REQUEST')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ERR_USER_CANCELLED() &
+        bind(C, name='expWEBVIEW_NAV_ERR_USER_CANCELLED')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ERR_OTHER() &
+        bind(C, name='expWEBVIEW_NAV_ERR_OTHER')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ACTION_NONE() &
+        bind(C, name='expWEBVIEW_NAV_ACTION_NONE')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ACTION_USER() &
+        bind(C, name='expWEBVIEW_NAV_ACTION_USER')
+      import :: c_int
+    end function
+
+    integer(c_int) function expWEBVIEW_NAV_ACTION_OTHER() &
+        bind(C, name='expWEBVIEW_NAV_ACTION_OTHER')
+      import :: c_int
+    end function
 
   end interface
 

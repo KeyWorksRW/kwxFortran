@@ -19,7 +19,7 @@ project( kwxFortran
     HOMEPAGE_URL "https://github.com/KeyWorksRW/wxUiEditor" )
 
 # ###################### General Settings #######################
-set( CMAKE_CXX_STANDARD 23 )
+set( CMAKE_CXX_STANDARD 17 )
 set( CMAKE_CXX_STANDARD_REQUIRED True )
 set( CMAKE_CXX_EXTENSIONS OFF )
 
@@ -67,38 +67,25 @@ if( WIN32 )
     endif()
 endif()
 
-# ###################### Options #######################
-# Only generate compile_commands.json for local development
-if ( NOT DEFINED ENV{CI} )
-    # creates a compile_commands.json file in the build directory, suitable for clangd
-    set( CMAKE_EXPORT_COMPILE_COMMANDS ON )
-endif()
+# ###################### sccache #######################
+find_program( SCCACHE_PROGRAM sccache )
+if( SCCACHE_PROGRAM )
+    message( STATUS "sccache found: ${SCCACHE_PROGRAM}" )
+    set( CMAKE_C_COMPILER_LAUNCHER "${SCCACHE_PROGRAM}" )
+    set( CMAKE_CXX_COMPILER_LAUNCHER "${SCCACHE_PROGRAM}" )
 
-# ###################### ccache support #######################
-find_program( CCACHE_PROGRAM ccache )
-
-if( CCACHE_PROGRAM )
-    message( STATUS "Using ccache: ${CCACHE_PROGRAM}" )
-    set( CMAKE_C_COMPILER_LAUNCHER "${CCACHE_PROGRAM}" )
-    set( CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}" )
-
-    message( NOTICE "ccache detected. Configure ccache globally for your development environment:" )
-    message( NOTICE "  Recommended for all platforms:" )
-    message( NOTICE "    ccache --set-config=compression=true" )
-    message( NOTICE "    ccache --set-config=max_size=<appropriate for your projects>" )
-    message( NOTICE "    ccache --set-config=sloppiness=pch_defines,time_macros,include_file_mtime,include_file_ctime" )
-
+    # sccache cannot cache MSVC's /Zi (separate PDB files). Use /Z7 (embedded)
+    # instead for Debug and RelWithDebInfo configs. CMake 3.25+ (CMP0141 NEW)
+    # honours CMAKE_MSVC_DEBUG_INFORMATION_FORMAT; this is a no-op on non-MSVC.
     if( MSVC )
-        message( NOTICE "  Required for MSVC:" )
-
-        message( NOTICE "    ccache --set-config=pch_external_checksum=true" )
-        message( NOTICE "    ccache --set-config=depend_mode=true" )
-        message( NOTICE "    ccache --set-config=\"ignore_options=/Zi /Z7 /ZI /FS /Fd*\"" )
+        set( CMAKE_MSVC_DEBUG_INFORMATION_FORMAT
+            "$<$<CONFIG:Debug,RelWithDebInfo>:Embedded>" )
     endif()
-
-    message( NOTICE "  Run 'ccache --show-config' to verify current settings" )
-    message( NOTICE "  Run 'ccache -s' to monitor cache usage" )
+else()
+    message( STATUS "sccache not found; building without a compiler cache" )
 endif()
+
+# ###################### Options #######################
 
 include( FetchContent )
 

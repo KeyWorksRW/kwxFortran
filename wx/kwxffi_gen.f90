@@ -8413,98 +8413,6 @@ module kwxffi
       type(c_ptr), value :: pObject
     end subroutine
 
-    ! kwxMessageParameters
-
-    type(c_ptr) function wxMessageParameters_Create(filePath, type_, pObject, pFunction) &
-        bind(C, name='wxMessageParameters_Create')
-      import :: c_ptr
-      type(c_ptr), value :: filePath
-      type(c_ptr), value :: type_
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pFunction
-    end function
-
-    ! wxMessageParameters
-
-    subroutine wxMessageParameters_Delete(pObject) &
-        bind(C, name='wxMessageParameters_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    ! kwxPlotCurve
-
-    type(c_ptr) function kwxPlotCurve_Create(pObject, fnGetStartX, endVal, y, offsetY, startY, endY) &
-        bind(C, name='kwxPlotCurve_Create')
-      import :: c_double, c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: fnGetStartX
-      type(c_ptr), value :: endVal
-      type(c_ptr), value :: y
-      integer(c_int), value :: offsetY
-      real(c_double), value :: startY
-      real(c_double), value :: endY
-    end function
-
-    subroutine kwxPlotCurve_Delete(pObject) &
-        bind(C, name='kwxPlotCurve_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    real(c_double) function kwxPlotCurve_GetEndY(pObject) &
-        bind(C, name='kwxPlotCurve_GetEndY')
-      import :: c_double, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function kwxPlotCurve_GetOffsetY(pObject) &
-        bind(C, name='kwxPlotCurve_GetOffsetY')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    real(c_double) function kwxPlotCurve_GetStartY(pObject) &
-        bind(C, name='kwxPlotCurve_GetStartY')
-      import :: c_double, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine kwxPlotCurve_SetEndY(pObject, endY) &
-        bind(C, name='kwxPlotCurve_SetEndY')
-      import :: c_double, c_ptr
-      type(c_ptr), value :: pObject
-      real(c_double), value :: endY
-    end subroutine
-
-    subroutine kwxPlotCurve_SetOffsetY(pObject, offsetY) &
-        bind(C, name='kwxPlotCurve_SetOffsetY')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: offsetY
-    end subroutine
-
-    subroutine kwxPlotCurve_SetPenNormal(pObject, pen) &
-        bind(C, name='kwxPlotCurve_SetPenNormal')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pen
-    end subroutine
-
-    subroutine kwxPlotCurve_SetPenSelected(pObject, pen) &
-        bind(C, name='kwxPlotCurve_SetPenSelected')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pen
-    end subroutine
-
-    subroutine kwxPlotCurve_SetStartY(pObject, startY) &
-        bind(C, name='kwxPlotCurve_SetStartY')
-      import :: c_double, c_ptr
-      type(c_ptr), value :: pObject
-      real(c_double), value :: startY
-    end subroutine
-
     ! kwxPreviewControlBar
 
     type(c_ptr) function kwxPreviewControlBar_Create(preview, buttons, parent, title, x, y, width, height, style) &
@@ -8920,13 +8828,6 @@ module kwxffi
     end subroutine
 
     ! wxActivateEvent
-
-    subroutine wxActivateEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxActivateEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
 
     integer(c_int) function wxActivateEvent_GetActive(pObject) &
         bind(C, name='wxActivateEvent_GetActive')
@@ -14021,13 +13922,6 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
-    subroutine wxCloseEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxCloseEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
-
     integer(c_int) function wxCloseEvent_GetLoggingOff(pObject) &
         bind(C, name='wxCloseEvent_GetLoggingOff')
       import :: c_int, c_ptr
@@ -14495,13 +14389,6 @@ module kwxffi
     end subroutine
 
     ! wxCommandEvent
-
-    subroutine wxCommandEvent_CopyObject(pObject, object_dest) &
-        bind(C, name='wxCommandEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: object_dest
-    end subroutine
 
     type(c_ptr) function wxCommandEvent_Create(type_, id) &
         bind(C, name='wxCommandEvent_Create')
@@ -15225,12 +15112,6 @@ module kwxffi
         bind(C, name='wxDC_Clear')
       import :: c_ptr
       type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxDC_ComputeScaleAndOrigin(obj) &
-        bind(C, name='wxDC_ComputeScaleAndOrigin')
-      import :: c_ptr
-      type(c_ptr), value :: obj
     end subroutine
 
     subroutine wxDC_CrossHair(pObject, x, y) &
@@ -16307,13 +16188,6 @@ module kwxffi
       type(c_ptr), value :: timeSpan
     end function
 
-    integer(c_int) function wxDateTime_IsGregorianDate(pObject, country) &
-        bind(C, name='wxDateTime_IsGregorianDate')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: country
-    end function
-
     integer(c_int) function wxDateTime_IsLaterThan(pObject, datetime) &
         bind(C, name='wxDateTime_IsLaterThan')
       import :: c_int, c_ptr
@@ -17176,353 +17050,6 @@ module kwxffi
       type(c_ptr), value :: dataObject
     end subroutine
 
-    ! wxDynToolInfo
-
-    integer(c_int) function wxDynToolInfo_Index(pObject) &
-        bind(C, name='wxDynToolInfo_Index')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxDynToolInfo_RealSize(pObject, width, height) &
-        bind(C, name='wxDynToolInfo_RealSize')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    type(c_ptr) function wxDynToolInfo_pToolWnd(pObject) &
-        bind(C, name='wxDynToolInfo_pToolWnd')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! wxDynamicSashWindow
-
-    type(c_ptr) function wxDynamicSashWindow_Create(parent, id, x, y, width, height, style) &
-        bind(C, name='wxDynamicSashWindow_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: parent
-      integer(c_int), value :: id
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-      integer(c_int), value :: style
-    end function
-
-    subroutine wxDynamicSashWindow_Delete(pObject) &
-        bind(C, name='wxDynamicSashWindow_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    type(c_ptr) function wxDynamicSashWindow_GetHScrollBar(pObject, child) &
-        bind(C, name='wxDynamicSashWindow_GetHScrollBar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: child
-    end function
-
-    type(c_ptr) function wxDynamicSashWindow_GetVScrollBar(pObject, child) &
-        bind(C, name='wxDynamicSashWindow_GetVScrollBar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: child
-    end function
-
-    ! wxDynamicToolBar
-
-    subroutine wxDynamicToolBar_AddSeparator(pObject, pSepartorWnd) &
-        bind(C, name='wxDynamicToolBar_AddSeparator')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pSepartorWnd
-    end subroutine
-
-    subroutine wxDynamicToolBar_AddTool(pObject, toolIndex, pToolWindow, width, height) &
-        bind(C, name='wxDynamicToolBar_AddTool')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: toolIndex
-      type(c_ptr), value :: pToolWindow
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-    end subroutine
-
-    type(c_ptr) function wxDynamicToolBar_AddToolBitmap(pObject, toolIndex, bitmap, pushedBitmap, toggle, x, y, clientData, helpString1, helpString2) &
-        bind(C, name='wxDynamicToolBar_AddToolBitmap')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: toolIndex
-      type(c_ptr), value :: bitmap
-      type(c_ptr), value :: pushedBitmap
-      integer(c_int), value :: toggle
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      type(c_ptr), value :: clientData
-      type(c_ptr), value :: helpString1
-      type(c_ptr), value :: helpString2
-    end function
-
-    subroutine wxDynamicToolBar_AddToolImage(pObject, toolIndex, imageFileName, imageFileType, labelText, alignTextRight, isFlat) &
-        bind(C, name='wxDynamicToolBar_AddToolImage')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: toolIndex
-      type(c_ptr), value :: imageFileName
-      integer(c_int), value :: imageFileType
-      type(c_ptr), value :: labelText
-      integer(c_int), value :: alignTextRight
-      integer(c_int), value :: isFlat
-    end subroutine
-
-    subroutine wxDynamicToolBar_AddToolLabel(pObject, toolIndex, labelBmp, labelText, alignTextRight, isFlat) &
-        bind(C, name='wxDynamicToolBar_AddToolLabel')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: toolIndex
-      type(c_ptr), value :: labelBmp
-      type(c_ptr), value :: labelText
-      integer(c_int), value :: alignTextRight
-      integer(c_int), value :: isFlat
-    end subroutine
-
-    type(c_ptr) function wxDynamicToolBar_Create(parent, id, x, y, width, height, style, orientation, RowsOrColumns) &
-        bind(C, name='wxDynamicToolBar_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: parent
-      integer(c_int), value :: id
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-      integer(c_int), value :: style
-      integer(c_int), value :: orientation
-      integer(c_int), value :: RowsOrColumns
-    end function
-
-    type(c_ptr) function wxDynamicToolBar_CreateDefault() &
-        bind(C, name='wxDynamicToolBar_CreateDefault')
-      import :: c_ptr
-    end function
-
-    type(c_ptr) function wxDynamicToolBar_CreateDefaultLayout(pObject) &
-        bind(C, name='wxDynamicToolBar_CreateDefaultLayout')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxDynamicToolBar_CreateParams(pObject, parent, id, x, y, width, height, style, orientation, RowsOrColumns) &
-        bind(C, name='wxDynamicToolBar_CreateParams')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: parent
-      integer(c_int), value :: id
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-      integer(c_int), value :: style
-      integer(c_int), value :: orientation
-      integer(c_int), value :: RowsOrColumns
-    end function
-
-    type(c_ptr) function wxDynamicToolBar_CreateTool(pObject, id, label, bmpNormal, bmpDisabled, kind_, clientData, shortHelp, longHelp) &
-        bind(C, name='wxDynamicToolBar_CreateTool')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: id
-      type(c_ptr), value :: label
-      type(c_ptr), value :: bmpNormal
-      type(c_ptr), value :: bmpDisabled
-      integer(c_int), value :: kind_
-      type(c_ptr), value :: clientData
-      type(c_ptr), value :: shortHelp
-      type(c_ptr), value :: longHelp
-    end function
-
-    type(c_ptr) function wxDynamicToolBar_CreateToolControl(pObject, control) &
-        bind(C, name='wxDynamicToolBar_CreateToolControl')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: control
-    end function
-
-    subroutine wxDynamicToolBar_Delete(pObject) &
-        bind(C, name='wxDynamicToolBar_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    integer(c_int) function wxDynamicToolBar_DoDeleteTool(pObject, pos, tool) &
-        bind(C, name='wxDynamicToolBar_DoDeleteTool')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: pos
-      type(c_ptr), value :: tool
-    end function
-
-    subroutine wxDynamicToolBar_DoEnableTool(pObject, tool, enable) &
-        bind(C, name='wxDynamicToolBar_DoEnableTool')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: tool
-      integer(c_int), value :: enable
-    end subroutine
-
-    integer(c_int) function wxDynamicToolBar_DoInsertTool(pObject, pos, tool) &
-        bind(C, name='wxDynamicToolBar_DoInsertTool')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: pos
-      type(c_ptr), value :: tool
-    end function
-
-    subroutine wxDynamicToolBar_DoSetToggle(pObject, tool, toggle) &
-        bind(C, name='wxDynamicToolBar_DoSetToggle')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: tool
-      integer(c_int), value :: toggle
-    end subroutine
-
-    subroutine wxDynamicToolBar_DoToggleTool(pObject, tool, toggle) &
-        bind(C, name='wxDynamicToolBar_DoToggleTool')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: tool
-      integer(c_int), value :: toggle
-    end subroutine
-
-    subroutine wxDynamicToolBar_DrawSeparator(pObject, info, dc) &
-        bind(C, name='wxDynamicToolBar_DrawSeparator')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: info
-      type(c_ptr), value :: dc
-    end subroutine
-
-    subroutine wxDynamicToolBar_EnableTool(pObject, toolIndex, enable) &
-        bind(C, name='wxDynamicToolBar_EnableTool')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: toolIndex
-      integer(c_int), value :: enable
-    end subroutine
-
-    type(c_ptr) function wxDynamicToolBar_FindToolForPosition(pObject, x, y) &
-        bind(C, name='wxDynamicToolBar_FindToolForPosition')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-    end function
-
-    subroutine wxDynamicToolBar_GetPreferredDim(pObject, givenWidth, givenHeight, preferredWidth, preferredHeight) &
-        bind(C, name='wxDynamicToolBar_GetPreferredDim')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: givenWidth
-      integer(c_int), value :: givenHeight
-      type(c_ptr), value :: preferredWidth
-      type(c_ptr), value :: preferredHeight
-    end subroutine
-
-    type(c_ptr) function wxDynamicToolBar_GetToolInfo(pObject, toolIndex) &
-        bind(C, name='wxDynamicToolBar_GetToolInfo')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: toolIndex
-    end function
-
-    integer(c_int) function wxDynamicToolBar_Layout(pObject) &
-        bind(C, name='wxDynamicToolBar_Layout')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxDynamicToolBar_RemoveTool(pObject, toolIndex) &
-        bind(C, name='wxDynamicToolBar_RemoveTool')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: toolIndex
-    end subroutine
-
-    subroutine wxDynamicToolBar_SetLayout(pObject, pLayout) &
-        bind(C, name='wxDynamicToolBar_SetLayout')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pLayout
-    end subroutine
-
-    ! wxEditableListBox
-
-    type(c_ptr) function wxEditableListBox_Create(parent, id, label, x, y, width, height, style) &
-        bind(C, name='wxEditableListBox_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: parent
-      integer(c_int), value :: id
-      type(c_ptr), value :: label
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-      integer(c_int), value :: style
-    end function
-
-    type(c_ptr) function wxEditableListBox_GetDelButton(pObject) &
-        bind(C, name='wxEditableListBox_GetDelButton')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxEditableListBox_GetDownButton(pObject) &
-        bind(C, name='wxEditableListBox_GetDownButton')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxEditableListBox_GetEditButton(pObject) &
-        bind(C, name='wxEditableListBox_GetEditButton')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxEditableListBox_GetListCtrl(pObject) &
-        bind(C, name='wxEditableListBox_GetListCtrl')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxEditableListBox_GetNewButton(pObject) &
-        bind(C, name='wxEditableListBox_GetNewButton')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxEditableListBox_GetStrings(pObject, ref) &
-        bind(C, name='wxEditableListBox_GetStrings')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: ref
-    end function
-
-    type(c_ptr) function wxEditableListBox_GetUpButton(pObject) &
-        bind(C, name='wxEditableListBox_GetUpButton')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxEditableListBox_SetStrings(pObject, strings, count) &
-        bind(C, name='wxEditableListBox_SetStrings')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: strings
-      integer(c_int), value :: count
-    end subroutine
-
     ! wxEncodingConverter
 
     subroutine wxEncodingConverter_Convert(pObject, input, output) &
@@ -17572,13 +17099,6 @@ module kwxffi
 
     ! wxEraseEvent
 
-    subroutine wxEraseEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxEraseEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
-
     type(c_ptr) function wxEraseEvent_GetDC(pObject) &
         bind(C, name='wxEraseEvent_GetDC')
       import :: c_ptr
@@ -17586,13 +17106,6 @@ module kwxffi
     end function
 
     ! wxEvent
-
-    subroutine wxEvent_CopyObject(pObject, object_dest) &
-        bind(C, name='wxEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: object_dest
-    end subroutine
 
     type(c_ptr) function wxEvent_GetEventObject(pObject) &
         bind(C, name='wxEvent_GetEventObject')
@@ -21401,27 +20914,6 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
-    subroutine wxIcon_SetDepth(pObject, depth) &
-        bind(C, name='wxIcon_SetDepth')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: depth
-    end subroutine
-
-    subroutine wxIcon_SetHeight(pObject, height) &
-        bind(C, name='wxIcon_SetHeight')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: height
-    end subroutine
-
-    subroutine wxIcon_SetWidth(pObject, width) &
-        bind(C, name='wxIcon_SetWidth')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: width
-    end subroutine
-
     ! wxIconBundle
 
     subroutine wxIconBundle_AddIcon(pObject, icon) &
@@ -21481,13 +20973,6 @@ module kwxffi
     end subroutine
 
     ! wxIdleEvent
-
-    subroutine wxIdleEvent_CopyObject(pObject, object_dest) &
-        bind(C, name='wxIdleEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: object_dest
-    end subroutine
 
     integer(c_int) function wxIdleEvent_MoreRequested(pObject) &
         bind(C, name='wxIdleEvent_MoreRequested')
@@ -22107,195 +21592,6 @@ module kwxffi
       integer(c_int), value :: flags
     end subroutine
 
-    ! wxIndividualLayoutConstraint
-
-    subroutine wxIndividualLayoutConstraint_Above(pObject, sibling, marg) &
-        bind(C, name='wxIndividualLayoutConstraint_Above')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: sibling
-      integer(c_int), value :: marg
-    end subroutine
-
-    subroutine wxIndividualLayoutConstraint_Absolute(pObject, val) &
-        bind(C, name='wxIndividualLayoutConstraint_Absolute')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: val
-    end subroutine
-
-    subroutine wxIndividualLayoutConstraint_AsIs(pObject) &
-        bind(C, name='wxIndividualLayoutConstraint_AsIs')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxIndividualLayoutConstraint_Below(pObject, sibling, marg) &
-        bind(C, name='wxIndividualLayoutConstraint_Below')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: sibling
-      integer(c_int), value :: marg
-    end subroutine
-
-    integer(c_int) function wxIndividualLayoutConstraint_GetDone(pObject) &
-        bind(C, name='wxIndividualLayoutConstraint_GetDone')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxIndividualLayoutConstraint_GetEdge(pObject, which, thisWin, other) &
-        bind(C, name='wxIndividualLayoutConstraint_GetEdge')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: which
-      type(c_ptr), value :: thisWin
-      type(c_ptr), value :: other
-    end function
-
-    integer(c_int) function wxIndividualLayoutConstraint_GetMargin(pObject) &
-        bind(C, name='wxIndividualLayoutConstraint_GetMargin')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxIndividualLayoutConstraint_GetMyEdge(pObject) &
-        bind(C, name='wxIndividualLayoutConstraint_GetMyEdge')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxIndividualLayoutConstraint_GetOtherEdge(pObject) &
-        bind(C, name='wxIndividualLayoutConstraint_GetOtherEdge')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxIndividualLayoutConstraint_GetOtherWindow(pObject) &
-        bind(C, name='wxIndividualLayoutConstraint_GetOtherWindow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxIndividualLayoutConstraint_GetPercent(pObject) &
-        bind(C, name='wxIndividualLayoutConstraint_GetPercent')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxIndividualLayoutConstraint_GetRelationship(pObject) &
-        bind(C, name='wxIndividualLayoutConstraint_GetRelationship')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxIndividualLayoutConstraint_GetValue(pObject) &
-        bind(C, name='wxIndividualLayoutConstraint_GetValue')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxIndividualLayoutConstraint_LeftOf(pObject, sibling, marg) &
-        bind(C, name='wxIndividualLayoutConstraint_LeftOf')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: sibling
-      integer(c_int), value :: marg
-    end subroutine
-
-    subroutine wxIndividualLayoutConstraint_PercentOf(pObject, otherW, which, per) &
-        bind(C, name='wxIndividualLayoutConstraint_PercentOf')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: otherW
-      integer(c_int), value :: which
-      integer(c_int), value :: per
-    end subroutine
-
-    integer(c_int) function wxIndividualLayoutConstraint_ResetIfWin(pObject, otherW) &
-        bind(C, name='wxIndividualLayoutConstraint_ResetIfWin')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: otherW
-    end function
-
-    subroutine wxIndividualLayoutConstraint_RightOf(pObject, sibling, marg) &
-        bind(C, name='wxIndividualLayoutConstraint_RightOf')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: sibling
-      integer(c_int), value :: marg
-    end subroutine
-
-    subroutine wxIndividualLayoutConstraint_SameAs(pObject, otherW, edge, marg) &
-        bind(C, name='wxIndividualLayoutConstraint_SameAs')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: otherW
-      integer(c_int), value :: edge
-      integer(c_int), value :: marg
-    end subroutine
-
-    integer(c_int) function wxIndividualLayoutConstraint_SatisfyConstraint(pObject, constraints, win) &
-        bind(C, name='wxIndividualLayoutConstraint_SatisfyConstraint')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: constraints
-      type(c_ptr), value :: win
-    end function
-
-    subroutine wxIndividualLayoutConstraint_Set(pObject, rel, otherW, otherE, val, marg) &
-        bind(C, name='wxIndividualLayoutConstraint_Set')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: rel
-      type(c_ptr), value :: otherW
-      integer(c_int), value :: otherE
-      integer(c_int), value :: val
-      integer(c_int), value :: marg
-    end subroutine
-
-    subroutine wxIndividualLayoutConstraint_SetDone(pObject, done) &
-        bind(C, name='wxIndividualLayoutConstraint_SetDone')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: done
-    end subroutine
-
-    subroutine wxIndividualLayoutConstraint_SetEdge(pObject, which) &
-        bind(C, name='wxIndividualLayoutConstraint_SetEdge')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: which
-    end subroutine
-
-    subroutine wxIndividualLayoutConstraint_SetMargin(pObject, margin) &
-        bind(C, name='wxIndividualLayoutConstraint_SetMargin')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: margin
-    end subroutine
-
-    subroutine wxIndividualLayoutConstraint_SetRelationship(pObject, relationship) &
-        bind(C, name='wxIndividualLayoutConstraint_SetRelationship')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: relationship
-    end subroutine
-
-    subroutine wxIndividualLayoutConstraint_SetValue(pObject, value_) &
-        bind(C, name='wxIndividualLayoutConstraint_SetValue')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: value_
-    end subroutine
-
-    subroutine wxIndividualLayoutConstraint_Unconstrained(pObject) &
-        bind(C, name='wxIndividualLayoutConstraint_Unconstrained')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
     ! wxInputStream
 
     subroutine wxInputStream_Delete(pObject) &
@@ -22807,13 +22103,6 @@ module kwxffi
       integer(c_int), value :: but
     end function
 
-    subroutine wxJoystickEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxJoystickEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
-
     integer(c_int) function wxJoystickEvent_GetButtonChange(pObject) &
         bind(C, name='wxJoystickEvent_GetButtonChange')
       import :: c_int, c_ptr
@@ -22912,13 +22201,6 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
-    subroutine wxKeyEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxKeyEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
-
     integer(c_int) function wxKeyEvent_GetKeyCode(pObject) &
         bind(C, name='wxKeyEvent_GetKeyCode')
       import :: c_int, c_ptr
@@ -22974,63 +22256,6 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
-    ! wxLEDNumberCtrl
-
-    type(c_ptr) function wxLEDNumberCtrl_Create(parent, id, x, y, width, height, style) &
-        bind(C, name='wxLEDNumberCtrl_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: parent
-      integer(c_int), value :: id
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-      integer(c_int), value :: style
-    end function
-
-    integer(c_int) function wxLEDNumberCtrl_GetAlignment(pObject) &
-        bind(C, name='wxLEDNumberCtrl_GetAlignment')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxLEDNumberCtrl_GetDrawFaded(pObject) &
-        bind(C, name='wxLEDNumberCtrl_GetDrawFaded')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxLEDNumberCtrl_GetValue(pObject, ref) &
-        bind(C, name='wxLEDNumberCtrl_GetValue')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: ref
-    end function
-
-    subroutine wxLEDNumberCtrl_SetAlignment(pObject, Alignment, Redraw) &
-        bind(C, name='wxLEDNumberCtrl_SetAlignment')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: Alignment
-      integer(c_int), value :: Redraw
-    end subroutine
-
-    subroutine wxLEDNumberCtrl_SetDrawFaded(pObject, DrawFaded, Redraw) &
-        bind(C, name='wxLEDNumberCtrl_SetDrawFaded')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: DrawFaded
-      integer(c_int), value :: Redraw
-    end subroutine
-
-    subroutine wxLEDNumberCtrl_SetValue(pObject, Value, Redraw) &
-        bind(C, name='wxLEDNumberCtrl_SetValue')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: Value
-      integer(c_int), value :: Redraw
-    end subroutine
-
     ! wxLayoutAlgorithm
 
     type(c_ptr) function wxLayoutAlgorithm_Create() &
@@ -23070,61 +22295,6 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: frame
       type(c_ptr), value :: mainWindow
-    end function
-
-    ! wxLayoutConstraints
-
-    type(c_ptr) function wxLayoutConstraints_Create() &
-        bind(C, name='wxLayoutConstraints_Create')
-      import :: c_ptr
-    end function
-
-    type(c_ptr) function wxLayoutConstraints_bottom(pObject) &
-        bind(C, name='wxLayoutConstraints_bottom')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxLayoutConstraints_centreX(pObject) &
-        bind(C, name='wxLayoutConstraints_centreX')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxLayoutConstraints_centreY(pObject) &
-        bind(C, name='wxLayoutConstraints_centreY')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxLayoutConstraints_height(pObject) &
-        bind(C, name='wxLayoutConstraints_height')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxLayoutConstraints_left(pObject) &
-        bind(C, name='wxLayoutConstraints_left')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxLayoutConstraints_right(pObject) &
-        bind(C, name='wxLayoutConstraints_right')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxLayoutConstraints_top(pObject) &
-        bind(C, name='wxLayoutConstraints_top')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxLayoutConstraints_width(pObject) &
-        bind(C, name='wxLayoutConstraints_width')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
     end function
 
     ! wxListBox
@@ -23736,12 +22906,6 @@ module kwxffi
       type(c_ptr), value :: compareFunc
       type(c_ptr), value :: obj
     end function
-
-    subroutine wxListCtrl_UpdateStyle(pObject) &
-        bind(C, name='wxListCtrl_UpdateStyle')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
 
     integer(c_int) function wxListCtrl_GetSubItemRect(pObject, item, subItem, x, y, width, height, code) &
         bind(C, name='wxListCtrl_GetSubItemRect')
@@ -25040,13 +24204,6 @@ module kwxffi
 
     ! wxMenuEvent
 
-    subroutine wxMenuEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxMenuEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
-
     integer(c_int) function wxMenuEvent_GetMenuId(pObject) &
         bind(C, name='wxMenuEvent_GetMenuId')
       import :: c_int, c_ptr
@@ -25488,13 +24645,6 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
-    subroutine wxMouseEvent_CopyObject(pObject, object_dest) &
-        bind(C, name='wxMouseEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: object_dest
-    end subroutine
-
     integer(c_int) function wxMouseEvent_Dragging(pObject) &
         bind(C, name='wxMouseEvent_Dragging')
       import :: c_int, c_ptr
@@ -25636,226 +24786,10 @@ module kwxffi
 
     ! wxMoveEvent
 
-    subroutine wxMoveEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxMoveEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
-
     type(c_ptr) function wxMoveEvent_GetPosition(pObject) &
         bind(C, name='wxMoveEvent_GetPosition')
       import :: c_ptr
       type(c_ptr), value :: pObject
-    end function
-
-    ! wxMultiCellCanvas
-
-    subroutine wxMultiCellCanvas_Add(pObject, win, row, col) &
-        bind(C, name='wxMultiCellCanvas_Add')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: win
-      integer(c_int), value :: row
-      integer(c_int), value :: col
-    end subroutine
-
-    subroutine wxMultiCellCanvas_CalculateConstraints(pObject) &
-        bind(C, name='wxMultiCellCanvas_CalculateConstraints')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    type(c_ptr) function wxMultiCellCanvas_Create(parent, numRows, numCols) &
-        bind(C, name='wxMultiCellCanvas_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: parent
-      integer(c_int), value :: numRows
-      integer(c_int), value :: numCols
-    end function
-
-    integer(c_int) function wxMultiCellCanvas_MaxCols(pObject) &
-        bind(C, name='wxMultiCellCanvas_MaxCols')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxMultiCellCanvas_MaxRows(pObject) &
-        bind(C, name='wxMultiCellCanvas_MaxRows')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxMultiCellCanvas_SetMinCellSize(pObject, width, height) &
-        bind(C, name='wxMultiCellCanvas_SetMinCellSize')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-    end subroutine
-
-    ! wxMultiCellItemHandle
-
-    type(c_ptr) function wxMultiCellItemHandle_Create(row, column, height, width, sizeX, sizeY, style, weightX, weightY, align) &
-        bind(C, name='wxMultiCellItemHandle_Create')
-      import :: c_int, c_ptr
-      integer(c_int), value :: row
-      integer(c_int), value :: column
-      integer(c_int), value :: height
-      integer(c_int), value :: width
-      integer(c_int), value :: sizeX
-      integer(c_int), value :: sizeY
-      integer(c_int), value :: style
-      integer(c_int), value :: weightX
-      integer(c_int), value :: weightY
-      integer(c_int), value :: align
-    end function
-
-    type(c_ptr) function wxMultiCellItemHandle_CreateWithSize(pObject, row, column, sizeX, sizeY, style, weightX, weightY, align) &
-        bind(C, name='wxMultiCellItemHandle_CreateWithSize')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: row
-      integer(c_int), value :: column
-      integer(c_int), value :: sizeX
-      integer(c_int), value :: sizeY
-      integer(c_int), value :: style
-      integer(c_int), value :: weightX
-      integer(c_int), value :: weightY
-      integer(c_int), value :: align
-    end function
-
-    type(c_ptr) function wxMultiCellItemHandle_CreateWithStyle(pObject, row, column, style, weightX, weightY, align) &
-        bind(C, name='wxMultiCellItemHandle_CreateWithStyle')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: row
-      integer(c_int), value :: column
-      integer(c_int), value :: style
-      integer(c_int), value :: weightX
-      integer(c_int), value :: weightY
-      integer(c_int), value :: align
-    end function
-
-    integer(c_int) function wxMultiCellItemHandle_GetAlignment(pObject) &
-        bind(C, name='wxMultiCellItemHandle_GetAlignment')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxMultiCellItemHandle_GetColumn(pObject) &
-        bind(C, name='wxMultiCellItemHandle_GetColumn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxMultiCellItemHandle_GetHeight(pObject) &
-        bind(C, name='wxMultiCellItemHandle_GetHeight')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxMultiCellItemHandle_GetLocalSize(pObject, width, height) &
-        bind(C, name='wxMultiCellItemHandle_GetLocalSize')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    integer(c_int) function wxMultiCellItemHandle_GetRow(pObject) &
-        bind(C, name='wxMultiCellItemHandle_GetRow')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxMultiCellItemHandle_GetStyle(pObject) &
-        bind(C, name='wxMultiCellItemHandle_GetStyle')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxMultiCellItemHandle_GetWeight(pObject, width, height) &
-        bind(C, name='wxMultiCellItemHandle_GetWeight')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    integer(c_int) function wxMultiCellItemHandle_GetWidth(pObject) &
-        bind(C, name='wxMultiCellItemHandle_GetWidth')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    ! wxMultiCellSizer
-
-    subroutine wxMultiCellSizer_CalcMin(pObject, width, height) &
-        bind(C, name='wxMultiCellSizer_CalcMin')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    type(c_ptr) function wxMultiCellSizer_Create(rows, cols) &
-        bind(C, name='wxMultiCellSizer_Create')
-      import :: c_int, c_ptr
-      integer(c_int), value :: rows
-      integer(c_int), value :: cols
-    end function
-
-    subroutine wxMultiCellSizer_Delete(pObject) &
-        bind(C, name='wxMultiCellSizer_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    integer(c_int) function wxMultiCellSizer_EnableGridLines(pObject, win) &
-        bind(C, name='wxMultiCellSizer_EnableGridLines')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: win
-    end function
-
-    subroutine wxMultiCellSizer_RecalcSizes(pObject) &
-        bind(C, name='wxMultiCellSizer_RecalcSizes')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    integer(c_int) function wxMultiCellSizer_SetColumnWidth(pObject, column, colSize, expandable) &
-        bind(C, name='wxMultiCellSizer_SetColumnWidth')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: column
-      integer(c_int), value :: colSize
-      integer(c_int), value :: expandable
-    end function
-
-    integer(c_int) function wxMultiCellSizer_SetDefaultCellSize(pObject, width, height) &
-        bind(C, name='wxMultiCellSizer_SetDefaultCellSize')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-    end function
-
-    integer(c_int) function wxMultiCellSizer_SetGridPen(pObject, pen) &
-        bind(C, name='wxMultiCellSizer_SetGridPen')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: pen
-    end function
-
-    integer(c_int) function wxMultiCellSizer_SetRowHeight(pObject, row, rowSize, expandable) &
-        bind(C, name='wxMultiCellSizer_SetRowHeight')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: row
-      integer(c_int), value :: rowSize
-      integer(c_int), value :: expandable
     end function
 
     ! wxMutex
@@ -25935,122 +24869,6 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
     end function
-
-    ! wxNewBitmapButton
-
-    type(c_ptr) function wxNewBitmapButton_Create(labelBitmap, labelText, alignText, isFlat, firedEventType, marginX, marginY, textToLabelGap, isSticky) &
-        bind(C, name='wxNewBitmapButton_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: labelBitmap
-      type(c_ptr), value :: labelText
-      integer(c_int), value :: alignText
-      integer(c_int), value :: isFlat
-      integer(c_int), value :: firedEventType
-      integer(c_int), value :: marginX
-      integer(c_int), value :: marginY
-      integer(c_int), value :: textToLabelGap
-      integer(c_int), value :: isSticky
-    end function
-
-    type(c_ptr) function wxNewBitmapButton_CreateFromFile(bitmapFileName, bitmapFileType, labelText, alignText, isFlat, firedEventType, marginX, marginY, textToLabelGap, isSticky) &
-        bind(C, name='wxNewBitmapButton_CreateFromFile')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: bitmapFileName
-      integer(c_int), value :: bitmapFileType
-      type(c_ptr), value :: labelText
-      integer(c_int), value :: alignText
-      integer(c_int), value :: isFlat
-      integer(c_int), value :: firedEventType
-      integer(c_int), value :: marginX
-      integer(c_int), value :: marginY
-      integer(c_int), value :: textToLabelGap
-      integer(c_int), value :: isSticky
-    end function
-
-    subroutine wxNewBitmapButton_Delete(pObject) &
-        bind(C, name='wxNewBitmapButton_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxNewBitmapButton_DrawDecorations(pObject, dc) &
-        bind(C, name='wxNewBitmapButton_DrawDecorations')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: dc
-    end subroutine
-
-    subroutine wxNewBitmapButton_DrawLabel(pObject, dc) &
-        bind(C, name='wxNewBitmapButton_DrawLabel')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: dc
-    end subroutine
-
-    integer(c_int) function wxNewBitmapButton_Enable(pObject, enable) &
-        bind(C, name='wxNewBitmapButton_Enable')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: enable
-    end function
-
-    subroutine wxNewBitmapButton_Realize(pObject, parent, id, x, y, width, height) &
-        bind(C, name='wxNewBitmapButton_Realize')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: parent
-      integer(c_int), value :: id
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-    end subroutine
-
-    subroutine wxNewBitmapButton_RenderAllLabelImages(pObject) &
-        bind(C, name='wxNewBitmapButton_RenderAllLabelImages')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxNewBitmapButton_RenderLabelImage(pObject, destBmp, srcBmp, isEnabled, isPressed) &
-        bind(C, name='wxNewBitmapButton_RenderLabelImage')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: destBmp
-      type(c_ptr), value :: srcBmp
-      integer(c_int), value :: isEnabled
-      integer(c_int), value :: isPressed
-    end subroutine
-
-    subroutine wxNewBitmapButton_RenderLabelImages(pObject) &
-        bind(C, name='wxNewBitmapButton_RenderLabelImages')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxNewBitmapButton_Reshape(pObject) &
-        bind(C, name='wxNewBitmapButton_Reshape')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxNewBitmapButton_SetAlignments(pObject, alignText, marginX, marginY, textToLabelGap) &
-        bind(C, name='wxNewBitmapButton_SetAlignments')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: alignText
-      integer(c_int), value :: marginX
-      integer(c_int), value :: marginY
-      integer(c_int), value :: textToLabelGap
-    end subroutine
-
-    subroutine wxNewBitmapButton_SetLabel(pObject, labelBitmap, labelText) &
-        bind(C, name='wxNewBitmapButton_SetLabel')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: labelBitmap
-      type(c_ptr), value :: labelText
-    end subroutine
 
     ! wxNotebook
 
@@ -28038,13 +26856,6 @@ module kwxffi
       type(c_ptr), value :: pObject
     end subroutine
 
-    subroutine wxNotifyEvent_CopyObject(pObject, object_dest) &
-        bind(C, name='wxNotifyEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: object_dest
-    end subroutine
-
     integer(c_int) function wxNotifyEvent_IsAllowed(pObject) &
         bind(C, name='wxNotifyEvent_IsAllowed')
       import :: c_int, c_ptr
@@ -28445,13 +27256,6 @@ module kwxffi
 
     ! wxPaletteChangedEvent
 
-    subroutine wxPaletteChangedEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxPaletteChangedEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
-
     type(c_ptr) function wxPaletteChangedEvent_GetChangedWindow(pObject) &
         bind(C, name='wxPaletteChangedEvent_GetChangedWindow')
       import :: c_ptr
@@ -28655,316 +27459,6 @@ module kwxffi
       integer(c_int), value :: width
     end subroutine
 
-    ! wxPlotEvent
-
-    type(c_ptr) function wxPlotEvent_GetCurve(pObject) &
-        bind(C, name='wxPlotEvent_GetCurve')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxPlotEvent_GetPosition(pObject) &
-        bind(C, name='wxPlotEvent_GetPosition')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    real(c_double) function wxPlotEvent_GetZoom(pObject) &
-        bind(C, name='wxPlotEvent_GetZoom')
-      import :: c_double, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxPlotEvent_SetPosition(pObject, pos) &
-        bind(C, name='wxPlotEvent_SetPosition')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: pos
-    end subroutine
-
-    subroutine wxPlotEvent_SetZoom(pObject, zoom) &
-        bind(C, name='wxPlotEvent_SetZoom')
-      import :: c_double, c_ptr
-      type(c_ptr), value :: pObject
-      real(c_double), value :: zoom
-    end subroutine
-
-    ! wxPlotOnOffCurve
-
-    subroutine wxPlotOnOffCurve_Add(pObject, onPos, offPos, clientData) &
-        bind(C, name='wxPlotOnOffCurve_Add')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: onPos
-      integer(c_int), value :: offPos
-      type(c_ptr), value :: clientData
-    end subroutine
-
-    type(c_ptr) function wxPlotOnOffCurve_Create(offsetY) &
-        bind(C, name='wxPlotOnOffCurve_Create')
-      import :: c_int, c_ptr
-      integer(c_int), value :: offsetY
-    end function
-
-    subroutine wxPlotOnOffCurve_Delete(pObject) &
-        bind(C, name='wxPlotOnOffCurve_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxPlotOnOffCurve_DrawOffLine(pObject, dc, y, start, end_) &
-        bind(C, name='wxPlotOnOffCurve_DrawOffLine')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: dc
-      integer(c_int), value :: y
-      integer(c_int), value :: start
-      integer(c_int), value :: end_
-    end subroutine
-
-    subroutine wxPlotOnOffCurve_DrawOnLine(pObject, dc, y, start, end_, clientData) &
-        bind(C, name='wxPlotOnOffCurve_DrawOnLine')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: dc
-      integer(c_int), value :: y
-      integer(c_int), value :: start
-      integer(c_int), value :: end_
-      type(c_ptr), value :: clientData
-    end subroutine
-
-    type(c_ptr) function wxPlotOnOffCurve_GetAt(pObject, index) &
-        bind(C, name='wxPlotOnOffCurve_GetAt')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: index
-    end function
-
-    type(c_ptr) function wxPlotOnOffCurve_GetClientData(pObject, index) &
-        bind(C, name='wxPlotOnOffCurve_GetClientData')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: index
-    end function
-
-    integer(c_int) function wxPlotOnOffCurve_GetCount(pObject) &
-        bind(C, name='wxPlotOnOffCurve_GetCount')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxPlotOnOffCurve_GetEndX(pObject) &
-        bind(C, name='wxPlotOnOffCurve_GetEndX')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxPlotOnOffCurve_GetOff(pObject, index) &
-        bind(C, name='wxPlotOnOffCurve_GetOff')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: index
-    end function
-
-    integer(c_int) function wxPlotOnOffCurve_GetOffsetY(pObject) &
-        bind(C, name='wxPlotOnOffCurve_GetOffsetY')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxPlotOnOffCurve_GetOn(pObject, index) &
-        bind(C, name='wxPlotOnOffCurve_GetOn')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: index
-    end function
-
-    integer(c_int) function wxPlotOnOffCurve_GetStartX(pObject) &
-        bind(C, name='wxPlotOnOffCurve_GetStartX')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxPlotOnOffCurve_SetOffsetY(pObject, offsetY) &
-        bind(C, name='wxPlotOnOffCurve_SetOffsetY')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: offsetY
-    end subroutine
-
-    ! wxPlotWindow
-
-    subroutine wxPlotWindow_Add(pObject, curve) &
-        bind(C, name='wxPlotWindow_Add')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: curve
-    end subroutine
-
-    subroutine wxPlotWindow_AddOnOff(pObject, curve) &
-        bind(C, name='wxPlotWindow_AddOnOff')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: curve
-    end subroutine
-
-    type(c_ptr) function wxPlotWindow_Create(parent, id, x, y, width, height, flags) &
-        bind(C, name='wxPlotWindow_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: parent
-      integer(c_int), value :: id
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-      integer(c_int), value :: flags
-    end function
-
-    subroutine wxPlotWindow_Delete(pObject, curve) &
-        bind(C, name='wxPlotWindow_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: curve
-    end subroutine
-
-    subroutine wxPlotWindow_DeleteOnOff(pObject, curve) &
-        bind(C, name='wxPlotWindow_DeleteOnOff')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: curve
-    end subroutine
-
-    subroutine wxPlotWindow_Enlarge(pObject, curve, factor) &
-        bind(C, name='wxPlotWindow_Enlarge')
-      import :: c_double, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: curve
-      real(c_double), value :: factor
-    end subroutine
-
-    type(c_ptr) function wxPlotWindow_GetAt(pObject, index) &
-        bind(C, name='wxPlotWindow_GetAt')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: index
-    end function
-
-    integer(c_int) function wxPlotWindow_GetCount(pObject) &
-        bind(C, name='wxPlotWindow_GetCount')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxPlotWindow_GetCurrent(pObject) &
-        bind(C, name='wxPlotWindow_GetCurrent')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxPlotWindow_GetEnlargeAroundWindowCentre(pObject) &
-        bind(C, name='wxPlotWindow_GetEnlargeAroundWindowCentre')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxPlotWindow_GetOnOffCurveAt(pObject, index) &
-        bind(C, name='wxPlotWindow_GetOnOffCurveAt')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: index
-    end function
-
-    integer(c_int) function wxPlotWindow_GetOnOffCurveCount(pObject) &
-        bind(C, name='wxPlotWindow_GetOnOffCurveCount')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxPlotWindow_GetScrollOnThumbRelease(pObject) &
-        bind(C, name='wxPlotWindow_GetScrollOnThumbRelease')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    real(c_double) function wxPlotWindow_GetUnitsPerValue(pObject) &
-        bind(C, name='wxPlotWindow_GetUnitsPerValue')
-      import :: c_double, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    real(c_double) function wxPlotWindow_GetZoom(pObject) &
-        bind(C, name='wxPlotWindow_GetZoom')
-      import :: c_double, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxPlotWindow_Move(pObject, curve, pixels_up) &
-        bind(C, name='wxPlotWindow_Move')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: curve
-      integer(c_int), value :: pixels_up
-    end subroutine
-
-    subroutine wxPlotWindow_RedrawEverything(pObject) &
-        bind(C, name='wxPlotWindow_RedrawEverything')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxPlotWindow_RedrawXAxis(pObject) &
-        bind(C, name='wxPlotWindow_RedrawXAxis')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxPlotWindow_RedrawYAxis(pObject) &
-        bind(C, name='wxPlotWindow_RedrawYAxis')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxPlotWindow_ResetScrollbar(pObject) &
-        bind(C, name='wxPlotWindow_ResetScrollbar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxPlotWindow_SetCurrent(pObject, current) &
-        bind(C, name='wxPlotWindow_SetCurrent')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: current
-    end subroutine
-
-    subroutine wxPlotWindow_SetEnlargeAroundWindowCentre(pObject, enlargeAroundWindowCentre) &
-        bind(C, name='wxPlotWindow_SetEnlargeAroundWindowCentre')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: enlargeAroundWindowCentre
-    end subroutine
-
-    subroutine wxPlotWindow_SetScrollOnThumbRelease(pObject, scrollOnThumbRelease) &
-        bind(C, name='wxPlotWindow_SetScrollOnThumbRelease')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: scrollOnThumbRelease
-    end subroutine
-
-    subroutine wxPlotWindow_SetUnitsPerValue(pObject, upv) &
-        bind(C, name='wxPlotWindow_SetUnitsPerValue')
-      import :: c_double, c_ptr
-      type(c_ptr), value :: pObject
-      real(c_double), value :: upv
-    end subroutine
-
-    subroutine wxPlotWindow_SetZoom(pObject, zoom) &
-        bind(C, name='wxPlotWindow_SetZoom')
-      import :: c_double, c_ptr
-      type(c_ptr), value :: pObject
-      real(c_double), value :: zoom
-    end subroutine
-
     ! wxPoint
 
     type(c_ptr) function wxPoint_Create(xx, yy) &
@@ -28974,8 +27468,8 @@ module kwxffi
       integer(c_int), value :: yy
     end function
 
-    subroutine wxPoint_Destroy(pObject) &
-        bind(C, name='wxPoint_Destroy')
+    subroutine wxPoint_Delete(pObject) &
+        bind(C, name='wxPoint_Delete')
       import :: c_ptr
       type(c_ptr), value :: pObject
     end subroutine
@@ -30270,13 +28764,6 @@ module kwxffi
 
     ! wxQueryNewPaletteEvent
 
-    subroutine wxQueryNewPaletteEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxQueryNewPaletteEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
-
     integer(c_int) function wxQueryNewPaletteEvent_GetPaletteRealized(pObject) &
         bind(C, name='wxQueryNewPaletteEvent_GetPaletteRealized')
       import :: c_int, c_ptr
@@ -30353,14 +28840,6 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
     end function
-
-    subroutine wxRadioBox_SetItemBitmap(pObject, item, bitmap) &
-        bind(C, name='wxRadioBox_SetItemBitmap')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: item
-      type(c_ptr), value :: bitmap
-    end subroutine
 
     subroutine wxRadioBox_SetItemLabel(pObject, item, label) &
         bind(C, name='wxRadioBox_SetItemLabel')
@@ -32430,123 +30909,6 @@ module kwxffi
       type(c_ptr), value :: region
     end subroutine
 
-    ! wxRemotelyScrolledTreeCtrl
-
-    subroutine wxRemotelyScrolledTreeCtrl_AdjustRemoteScrollbars(pObject) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_AdjustRemoteScrollbars')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxRemotelyScrolledTreeCtrl_CalcTreeSize(pObject, x, y, width, height) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_CalcTreeSize')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    subroutine wxRemotelyScrolledTreeCtrl_CalcTreeSizeItem(pObject, id, x, y, width, height) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_CalcTreeSizeItem')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: id
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    type(c_ptr) function wxRemotelyScrolledTreeCtrl_Create(pObject, compareFunc, parent, id, x, y, width, height, style) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: compareFunc
-      type(c_ptr), value :: parent
-      integer(c_int), value :: id
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-      integer(c_int), value :: style
-    end function
-
-    subroutine wxRemotelyScrolledTreeCtrl_Delete(pObject) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    type(c_ptr) function wxRemotelyScrolledTreeCtrl_GetCompanionWindow(pObject) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_GetCompanionWindow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxRemotelyScrolledTreeCtrl_GetScrollPos(pObject, orient) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_GetScrollPos')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: orient
-    end function
-
-    type(c_ptr) function wxRemotelyScrolledTreeCtrl_GetScrolledWindow(pObject) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_GetScrolledWindow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxRemotelyScrolledTreeCtrl_GetViewStart(pObject, x, y) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_GetViewStart')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
-    subroutine wxRemotelyScrolledTreeCtrl_HideVScrollbar(pObject) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_HideVScrollbar')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    subroutine wxRemotelyScrolledTreeCtrl_PrepareDC(pObject, dc) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_PrepareDC')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: dc
-    end subroutine
-
-    subroutine wxRemotelyScrolledTreeCtrl_ScrollToLine(pObject, posHoriz, posVert) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_ScrollToLine')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: posHoriz
-      integer(c_int), value :: posVert
-    end subroutine
-
-    subroutine wxRemotelyScrolledTreeCtrl_SetCompanionWindow(pObject, companion) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_SetCompanionWindow')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: companion
-    end subroutine
-
-    subroutine wxRemotelyScrolledTreeCtrl_SetScrollbars(pObject, pixelsPerUnitX, pixelsPerUnitY, noUnitsX, noUnitsY, xPos, yPos, noRefresh) &
-        bind(C, name='wxRemotelyScrolledTreeCtrl_SetScrollbars')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: pixelsPerUnitX
-      integer(c_int), value :: pixelsPerUnitY
-      integer(c_int), value :: noUnitsX
-      integer(c_int), value :: noUnitsY
-      integer(c_int), value :: xPos
-      integer(c_int), value :: yPos
-      integer(c_int), value :: noRefresh
-    end subroutine
-
     ! wxSVGFileDC
 
     type(c_ptr) function wxSVGFileDC_Create(fileName) &
@@ -33218,13 +31580,6 @@ module kwxffi
 
     ! wxShowEvent
 
-    subroutine wxShowEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxShowEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
-
     integer(c_int) function wxShowEvent_IsShown(pObject) &
         bind(C, name='wxShowEvent_IsShown')
       import :: c_int, c_ptr
@@ -33314,13 +31669,6 @@ module kwxffi
     end subroutine
 
     ! wxSizeEvent
-
-    subroutine wxSizeEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxSizeEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
 
     type(c_ptr) function wxSizeEvent_GetSize(pObject) &
         bind(C, name='wxSizeEvent_GetSize')
@@ -34349,20 +32697,6 @@ module kwxffi
         bind(C, name='wxSplashScreen_GetTimeout')
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
-    end function
-
-    ! wxSplitterScrolledWindow
-
-    type(c_ptr) function wxSplitterScrolledWindow_Create(parent, id, x, y, width, height, style) &
-        bind(C, name='wxSplitterScrolledWindow_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: parent
-      integer(c_int), value :: id
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-      integer(c_int), value :: style
     end function
 
     ! wxSplitterWindow
@@ -35785,42 +34119,6 @@ module kwxffi
       integer(c_int), value :: style
     end subroutine
 
-    ! wxThinSplitterWindow
-
-    type(c_ptr) function wxThinSplitterWindow_Create(parent, id, x, y, width, height, style) &
-        bind(C, name='wxThinSplitterWindow_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: parent
-      integer(c_int), value :: id
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-      integer(c_int), value :: style
-    end function
-
-    subroutine wxThinSplitterWindow_DrawSash(pObject, dc) &
-        bind(C, name='wxThinSplitterWindow_DrawSash')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: dc
-    end subroutine
-
-    integer(c_int) function wxThinSplitterWindow_SashHitTest(pObject, x, y, tolerance) &
-        bind(C, name='wxThinSplitterWindow_SashHitTest')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: tolerance
-    end function
-
-    subroutine wxThinSplitterWindow_SizeWindows(pObject) &
-        bind(C, name='wxThinSplitterWindow_SizeWindows')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
     ! wxTimer
 
     type(c_ptr) function wxTimer_Create(parent, id) &
@@ -36305,61 +34603,6 @@ module kwxffi
       integer(c_int), value :: toggle
     end subroutine
 
-    ! wxToolLayoutItem
-
-    integer(c_int) function wxToolLayoutItem_IsSeparator(pObject) &
-        bind(C, name='wxToolLayoutItem_IsSeparator')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxToolLayoutItem_Rect(pObject, x, y, width, height) &
-        bind(C, name='wxToolLayoutItem_Rect')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    ! wxToolWindow
-
-    subroutine wxToolWindow_AddMiniButton(pObject, button) &
-        bind(C, name='wxToolWindow_AddMiniButton')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: button
-    end subroutine
-
-    type(c_ptr) function wxToolWindow_Create(pObject, button, title) &
-        bind(C, name='wxToolWindow_Create')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: button
-      type(c_ptr), value :: title
-    end function
-
-    type(c_ptr) function wxToolWindow_GetClient(pObject) &
-        bind(C, name='wxToolWindow_GetClient')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxToolWindow_SetClient(pObject, window) &
-        bind(C, name='wxToolWindow_SetClient')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: window
-    end subroutine
-
-    subroutine wxToolWindow_SetTitleFont(pObject, font) &
-        bind(C, name='wxToolWindow_SetTitleFont')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: font
-    end subroutine
-
     ! wxTopLevelWindow
 
     integer(c_int) function wxTopLevelWindow_EnableCloseButton(pObject, enable) &
@@ -36561,45 +34804,6 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
       type(c_ptr), value :: filename
-    end subroutine
-
-    ! wxTreeCompanionWindow
-
-    type(c_ptr) function wxTreeCompanionWindow_Create(parent, id, x, y, width, height, style) &
-        bind(C, name='wxTreeCompanionWindow_Create')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: parent
-      integer(c_int), value :: id
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-      integer(c_int), value :: style
-    end function
-
-    subroutine wxTreeCompanionWindow_DrawItem(pObject, dc, id, x, y, width, height) &
-        bind(C, name='wxTreeCompanionWindow_DrawItem')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: dc
-      type(c_ptr), value :: id
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-    end subroutine
-
-    type(c_ptr) function wxTreeCompanionWindow_GetTreeCtrl(pObject) &
-        bind(C, name='wxTreeCompanionWindow_GetTreeCtrl')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxTreeCompanionWindow_SetTreeCtrl(pObject, treeCtrl) &
-        bind(C, name='wxTreeCompanionWindow_SetTreeCtrl')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: treeCtrl
     end subroutine
 
     ! wxTreeCtrl
@@ -37644,13 +35848,6 @@ module kwxffi
       integer(c_int), value :: check
     end subroutine
 
-    subroutine wxUpdateUIEvent_CopyObject(pObject, obj) &
-        bind(C, name='wxUpdateUIEvent_CopyObject')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: obj
-    end subroutine
-
     subroutine wxUpdateUIEvent_Enable(pObject, enable) &
         bind(C, name='wxUpdateUIEvent_Enable')
       import :: c_int, c_ptr
@@ -38057,13 +36254,6 @@ module kwxffi
       type(c_ptr), value :: child
     end subroutine
 
-    subroutine wxWindow_AddConstraintReference(pObject, otherWin) &
-        bind(C, name='wxWindow_AddConstraintReference')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: otherWin
-    end subroutine
-
     subroutine wxWindow_CaptureMouse(pObject) &
         bind(C, name='wxWindow_CaptureMouse')
       import :: c_ptr
@@ -38129,12 +36319,6 @@ module kwxffi
       integer(c_int), value :: style
     end function
 
-    subroutine wxWindow_DeleteRelatedConstraints(pObject) &
-        bind(C, name='wxWindow_DeleteRelatedConstraints')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
     integer(c_int) function wxWindow_Destroy(pObject) &
         bind(C, name='wxWindow_Destroy')
       import :: c_int, c_ptr
@@ -38151,13 +36335,6 @@ module kwxffi
         bind(C, name='wxWindow_Disable')
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
-    end function
-
-    integer(c_int) function wxWindow_DoPhase(pObject, phase) &
-        bind(C, name='wxWindow_DoPhase')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: phase
     end function
 
     integer(c_int) function wxWindow_Enable(pObject) &
@@ -38260,26 +36437,6 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
-    subroutine wxWindow_GetClientSizeConstraint(pObject, width, height) &
-        bind(C, name='wxWindow_GetClientSizeConstraint')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
-
-    type(c_ptr) function wxWindow_GetConstraints(pObject) &
-        bind(C, name='wxWindow_GetConstraints')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxWindow_GetConstraintsInvolvedIn(pObject) &
-        bind(C, name='wxWindow_GetConstraintsInvolvedIn')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
     type(c_ptr) function wxWindow_GetCursor(pObject) &
         bind(C, name='wxWindow_GetCursor')
       import :: c_ptr
@@ -38378,14 +36535,6 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
-    subroutine wxWindow_GetPositionConstraint(pObject, x, y) &
-        bind(C, name='wxWindow_GetPositionConstraint')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: x
-      type(c_ptr), value :: y
-    end subroutine
-
     type(c_ptr) function wxWindow_GetRect(pObject) &
         bind(C, name='wxWindow_GetRect')
       import :: c_ptr
@@ -38418,14 +36567,6 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
     end function
-
-    subroutine wxWindow_GetSizeConstraint(pObject, width, height) &
-        bind(C, name='wxWindow_GetSizeConstraint')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: width
-      type(c_ptr), value :: height
-    end subroutine
 
     type(c_ptr) function wxWindow_GetSizer(pObject) &
         bind(C, name='wxWindow_GetSizer')
@@ -38540,20 +36681,6 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
-    integer(c_int) function wxWindow_LayoutPhase1(pObject, noChanges) &
-        bind(C, name='wxWindow_LayoutPhase1')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: noChanges
-    end function
-
-    integer(c_int) function wxWindow_LayoutPhase2(pObject, noChanges) &
-        bind(C, name='wxWindow_LayoutPhase2')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: noChanges
-    end function
-
     subroutine wxWindow_Lower(pObject) &
         bind(C, name='wxWindow_Lower')
       import :: c_ptr
@@ -38567,14 +36694,6 @@ module kwxffi
       integer(c_int), value :: x
       integer(c_int), value :: y
       integer(c_int), value :: flags
-    end subroutine
-
-    subroutine wxWindow_MoveConstraint(pObject, x, y) &
-        bind(C, name='wxWindow_MoveConstraint')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: x
-      integer(c_int), value :: y
     end subroutine
 
     type(c_ptr) function wxWindow_PopEventHandler(pObject, deleteHandler) &
@@ -38644,25 +36763,12 @@ module kwxffi
       type(c_ptr), value :: child
     end subroutine
 
-    subroutine wxWindow_RemoveConstraintReference(pObject, otherWin) &
-        bind(C, name='wxWindow_RemoveConstraintReference')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: otherWin
-    end subroutine
-
     integer(c_int) function wxWindow_Reparent(pObject, parent) &
         bind(C, name='wxWindow_Reparent')
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
       type(c_ptr), value :: parent
     end function
-
-    subroutine wxWindow_ResetConstraints(pObject) &
-        bind(C, name='wxWindow_ResetConstraints')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
 
     type(c_ptr) function wxWindow_ScreenToClient(pObject, x, y) &
         bind(C, name='wxWindow_ScreenToClient')
@@ -38740,20 +36846,6 @@ module kwxffi
       type(c_ptr), value :: pObject
       integer(c_int), value :: width
       integer(c_int), value :: height
-    end subroutine
-
-    subroutine wxWindow_SetConstraintSizes(pObject, recurse) &
-        bind(C, name='wxWindow_SetConstraintSizes')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: recurse
-    end subroutine
-
-    subroutine wxWindow_SetConstraints(pObject, constraints) &
-        bind(C, name='wxWindow_SetConstraints')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: constraints
     end subroutine
 
     integer(c_int) function wxWindow_SetCursor(pObject, cursor) &
@@ -38849,16 +36941,6 @@ module kwxffi
       integer(c_int), value :: sizeFlags
     end subroutine
 
-    subroutine wxWindow_SetSizeConstraint(pObject, x, y, width, height) &
-        bind(C, name='wxWindow_SetSizeConstraint')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: x
-      integer(c_int), value :: y
-      integer(c_int), value :: width
-      integer(c_int), value :: height
-    end subroutine
-
     subroutine wxWindow_SetSizeHints(pObject, minW, minH, maxW, maxH, incW, incH) &
         bind(C, name='wxWindow_SetSizeHints')
       import :: c_int, c_ptr
@@ -38947,13 +37029,6 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
     end function
-
-    subroutine wxWindow_UnsetConstraints(pObject, constraints) &
-        bind(C, name='wxWindow_UnsetConstraints')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: constraints
-    end subroutine
 
     subroutine wxWindow_Update(pObject) &
         bind(C, name='wxWindow_Update')

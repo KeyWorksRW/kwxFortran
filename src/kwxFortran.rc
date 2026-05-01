@@ -1,0 +1,4 @@
+// Embed application manifest for Common Controls v6 and DPI awareness.
+// CREATEPROCESS_MANIFEST_RESOURCE_ID (1) + RT_MANIFEST (24)
+#include <winuser.h>
+1 RT_MANIFEST "kwxFortran.manifest"

@@ -7,11 +7,19 @@
     },
     "configurePresets": [
         {
-            "name": "ninja-multi",
-            "displayName": "Ninja Multi-Config (ifx + MSVC)",
-            "description": "Default: ifx + cl.exe, outputs to build/ and bin/",
+            "name": "ninja-gfortran",
+            "displayName": "Ninja Multi-Config (gfortran + clang)",
+            "description": "Default: gfortran + clang/clang++ (GNU ABI), outputs to build/ and bin/",
             "generator": "Ninja Multi-Config",
             "binaryDir": "${sourceDir}/build",
+            "toolchainFile": "${sourceDir}/cmake/gfortran-toolchain.cmake"
+        },
+        {
+            "name": "ninja-ifx",
+            "displayName": "Ninja Multi-Config (ifx + MSVC)",
+            "description": "ifx + cl.exe (MSVC ABI), outputs to build-ifx/ and bin-ifx/",
+            "generator": "Ninja Multi-Config",
+            "binaryDir": "${sourceDir}/build-ifx",
             "cacheVariables": {
                 "CMAKE_Fortran_COMPILER": "ifx",
                 "CMAKE_C_COMPILER": "cl",
@@ -21,25 +29,13 @@
         {
             "name": "ninja-ifx-clangcl",
             "displayName": "Ninja Multi-Config (ifx + clang-cl)",
-            "description": "ifx + clang-cl (MSVC ABI), outputs to build/ and bin/",
+            "description": "ifx + clang-cl (MSVC ABI), outputs to build-ifx/ and bin-ifx/",
             "generator": "Ninja Multi-Config",
-            "binaryDir": "${sourceDir}/build",
+            "binaryDir": "${sourceDir}/build-ifx",
             "cacheVariables": {
                 "CMAKE_Fortran_COMPILER": "ifx",
                 "CMAKE_C_COMPILER": "clang-cl",
                 "CMAKE_CXX_COMPILER": "clang-cl"
-            }
-        },
-        {
-            "name": "ninja-gfortran-mingw",
-            "displayName": "Ninja Multi-Config (gfortran + MinGW)",
-            "description": "gfortran + g++ (GNU ABI), outputs to build-mingw/ and bin-mingw/",
-            "generator": "Ninja Multi-Config",
-            "binaryDir": "${sourceDir}/build-mingw",
-            "cacheVariables": {
-                "CMAKE_Fortran_COMPILER": "gfortran",
-                "CMAKE_C_COMPILER": "gcc",
-                "CMAKE_CXX_COMPILER": "g++"
             }
         },
         {

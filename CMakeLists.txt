@@ -40,14 +40,14 @@ endif()
 if(WIN32)
     if(MSVC OR CMAKE_CXX_SIMULATE_ID STREQUAL "MSVC")
         set(KWXF_MSVC_ABI TRUE)
-        set(KWXF_BIN_DIR "${PROJECT_SOURCE_DIR}/bin")
-        set(KWXF_LIB_DIR "${PROJECT_SOURCE_DIR}/lib")
+        set(KWXF_BIN_DIR "${PROJECT_SOURCE_DIR}/bin-ifx")
+        set(KWXF_LIB_DIR "${PROJECT_SOURCE_DIR}/lib-ifx")
         message(STATUS "Compiler ABI: MSVC (ifx + cl/clang-cl)")
     else()
         set(KWXF_MSVC_ABI FALSE)
-        set(KWXF_BIN_DIR "${PROJECT_SOURCE_DIR}/bin-mingw")
-        set(KWXF_LIB_DIR "${PROJECT_SOURCE_DIR}/lib-mingw")
-        message(STATUS "Compiler ABI: GNU (gfortran + g++/clang++)")
+        set(KWXF_BIN_DIR "${PROJECT_SOURCE_DIR}/bin")
+        set(KWXF_LIB_DIR "${PROJECT_SOURCE_DIR}/lib")
+        message(STATUS "Compiler ABI: GNU (gfortran + clang/clang++)")
     endif()
 else()
     set(KWXF_BIN_DIR "${PROJECT_SOURCE_DIR}/bin")
@@ -63,8 +63,20 @@ if(WIN32)
     elseif(CMAKE_Fortran_COMPILER_ID STREQUAL "GNU" AND KWXF_MSVC_ABI)
         message(FATAL_ERROR
             "gfortran on Windows requires g++ or clang++ (GNU mode, not clang-cl).\n"
-            "Use the ninja-gfortran-mingw preset.")
+            "Use the ninja-gfortran preset.")
     endif()
+endif()
+
+# ###################### DWARF version #######################
+# GCC 15 defaults to DWARF-5, which stores line-table file/directory names in a
+# separate .debug_line_str section.  LLDB on Windows (PE/COFF) may not read that
+# section, causing breakpoints in Fortran (and gcc-compiled C++) to silently fail.
+# Force DWARF-4 for all non-MSVC compilers so that file names stay inline in
+# .debug_line — universally supported by every LLDB version.
+if(NOT KWXF_MSVC_ABI)
+    add_compile_options(
+        $<$<AND:$<COMPILE_LANGUAGE:C,CXX,Fortran>,$<CONFIG:Debug,RelWithDebInfo>>:-gdwarf-4>
+    )
 endif()
 
 # ###################### sccache #######################
@@ -135,7 +147,9 @@ include(file_list.cmake)
 add_library(kwxFortran STATIC ${CXX_SOURCES} ${FORTRAN_SOURCES})
 
 # Generated bindings must exist before compiling Fortran sources
-add_dependencies(kwxFortran generate_fortran_bindings)
+if(TARGET generate_fortran_bindings)
+    add_dependencies(kwxFortran generate_fortran_bindings)
+endif()
 
 # Define export macro for kwxApp.cpp on Windows
 target_compile_definitions(kwxFortran PRIVATE KWXFORTRAN_EXPORTS)
@@ -155,10 +169,15 @@ if(WIN32)
             ${WX_BUILD_DIR}/lib/vc_x64_lib/mswu
         )
     else()
-        # MinGW/gfortran: wxWidgets uses gcc_x64_lib for 64-bit MinGW builds
+        # wxWidgets names this directory based on the C++ compiler:
+        # clang_x64_lib (clang++), gcc_x64_lib (g++), etc.
+        file(GLOB _wx_lib_dirs "${WX_BUILD_DIR}/lib/*_x64_lib")
+        list(GET _wx_lib_dirs 0 _wx_lib_dir)
         target_include_directories(kwxFortran PRIVATE
-            ${WX_BUILD_DIR}/lib/gcc_x64_lib/mswu
+            ${_wx_lib_dir}/mswu
         )
+        unset(_wx_lib_dirs)
+        unset(_wx_lib_dir)
     endif()
 elseif(APPLE)
     target_include_directories(kwxFortran PRIVATE
@@ -184,8 +203,13 @@ target_include_directories(kwxFortran PUBLIC
 
 set(EXAMPLE_TARGETS minimal hello controls_demo demo)
 
+# Windows manifest for Common Controls v6 and DPI awareness
+if(WIN32)
+    set(KWXF_RC_FILE ${CMAKE_CURRENT_SOURCE_DIR}/src/kwxFortran.rc)
+endif()
+
 foreach(example ${EXAMPLE_TARGETS})
-    add_executable(${example} examples/${example}.f90)
+    add_executable(${example} examples/${example}.f90 $<$<BOOL:${WIN32}>:${KWXF_RC_FILE}>)
     target_link_libraries(${example} PRIVATE kwxFortran kwxFFI)
     set_target_properties(${example} PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${KWXF_BIN_DIR}/$<CONFIG>

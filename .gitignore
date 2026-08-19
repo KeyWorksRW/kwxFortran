@@ -1,5 +1,6 @@
 .private/
 .vscode/
+.wwxue_tests/
 
 build/
 build-ifx/

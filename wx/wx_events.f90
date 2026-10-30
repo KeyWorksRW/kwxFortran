@@ -2,7 +2,7 @@
 module wx_events
     use, intrinsic :: iso_c_binding
     use kwx_types
-    use kwxffi, wxClosure_C_ptr => wxClosure_Create
+    use kwxffi
     use wx_string, only: from_wxstring
     implicit none
     private
@@ -33,16 +33,6 @@ module wx_events
         end subroutine event_callback
     end interface
 
-    ! Private wxClosure binding with c_funptr
-    interface
-        function wxClosure_Create(fun, data) bind(C, name="wxClosure_Create")
-            import :: c_ptr, c_funptr
-            type(c_funptr), value :: fun
-            type(c_ptr), value :: data
-            type(c_ptr) :: wxClosure_Create
-        end function
-    end interface
-
 contains
 
     !--- Connection ---
@@ -68,8 +58,9 @@ contains
         if (present(last_id)) c_last = int(last_id, c_int)
         c_type = int(event_type, c_int)
 
+        ! TClosureFun is void* in C, so the function pointer crosses as a c_ptr.
         dummy = wxEvtHandler_Connect(window%ptr, c_first, c_last, c_type, &
-            wxClosure_Create(fptr, data_ptr))
+            wxClosure_Create(transfer(fptr, c_null_ptr), data_ptr))
     end subroutine
 
     subroutine wx_disconnect(window, event_type, id, last_id)

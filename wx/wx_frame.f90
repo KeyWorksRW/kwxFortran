@@ -105,15 +105,15 @@ contains
     subroutine wx_frame_create_status_bar(frame, number, style)
         type(wxFrame_t), intent(in) :: frame
         integer, intent(in), optional :: number
-        integer(c_long), intent(in), optional :: style
+        integer(c_int), intent(in), optional :: style
         type(c_ptr) :: result_
         integer(c_int) :: c_num
-        integer(c_long) :: c_style
+        integer(c_int) :: c_style
         c_num = 1_c_int
         if (present(number)) c_num = int(number, c_int)
-        c_style = 0_c_long
+        c_style = 0_c_int
         if (present(style)) c_style = style
-        result_ = wxFrame_CreateStatusBar(frame%ptr, c_num, c_style)
+        result_ = wxFrame_CreateStatusBar(frame%ptr, c_num, c_style, -1_c_int)
     end subroutine
 
     subroutine wx_frame_set_status_text(frame, text, number)
@@ -174,7 +174,7 @@ contains
         integer(c_long) :: c_style
         c_style = -1_c_long
         if (present(style)) c_style = style
-        toolbar%ptr = wxFrame_CreateToolBar(frame%ptr, c_style)
+        toolbar%ptr = wxFrame_CreateToolBar(frame%ptr, c_style, -1_c_int)
     end function
 
     function wx_frame_get_tool_bar(frame) result(toolbar)

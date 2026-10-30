@@ -1,14 +1,36 @@
-.private/
-.vscode/
-.wwxue_tests/
+lib/
+bin/
+.cache
+.local
+.private
+.shared
 
-build/
+src/version.h
+src/version.rc
+
 build-ifx/
 bin/
 bin-ifx/
 lib/
 lib-ifx/
-.shared/
 
 # Fortran compiled module interface files — generated in build/modules/, never in src/
 *.mod
+
+tests/quick
+
+# cmake
+build/
+CMakeFiles/
+
+# File extensions to ignore
+*.dll
+*.exe
+*.pdb
+*.obj
+*.log
+*.tmp
+*.bak
+*.zip
+*.tar.gz
+*.7z

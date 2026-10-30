@@ -28,7 +28,7 @@ module demo_handlers
     use wx_dialogs, only: wx_message_box
     use wx_app, only: wx_exit_main_loop
     use wx_frame, only: wx_frame_close
-    use kwx_constants, only: wxOK, wxICON_INFORMATION
+    use kwxffi, only: wxOK, wxICON_INFORMATION
     use demo_globals
     implicit none
 
@@ -102,7 +102,7 @@ program demo
     use wx_window
     use wx_events
     use kwx_types
-    use kwx_constants, only: wxEVT_MENU, wxEVT_BUTTON, wxEVT_CLOSE_WINDOW, &
+    use kwxffi, only: wxEVT_MENU, wxEVT_BUTTON, wxEVT_CLOSE_WINDOW, &
         wxID_NEW, wxID_OPEN, wxID_SAVE, wxID_EXIT, wxID_ABOUT, &
         wxID_UNDO, wxID_REDO, wxID_CUT, wxID_COPY, wxID_PASTE, &
         wxVERTICAL, wxHORIZONTAL, wxALL, wxEXPAND, wxALIGN_CENTER_VERTICAL, &

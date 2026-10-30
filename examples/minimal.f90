@@ -13,7 +13,6 @@ program minimal
     use wx_app
     use wx_frame
     use kwx_types
-    use kwx_constants
     implicit none
 
     type(wxFrame_t) :: main_frame

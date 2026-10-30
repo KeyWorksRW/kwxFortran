@@ -230,3 +230,9 @@ if(WIN32)
         endforeach()
     endif()
 endif()
+
+# ###################### Tests #######################
+
+# tests/quick is an untracked scratch area with its own standalone CMake project.
+# It is not part of this build — the Configure tasks configure it with its own
+# CMakePresets.json, and the "build quick debug" task builds it with ninja.

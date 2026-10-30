@@ -14,7 +14,9 @@ Fortran language bindings for [wxWidgets](https://www.wxwidgets.org/) via [kwxFF
 
 kwxFortran provides a two-layer binding architecture:
 
-1. **FFI Layer** (`wx/kwx_bindings.f90`) — Raw `ISO_C_BINDING` interface declarations mapping directly to the kwxFFI C function exports. All pointers are `c_ptr`.
+1. **FFI Layer** (`wx/kwxffi_gen.f90`, module `kwxffi`) — Raw `ISO_C_BINDING` interface
+   declarations mapping directly to the kwxFFI C function exports. All pointers are `c_ptr`.
+   Events, keys, constants, class methods and free functions all live in this one module.
 2. **Wrapper Layer** (`wx/wx_*.f90`) — Idiomatic Fortran wrappers with optional parameters, automatic string conversion, type safety, and sensible defaults.
 
 Users should work with the wrapper layer. The FFI layer is available for direct access when needed.
@@ -49,7 +51,7 @@ program hello
     use wx_window
     use wx_events
     use kwx_types
-    use kwx_constants
+    use kwxffi, only: wxVERTICAL, wxALL, wxEXPAND, wxALIGN_CENTER, wxEVT_BUTTON
     use hello_handlers
     implicit none
 
@@ -133,7 +135,7 @@ All types wrap an opaque `c_ptr` with an `is_valid()` method. Always check after
 
 | Entity | Convention | Example |
 | --- | --- | --- |
-| Modules | `snake_case` | `wx_frame`, `kwx_bindings` |
+| Modules | `snake_case` | `wx_frame`, `kwxffi` |
 | Types | `PascalCase_t` | `wxFrame_t`, `wxButton_t` |
 | Wrapper functions | `wx_<class>_<action>` | `wx_frame_create`, `wx_frame_show` |
 | Raw bindings | Match C name | `wxFrame_Create`, `kwxApp_Initialize` |

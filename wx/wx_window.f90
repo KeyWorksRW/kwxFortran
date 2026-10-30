@@ -55,7 +55,7 @@ contains
     subroutine wx_window_enable(window)
         class(wxWindow_t), intent(in) :: window
         integer(c_int) :: result_
-        result_ = wxWindow_Enable(window%ptr)
+        result_ = wxWindow_Enable(window%ptr, 1_c_int)
     end subroutine
 
     subroutine wx_window_disable(window)

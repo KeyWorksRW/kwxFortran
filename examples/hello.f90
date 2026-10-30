@@ -42,7 +42,7 @@ program hello
     use wx_window
     use wx_events
     use kwx_types
-    use kwx_constants
+    use kwxffi, only: wxVERTICAL, wxALL, wxEXPAND, wxALIGN_CENTER, wxEVT_BUTTON
     use hello_handlers
     implicit none
 

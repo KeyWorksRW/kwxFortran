@@ -122,7 +122,12 @@ program controls_demo
     use wx_window
     use wx_events
     use kwx_types
-    use kwx_constants
+    use kwxffi, only: wxID_NEW, wxID_OPEN, wxID_SAVE, wxID_EXIT, wxID_ABOUT, &
+        wxID_UNDO, wxID_REDO, wxID_CUT, wxID_COPY, wxID_PASTE, &
+        wxEVT_MENU, wxEVT_CHECKBOX, wxEVT_RADIOBUTTON, wxEVT_CHOICE, &
+        wxEVT_LISTBOX, wxEVT_COMBOBOX, &
+        wxHORIZONTAL, wxVERTICAL, wxALL, wxLEFT, wxTOP, wxEXPAND, &
+        wxRB_GROUP, wxLB_SINGLE, wxCB_DROPDOWN
     use controls_demo_handlers
     implicit none
 

@@ -7,333 +7,315 @@ module wx_frame
     implicit none
     private
 
-    ! Creation
+    public :: wx_frame_centre
+    public :: wx_frame_get_icon
+    public :: wx_frame_get_title
+    public :: wx_frame_iconize
+    public :: wx_frame_is_full_screen
+    public :: wx_frame_is_iconized
+    public :: wx_frame_is_maximized
+    public :: wx_frame_maximize
+    public :: wx_frame_set_icon
+    public :: wx_frame_set_shape
+    public :: wx_frame_set_title
+    public :: wx_frame_show_full_screen
+    public :: wx_frame_get_client_area_origin_point
+    public :: wx_frame_set_window_modality
+    public :: wx_frame_process_command_item
+    public :: wx_frame_do_menu_updates
+    public :: wx_frame_is_client_area_child
     public :: wx_frame_create
-
-    ! Show/hide/close
-    public :: wx_frame_show, wx_frame_hide, wx_frame_close
-
-    ! Status bar
-    public :: wx_frame_create_status_bar, wx_frame_set_status_text
-    public :: wx_frame_push_status_text, wx_frame_pop_status_text
-
-    ! Menu bar
-    public :: wx_frame_set_menu_bar, wx_frame_get_menu_bar
-
-    ! Toolbar
-    public :: wx_frame_create_tool_bar, wx_frame_get_tool_bar
-
-    ! Window ops
-    public :: wx_frame_center, wx_frame_set_size
-
-    ! TopLevelWindow ops
-    public :: wx_frame_restore, wx_frame_maximize, wx_frame_iconize
-    public :: wx_frame_is_maximized, wx_frame_is_iconized
-    public :: wx_frame_show_full_screen, wx_frame_is_full_screen
-    public :: wx_frame_get_title, wx_frame_set_title
-    public :: wx_frame_is_active
-    public :: wx_frame_enable_close_button
-    public :: wx_frame_enable_maximize_button
-    public :: wx_frame_enable_minimize_button
-    public :: wx_frame_request_user_attention
+    public :: wx_frame_msw_get_task_bar_button
+    public :: wx_frame_msw_get_system_menu
+    public :: wx_frame_create_status_bar
+    public :: wx_frame_create_tool_bar
+    public :: wx_frame_get_client_area_origin_left
+    public :: wx_frame_get_client_area_origin_top
+    public :: wx_frame_get_menu_bar
+    public :: wx_frame_get_status_bar
+    public :: wx_frame_get_tool_bar
+    public :: wx_frame_restore
+    public :: wx_frame_set_menu_bar
+    public :: wx_frame_set_status_bar
+    public :: wx_frame_set_status_text
+    public :: wx_frame_set_status_widths
+    public :: wx_frame_set_tool_bar
+    public :: wx_frame_find_item_in_menu_bar
+    public :: wx_frame_process_command
+    public :: wx_frame_set_status_bar_pane
+    public :: wx_frame_get_status_bar_pane
+    public :: wx_frame_push_status_text
+    public :: wx_frame_pop_status_text
 
 contains
 
-    !--- Creation ---
+    subroutine wx_frame_centre(self, orientation)
+        class(wxframe_t), intent(in) :: self
+        integer(c_int), intent(in) :: orientation
+        call wxFrame_Centre(self%ptr, orientation)
+    end subroutine wx_frame_centre
 
-    function wx_frame_create(title, parent, id, x, y, width, height, style) &
-            result(frame)
-        character(len=*), intent(in) :: title
-        class(wxWindow_t), intent(in), optional :: parent
-        integer, intent(in), optional :: id
-        integer, intent(in), optional :: x, y, width, height
-        integer(c_long), intent(in), optional :: style
-        type(wxFrame_t) :: frame
+    function wx_frame_get_icon(self) result(result_object)
+        class(wxframe_t), intent(in) :: self
+        type(wxicon_t) :: result_object
+        result_object = wxicon_from_ptr(wxFrame_GetIcon(self%ptr), .false.)
+    end function wx_frame_get_icon
 
-        type(c_ptr) :: parent_ptr, title_ptr
-        integer(c_int) :: c_id, c_x, c_y, c_w, c_h
-        integer(c_long) :: c_style
+    function wx_frame_get_title(self) result(result_text)
+        class(wxframe_t), intent(in) :: self
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = wxFrame_GetTitle(self%ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wx_frame_get_title
 
-        parent_ptr = c_null_ptr
-        if (present(parent)) parent_ptr = parent%ptr
-        c_id = wxID_ANY()
-        if (present(id)) c_id = int(id, c_int)
-        c_x = -1_c_int
-        if (present(x)) c_x = int(x, c_int)
-        c_y = -1_c_int
-        if (present(y)) c_y = int(y, c_int)
-        c_w = -1_c_int
-        if (present(width)) c_w = int(width, c_int)
-        c_h = -1_c_int
-        if (present(height)) c_h = int(height, c_int)
-        c_style = wxDEFAULT_FRAME_STYLE()
-        if (present(style)) c_style = style
+    function wx_frame_iconize(self) result(result_value)
+        class(wxframe_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxFrame_Iconize(self%ptr) /= 0)
+    end function wx_frame_iconize
 
-        title_ptr = to_wxstring(title)
-        frame%ptr = wxFrame_Create(parent_ptr, c_id, title_ptr, &
-            c_x, c_y, c_w, c_h, c_style)
-        call wxString_Delete(title_ptr)
-    end function
+    function wx_frame_is_full_screen(self) result(result_value)
+        class(wxframe_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxFrame_IsFullScreen(self%ptr) /= 0)
+    end function wx_frame_is_full_screen
 
-    !--- Show/hide/close ---
+    function wx_frame_is_iconized(self) result(result_value)
+        class(wxframe_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxFrame_IsIconized(self%ptr) /= 0)
+    end function wx_frame_is_iconized
 
-    subroutine wx_frame_show(frame)
-        type(wxFrame_t), intent(in) :: frame
-        integer(c_int) :: dummy
-        dummy = wxWindow_Show(frame%ptr)
-    end subroutine
+    function wx_frame_is_maximized(self) result(result_value)
+        class(wxframe_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxFrame_IsMaximized(self%ptr) /= 0)
+    end function wx_frame_is_maximized
 
-    subroutine wx_frame_hide(frame)
-        type(wxFrame_t), intent(in) :: frame
-        integer(c_int) :: dummy
-        dummy = wxWindow_Hide(frame%ptr)
-    end subroutine
+    subroutine wx_frame_maximize(self)
+        class(wxframe_t), intent(in) :: self
+        call wxFrame_Maximize(self%ptr)
+    end subroutine wx_frame_maximize
 
-    subroutine wx_frame_close(frame, force)
-        type(wxFrame_t), intent(in) :: frame
-        logical, intent(in), optional :: force
-        integer(c_int) :: c_force, dummy
-        c_force = 0_c_int
-        if (present(force)) then
-            if (force) c_force = 1_c_int
-        end if
-        dummy = wxWindow_Close(frame%ptr, c_force)
-    end subroutine
+    subroutine wx_frame_set_icon(self, icon)
+        class(wxframe_t), intent(in) :: self
+        class(wxicon_t), intent(in) :: icon
+        call wxFrame_SetIcon(self%ptr, icon%ptr)
+    end subroutine wx_frame_set_icon
 
-    !--- Status bar ---
+    function wx_frame_set_shape(self, region) result(result_value)
+        class(wxframe_t), intent(in) :: self
+        class(wxregion_t), intent(in) :: region
+        logical :: result_value
+        result_value = (wxFrame_SetShape(self%ptr, region%ptr) /= 0)
+    end function wx_frame_set_shape
 
-    subroutine wx_frame_create_status_bar(frame, number, style)
-        type(wxFrame_t), intent(in) :: frame
-        integer, intent(in), optional :: number
-        integer(c_long), intent(in), optional :: style
-        type(c_ptr) :: result_
-        integer(c_int) :: c_num
-        integer(c_long) :: c_style
-        c_num = 1_c_int
-        if (present(number)) c_num = int(number, c_int)
-        c_style = 0_c_long
-        if (present(style)) c_style = style
-        result_ = wxFrame_CreateStatusBar(frame%ptr, c_num, c_style)
-    end subroutine
-
-    subroutine wx_frame_set_status_text(frame, text, number)
-        type(wxFrame_t), intent(in) :: frame
+    subroutine wx_frame_set_title(self, text)
+        class(wxframe_t), intent(in) :: self
         character(len=*), intent(in) :: text
-        integer, intent(in), optional :: number
         type(c_ptr) :: text_ptr
-        integer(c_int) :: c_num
-        c_num = 0_c_int
-        if (present(number)) c_num = int(number, c_int)
         text_ptr = to_wxstring(text)
-        call wxFrame_SetStatusText(frame%ptr, text_ptr, c_num)
+        call wxFrame_SetTitle(self%ptr, text_ptr)
         call wxString_Delete(text_ptr)
-    end subroutine
+    end subroutine wx_frame_set_title
 
-    subroutine wx_frame_push_status_text(frame, text, number)
-        type(wxFrame_t), intent(in) :: frame
-        character(len=*), intent(in) :: text
-        integer, intent(in), optional :: number
-        type(c_ptr) :: text_ptr
-        integer(c_int) :: c_num
-        c_num = 0_c_int
-        if (present(number)) c_num = int(number, c_int)
-        text_ptr = to_wxstring(text)
-        call wxFrame_PushStatusText(frame%ptr, text_ptr, c_num)
-        call wxString_Delete(text_ptr)
-    end subroutine
-
-    subroutine wx_frame_pop_status_text(frame, number)
-        type(wxFrame_t), intent(in) :: frame
-        integer, intent(in), optional :: number
-        integer(c_int) :: c_num
-        c_num = 0_c_int
-        if (present(number)) c_num = int(number, c_int)
-        call wxFrame_PopStatusText(frame%ptr, c_num)
-    end subroutine
-
-    !--- Menu bar ---
-
-    subroutine wx_frame_set_menu_bar(frame, menubar)
-        type(wxFrame_t), intent(in) :: frame
-        type(wxMenuBar_t), intent(in) :: menubar
-        call wxFrame_SetMenuBar(frame%ptr, menubar%ptr)
-    end subroutine
-
-    function wx_frame_get_menu_bar(frame) result(menubar)
-        type(wxFrame_t), intent(in) :: frame
-        type(wxMenuBar_t) :: menubar
-        menubar%ptr = wxFrame_GetMenuBar(frame%ptr)
-    end function
-
-    !--- Toolbar ---
-
-    function wx_frame_create_tool_bar(frame, style) result(toolbar)
-        type(wxFrame_t), intent(in) :: frame
-        integer(c_long), intent(in), optional :: style
-        type(wxToolBar_t) :: toolbar
-        integer(c_long) :: c_style
-        c_style = -1_c_long
-        if (present(style)) c_style = style
-        toolbar%ptr = wxFrame_CreateToolBar(frame%ptr, c_style)
-    end function
-
-    function wx_frame_get_tool_bar(frame) result(toolbar)
-        type(wxFrame_t), intent(in) :: frame
-        type(wxToolBar_t) :: toolbar
-        toolbar%ptr = wxFrame_GetToolBar(frame%ptr)
-    end function
-
-    !--- Window ops ---
-
-    subroutine wx_frame_center(frame, direction)
-        type(wxFrame_t), intent(in) :: frame
-        integer, intent(in), optional :: direction
-        integer(c_int) :: dir
-        dir = wxBOTH()
-        if (present(direction)) dir = int(direction, c_int)
-        call wxWindow_CenterOnParent(frame%ptr, dir)
-    end subroutine
-
-    subroutine wx_frame_set_size(frame, width, height)
-        type(wxFrame_t), intent(in) :: frame
-        integer, intent(in) :: width, height
-        call wxWindow_SetSize(frame%ptr, -1_c_int, -1_c_int, &
-            int(width, c_int), int(height, c_int), 0_c_int)
-    end subroutine
-
-    !--- TopLevelWindow ops ---
-
-    subroutine wx_frame_restore(frame)
-        type(wxFrame_t), intent(in) :: frame
-        call wxTopLevelWindow_Restore(frame%ptr)
-    end subroutine
-
-    subroutine wx_frame_maximize(frame, maximize)
-        type(wxFrame_t), intent(in) :: frame
-        logical, intent(in), optional :: maximize
-        integer(c_int) :: c_max
-        c_max = 1_c_int
-        if (present(maximize)) then
-            c_max = 0_c_int
-            if (maximize) c_max = 1_c_int
-        end if
-        call wxTopLevelWindow_Maximize(frame%ptr, c_max)
-    end subroutine
-
-    subroutine wx_frame_iconize(frame, iconize)
-        type(wxFrame_t), intent(in) :: frame
-        logical, intent(in), optional :: iconize
-        integer(c_int) :: c_ico, dummy
-        c_ico = 1_c_int
-        if (present(iconize)) then
-            c_ico = 0_c_int
-            if (iconize) c_ico = 1_c_int
-        end if
-        dummy = wxTopLevelWindow_Iconize(frame%ptr, c_ico)
-    end subroutine
-
-    function wx_frame_is_maximized(frame) result(maximized)
-        type(wxFrame_t), intent(in) :: frame
-        logical :: maximized
-        maximized = (wxTopLevelWindow_IsMaximized(frame%ptr) /= 0)
-    end function
-
-    function wx_frame_is_iconized(frame) result(iconized)
-        type(wxFrame_t), intent(in) :: frame
-        logical :: iconized
-        iconized = (wxTopLevelWindow_IsIconized(frame%ptr) /= 0)
-    end function
-
-    function wx_frame_show_full_screen(frame, show, style) result(ok)
-        type(wxFrame_t), intent(in) :: frame
+    function wx_frame_show_full_screen(self, show, style) result(result_value)
+        class(wxframe_t), intent(in) :: self
         logical, intent(in) :: show
-        integer(c_long), intent(in), optional :: style
-        logical :: ok
-        integer(c_int) :: c_show
-        integer(c_long) :: c_style
-        c_show = 0_c_int
-        if (show) c_show = 1_c_int
-        c_style = 0_c_long
-        if (present(style)) c_style = style
-        ok = (wxTopLevelWindow_ShowFullScreen(frame%ptr, c_show, c_style) /= 0)
-    end function
+        integer(c_int), intent(in) :: style
+        logical :: result_value
+        result_value = (wxFrame_ShowFullScreen(self%ptr, merge(1_c_int, 0_c_int, show), style) /= 0)
+    end function wx_frame_show_full_screen
 
-    function wx_frame_is_full_screen(frame) result(full)
-        type(wxFrame_t), intent(in) :: frame
-        logical :: full
-        full = (wxTopLevelWindow_IsFullScreen(frame%ptr) /= 0)
-    end function
+    function wx_frame_get_client_area_origin_point(self) result(result_object)
+        class(wxframe_t), intent(in) :: self
+        type(wxpoint_t) :: result_object
+        result_object = wxpoint_from_ptr(wxFrame_GetClientAreaOriginPoint(self%ptr), .false.)
+    end function wx_frame_get_client_area_origin_point
 
-    function wx_frame_get_title(frame) result(title)
-        type(wxFrame_t), intent(in) :: frame
-        character(len=:), allocatable :: title
-        type(c_ptr) :: ws_ptr
-        ws_ptr = wxTopLevelWindow_GetTitle(frame%ptr)
-        title = from_wxstring(ws_ptr)
-        call wxString_Delete(ws_ptr)
-    end function
+    subroutine wx_frame_set_window_modality(self, modality)
+        class(wxframe_t), intent(in) :: self
+        integer(c_int), intent(in) :: modality
+        call wxFrame_SetWindowModality(self%ptr, modality)
+    end subroutine wx_frame_set_window_modality
 
-    subroutine wx_frame_set_title(frame, title)
-        type(wxFrame_t), intent(in) :: frame
-        character(len=*), intent(in) :: title
-        type(c_ptr) :: title_ptr
-        title_ptr = to_wxstring(title)
-        call wxTopLevelWindow_SetTitle(frame%ptr, title_ptr)
-        call wxString_Delete(title_ptr)
-    end subroutine
+    function wx_frame_process_command_item(self, item) result(result_value)
+        class(wxframe_t), intent(in) :: self
+        class(wxmenuitem_t), intent(in) :: item
+        logical :: result_value
+        result_value = (wxFrame_ProcessCommandItem(self%ptr, item%ptr) /= 0)
+    end function wx_frame_process_command_item
 
-    function wx_frame_is_active(frame) result(active)
-        type(wxFrame_t), intent(in) :: frame
-        logical :: active
-        active = (wxTopLevelWindow_IsActive(frame%ptr) /= 0)
-    end function
+    subroutine wx_frame_do_menu_updates(self, menu)
+        class(wxframe_t), intent(in) :: self
+        class(wxmenu_t), intent(in) :: menu
+        call wxFrame_DoMenuUpdates(self%ptr, menu%ptr)
+    end subroutine wx_frame_do_menu_updates
 
-    function wx_frame_enable_close_button(frame, enable) result(ok)
-        type(wxFrame_t), intent(in) :: frame
-        logical, intent(in), optional :: enable
-        logical :: ok
-        integer(c_int) :: c_en
-        c_en = 1_c_int
-        if (present(enable)) then
-            c_en = 0_c_int
-            if (enable) c_en = 1_c_int
-        end if
-        ok = (wxTopLevelWindow_EnableCloseButton(frame%ptr, c_en) /= 0)
-    end function
+    function wx_frame_is_client_area_child(self, child) result(result_value)
+        class(wxframe_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: child
+        logical :: result_value
+        result_value = (wxFrame_IsClientAreaChild(self%ptr, child%ptr) /= 0)
+    end function wx_frame_is_client_area_child
 
-    function wx_frame_enable_maximize_button(frame, enable) result(ok)
-        type(wxFrame_t), intent(in) :: frame
-        logical, intent(in), optional :: enable
-        logical :: ok
-        integer(c_int) :: c_en
-        c_en = 1_c_int
-        if (present(enable)) then
-            c_en = 0_c_int
-            if (enable) c_en = 1_c_int
-        end if
-        ok = (wxTopLevelWindow_EnableMaximizeButton(frame%ptr, c_en) /= 0)
-    end function
+    function wx_frame_create(parent, id, text, left, top, width, height, style) result(result_object)
+        class(wxwindow_t), intent(in) :: parent
+        integer(c_int), intent(in) :: id
+        character(len=*), intent(in) :: text
+        integer(c_int), intent(in) :: left
+        integer(c_int), intent(in) :: top
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        integer(c_int), intent(in) :: style
+        type(c_ptr) :: text_ptr
+        type(wxframe_t) :: result_object
+        text_ptr = to_wxstring(text)
+        result_object%ptr = wxFrame_Create(parent%ptr, id, text_ptr, left, top, width, height, style)
+        result_object%owned = .true.
+        call wxString_Delete(text_ptr)
+    end function wx_frame_create
 
-    function wx_frame_enable_minimize_button(frame, enable) result(ok)
-        type(wxFrame_t), intent(in) :: frame
-        logical, intent(in), optional :: enable
-        logical :: ok
-        integer(c_int) :: c_en
-        c_en = 1_c_int
-        if (present(enable)) then
-            c_en = 0_c_int
-            if (enable) c_en = 1_c_int
-        end if
-        ok = (wxTopLevelWindow_EnableMinimizeButton(frame%ptr, c_en) /= 0)
-    end function
+    function wx_frame_msw_get_task_bar_button(self) result(result_value)
+        class(wxframe_t), intent(in) :: self
+        type(c_ptr) :: result_value
+        result_value = wxFrame_MSWGetTaskBarButton(self%ptr)
+    end function wx_frame_msw_get_task_bar_button
 
-    subroutine wx_frame_request_user_attention(frame, flags)
-        type(wxFrame_t), intent(in) :: frame
-        integer, intent(in), optional :: flags
-        integer(c_int) :: c_flags
-        c_flags = 0_c_int
-        if (present(flags)) c_flags = int(flags, c_int)
-        call wxTopLevelWindow_RequestUserAttention(frame%ptr, c_flags)
-    end subroutine
+    function wx_frame_msw_get_system_menu(self) result(result_object)
+        class(wxframe_t), intent(in) :: self
+        type(wxmenu_t) :: result_object
+        result_object = wxmenu_from_ptr(wxFrame_MSWGetSystemMenu(self%ptr), .false.)
+    end function wx_frame_msw_get_system_menu
+
+    function wx_frame_create_status_bar(self, number, style, id) result(result_object)
+        class(wxframe_t), intent(in) :: self
+        integer(c_int), intent(in) :: number
+        integer(c_int), intent(in) :: style
+        integer(c_int), intent(in) :: id
+        type(wxstatusbar_t) :: result_object
+        result_object = wxstatusbar_from_ptr(wxFrame_CreateStatusBar(self%ptr, number, style, id), .false.)
+    end function wx_frame_create_status_bar
+
+    function wx_frame_create_tool_bar(self, style, id) result(result_object)
+        class(wxframe_t), intent(in) :: self
+        integer(c_long), intent(in) :: style
+        integer(c_int), intent(in) :: id
+        type(wxtoolbar_t) :: result_object
+        result_object = wxtoolbar_from_ptr(wxFrame_CreateToolBar(self%ptr, style, id), .false.)
+    end function wx_frame_create_tool_bar
+
+    function wx_frame_get_client_area_origin_left(self) result(result_value)
+        class(wxframe_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxFrame_GetClientAreaOrigin_left(self%ptr)
+    end function wx_frame_get_client_area_origin_left
+
+    function wx_frame_get_client_area_origin_top(self) result(result_value)
+        class(wxframe_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxFrame_GetClientAreaOrigin_top(self%ptr)
+    end function wx_frame_get_client_area_origin_top
+
+    function wx_frame_get_menu_bar(self) result(result_object)
+        class(wxframe_t), intent(in) :: self
+        type(wxmenubar_t) :: result_object
+        result_object = wxmenubar_from_ptr(wxFrame_GetMenuBar(self%ptr), .false.)
+    end function wx_frame_get_menu_bar
+
+    function wx_frame_get_status_bar(self) result(result_object)
+        class(wxframe_t), intent(in) :: self
+        type(wxstatusbar_t) :: result_object
+        result_object = wxstatusbar_from_ptr(wxFrame_GetStatusBar(self%ptr), .false.)
+    end function wx_frame_get_status_bar
+
+    function wx_frame_get_tool_bar(self) result(result_object)
+        class(wxframe_t), intent(in) :: self
+        type(wxtoolbar_t) :: result_object
+        result_object = wxtoolbar_from_ptr(wxFrame_GetToolBar(self%ptr), .false.)
+    end function wx_frame_get_tool_bar
+
+    subroutine wx_frame_restore(self)
+        class(wxframe_t), intent(in) :: self
+        call wxFrame_Restore(self%ptr)
+    end subroutine wx_frame_restore
+
+    subroutine wx_frame_set_menu_bar(self, menubar)
+        class(wxframe_t), intent(in) :: self
+        class(wxmenubar_t), intent(in) :: menubar
+        call wxFrame_SetMenuBar(self%ptr, menubar%ptr)
+    end subroutine wx_frame_set_menu_bar
+
+    subroutine wx_frame_set_status_bar(self, statbar)
+        class(wxframe_t), intent(in) :: self
+        class(wxstatusbar_t), intent(in) :: statbar
+        call wxFrame_SetStatusBar(self%ptr, statbar%ptr)
+    end subroutine wx_frame_set_status_bar
+
+    subroutine wx_frame_set_status_text(self, text, number)
+        class(wxframe_t), intent(in) :: self
+        character(len=*), intent(in) :: text
+        integer(c_int), intent(in) :: number
+        type(c_ptr) :: text_ptr
+        text_ptr = to_wxstring(text)
+        call wxFrame_SetStatusText(self%ptr, text_ptr, number)
+        call wxString_Delete(text_ptr)
+    end subroutine wx_frame_set_status_text
+
+    subroutine wx_frame_set_status_widths(self, count, widths)
+        class(wxframe_t), intent(in) :: self
+        integer(c_int), intent(in) :: count
+        type(c_ptr), intent(in), value :: widths
+        call wxFrame_SetStatusWidths(self%ptr, count, widths)
+    end subroutine wx_frame_set_status_widths
+
+    subroutine wx_frame_set_tool_bar(self, toolbar)
+        class(wxframe_t), intent(in) :: self
+        class(wxtoolbar_t), intent(in) :: toolbar
+        call wxFrame_SetToolBar(self%ptr, toolbar%ptr)
+    end subroutine wx_frame_set_tool_bar
+
+    function wx_frame_find_item_in_menu_bar(self, menuid) result(result_object)
+        class(wxframe_t), intent(in) :: self
+        integer(c_int), intent(in) :: menuid
+        type(wxmenuitem_t) :: result_object
+        result_object = wxmenuitem_from_ptr(wxFrame_FindItemInMenuBar(self%ptr, menuid), .false.)
+    end function wx_frame_find_item_in_menu_bar
+
+    subroutine wx_frame_process_command(self, id)
+        class(wxframe_t), intent(in) :: self
+        integer(c_int), intent(in) :: id
+        call wxFrame_ProcessCommand(self%ptr, id)
+    end subroutine wx_frame_process_command
+
+    subroutine wx_frame_set_status_bar_pane(self, n)
+        class(wxframe_t), intent(in) :: self
+        integer(c_int), intent(in) :: n
+        call wxFrame_SetStatusBarPane(self%ptr, n)
+    end subroutine wx_frame_set_status_bar_pane
+
+    function wx_frame_get_status_bar_pane(self) result(result_value)
+        class(wxframe_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxFrame_GetStatusBarPane(self%ptr)
+    end function wx_frame_get_status_bar_pane
+
+    subroutine wx_frame_push_status_text(self, text, field)
+        class(wxframe_t), intent(in) :: self
+        character(len=*), intent(in) :: text
+        integer(c_int), intent(in) :: field
+        type(c_ptr) :: text_ptr
+        text_ptr = to_wxstring(text)
+        call wxFrame_PushStatusText(self%ptr, text_ptr, field)
+        call wxString_Delete(text_ptr)
+    end subroutine wx_frame_push_status_text
+
+    subroutine wx_frame_pop_status_text(self, field)
+        class(wxframe_t), intent(in) :: self
+        integer(c_int), intent(in) :: field
+        call wxFrame_PopStatusText(self%ptr, field)
+    end subroutine wx_frame_pop_status_text
 
 end module wx_frame

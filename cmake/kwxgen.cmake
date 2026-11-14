@@ -1,10 +1,10 @@
-# [Randalphwa - 04-14-2026] kwxgen is now a separate repository. Eventually, it will
-# create tags with source code and binary versions, at which point this can be updated
-# accordingly.
+# [Randalphwa - 04-14-2026] kwxgen now lives inside kwxFFI (`kwxgen/`), and kwxFFI's own
+# CMakeLists.txt adds it as a subdirectory. This wrapper is kept for reference and is
+# disabled in CMakeLists.txt; its custom command generates the Fortran bindings automatically.
 
 # ###################### kwxgen — Fortran binding generator #######################
 
-add_subdirectory(${kwxFFI_SOURCE_DIR}/tools/kwxgen kwxgen-build)
+add_subdirectory(${kwxFFI_SOURCE_DIR}/kwxgen kwxgen-build)
 
 set(KWXFFI_HEADERS
     ${kwxFFI_SOURCE_DIR}/include/kwx_classes.h

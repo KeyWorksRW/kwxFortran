@@ -14,13 +14,13 @@
 #include <cstdlib>
 #include <cstring>
 
-// Export macro for cross-platform compatibility
+// kwxApp is compiled into the static kwxFortran library, so no import/export
+// decoration is needed on Windows: __declspec(dllexport) would emit export
+// directives into an archive that is never loaded as a module, and
+// __declspec(dllimport) would generate an indirect call through the IAT that
+// cannot be resolved at static-link time.
 #ifdef _WIN32
-#ifdef KWXFORTRAN_EXPORTS
-#define KWXAPP_API __declspec(dllexport)
-#else
-#define KWXAPP_API __declspec(dllimport)
-#endif
+#define KWXAPP_API
 #else
 #define KWXAPP_API __attribute__((visibility("default")))
 #endif

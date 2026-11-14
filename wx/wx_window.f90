@@ -3,211 +3,2049 @@ module wx_window
     use, intrinsic :: iso_c_binding
     use kwx_types
     use kwxffi
+    use wx_string, only: to_wxstring, from_wxstring
     implicit none
     private
 
-    ! Visibility and state
-    public :: wx_window_show, wx_window_hide
-    public :: wx_window_enable, wx_window_disable
-    public :: wx_window_is_enabled, wx_window_is_shown
-
-    ! Size and position
-    public :: wx_window_set_size, wx_window_move
+    public :: wx_window_set_accessible
+    public :: wx_window_get_accessible
+    public :: wx_window_get_or_create_accessible
+    public :: wx_window_create_accessible
+    public :: wx_window_set_accessible_name
+    public :: wx_window_convert_dialog_to_pixels_ex
+    public :: wx_window_convert_pixels_to_dialog_ex
+    public :: wx_window_screen_to_client2
+    public :: wx_window_new_control_id
+    public :: wx_window_centre_on_parent
+    public :: wx_window_find_window_by_id
+    public :: wx_window_find_window_by_name
+    public :: wx_window_get_containing_sizer
+    public :: wx_window_get_min_size_from_known_direction
+    public :: wx_window_is_transparent_background_supported
+    public :: wx_window_post_size_event
+    public :: wx_window_unreserve_control_id
+    public :: wx_window_get_window_variant
+    public :: wx_window_set_window_variant
+    public :: wx_window_get_layout_direction
+    public :: wx_window_set_layout_direction
+    public :: wx_window_set_position
+    public :: wx_window_get_screen_position
+    public :: wx_window_get_screen_rect
+    public :: wx_window_get_client_area_origin
+    public :: wx_window_get_client_rect
+    public :: wx_window_client_to_window_size
+    public :: wx_window_window_to_client_size
+    public :: wx_window_get_best_height
+    public :: wx_window_get_best_width
+    public :: wx_window_invalidate_best_size
+    public :: wx_window_cache_best_size
+    public :: wx_window_set_initial_size
+    public :: wx_window_centre
+    public :: wx_window_get_min_size
+    public :: wx_window_get_max_size
+    public :: wx_window_set_min_client_size
+    public :: wx_window_set_max_client_size
+    public :: wx_window_get_min_client_size
+    public :: wx_window_get_max_client_size
+    public :: wx_window_get_best_virtual_size
+    public :: wx_window_get_content_scale_factor
+    public :: wx_window_get_dpi_scale_factor
+    public :: wx_window_get_window_border_size
+    public :: wx_window_send_size_event
+    public :: wx_window_send_size_event_to_parent
+    public :: wx_window_show_with_effect
+    public :: wx_window_hide_with_effect
+    public :: wx_window_is_this_enabled
+    public :: wx_window_is_shown_on_screen
+    public :: wx_window_set_window_style
+    public :: wx_window_get_window_style
+    public :: wx_window_is_retained
+    public :: wx_window_toggle_window_style
+    public :: wx_window_get_extra_style
+    public :: wx_window_has_extra_style
+    public :: wx_window_set_theme_enabled
+    public :: wx_window_get_theme_enabled
+    public :: wx_window_set_focus_from_kbd
+    public :: wx_window_accepts_focus
+    public :: wx_window_accepts_focus_recursively
+    public :: wx_window_accepts_focus_from_keyboard
+    public :: wx_window_disable_focus_from_keyboard
+    public :: wx_window_enable_focus_from_keyboard
+    public :: wx_window_can_be_focused
+    public :: wx_window_is_focusable
+    public :: wx_window_can_accept_focus
+    public :: wx_window_can_accept_focus_from_keyboard
+    public :: wx_window_set_can_focus
+    public :: wx_window_enable_visible_focus
+    public :: wx_window_navigate_in
+    public :: wx_window_navigate
+    public :: wx_window_move_before_in_tab_order
+    public :: wx_window_move_after_in_tab_order
+    public :: wx_window_is_descendant
+    public :: wx_window_set_parent
+    public :: wx_window_set_event_handler
+    public :: wx_window_remove_event_handler
+    public :: wx_window_process_window_event
+    public :: wx_window_process_window_event_locally
+    public :: wx_window_handle_window_event
+    public :: wx_window_get_accelerator_table
+    public :: wx_window_register_hot_key
+    public :: wx_window_unregister_hot_key
+    public :: wx_window_get_dpi
+    public :: wx_window_from_dip
+    public :: wx_window_to_dip
+    public :: wx_window_has_capture
+    public :: wx_window_enable_touch_events
+    public :: wx_window_is_frozen
+    public :: wx_window_set_double_buffered
+    public :: wx_window_is_double_buffered
+    public :: wx_window_get_update_client_rect
+    public :: wx_window_set_own_background_colour
+    public :: wx_window_use_bg_col
+    public :: wx_window_use_background_colour
+    public :: wx_window_inherits_background_colour
+    public :: wx_window_set_own_foreground_colour
+    public :: wx_window_use_foreground_colour
+    public :: wx_window_inherits_foreground_colour
+    public :: wx_window_set_background_style
+    public :: wx_window_get_background_style
+    public :: wx_window_has_transparent_background
+    public :: wx_window_set_own_font
+    public :: wx_window_enable_input_method
+    public :: wx_window_is_input_method_enabled
+    public :: wx_window_update_input_method_cursor_rect
+    public :: wx_window_get_input_method_cursor_rect
+    public :: wx_window_hit_test
+    public :: wx_window_get_border
+    public :: wx_window_has_multiple_pages
+    public :: wx_window_can_scroll
+    public :: wx_window_has_scrollbar
+    public :: wx_window_get_scrollbar_size
+    public :: wx_window_scroll_lines
+    public :: wx_window_scroll_pages
+    public :: wx_window_line_up
+    public :: wx_window_line_down
+    public :: wx_window_page_up
+    public :: wx_window_page_down
+    public :: wx_window_always_show_scrollbars
+    public :: wx_window_is_scrollbar_always_shown
+    public :: wx_window_set_help_text
+    public :: wx_window_get_help_text
+    public :: wx_window_unset_tool_tip
+    public :: wx_window_get_tool_tip_text
+    public :: wx_window_drag_accept_files
+    public :: wx_window_set_containing_sizer
+    public :: wx_window_set_transparent
+    public :: wx_window_can_set_transparent
+    public :: wx_window_get_palette
+    public :: wx_window_set_palette
+    public :: wx_window_has_custom_palette
+    public :: wx_window_inherit_attributes
+    public :: wx_window_should_inherit_colours
+    public :: wx_window_get_popup_menu_selection_from_user
+    public :: wx_window_adjust_for_layout_direction
+    public :: wx_window_begin_repositioning_children
+    public :: wx_window_end_repositioning_children
+    public :: wx_window_is_client_area_child
+    public :: wx_window_from_phys
+    public :: wx_window_to_phys
+    public :: wx_window_get_help_text_at_point
+    public :: wx_window_get_help_id_at_point
+    public :: wx_window_copy_tool_tip
+    public :: wx_window_can_be_outside_client_area
+    public :: wx_window_can_apply_theme_border
+    public :: wx_window_is_top_navigation_domain
+    public :: wx_window_add_child
+    public :: wx_window_capture_mouse
+    public :: wx_window_center
+    public :: wx_window_center_on_parent
+    public :: wx_window_clear_background
+    public :: wx_window_client_to_screen
+    public :: wx_window_close
+    public :: wx_window_convert_dialog_to_pixels
+    public :: wx_window_convert_pixels_to_dialog
+    public :: wx_window_create
+    public :: wx_window_destroy
+    public :: wx_window_destroy_children
+    public :: wx_window_disable
+    public :: wx_window_enable
+    public :: wx_window_find_focus
+    public :: wx_window_find_window
+    public :: wx_window_find_window_by_id_self
+    public :: wx_window_fit
+    public :: wx_window_fit_inside
+    public :: wx_window_freeze
+    public :: wx_window_get_effective_min_size
+    public :: wx_window_get_auto_layout
+    public :: wx_window_get_background_colour
+    public :: wx_window_get_best_size
+    public :: wx_window_get_caret
+    public :: wx_window_get_char_height
+    public :: wx_window_get_char_width
+    public :: wx_window_get_children
+    public :: wx_window_get_client_data
+    public :: wx_window_get_client_size
+    public :: wx_window_get_cursor
+    public :: wx_window_get_drop_target
+    public :: wx_window_get_event_handler
+    public :: wx_window_get_font
+    public :: wx_window_get_foreground_colour
+    public :: wx_window_get_handle
     public :: wx_window_get_id
-
-    ! Focus
-    public :: wx_window_set_focus, wx_window_has_focus
-
-    ! Refresh and update
-    public :: wx_window_refresh, wx_window_update
-
-    ! Layout
-    public :: wx_window_center, wx_window_fit, wx_window_layout
-
-    ! Destruction
-    public :: wx_window_destroy, wx_window_close
-
-    ! Hierarchy
-    public :: wx_window_get_parent, wx_window_is_top_level
-
-    ! Freeze/thaw
-    public :: wx_window_freeze, wx_window_thaw
-
-    ! Z-order
-    public :: wx_window_raise, wx_window_lower
+    public :: wx_window_get_label
+    public :: wx_window_get_label_empty
+    public :: wx_window_get_max_height
+    public :: wx_window_get_max_width
+    public :: wx_window_get_min_height
+    public :: wx_window_get_min_width
+    public :: wx_window_get_name
+    public :: wx_window_get_parent
+    public :: wx_window_get_position
+    public :: wx_window_get_rect
+    public :: wx_window_get_scroll_pos
+    public :: wx_window_get_scroll_range
+    public :: wx_window_get_scroll_thumb
+    public :: wx_window_get_size
+    public :: wx_window_get_sizer
+    public :: wx_window_get_text_extent
+    public :: wx_window_get_tool_tip
+    public :: wx_window_get_update_region
+    public :: wx_window_get_validator
+    public :: wx_window_get_virtual_size
+    public :: wx_window_get_window_style_flag
+    public :: wx_window_has_flag
+    public :: wx_window_has_focus
+    public :: wx_window_hide
+    public :: wx_window_init_dialog
+    public :: wx_window_is_being_deleted
+    public :: wx_window_is_enabled
+    public :: wx_window_is_exposed
+    public :: wx_window_is_shown
+    public :: wx_window_is_top_level
+    public :: wx_window_layout
+    public :: wx_window_lower
+    public :: wx_window_move
+    public :: wx_window_pop_event_handler
+    public :: wx_window_popup_menu
+    public :: wx_window_prepare_dc
+    public :: wx_window_push_event_handler
+    public :: wx_window_raise
+    public :: wx_window_refresh
+    public :: wx_window_refresh_rect
+    public :: wx_window_release_mouse
+    public :: wx_window_remove_child
+    public :: wx_window_reparent
+    public :: wx_window_screen_to_client
+    public :: wx_window_scroll_window
+    public :: wx_window_scroll_window_rect
+    public :: wx_window_set_accelerator_table
+    public :: wx_window_set_auto_layout
+    public :: wx_window_set_background_colour
+    public :: wx_window_set_caret
+    public :: wx_window_set_client_data
+    public :: wx_window_set_client_object
+    public :: wx_window_set_client_size
+    public :: wx_window_set_cursor
+    public :: wx_window_set_drop_target
+    public :: wx_window_set_extra_style
+    public :: wx_window_set_focus
+    public :: wx_window_set_font
+    public :: wx_window_set_foreground_colour
+    public :: wx_window_set_id
+    public :: wx_window_set_label
+    public :: wx_window_set_name
+    public :: wx_window_set_scroll_pos
+    public :: wx_window_set_scrollbar
+    public :: wx_window_set_size
+    public :: wx_window_set_size_hints
+    public :: wx_window_set_min_size
+    public :: wx_window_set_max_size
+    public :: wx_window_set_sizer
+    public :: wx_window_set_sizer_and_fit
+    public :: wx_window_set_tool_tip
+    public :: wx_window_set_validator
+    public :: wx_window_set_window_style_flag
+    public :: wx_window_show
+    public :: wx_window_thaw
+    public :: wx_window_transfer_data_from_window
+    public :: wx_window_transfer_data_to_window
+    public :: wx_window_update
+    public :: wx_window_update_window_ui
+    public :: wx_window_validate
+    public :: wx_window_set_virtual_size
+    public :: wx_window_warp_pointer
 
 contains
 
-    !--- Visibility and state ---
+    subroutine wx_window_set_accessible(self, accessible)
+        class(wxwindow_t), intent(in) :: self
+        class(wxaccessible_t), intent(in) :: accessible
+        call wxWindow_SetAccessible(self%ptr, accessible%ptr)
+    end subroutine wx_window_set_accessible
 
-    function wx_window_show(window) result(shown)
-        class(wxWindow_t), intent(in) :: window
-        logical :: shown
-        shown = (wxWindow_Show(window%ptr) /= 0)
-    end function
+    function wx_window_get_accessible(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxaccessible_t) :: result_object
+        result_object = wxaccessible_from_ptr(wxWindow_GetAccessible(self%ptr), .false.)
+    end function wx_window_get_accessible
 
-    function wx_window_hide(window) result(hidden)
-        class(wxWindow_t), intent(in) :: window
-        logical :: hidden
-        hidden = (wxWindow_Hide(window%ptr) /= 0)
-    end function
+    function wx_window_get_or_create_accessible(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxaccessible_t) :: result_object
+        result_object = wxaccessible_from_ptr(wxWindow_GetOrCreateAccessible(self%ptr), .false.)
+    end function wx_window_get_or_create_accessible
 
-    subroutine wx_window_enable(window)
-        class(wxWindow_t), intent(in) :: window
-        integer(c_int) :: result_
-        result_ = wxWindow_Enable(window%ptr)
-    end subroutine
+    function wx_window_create_accessible(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxaccessible_t) :: result_object
+        result_object = wxaccessible_from_ptr(wxWindow_CreateAccessible(self%ptr), .false.)
+    end function wx_window_create_accessible
 
-    subroutine wx_window_disable(window)
-        class(wxWindow_t), intent(in) :: window
-        integer(c_int) :: result_
-        result_ = wxWindow_Disable(window%ptr)
-    end subroutine
+    subroutine wx_window_set_accessible_name(self, name)
+        class(wxwindow_t), intent(in) :: self
+        character(len=*), intent(in) :: name
+        type(c_ptr) :: name_ptr
+        name_ptr = to_wxstring(name)
+        call wxWindow_SetAccessibleName(self%ptr, name_ptr)
+        call wxString_Delete(name_ptr)
+    end subroutine wx_window_set_accessible_name
 
-    function wx_window_is_enabled(window) result(enabled)
-        class(wxWindow_t), intent(in) :: window
-        logical :: enabled
-        enabled = (wxWindow_IsEnabled(window%ptr) /= 0)
-    end function
+    function wx_window_convert_dialog_to_pixels_ex(self, x, y) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        type(wxpoint_t) :: result_object
+        result_object = wxpoint_from_ptr(wxWindow_ConvertDialogToPixelsEx(self%ptr, x, y), .false.)
+    end function wx_window_convert_dialog_to_pixels_ex
 
-    function wx_window_is_shown(window) result(shown)
-        class(wxWindow_t), intent(in) :: window
-        logical :: shown
-        shown = (wxWindow_IsShown(window%ptr) /= 0)
-    end function
+    function wx_window_convert_pixels_to_dialog_ex(self, x, y) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        type(wxpoint_t) :: result_object
+        result_object = wxpoint_from_ptr(wxWindow_ConvertPixelsToDialogEx(self%ptr, x, y), .false.)
+    end function wx_window_convert_pixels_to_dialog_ex
 
-    !--- Size and position ---
+    function wx_window_screen_to_client2(self, x, y) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        type(wxpoint_t) :: result_object
+        result_object = wxpoint_from_ptr(wxWindow_ScreenToClient2(self%ptr, x, y), .false.)
+    end function wx_window_screen_to_client2
 
-    subroutine wx_window_set_size(window, x, y, width, height)
-        class(wxWindow_t), intent(in) :: window
-        integer, intent(in) :: x, y, width, height
-        call wxWindow_SetSize(window%ptr, int(x, c_int), int(y, c_int), &
-            int(width, c_int), int(height, c_int), 0_c_int)
-    end subroutine
+    function wx_window_new_control_id(count) result(result_value)
+        integer(c_int), intent(in) :: count
+        integer(c_int) :: result_value
+        result_value = wxWindow_NewControlId(count)
+    end function wx_window_new_control_id
 
-    subroutine wx_window_move(window, x, y)
-        class(wxWindow_t), intent(in) :: window
-        integer, intent(in) :: x, y
-        call wxWindow_Move(window%ptr, int(x, c_int), int(y, c_int), 0_c_int)
-    end subroutine
+    subroutine wx_window_centre_on_parent(self, dir)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: dir
+        call wxWindow_CentreOnParent(self%ptr, dir)
+    end subroutine wx_window_centre_on_parent
 
-    function wx_window_get_id(window) result(id)
-        class(wxWindow_t), intent(in) :: window
-        integer :: id
-        id = int(wxWindow_GetId(window%ptr))
-    end function
+    function wx_window_find_window_by_id(winid, parent) result(result_object)
+        integer(c_long), intent(in) :: winid
+        type(c_ptr), intent(in), value :: parent
+        type(wxwindow_t) :: result_object
+        result_object = wxwindow_from_ptr(wxWindow_FindWindowById(winid, parent), .false.)
+    end function wx_window_find_window_by_id
 
-    !--- Focus ---
+    function wx_window_find_window_by_name(name, parent) result(result_object)
+        character(len=*), intent(in) :: name
+        type(c_ptr), intent(in), value :: parent
+        type(c_ptr) :: name_ptr
+        type(wxwindow_t) :: result_object
+        name_ptr = to_wxstring(name)
+        result_object = wxwindow_from_ptr(wxWindow_FindWindowByName(name_ptr, parent), .false.)
+        call wxString_Delete(name_ptr)
+    end function wx_window_find_window_by_name
 
-    subroutine wx_window_set_focus(window)
-        class(wxWindow_t), intent(in) :: window
-        call wxWindow_SetFocus(window%ptr)
-    end subroutine
+    function wx_window_get_containing_sizer(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsizer_t) :: result_object
+        result_object = wxsizer_from_ptr(wxWindow_GetContainingSizer(self%ptr), .false.)
+    end function wx_window_get_containing_sizer
 
-    function wx_window_has_focus(window) result(focused)
-        class(wxWindow_t), intent(in) :: window
-        logical :: focused
-        focused = (wxWindow_HasFocus(window%ptr) /= 0)
-    end function
+    function wx_window_get_min_size_from_known_direction(self, direction, size, availableotherdir) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: direction
+        integer(c_int), intent(in) :: size
+        integer(c_int), intent(in) :: availableotherdir
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetMinSizeFromKnownDirection(self%ptr, direction, size, availableotherdir), .false.)
+    end function wx_window_get_min_size_from_known_direction
 
-    !--- Refresh and update ---
+    function wx_window_is_transparent_background_supported(self, reason) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: reason
+        logical :: result_value
+        result_value = (wxWindow_IsTransparentBackgroundSupported(self%ptr, reason) /= 0)
+    end function wx_window_is_transparent_background_supported
 
-    subroutine wx_window_refresh(window, erase_background)
-        class(wxWindow_t), intent(in) :: window
-        logical, intent(in), optional :: erase_background
-        integer(c_int) :: erase
-        erase = 1_c_int
-        if (present(erase_background)) then
-            erase = 0_c_int
-            if (erase_background) erase = 1_c_int
-        end if
-        call wxWindow_Refresh(window%ptr, erase)
-    end subroutine
+    subroutine wx_window_post_size_event(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_PostSizeEvent(self%ptr)
+    end subroutine wx_window_post_size_event
 
-    subroutine wx_window_update(window)
-        class(wxWindow_t), intent(in) :: window
-        call wxWindow_UpdateWindowUI(window%ptr, 0_c_int)
-    end subroutine
+    subroutine wx_window_unreserve_control_id(id, count)
+        integer(c_int), intent(in) :: id
+        integer(c_int), intent(in) :: count
+        call wxWindow_UnreserveControlId(id, count)
+    end subroutine wx_window_unreserve_control_id
 
-    !--- Layout ---
+    function wx_window_get_window_variant(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetWindowVariant(self%ptr)
+    end function wx_window_get_window_variant
 
-    subroutine wx_window_center(window, direction)
-        class(wxWindow_t), intent(in) :: window
-        integer, intent(in), optional :: direction
-        integer(c_int) :: dir
-        dir = wxBOTH()
-        if (present(direction)) dir = int(direction, c_int)
-        call wxWindow_CenterOnParent(window%ptr, dir)
-    end subroutine
+    subroutine wx_window_set_window_variant(self, variant)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: variant
+        call wxWindow_SetWindowVariant(self%ptr, variant)
+    end subroutine wx_window_set_window_variant
 
-    subroutine wx_window_fit(window)
-        class(wxWindow_t), intent(in) :: window
-        call wxWindow_Fit(window%ptr)
-    end subroutine
+    function wx_window_get_layout_direction(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetLayoutDirection(self%ptr)
+    end function wx_window_get_layout_direction
 
-    function wx_window_layout(window) result(ok)
-        class(wxWindow_t), intent(in) :: window
-        logical :: ok
-        ok = (wxWindow_Layout(window%ptr) /= 0)
-    end function
+    subroutine wx_window_set_layout_direction(self, direction)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: direction
+        call wxWindow_SetLayoutDirection(self%ptr, direction)
+    end subroutine wx_window_set_layout_direction
 
-    !--- Destruction ---
+    subroutine wx_window_set_position(self, x, y)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        call wxWindow_SetPosition(self%ptr, x, y)
+    end subroutine wx_window_set_position
 
-    function wx_window_destroy(window) result(destroyed)
-        class(wxWindow_t), intent(inout) :: window
-        logical :: destroyed
-        destroyed = (wxWindow_Destroy(window%ptr) /= 0)
-        window%ptr = c_null_ptr
-    end function
+    subroutine wx_window_get_screen_position(self, x, y)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(out), target :: x
+        integer(c_int), intent(out), target :: y
+        call wxWindow_GetScreenPosition(self%ptr, c_loc(x), c_loc(y))
+    end subroutine wx_window_get_screen_position
 
-    function wx_window_close(window, force) result(closed)
-        class(wxWindow_t), intent(in) :: window
-        logical, intent(in), optional :: force
-        logical :: closed
-        integer(c_int) :: c_force
-        c_force = 0_c_int
-        if (present(force)) then
-            if (force) c_force = 1_c_int
-        end if
-        closed = (wxWindow_Close(window%ptr, c_force) /= 0)
-    end function
+    function wx_window_get_screen_rect(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxrect_t) :: result_object
+        result_object = wxrect_from_ptr(wxWindow_GetScreenRect(self%ptr), .false.)
+    end function wx_window_get_screen_rect
 
-    !--- Hierarchy ---
+    subroutine wx_window_get_client_area_origin(self, x, y)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(out), target :: x
+        integer(c_int), intent(out), target :: y
+        call wxWindow_GetClientAreaOrigin(self%ptr, c_loc(x), c_loc(y))
+    end subroutine wx_window_get_client_area_origin
 
-    function wx_window_get_parent(window) result(parent)
-        class(wxWindow_t), intent(in) :: window
-        type(wxWindow_t) :: parent
-        parent%ptr = wxWindow_GetParent(window%ptr)
-    end function
+    function wx_window_get_client_rect(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxrect_t) :: result_object
+        result_object = wxrect_from_ptr(wxWindow_GetClientRect(self%ptr), .false.)
+    end function wx_window_get_client_rect
 
-    function wx_window_is_top_level(window) result(is_top)
-        class(wxWindow_t), intent(in) :: window
-        logical :: is_top
-        is_top = (wxWindow_IsTopLevel(window%ptr) /= 0)
-    end function
+    subroutine wx_window_client_to_window_size(self, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(out), target :: width
+        integer(c_int), intent(out), target :: height
+        call wxWindow_ClientToWindowSize(self%ptr, c_loc(width), c_loc(height))
+    end subroutine wx_window_client_to_window_size
 
-    !--- Freeze/thaw ---
+    subroutine wx_window_window_to_client_size(self, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(out), target :: width
+        integer(c_int), intent(out), target :: height
+        call wxWindow_WindowToClientSize(self%ptr, c_loc(width), c_loc(height))
+    end subroutine wx_window_window_to_client_size
 
-    subroutine wx_window_freeze(window)
-        class(wxWindow_t), intent(in) :: window
-        call wxWindow_Freeze(window%ptr)
-    end subroutine
+    function wx_window_get_best_height(self, width) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetBestHeight(self%ptr, width)
+    end function wx_window_get_best_height
 
-    subroutine wx_window_thaw(window)
-        class(wxWindow_t), intent(in) :: window
-        call wxWindow_Thaw(window%ptr)
-    end subroutine
+    function wx_window_get_best_width(self, height) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: height
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetBestWidth(self%ptr, height)
+    end function wx_window_get_best_width
 
-    !--- Z-order ---
+    subroutine wx_window_invalidate_best_size(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_InvalidateBestSize(self%ptr)
+    end subroutine wx_window_invalidate_best_size
 
-    subroutine wx_window_raise(window)
-        class(wxWindow_t), intent(in) :: window
-        call wxWindow_Raise(window%ptr)
-    end subroutine
+    subroutine wx_window_cache_best_size(self, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxWindow_CacheBestSize(self%ptr, width, height)
+    end subroutine wx_window_cache_best_size
 
-    subroutine wx_window_lower(window)
-        class(wxWindow_t), intent(in) :: window
-        call wxWindow_Lower(window%ptr)
-    end subroutine
+    function wx_window_set_initial_size(self, width, height) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        logical :: result_value
+        result_value = (wxWindow_SetInitialSize(self%ptr, width, height) /= 0)
+    end function wx_window_set_initial_size
+
+    subroutine wx_window_centre(self, direction)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: direction
+        call wxWindow_Centre(self%ptr, direction)
+    end subroutine wx_window_centre
+
+    function wx_window_get_min_size(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetMinSize(self%ptr), .false.)
+    end function wx_window_get_min_size
+
+    function wx_window_get_max_size(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetMaxSize(self%ptr), .false.)
+    end function wx_window_get_max_size
+
+    subroutine wx_window_set_min_client_size(self, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxWindow_SetMinClientSize(self%ptr, width, height)
+    end subroutine wx_window_set_min_client_size
+
+    subroutine wx_window_set_max_client_size(self, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxWindow_SetMaxClientSize(self%ptr, width, height)
+    end subroutine wx_window_set_max_client_size
+
+    function wx_window_get_min_client_size(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetMinClientSize(self%ptr), .false.)
+    end function wx_window_get_min_client_size
+
+    function wx_window_get_max_client_size(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetMaxClientSize(self%ptr), .false.)
+    end function wx_window_get_max_client_size
+
+    function wx_window_get_best_virtual_size(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetBestVirtualSize(self%ptr), .false.)
+    end function wx_window_get_best_virtual_size
+
+    function wx_window_get_content_scale_factor(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        real(c_double) :: result_value
+        result_value = wxWindow_GetContentScaleFactor(self%ptr)
+    end function wx_window_get_content_scale_factor
+
+    function wx_window_get_dpi_scale_factor(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        real(c_double) :: result_value
+        result_value = wxWindow_GetDPIScaleFactor(self%ptr)
+    end function wx_window_get_dpi_scale_factor
+
+    function wx_window_get_window_border_size(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetWindowBorderSize(self%ptr), .false.)
+    end function wx_window_get_window_border_size
+
+    subroutine wx_window_send_size_event(self, flags)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: flags
+        call wxWindow_SendSizeEvent(self%ptr, flags)
+    end subroutine wx_window_send_size_event
+
+    subroutine wx_window_send_size_event_to_parent(self, flags)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: flags
+        call wxWindow_SendSizeEventToParent(self%ptr, flags)
+    end subroutine wx_window_send_size_event_to_parent
+
+    function wx_window_show_with_effect(self, effect, timeout) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: effect
+        integer(c_int), intent(in) :: timeout
+        logical :: result_value
+        result_value = (wxWindow_ShowWithEffect(self%ptr, effect, timeout) /= 0)
+    end function wx_window_show_with_effect
+
+    function wx_window_hide_with_effect(self, effect, timeout) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: effect
+        integer(c_int), intent(in) :: timeout
+        logical :: result_value
+        result_value = (wxWindow_HideWithEffect(self%ptr, effect, timeout) /= 0)
+    end function wx_window_hide_with_effect
+
+    function wx_window_is_this_enabled(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_IsThisEnabled(self%ptr) /= 0)
+    end function wx_window_is_this_enabled
+
+    function wx_window_is_shown_on_screen(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_IsShownOnScreen(self%ptr) /= 0)
+    end function wx_window_is_shown_on_screen
+
+    subroutine wx_window_set_window_style(self, style)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_long), intent(in) :: style
+        call wxWindow_SetWindowStyle(self%ptr, style)
+    end subroutine wx_window_set_window_style
+
+    function wx_window_get_window_style(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_long) :: result_value
+        result_value = wxWindow_GetWindowStyle(self%ptr)
+    end function wx_window_get_window_style
+
+    function wx_window_is_retained(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_IsRetained(self%ptr) /= 0)
+    end function wx_window_is_retained
+
+    function wx_window_toggle_window_style(self, flag) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: flag
+        logical :: result_value
+        result_value = (wxWindow_ToggleWindowStyle(self%ptr, flag) /= 0)
+    end function wx_window_toggle_window_style
+
+    function wx_window_get_extra_style(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_long) :: result_value
+        result_value = wxWindow_GetExtraStyle(self%ptr)
+    end function wx_window_get_extra_style
+
+    function wx_window_has_extra_style(self, exflag) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: exflag
+        logical :: result_value
+        result_value = (wxWindow_HasExtraStyle(self%ptr, exflag) /= 0)
+    end function wx_window_has_extra_style
+
+    subroutine wx_window_set_theme_enabled(self, enabletheme)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: enabletheme
+        call wxWindow_SetThemeEnabled(self%ptr, merge(1_c_int, 0_c_int, enabletheme))
+    end subroutine wx_window_set_theme_enabled
+
+    function wx_window_get_theme_enabled(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_GetThemeEnabled(self%ptr) /= 0)
+    end function wx_window_get_theme_enabled
+
+    subroutine wx_window_set_focus_from_kbd(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_SetFocusFromKbd(self%ptr)
+    end subroutine wx_window_set_focus_from_kbd
+
+    function wx_window_accepts_focus(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_AcceptsFocus(self%ptr) /= 0)
+    end function wx_window_accepts_focus
+
+    function wx_window_accepts_focus_recursively(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_AcceptsFocusRecursively(self%ptr) /= 0)
+    end function wx_window_accepts_focus_recursively
+
+    function wx_window_accepts_focus_from_keyboard(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_AcceptsFocusFromKeyboard(self%ptr) /= 0)
+    end function wx_window_accepts_focus_from_keyboard
+
+    subroutine wx_window_disable_focus_from_keyboard(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_DisableFocusFromKeyboard(self%ptr)
+    end subroutine wx_window_disable_focus_from_keyboard
+
+    subroutine wx_window_enable_focus_from_keyboard(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_EnableFocusFromKeyboard(self%ptr)
+    end subroutine wx_window_enable_focus_from_keyboard
+
+    function wx_window_can_be_focused(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_CanBeFocused(self%ptr) /= 0)
+    end function wx_window_can_be_focused
+
+    function wx_window_is_focusable(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_IsFocusable(self%ptr) /= 0)
+    end function wx_window_is_focusable
+
+    function wx_window_can_accept_focus(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_CanAcceptFocus(self%ptr) /= 0)
+    end function wx_window_can_accept_focus
+
+    function wx_window_can_accept_focus_from_keyboard(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_CanAcceptFocusFromKeyboard(self%ptr) /= 0)
+    end function wx_window_can_accept_focus_from_keyboard
+
+    subroutine wx_window_set_can_focus(self, canfocus)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: canfocus
+        call wxWindow_SetCanFocus(self%ptr, merge(1_c_int, 0_c_int, canfocus))
+    end subroutine wx_window_set_can_focus
+
+    subroutine wx_window_enable_visible_focus(self, enabled)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: enabled
+        call wxWindow_EnableVisibleFocus(self%ptr, merge(1_c_int, 0_c_int, enabled))
+    end subroutine wx_window_enable_visible_focus
+
+    function wx_window_navigate_in(self, flags) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: flags
+        logical :: result_value
+        result_value = (wxWindow_NavigateIn(self%ptr, flags) /= 0)
+    end function wx_window_navigate_in
+
+    function wx_window_navigate(self, flags) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: flags
+        logical :: result_value
+        result_value = (wxWindow_Navigate(self%ptr, flags) /= 0)
+    end function wx_window_navigate
+
+    subroutine wx_window_move_before_in_tab_order(self, win)
+        class(wxwindow_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: win
+        call wxWindow_MoveBeforeInTabOrder(self%ptr, win%ptr)
+    end subroutine wx_window_move_before_in_tab_order
+
+    subroutine wx_window_move_after_in_tab_order(self, win)
+        class(wxwindow_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: win
+        call wxWindow_MoveAfterInTabOrder(self%ptr, win%ptr)
+    end subroutine wx_window_move_after_in_tab_order
+
+    function wx_window_is_descendant(self, win) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: win
+        logical :: result_value
+        result_value = (wxWindow_IsDescendant(self%ptr, win%ptr) /= 0)
+    end function wx_window_is_descendant
+
+    subroutine wx_window_set_parent(self, parent)
+        class(wxwindow_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: parent
+        call wxWindow_SetParent(self%ptr, parent%ptr)
+    end subroutine wx_window_set_parent
+
+    subroutine wx_window_set_event_handler(self, handler)
+        class(wxwindow_t), intent(in) :: self
+        class(wxevthandler_t), intent(in) :: handler
+        call wxWindow_SetEventHandler(self%ptr, handler%ptr)
+    end subroutine wx_window_set_event_handler
+
+    function wx_window_remove_event_handler(self, handler) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxevthandler_t), intent(in) :: handler
+        logical :: result_value
+        result_value = (wxWindow_RemoveEventHandler(self%ptr, handler%ptr) /= 0)
+    end function wx_window_remove_event_handler
+
+    function wx_window_process_window_event(self, event) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxevent_t), intent(in) :: event
+        logical :: result_value
+        result_value = (wxWindow_ProcessWindowEvent(self%ptr, event%ptr) /= 0)
+    end function wx_window_process_window_event
+
+    function wx_window_process_window_event_locally(self, event) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxevent_t), intent(in) :: event
+        logical :: result_value
+        result_value = (wxWindow_ProcessWindowEventLocally(self%ptr, event%ptr) /= 0)
+    end function wx_window_process_window_event_locally
+
+    function wx_window_handle_window_event(self, event) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxevent_t), intent(in) :: event
+        logical :: result_value
+        result_value = (wxWindow_HandleWindowEvent(self%ptr, event%ptr) /= 0)
+    end function wx_window_handle_window_event
+
+    function wx_window_get_accelerator_table(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxacceleratortable_t) :: result_object
+        result_object = wxacceleratortable_from_ptr(wxWindow_GetAcceleratorTable(self%ptr), .false.)
+    end function wx_window_get_accelerator_table
+
+    function wx_window_register_hot_key(self, hotkeyid, modifiers, keycode) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: hotkeyid
+        integer(c_int), intent(in) :: modifiers
+        integer(c_int), intent(in) :: keycode
+        logical :: result_value
+        result_value = (wxWindow_RegisterHotKey(self%ptr, hotkeyid, modifiers, keycode) /= 0)
+    end function wx_window_register_hot_key
+
+    function wx_window_unregister_hot_key(self, hotkeyid) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: hotkeyid
+        logical :: result_value
+        result_value = (wxWindow_UnregisterHotKey(self%ptr, hotkeyid) /= 0)
+    end function wx_window_unregister_hot_key
+
+    function wx_window_get_dpi(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetDPI(self%ptr), .false.)
+    end function wx_window_get_dpi
+
+    function wx_window_from_dip(self, value) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: value
+        integer(c_int) :: result_value
+        result_value = wxWindow_FromDIP(self%ptr, value)
+    end function wx_window_from_dip
+
+    function wx_window_to_dip(self, value) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: value
+        integer(c_int) :: result_value
+        result_value = wxWindow_ToDIP(self%ptr, value)
+    end function wx_window_to_dip
+
+    function wx_window_has_capture(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_HasCapture(self%ptr) /= 0)
+    end function wx_window_has_capture
+
+    function wx_window_enable_touch_events(self, eventsmask) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: eventsmask
+        logical :: result_value
+        result_value = (wxWindow_EnableTouchEvents(self%ptr, eventsmask) /= 0)
+    end function wx_window_enable_touch_events
+
+    function wx_window_is_frozen(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_IsFrozen(self%ptr) /= 0)
+    end function wx_window_is_frozen
+
+    subroutine wx_window_set_double_buffered(self, on)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: on
+        call wxWindow_SetDoubleBuffered(self%ptr, merge(1_c_int, 0_c_int, on))
+    end subroutine wx_window_set_double_buffered
+
+    function wx_window_is_double_buffered(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_IsDoubleBuffered(self%ptr) /= 0)
+    end function wx_window_is_double_buffered
+
+    function wx_window_get_update_client_rect(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxrect_t) :: result_object
+        result_object = wxrect_from_ptr(wxWindow_GetUpdateClientRect(self%ptr), .false.)
+    end function wx_window_get_update_client_rect
+
+    subroutine wx_window_set_own_background_colour(self, colour)
+        class(wxwindow_t), intent(in) :: self
+        class(wxcolour_t), intent(in) :: colour
+        call wxWindow_SetOwnBackgroundColour(self%ptr, colour%ptr)
+    end subroutine wx_window_set_own_background_colour
+
+    function wx_window_use_bg_col(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_UseBgCol(self%ptr) /= 0)
+    end function wx_window_use_bg_col
+
+    function wx_window_use_background_colour(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_UseBackgroundColour(self%ptr) /= 0)
+    end function wx_window_use_background_colour
+
+    function wx_window_inherits_background_colour(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_InheritsBackgroundColour(self%ptr) /= 0)
+    end function wx_window_inherits_background_colour
+
+    subroutine wx_window_set_own_foreground_colour(self, colour)
+        class(wxwindow_t), intent(in) :: self
+        class(wxcolour_t), intent(in) :: colour
+        call wxWindow_SetOwnForegroundColour(self%ptr, colour%ptr)
+    end subroutine wx_window_set_own_foreground_colour
+
+    function wx_window_use_foreground_colour(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_UseForegroundColour(self%ptr) /= 0)
+    end function wx_window_use_foreground_colour
+
+    function wx_window_inherits_foreground_colour(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_InheritsForegroundColour(self%ptr) /= 0)
+    end function wx_window_inherits_foreground_colour
+
+    function wx_window_set_background_style(self, style) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: style
+        logical :: result_value
+        result_value = (wxWindow_SetBackgroundStyle(self%ptr, style) /= 0)
+    end function wx_window_set_background_style
+
+    function wx_window_get_background_style(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetBackgroundStyle(self%ptr)
+    end function wx_window_get_background_style
+
+    function wx_window_has_transparent_background(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_HasTransparentBackground(self%ptr) /= 0)
+    end function wx_window_has_transparent_background
+
+    subroutine wx_window_set_own_font(self, font)
+        class(wxwindow_t), intent(in) :: self
+        class(wxfont_t), intent(in) :: font
+        call wxWindow_SetOwnFont(self%ptr, font%ptr)
+    end subroutine wx_window_set_own_font
+
+    subroutine wx_window_enable_input_method(self, enable)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: enable
+        call wxWindow_EnableInputMethod(self%ptr, merge(1_c_int, 0_c_int, enable))
+    end subroutine wx_window_enable_input_method
+
+    function wx_window_is_input_method_enabled(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_IsInputMethodEnabled(self%ptr) /= 0)
+    end function wx_window_is_input_method_enabled
+
+    subroutine wx_window_update_input_method_cursor_rect(self, x, y, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxWindow_UpdateInputMethodCursorRect(self%ptr, x, y, width, height)
+    end subroutine wx_window_update_input_method_cursor_rect
+
+    function wx_window_get_input_method_cursor_rect(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxrect_t) :: result_object
+        result_object = wxrect_from_ptr(wxWindow_GetInputMethodCursorRect(self%ptr), .false.)
+    end function wx_window_get_input_method_cursor_rect
+
+    function wx_window_hit_test(self, x, y) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int) :: result_value
+        result_value = wxWindow_HitTest(self%ptr, x, y)
+    end function wx_window_hit_test
+
+    function wx_window_get_border(self, flags) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_long), intent(in) :: flags
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetBorder(self%ptr, flags)
+    end function wx_window_get_border
+
+    function wx_window_has_multiple_pages(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_HasMultiplePages(self%ptr) /= 0)
+    end function wx_window_has_multiple_pages
+
+    function wx_window_can_scroll(self, orient) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: orient
+        logical :: result_value
+        result_value = (wxWindow_CanScroll(self%ptr, orient) /= 0)
+    end function wx_window_can_scroll
+
+    function wx_window_has_scrollbar(self, orient) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: orient
+        logical :: result_value
+        result_value = (wxWindow_HasScrollbar(self%ptr, orient) /= 0)
+    end function wx_window_has_scrollbar
+
+    function wx_window_get_scrollbar_size(self, orient) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: orient
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetScrollbarSize(self%ptr, orient)
+    end function wx_window_get_scrollbar_size
+
+    function wx_window_scroll_lines(self, lines) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: lines
+        logical :: result_value
+        result_value = (wxWindow_ScrollLines(self%ptr, lines) /= 0)
+    end function wx_window_scroll_lines
+
+    function wx_window_scroll_pages(self, pages) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: pages
+        logical :: result_value
+        result_value = (wxWindow_ScrollPages(self%ptr, pages) /= 0)
+    end function wx_window_scroll_pages
+
+    function wx_window_line_up(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_LineUp(self%ptr) /= 0)
+    end function wx_window_line_up
+
+    function wx_window_line_down(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_LineDown(self%ptr) /= 0)
+    end function wx_window_line_down
+
+    function wx_window_page_up(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_PageUp(self%ptr) /= 0)
+    end function wx_window_page_up
+
+    function wx_window_page_down(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_PageDown(self%ptr) /= 0)
+    end function wx_window_page_down
+
+    subroutine wx_window_always_show_scrollbars(self, horz, vert)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: horz
+        logical, intent(in) :: vert
+        call wxWindow_AlwaysShowScrollbars(self%ptr, merge(1_c_int, 0_c_int, horz), merge(1_c_int, 0_c_int, vert))
+    end subroutine wx_window_always_show_scrollbars
+
+    function wx_window_is_scrollbar_always_shown(self, orient) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: orient
+        logical :: result_value
+        result_value = (wxWindow_IsScrollbarAlwaysShown(self%ptr, orient) /= 0)
+    end function wx_window_is_scrollbar_always_shown
+
+    subroutine wx_window_set_help_text(self, text)
+        class(wxwindow_t), intent(in) :: self
+        character(len=*), intent(in) :: text
+        type(c_ptr) :: text_ptr
+        text_ptr = to_wxstring(text)
+        call wxWindow_SetHelpText(self%ptr, text_ptr)
+        call wxString_Delete(text_ptr)
+    end subroutine wx_window_set_help_text
+
+    function wx_window_get_help_text(self) result(result_text)
+        class(wxwindow_t), intent(in) :: self
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = wxWindow_GetHelpText(self%ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wx_window_get_help_text
+
+    subroutine wx_window_unset_tool_tip(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_UnsetToolTip(self%ptr)
+    end subroutine wx_window_unset_tool_tip
+
+    function wx_window_get_tool_tip_text(self) result(result_text)
+        class(wxwindow_t), intent(in) :: self
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = wxWindow_GetToolTipText(self%ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wx_window_get_tool_tip_text
+
+    subroutine wx_window_drag_accept_files(self, accept)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: accept
+        call wxWindow_DragAcceptFiles(self%ptr, merge(1_c_int, 0_c_int, accept))
+    end subroutine wx_window_drag_accept_files
+
+    subroutine wx_window_set_containing_sizer(self, sizer)
+        class(wxwindow_t), intent(in) :: self
+        class(wxsizer_t), intent(in) :: sizer
+        call wxWindow_SetContainingSizer(self%ptr, sizer%ptr)
+    end subroutine wx_window_set_containing_sizer
+
+    function wx_window_set_transparent(self, alpha) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int8_t), intent(in) :: alpha
+        logical :: result_value
+        result_value = (wxWindow_SetTransparent(self%ptr, alpha) /= 0)
+    end function wx_window_set_transparent
+
+    function wx_window_can_set_transparent(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_CanSetTransparent(self%ptr) /= 0)
+    end function wx_window_can_set_transparent
+
+    function wx_window_get_palette(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxpalette_t) :: result_object
+        result_object = wxpalette_from_ptr(wxWindow_GetPalette(self%ptr), .false.)
+    end function wx_window_get_palette
+
+    subroutine wx_window_set_palette(self, palette)
+        class(wxwindow_t), intent(in) :: self
+        class(wxpalette_t), intent(in) :: palette
+        call wxWindow_SetPalette(self%ptr, palette%ptr)
+    end subroutine wx_window_set_palette
+
+    function wx_window_has_custom_palette(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_HasCustomPalette(self%ptr) /= 0)
+    end function wx_window_has_custom_palette
+
+    subroutine wx_window_inherit_attributes(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_InheritAttributes(self%ptr)
+    end subroutine wx_window_inherit_attributes
+
+    function wx_window_should_inherit_colours(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_ShouldInheritColours(self%ptr) /= 0)
+    end function wx_window_should_inherit_colours
+
+    function wx_window_get_popup_menu_selection_from_user(self, menu, x, y) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxmenu_t), intent(in) :: menu
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetPopupMenuSelectionFromUser(self%ptr, menu%ptr, x, y)
+    end function wx_window_get_popup_menu_selection_from_user
+
+    function wx_window_adjust_for_layout_direction(self, x, width, widthtotal) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: widthtotal
+        integer(c_int) :: result_value
+        result_value = wxWindow_AdjustForLayoutDirection(self%ptr, x, width, widthtotal)
+    end function wx_window_adjust_for_layout_direction
+
+    function wx_window_begin_repositioning_children(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_BeginRepositioningChildren(self%ptr) /= 0)
+    end function wx_window_begin_repositioning_children
+
+    subroutine wx_window_end_repositioning_children(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_EndRepositioningChildren(self%ptr)
+    end subroutine wx_window_end_repositioning_children
+
+    function wx_window_is_client_area_child(self, child) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: child
+        logical :: result_value
+        result_value = (wxWindow_IsClientAreaChild(self%ptr, child%ptr) /= 0)
+    end function wx_window_is_client_area_child
+
+    function wx_window_from_phys(self, value) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: value
+        integer(c_int) :: result_value
+        result_value = wxWindow_FromPhys(self%ptr, value)
+    end function wx_window_from_phys
+
+    function wx_window_to_phys(self, value) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: value
+        integer(c_int) :: result_value
+        result_value = wxWindow_ToPhys(self%ptr, value)
+    end function wx_window_to_phys
+
+    function wx_window_get_help_text_at_point(self, x, y, origin) result(result_text)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: origin
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = wxWindow_GetHelpTextAtPoint(self%ptr, x, y, origin)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wx_window_get_help_text_at_point
+
+    function wx_window_get_help_id_at_point(self, x, y) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetHelpIdAtPoint(self%ptr, x, y)
+    end function wx_window_get_help_id_at_point
+
+    function wx_window_copy_tool_tip(self, tip) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxtooltip_t), intent(in) :: tip
+        logical :: result_value
+        result_value = (wxWindow_CopyToolTip(self%ptr, tip%ptr) /= 0)
+    end function wx_window_copy_tool_tip
+
+    function wx_window_can_be_outside_client_area(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_CanBeOutsideClientArea(self%ptr) /= 0)
+    end function wx_window_can_be_outside_client_area
+
+    function wx_window_can_apply_theme_border(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_CanApplyThemeBorder(self%ptr) /= 0)
+    end function wx_window_can_apply_theme_border
+
+    function wx_window_is_top_navigation_domain(self, kind) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: kind
+        logical :: result_value
+        result_value = (wxWindow_IsTopNavigationDomain(self%ptr, kind) /= 0)
+    end function wx_window_is_top_navigation_domain
+
+    subroutine wx_window_add_child(self, child)
+        class(wxwindow_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: child
+        call wxWindow_AddChild(self%ptr, child%ptr)
+    end subroutine wx_window_add_child
+
+    subroutine wx_window_capture_mouse(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_CaptureMouse(self%ptr)
+    end subroutine wx_window_capture_mouse
+
+    subroutine wx_window_center(self, direction)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: direction
+        call wxWindow_Center(self%ptr, direction)
+    end subroutine wx_window_center
+
+    subroutine wx_window_center_on_parent(self, dir)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: dir
+        call wxWindow_CenterOnParent(self%ptr, dir)
+    end subroutine wx_window_center_on_parent
+
+    subroutine wx_window_clear_background(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_ClearBackground(self%ptr)
+    end subroutine wx_window_clear_background
+
+    function wx_window_client_to_screen(self, x, y) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        type(wxpoint_t) :: result_object
+        result_object = wxpoint_from_ptr(wxWindow_ClientToScreen(self%ptr, x, y), .false.)
+    end function wx_window_client_to_screen
+
+    function wx_window_close(self, force) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: force
+        logical :: result_value
+        result_value = (wxWindow_Close(self%ptr, merge(1_c_int, 0_c_int, force)) /= 0)
+    end function wx_window_close
+
+    function wx_window_convert_dialog_to_pixels(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxpoint_t) :: result_object
+        result_object = wxpoint_from_ptr(wxWindow_ConvertDialogToPixels(self%ptr), .false.)
+    end function wx_window_convert_dialog_to_pixels
+
+    function wx_window_convert_pixels_to_dialog(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxpoint_t) :: result_object
+        result_object = wxpoint_from_ptr(wxWindow_ConvertPixelsToDialog(self%ptr), .false.)
+    end function wx_window_convert_pixels_to_dialog
+
+    function wx_window_create(self, id, x, y, width, height, style) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: id
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        integer(c_int), intent(in) :: style
+        type(wxwindow_t) :: result_object
+        result_object = wxwindow_from_ptr(wxWindow_Create(self%ptr, id, x, y, width, height, style), .false.)
+    end function wx_window_create
+
+    function wx_window_destroy(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_Destroy(self%ptr) /= 0)
+    end function wx_window_destroy
+
+    function wx_window_destroy_children(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_DestroyChildren(self%ptr) /= 0)
+    end function wx_window_destroy_children
+
+    function wx_window_disable(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_Disable(self%ptr) /= 0)
+    end function wx_window_disable
+
+    function wx_window_enable(self, enable) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: enable
+        logical :: result_value
+        result_value = (wxWindow_Enable(self%ptr, merge(1_c_int, 0_c_int, enable)) /= 0)
+    end function wx_window_enable
+
+    function wx_window_find_focus(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxwindow_t) :: result_object
+        result_object = wxwindow_from_ptr(wxWindow_FindFocus(self%ptr), .false.)
+    end function wx_window_find_focus
+
+    function wx_window_find_window(self, name) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        character(len=*), intent(in) :: name
+        type(c_ptr) :: name_ptr
+        type(wxwindow_t) :: result_object
+        name_ptr = to_wxstring(name)
+        result_object = wxwindow_from_ptr(wxWindow_FindWindow(self%ptr, name_ptr), .false.)
+        call wxString_Delete(name_ptr)
+    end function wx_window_find_window
+
+    function wx_window_find_window_by_id_self(self, id) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: id
+        type(wxwindow_t) :: result_object
+        result_object = wxwindow_from_ptr(wxWindow_FindWindowByIdSelf(self%ptr, id), .false.)
+    end function wx_window_find_window_by_id_self
+
+    subroutine wx_window_fit(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_Fit(self%ptr)
+    end subroutine wx_window_fit
+
+    subroutine wx_window_fit_inside(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_FitInside(self%ptr)
+    end subroutine wx_window_fit_inside
+
+    subroutine wx_window_freeze(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_Freeze(self%ptr)
+    end subroutine wx_window_freeze
+
+    function wx_window_get_effective_min_size(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetEffectiveMinSize(self%ptr), .false.)
+    end function wx_window_get_effective_min_size
+
+    function wx_window_get_auto_layout(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetAutoLayout(self%ptr)
+    end function wx_window_get_auto_layout
+
+    subroutine wx_window_get_background_colour(self, ref)
+        class(wxwindow_t), intent(in) :: self
+        class(wxcolour_t), intent(in) :: ref
+        call wxWindow_GetBackgroundColour(self%ptr, ref%ptr)
+    end subroutine wx_window_get_background_colour
+
+    function wx_window_get_best_size(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetBestSize(self%ptr), .false.)
+    end function wx_window_get_best_size
+
+    function wx_window_get_caret(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxcaret_t) :: result_object
+        result_object = wxcaret_from_ptr(wxWindow_GetCaret(self%ptr), .false.)
+    end function wx_window_get_caret
+
+    function wx_window_get_char_height(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetCharHeight(self%ptr)
+    end function wx_window_get_char_height
+
+    function wx_window_get_char_width(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetCharWidth(self%ptr)
+    end function wx_window_get_char_width
+
+    function wx_window_get_children(self, result, count) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: result
+        integer(c_int), intent(in) :: count
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetChildren(self%ptr, result, count)
+    end function wx_window_get_children
+
+    function wx_window_get_client_data(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxclientdata_t) :: result_object
+        result_object = wxclientdata_from_ptr(wxWindow_GetClientData(self%ptr), .false.)
+    end function wx_window_get_client_data
+
+    function wx_window_get_client_size(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetClientSize(self%ptr), .false.)
+    end function wx_window_get_client_size
+
+    function wx_window_get_cursor(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxcursor_t) :: result_object
+        result_object = wxcursor_from_ptr(wxWindow_GetCursor(self%ptr), .false.)
+    end function wx_window_get_cursor
+
+    function wx_window_get_drop_target(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxdroptarget_t) :: result_object
+        result_object = wxdroptarget_from_ptr(wxWindow_GetDropTarget(self%ptr), .false.)
+    end function wx_window_get_drop_target
+
+    function wx_window_get_event_handler(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxevthandler_t) :: result_object
+        result_object = wxevthandler_from_ptr(wxWindow_GetEventHandler(self%ptr), .false.)
+    end function wx_window_get_event_handler
+
+    subroutine wx_window_get_font(self, ref)
+        class(wxwindow_t), intent(in) :: self
+        class(wxfont_t), intent(in) :: ref
+        call wxWindow_GetFont(self%ptr, ref%ptr)
+    end subroutine wx_window_get_font
+
+    subroutine wx_window_get_foreground_colour(self, ref)
+        class(wxwindow_t), intent(in) :: self
+        class(wxcolour_t), intent(in) :: ref
+        call wxWindow_GetForegroundColour(self%ptr, ref%ptr)
+    end subroutine wx_window_get_foreground_colour
+
+    function wx_window_get_handle(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        type(c_ptr) :: result_value
+        result_value = wxWindow_GetHandle(self%ptr)
+    end function wx_window_get_handle
+
+    function wx_window_get_id(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetId(self%ptr)
+    end function wx_window_get_id
+
+    function wx_window_get_label(self) result(result_text)
+        class(wxwindow_t), intent(in) :: self
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = wxWindow_GetLabel(self%ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wx_window_get_label
+
+    function wx_window_get_label_empty(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetLabelEmpty(self%ptr)
+    end function wx_window_get_label_empty
+
+    function wx_window_get_max_height(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetMaxHeight(self%ptr)
+    end function wx_window_get_max_height
+
+    function wx_window_get_max_width(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetMaxWidth(self%ptr)
+    end function wx_window_get_max_width
+
+    function wx_window_get_min_height(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetMinHeight(self%ptr)
+    end function wx_window_get_min_height
+
+    function wx_window_get_min_width(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetMinWidth(self%ptr)
+    end function wx_window_get_min_width
+
+    function wx_window_get_name(self) result(result_text)
+        class(wxwindow_t), intent(in) :: self
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = wxWindow_GetName(self%ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wx_window_get_name
+
+    function wx_window_get_parent(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxwindow_t) :: result_object
+        result_object = wxwindow_from_ptr(wxWindow_GetParent(self%ptr), .false.)
+    end function wx_window_get_parent
+
+    function wx_window_get_position(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxpoint_t) :: result_object
+        result_object = wxpoint_from_ptr(wxWindow_GetPosition(self%ptr), .false.)
+    end function wx_window_get_position
+
+    function wx_window_get_rect(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxrect_t) :: result_object
+        result_object = wxrect_from_ptr(wxWindow_GetRect(self%ptr), .false.)
+    end function wx_window_get_rect
+
+    function wx_window_get_scroll_pos(self, orient) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: orient
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetScrollPos(self%ptr, orient)
+    end function wx_window_get_scroll_pos
+
+    function wx_window_get_scroll_range(self, orient) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: orient
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetScrollRange(self%ptr, orient)
+    end function wx_window_get_scroll_range
+
+    function wx_window_get_scroll_thumb(self, orient) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: orient
+        integer(c_int) :: result_value
+        result_value = wxWindow_GetScrollThumb(self%ptr, orient)
+    end function wx_window_get_scroll_thumb
+
+    function wx_window_get_size(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetSize(self%ptr), .false.)
+    end function wx_window_get_size
+
+    function wx_window_get_sizer(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsizer_t) :: result_object
+        result_object = wxsizer_from_ptr(wxWindow_GetSizer(self%ptr), .false.)
+    end function wx_window_get_sizer
+
+    subroutine wx_window_get_text_extent(self, string, x, y, descent, externalleading, thefont)
+        class(wxwindow_t), intent(in) :: self
+        character(len=*), intent(in) :: string
+        integer(c_int), intent(out), target :: x
+        integer(c_int), intent(out), target :: y
+        integer(c_int), intent(out), target :: descent
+        integer(c_int), intent(out), target :: externalleading
+        class(wxfont_t), intent(in) :: thefont
+        type(c_ptr) :: string_ptr
+        string_ptr = to_wxstring(string)
+        call wxWindow_GetTextExtent(self%ptr, string_ptr, c_loc(x), c_loc(y), c_loc(descent), c_loc(externalleading), thefont%ptr)
+        call wxString_Delete(string_ptr)
+    end subroutine wx_window_get_text_extent
+
+    function wx_window_get_tool_tip(self) result(result_text)
+        class(wxwindow_t), intent(in) :: self
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = wxWindow_GetToolTip(self%ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wx_window_get_tool_tip
+
+    function wx_window_get_update_region(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxregion_t) :: result_object
+        result_object = wxregion_from_ptr(wxWindow_GetUpdateRegion(self%ptr), .false.)
+    end function wx_window_get_update_region
+
+    function wx_window_get_validator(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxvalidator_t) :: result_object
+        result_object = wxvalidator_from_ptr(wxWindow_GetValidator(self%ptr), .false.)
+    end function wx_window_get_validator
+
+    function wx_window_get_virtual_size(self) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_GetVirtualSize(self%ptr), .false.)
+    end function wx_window_get_virtual_size
+
+    function wx_window_get_window_style_flag(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_long) :: result_value
+        result_value = wxWindow_GetWindowStyleFlag(self%ptr)
+    end function wx_window_get_window_style_flag
+
+    function wx_window_has_flag(self, flag) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: flag
+        logical :: result_value
+        result_value = (wxWindow_HasFlag(self%ptr, flag) /= 0)
+    end function wx_window_has_flag
+
+    function wx_window_has_focus(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_HasFocus(self%ptr) /= 0)
+    end function wx_window_has_focus
+
+    function wx_window_hide(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_Hide(self%ptr) /= 0)
+    end function wx_window_hide
+
+    subroutine wx_window_init_dialog(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_InitDialog(self%ptr)
+    end subroutine wx_window_init_dialog
+
+    function wx_window_is_being_deleted(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_IsBeingDeleted(self%ptr) /= 0)
+    end function wx_window_is_being_deleted
+
+    function wx_window_is_enabled(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_IsEnabled(self%ptr) /= 0)
+    end function wx_window_is_enabled
+
+    function wx_window_is_exposed(self, x, y, width, height) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        logical :: result_value
+        result_value = (wxWindow_IsExposed(self%ptr, x, y, width, height) /= 0)
+    end function wx_window_is_exposed
+
+    function wx_window_is_shown(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_IsShown(self%ptr) /= 0)
+    end function wx_window_is_shown
+
+    function wx_window_is_top_level(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_IsTopLevel(self%ptr) /= 0)
+    end function wx_window_is_top_level
+
+    function wx_window_layout(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWindow_Layout(self%ptr)
+    end function wx_window_layout
+
+    subroutine wx_window_lower(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_Lower(self%ptr)
+    end subroutine wx_window_lower
+
+    subroutine wx_window_move(self, x, y, flags)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: flags
+        call wxWindow_Move(self%ptr, x, y, flags)
+    end subroutine wx_window_move
+
+    function wx_window_pop_event_handler(self, deletehandler) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: deletehandler
+        type(c_ptr) :: result_value
+        result_value = wxWindow_PopEventHandler(self%ptr, merge(1_c_int, 0_c_int, deletehandler))
+    end function wx_window_pop_event_handler
+
+    function wx_window_popup_menu(self, menu, x, y) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxmenu_t), intent(in) :: menu
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int) :: result_value
+        result_value = wxWindow_PopupMenu(self%ptr, menu%ptr, x, y)
+    end function wx_window_popup_menu
+
+    subroutine wx_window_prepare_dc(self, dc)
+        class(wxwindow_t), intent(in) :: self
+        class(wxdc_t), intent(in) :: dc
+        call wxWindow_PrepareDC(self%ptr, dc%ptr)
+    end subroutine wx_window_prepare_dc
+
+    subroutine wx_window_push_event_handler(self, handler)
+        class(wxwindow_t), intent(in) :: self
+        class(wxevthandler_t), intent(in) :: handler
+        call wxWindow_PushEventHandler(self%ptr, handler%ptr)
+    end subroutine wx_window_push_event_handler
+
+    subroutine wx_window_raise(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_Raise(self%ptr)
+    end subroutine wx_window_raise
+
+    subroutine wx_window_refresh(self, erasebackground)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: erasebackground
+        call wxWindow_Refresh(self%ptr, merge(1_c_int, 0_c_int, erasebackground))
+    end subroutine wx_window_refresh
+
+    subroutine wx_window_refresh_rect(self, erasebackground, x, y, width, height)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: erasebackground
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxWindow_RefreshRect(self%ptr, merge(1_c_int, 0_c_int, erasebackground), x, y, width, height)
+    end subroutine wx_window_refresh_rect
+
+    subroutine wx_window_release_mouse(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_ReleaseMouse(self%ptr)
+    end subroutine wx_window_release_mouse
+
+    subroutine wx_window_remove_child(self, child)
+        class(wxwindow_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: child
+        call wxWindow_RemoveChild(self%ptr, child%ptr)
+    end subroutine wx_window_remove_child
+
+    function wx_window_reparent(self, parent) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: parent
+        integer(c_int) :: result_value
+        result_value = wxWindow_Reparent(self%ptr, parent%ptr)
+    end function wx_window_reparent
+
+    function wx_window_screen_to_client(self, x, y) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        type(wxpoint_t) :: result_object
+        result_object = wxpoint_from_ptr(wxWindow_ScreenToClient(self%ptr, x, y), .false.)
+    end function wx_window_screen_to_client
+
+    subroutine wx_window_scroll_window(self, dx, dy)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: dx
+        integer(c_int), intent(in) :: dy
+        call wxWindow_ScrollWindow(self%ptr, dx, dy)
+    end subroutine wx_window_scroll_window
+
+    subroutine wx_window_scroll_window_rect(self, dx, dy, x, y, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: dx
+        integer(c_int), intent(in) :: dy
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxWindow_ScrollWindowRect(self%ptr, dx, dy, x, y, width, height)
+    end subroutine wx_window_scroll_window_rect
+
+    subroutine wx_window_set_accelerator_table(self, accel)
+        class(wxwindow_t), intent(in) :: self
+        class(wxacceleratortable_t), intent(in) :: accel
+        call wxWindow_SetAcceleratorTable(self%ptr, accel%ptr)
+    end subroutine wx_window_set_accelerator_table
+
+    subroutine wx_window_set_auto_layout(self, autolayout)
+        class(wxwindow_t), intent(in) :: self
+        logical, intent(in) :: autolayout
+        call wxWindow_SetAutoLayout(self%ptr, merge(1_c_int, 0_c_int, autolayout))
+    end subroutine wx_window_set_auto_layout
+
+    function wx_window_set_background_colour(self, colour) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxcolour_t), intent(in) :: colour
+        logical :: result_value
+        result_value = (wxWindow_SetBackgroundColour(self%ptr, colour%ptr) /= 0)
+    end function wx_window_set_background_colour
+
+    subroutine wx_window_set_caret(self, caret)
+        class(wxwindow_t), intent(in) :: self
+        class(wxcaret_t), intent(in) :: caret
+        call wxWindow_SetCaret(self%ptr, caret%ptr)
+    end subroutine wx_window_set_caret
+
+    subroutine wx_window_set_client_data(self, data)
+        class(wxwindow_t), intent(in) :: self
+        class(wxclientdata_t), intent(in) :: data
+        call wxWindow_SetClientData(self%ptr, data%ptr)
+    end subroutine wx_window_set_client_data
+
+    subroutine wx_window_set_client_object(self, data)
+        class(wxwindow_t), intent(in) :: self
+        class(wxclientdata_t), intent(in) :: data
+        call wxWindow_SetClientObject(self%ptr, data%ptr)
+    end subroutine wx_window_set_client_object
+
+    subroutine wx_window_set_client_size(self, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxWindow_SetClientSize(self%ptr, width, height)
+    end subroutine wx_window_set_client_size
+
+    function wx_window_set_cursor(self, cursor) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxcursor_t), intent(in) :: cursor
+        integer(c_int) :: result_value
+        result_value = wxWindow_SetCursor(self%ptr, cursor%ptr)
+    end function wx_window_set_cursor
+
+    subroutine wx_window_set_drop_target(self, droptarget)
+        class(wxwindow_t), intent(in) :: self
+        class(wxdroptarget_t), intent(in) :: droptarget
+        call wxWindow_SetDropTarget(self%ptr, droptarget%ptr)
+    end subroutine wx_window_set_drop_target
+
+    subroutine wx_window_set_extra_style(self, exstyle)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_long), intent(in) :: exstyle
+        call wxWindow_SetExtraStyle(self%ptr, exstyle)
+    end subroutine wx_window_set_extra_style
+
+    subroutine wx_window_set_focus(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_SetFocus(self%ptr)
+    end subroutine wx_window_set_focus
+
+    function wx_window_set_font(self, font) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxfont_t), intent(in) :: font
+        logical :: result_value
+        result_value = (wxWindow_SetFont(self%ptr, font%ptr) /= 0)
+    end function wx_window_set_font
+
+    function wx_window_set_foreground_colour(self, colour) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        class(wxcolour_t), intent(in) :: colour
+        integer(c_int) :: result_value
+        result_value = wxWindow_SetForegroundColour(self%ptr, colour%ptr)
+    end function wx_window_set_foreground_colour
+
+    subroutine wx_window_set_id(self, id)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: id
+        call wxWindow_SetId(self%ptr, id)
+    end subroutine wx_window_set_id
+
+    subroutine wx_window_set_label(self, title)
+        class(wxwindow_t), intent(in) :: self
+        character(len=*), intent(in) :: title
+        type(c_ptr) :: title_ptr
+        title_ptr = to_wxstring(title)
+        call wxWindow_SetLabel(self%ptr, title_ptr)
+        call wxString_Delete(title_ptr)
+    end subroutine wx_window_set_label
+
+    subroutine wx_window_set_name(self, name)
+        class(wxwindow_t), intent(in) :: self
+        character(len=*), intent(in) :: name
+        type(c_ptr) :: name_ptr
+        name_ptr = to_wxstring(name)
+        call wxWindow_SetName(self%ptr, name_ptr)
+        call wxString_Delete(name_ptr)
+    end subroutine wx_window_set_name
+
+    subroutine wx_window_set_scroll_pos(self, orient, pos, refresh)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: orient
+        integer(c_int), intent(in) :: pos
+        logical, intent(in) :: refresh
+        call wxWindow_SetScrollPos(self%ptr, orient, pos, merge(1_c_int, 0_c_int, refresh))
+    end subroutine wx_window_set_scroll_pos
+
+    subroutine wx_window_set_scrollbar(self, orient, pos, thumbvisible, range, refresh)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: orient
+        integer(c_int), intent(in) :: pos
+        integer(c_int), intent(in) :: thumbvisible
+        integer(c_int), intent(in) :: range
+        logical, intent(in) :: refresh
+        call wxWindow_SetScrollbar(self%ptr, orient, pos, thumbvisible, range, merge(1_c_int, 0_c_int, refresh))
+    end subroutine wx_window_set_scrollbar
+
+    subroutine wx_window_set_size(self, x, y, width, height, sizeflags)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        integer(c_int), intent(in) :: sizeflags
+        call wxWindow_SetSize(self%ptr, x, y, width, height, sizeflags)
+    end subroutine wx_window_set_size
+
+    subroutine wx_window_set_size_hints(self, minw, minh, maxw, maxh, incw, inch)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: minw
+        integer(c_int), intent(in) :: minh
+        integer(c_int), intent(in) :: maxw
+        integer(c_int), intent(in) :: maxh
+        integer(c_int), intent(in) :: incw
+        integer(c_int), intent(in) :: inch
+        call wxWindow_SetSizeHints(self%ptr, minw, minh, maxw, maxh, incw, inch)
+    end subroutine wx_window_set_size_hints
+
+    subroutine wx_window_set_min_size(self, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxWindow_SetMinSize(self%ptr, width, height)
+    end subroutine wx_window_set_min_size
+
+    subroutine wx_window_set_max_size(self, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxWindow_SetMaxSize(self%ptr, width, height)
+    end subroutine wx_window_set_max_size
+
+    subroutine wx_window_set_sizer(self, sizer, deleteold)
+        class(wxwindow_t), intent(in) :: self
+        class(wxsizer_t), intent(in) :: sizer
+        logical, intent(in) :: deleteold
+        call wxWindow_SetSizer(self%ptr, sizer%ptr, merge(1_c_int, 0_c_int, deleteold))
+    end subroutine wx_window_set_sizer
+
+    subroutine wx_window_set_sizer_and_fit(self, sizer, deleteold)
+        class(wxwindow_t), intent(in) :: self
+        class(wxsizer_t), intent(in) :: sizer
+        logical, intent(in) :: deleteold
+        call wxWindow_SetSizerAndFit(self%ptr, sizer%ptr, merge(1_c_int, 0_c_int, deleteold))
+    end subroutine wx_window_set_sizer_and_fit
+
+    subroutine wx_window_set_tool_tip(self, tip)
+        class(wxwindow_t), intent(in) :: self
+        character(len=*), intent(in) :: tip
+        type(c_ptr) :: tip_ptr
+        tip_ptr = to_wxstring(tip)
+        call wxWindow_SetToolTip(self%ptr, tip_ptr)
+        call wxString_Delete(tip_ptr)
+    end subroutine wx_window_set_tool_tip
+
+    subroutine wx_window_set_validator(self, validator)
+        class(wxwindow_t), intent(in) :: self
+        class(wxvalidator_t), intent(in) :: validator
+        call wxWindow_SetValidator(self%ptr, validator%ptr)
+    end subroutine wx_window_set_validator
+
+    subroutine wx_window_set_window_style_flag(self, style)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_long), intent(in) :: style
+        call wxWindow_SetWindowStyleFlag(self%ptr, style)
+    end subroutine wx_window_set_window_style_flag
+
+    function wx_window_show(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_Show(self%ptr) /= 0)
+    end function wx_window_show
+
+    subroutine wx_window_thaw(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_Thaw(self%ptr)
+    end subroutine wx_window_thaw
+
+    function wx_window_transfer_data_from_window(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_TransferDataFromWindow(self%ptr) /= 0)
+    end function wx_window_transfer_data_from_window
+
+    function wx_window_transfer_data_to_window(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_TransferDataToWindow(self%ptr) /= 0)
+    end function wx_window_transfer_data_to_window
+
+    subroutine wx_window_update(self)
+        class(wxwindow_t), intent(in) :: self
+        call wxWindow_Update(self%ptr)
+    end subroutine wx_window_update
+
+    subroutine wx_window_update_window_ui(self, flags)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_long), intent(in) :: flags
+        call wxWindow_UpdateWindowUI(self%ptr, flags)
+    end subroutine wx_window_update_window_ui
+
+    function wx_window_validate(self) result(result_value)
+        class(wxwindow_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWindow_Validate(self%ptr) /= 0)
+    end function wx_window_validate
+
+    subroutine wx_window_set_virtual_size(self, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxWindow_SetVirtualSize(self%ptr, width, height)
+    end subroutine wx_window_set_virtual_size
+
+    subroutine wx_window_warp_pointer(self, x, y)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        call wxWindow_WarpPointer(self%ptr, x, y)
+    end subroutine wx_window_warp_pointer
 
 end module wx_window

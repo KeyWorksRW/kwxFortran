@@ -14,7 +14,9 @@ Fortran language bindings for [wxWidgets](https://www.wxwidgets.org/) via [kwxFF
 
 kwxFortran provides a two-layer binding architecture:
 
-1. **FFI Layer** (`wx/kwx_bindings.f90`) — Raw `ISO_C_BINDING` interface declarations mapping directly to the kwxFFI C function exports. All pointers are `c_ptr`.
+1. **FFI Layer** (`wx/kwxffi_gen.f90`, module `kwxffi`) — Raw `ISO_C_BINDING` interface
+   declarations mapping directly to the kwxFFI C function exports. All pointers are `c_ptr`.
+   Events, keys, constants, class methods and free functions all live in this one module.
 2. **Wrapper Layer** (`wx/wx_*.f90`) — Idiomatic Fortran wrappers with optional parameters, automatic string conversion, type safety, and sensible defaults.
 
 Users should work with the wrapper layer. The FFI layer is available for direct access when needed.
@@ -42,54 +44,71 @@ contains
 end module hello_handlers
 
 program hello
+    use, intrinsic :: iso_c_binding
     use wx_app
     use wx_frame
-    use wx_controls
-    use wx_sizers
-    use wx_window
+    use wx_panel, only: wx_panel_create
+    use wx_button, only: wx_button_create
+    use wx_static_text, only: wx_static_text_create
+    use wx_text_ctrl, only: wx_text_ctrl_create
+    use wx_box_sizer, only: wx_box_sizer_create
+    use wx_sizer, only: wx_sizer_add_window, wx_sizer_add_stretch_spacer, &
+        wx_sizer_set_size_hints
+    use wx_window, only: wx_window_set_sizer, wx_window_center, wx_window_show
     use wx_events
     use kwx_types
-    use kwx_constants
+    use kwxffi, only: wxVERTICAL, wxALL, wxEXPAND, wxALIGN_CENTER, wxEVT_BUTTON, &
+        wxID_ANY, wxDEFAULT_FRAME_STYLE, wxSTB_DEFAULT_STYLE, wxBOTH
     use hello_handlers
     implicit none
 
+    type(wxWindow_t)     :: no_parent
     type(wxFrame_t)      :: frame
+    type(wxStatusBar_t)  :: status_bar
     type(wxPanel_t)      :: panel
     type(wxBoxSizer_t)   :: main_sizer
     type(wxStaticText_t) :: label
     type(wxButton_t)     :: button
     type(wxTextCtrl_t)   :: text_input
     integer :: exit_code
+    logical :: shown
 
     if (.not. wx_initialize()) stop 1
     call wx_set_app_name("Hello Fortran")
 
-    frame = wx_frame_create(title="Hello wxFortran", width=400, height=300)
-    panel = wx_panel_create(parent=frame)
+    no_parent%ptr = c_null_ptr
+    frame = wx_frame_create(no_parent, wxID_ANY(), "Hello wxFortran", &
+        -1_c_int, -1_c_int, 400_c_int, 300_c_int, wxDEFAULT_FRAME_STYLE())
+    panel = wx_panel_create(frame, wxID_ANY(), -1_c_int, -1_c_int, &
+        -1_c_int, -1_c_int, 0_c_int)
 
     main_sizer = wx_box_sizer_create(wxVERTICAL())
 
-    label = wx_static_text_create("Hello, World from Fortran!", parent=panel)
-    call wx_sizer_add_window(main_sizer, label, proportion=0, flag=wxALL(), border=10)
+    label = wx_static_text_create(panel, wxID_ANY(), &
+        "Hello, World from Fortran!", -1_c_int, -1_c_int, -1_c_int, -1_c_int, 0_c_int)
+    call wx_sizer_add_window(main_sizer, label, 0_c_int, wxALL(), 10_c_int, c_null_ptr)
 
-    text_input = wx_text_ctrl_create(parent=panel, value="Type here...")
-    call wx_sizer_add_window(main_sizer, text_input, &
-        proportion=0, flag=ior(wxEXPAND(), wxALL()), border=10)
+    text_input = wx_text_ctrl_create(panel, wxID_ANY(), "Type here...", &
+        -1_c_int, -1_c_int, -1_c_int, -1_c_int, 0_c_long)
+    call wx_sizer_add_window(main_sizer, text_input, 0_c_int, &
+        ior(wxEXPAND(), wxALL()), 10_c_int, c_null_ptr)
 
-    button = wx_button_create("Click Me!", parent=panel)
-    call wx_sizer_add_window(main_sizer, button, &
-        proportion=0, flag=ior(wxALIGN_CENTER(), wxALL()), border=10)
+    button = wx_button_create(panel, wxID_ANY(), "Click Me!", &
+        -1_c_int, -1_c_int, -1_c_int, -1_c_int, 0_c_int)
+    call wx_sizer_add_window(main_sizer, button, 0_c_int, &
+        ior(wxALIGN_CENTER(), wxALL()), 10_c_int, c_null_ptr)
 
     call wx_connect(button, wxEVT_BUTTON(), on_button_click)
-    call wx_sizer_add_stretch_spacer(main_sizer)
-    call wx_window_set_sizer(panel, main_sizer)
+    call wx_sizer_add_stretch_spacer(main_sizer, 1_c_int)
+    call wx_window_set_sizer(panel, main_sizer, .false.)
 
-    call wx_frame_center(frame)
-    call wx_frame_create_status_bar(frame)
-    call wx_frame_set_status_text(frame, "Click the button!")
+    call wx_window_center(frame, wxBOTH())
+    status_bar = wx_frame_create_status_bar(frame, 1_c_int, &
+        wxSTB_DEFAULT_STYLE(), 0_c_int)
+    call wx_frame_set_status_text(frame, "Click the button!", 0_c_int)
 
     call wx_set_top_window(frame)
-    call wx_frame_show(frame)
+    shown = wx_window_show(frame)
 
     exit_code = wx_main_loop()
     call wx_shutdown()
@@ -133,9 +152,9 @@ All types wrap an opaque `c_ptr` with an `is_valid()` method. Always check after
 
 | Entity | Convention | Example |
 | --- | --- | --- |
-| Modules | `snake_case` | `wx_frame`, `kwx_bindings` |
+| Modules | `snake_case` | `wx_frame`, `kwxffi` |
 | Types | `PascalCase_t` | `wxFrame_t`, `wxButton_t` |
-| Wrapper functions | `wx_<class>_<action>` | `wx_frame_create`, `wx_frame_show` |
+| Wrapper functions | `wx_<class>_<action>` | `wx_frame_create`, `wx_window_show` |
 | Raw bindings | Match C name | `wxFrame_Create`, `kwxApp_Initialize` |
 | Constants | Match wxWidgets | `wxID_ANY()`, `wxDEFAULT_FRAME_STYLE()` |
 

@@ -2,10 +2,12 @@
 module wx_string
     use, intrinsic :: iso_c_binding
     use kwx_types
+    use kwxffi, only: wxString_Delete, kwxFree
     implicit none
     private
 
-    public :: to_wxstring, from_wxstring, wxString_Delete
+    public :: to_wxstring, from_wxstring, from_cstring, free_cstring, wx_string_delete, &
+        wxString_Delete
 
     interface
         function wxString_CreateUTF8(str) bind(C, name="wxString_CreateUTF8")
@@ -21,15 +23,12 @@ module wx_string
             integer(c_int) :: wxString_GetString
         end function
 
-        subroutine wxString_Delete_C(wx_str) bind(C, name="wxString_Delete")
-            import :: c_ptr
-            type(c_ptr), value :: wx_str
-        end subroutine
-
-        function wxString_Length(wx_str) bind(C, name="wxString_Length")
-            import :: c_ptr, c_int
-            type(c_ptr), value :: wx_str
-            integer(c_int) :: wxString_Length
+        ! A TString is a bare char*, so its length comes from the C library rather than from
+        ! an FFI accessor.
+        function c_strlen(str) bind(C, name="strlen")
+            import :: c_ptr, c_size_t
+            type(c_ptr), value :: str
+            integer(c_size_t) :: c_strlen
         end function
     end interface
 
@@ -72,12 +71,48 @@ contains
         end do
     end function from_wxstring
 
-    subroutine wxString_Delete(wx_str_ptr)
+    ! Copies a NUL-terminated UTF-8 C string into a Fortran string. The pointer is NOT freed:
+    ! the FFI does not state whether a TString result is strdup()ed or borrowed. Use
+    ! free_cstring() on the raw pointer when the C function documents caller ownership.
+    function from_cstring(cstr) result(fstring)
+        type(c_ptr), intent(in) :: cstr
+        character(len=:), allocatable :: fstring
+        character(kind=c_char), dimension(:), pointer :: chars
+        integer(c_size_t) :: slen
+        integer :: idx
+
+        fstring = ""
+        if (.not. c_associated(cstr)) return
+
+        slen = c_strlen(cstr)
+        if (slen <= 0) return
+
+        allocate(character(len=int(slen)) :: fstring)
+        call c_f_pointer(cstr, chars, [int(slen)])
+        do idx = 1, int(slen)
+            fstring(idx:idx) = chars(idx)
+        end do
+    end function from_cstring
+
+    ! Releases a string buffer the C side allocated with malloc()/strdup() and clears the
+    ! caller's pointer so a stale handle cannot survive the call.
+    subroutine free_cstring(cstr)
+        type(c_ptr), intent(inout) :: cstr
+        if (c_associated(cstr)) then
+            call kwxFree(cstr)
+            cstr = c_null_ptr
+        end if
+    end subroutine free_cstring
+
+    ! Frees wx_str_ptr and clears it. The re-exported kwxffi wxString_Delete takes its
+    ! argument by value, so it cannot null the caller's pointer; use this when a stale
+    ! handle must not survive the call.
+    subroutine wx_string_delete(wx_str_ptr)
         type(c_ptr), intent(inout) :: wx_str_ptr
         if (c_associated(wx_str_ptr)) then
-            call wxString_Delete_C(wx_str_ptr)
+            call wxString_Delete(wx_str_ptr)
             wx_str_ptr = c_null_ptr
         end if
-    end subroutine wxString_Delete
+    end subroutine wx_string_delete
 
 end module wx_string

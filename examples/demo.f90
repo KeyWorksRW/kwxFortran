@@ -24,15 +24,32 @@ end module demo_globals
 module demo_handlers
     use, intrinsic :: iso_c_binding
     use wx_events
-    use wx_controls, only: wx_text_ctrl_get_value
-    use wx_dialogs, only: wx_message_box
+    use wx_text_ctrl, only: wx_text_ctrl_get_value
+    use wx_string, only: to_wxstring, wxString_Delete
+    use wx_window, only: wx_window_close
     use wx_app, only: wx_exit_main_loop
-    use wx_frame, only: wx_frame_close
-    use kwxffi, only: wxOK, wxICON_INFORMATION
+    use kwxffi, only: kwxMessageBox, wxOK, wxICON_INFORMATION
     use demo_globals
     implicit none
 
 contains
+
+    !---------------------------------------------------------------------------
+    ! wxMessageBox() with wxOK | wxICON_INFORMATION, no parent
+    !---------------------------------------------------------------------------
+    function show_message(message, caption) result(res)
+        character(len=*), intent(in) :: message
+        character(len=*), intent(in) :: caption
+        integer :: res
+        type(c_ptr) :: message_ptr, caption_ptr
+
+        message_ptr = to_wxstring(message)
+        caption_ptr = to_wxstring(caption)
+        res = int(kwxMessageBox(message_ptr, caption_ptr, &
+            ior(wxOK(), wxICON_INFORMATION()), c_null_ptr, -1_c_int, -1_c_int))
+        call wxString_Delete(caption_ptr)
+        call wxString_Delete(message_ptr)
+    end function show_message
 
     !---------------------------------------------------------------------------
     ! "Click Me" button handler — show text control value in a message box
@@ -48,11 +65,9 @@ contains
         text = wx_text_ctrl_get_value(g_text_ctrl)
 
         if (len(text) == 0) then
-            res = wx_message_box("(no text entered)", "Demo", &
-                ior(wxOK(), wxICON_INFORMATION()))
+            res = show_message("(no text entered)", "Demo")
         else
-            res = wx_message_box(text, "You typed", &
-                ior(wxOK(), wxICON_INFORMATION()))
+            res = show_message(text, "You typed")
         end if
     end subroutine on_click_me
 
@@ -61,10 +76,10 @@ contains
     !---------------------------------------------------------------------------
     subroutine on_exit(fun, data, evt) bind(C)
         type(c_ptr), value :: fun, data, evt
+        logical :: closed
 
         if (.not. c_associated(evt)) return
-        ! TODO: restore `dummy = wx_frame_close(...)` once kwxFFI#37 lands
-        call wx_frame_close(g_frame, force=.true.)
+        closed = wx_window_close(g_frame, .true.)
     end subroutine on_exit
 
     !---------------------------------------------------------------------------
@@ -84,34 +99,41 @@ contains
         integer :: res
 
         if (.not. c_associated(evt)) return
-        res = wx_message_box( &
+        res = show_message(&
             "kwxFortran Demo" // achar(10) // &
             "Fortran bindings for wxWidgets via kwxFFI", &
-            "About Demo", &
-            ior(wxOK(), wxICON_INFORMATION()))
+            "About Demo")
     end subroutine on_about
 
 end module demo_handlers
 
 program demo
+    use, intrinsic :: iso_c_binding
     use wx_app
     use wx_frame
-    use wx_controls
-    use wx_menus
-    use wx_sizers
-    use wx_window
+    use wx_panel, only: wx_panel_create
+    use wx_button, only: wx_button_create
+    use wx_static_text, only: wx_static_text_create
+    use wx_text_ctrl, only: wx_text_ctrl_create, wx_text_ctrl_set_hint
+    use wx_box_sizer, only: wx_box_sizer_create
+    use wx_sizer, only: wx_sizer_add_window, wx_sizer_add_sizer
+    use wx_menu, only: wx_menu_create, wx_menu_append, wx_menu_append_separator
+    use wx_menu_bar, only: wx_menu_bar_create, wx_menu_bar_append
+    use wx_window, only: wx_window_set_sizer, wx_window_center, wx_window_show
     use wx_events
     use kwx_types
     use kwxffi, only: wxEVT_MENU, wxEVT_BUTTON, wxEVT_CLOSE_WINDOW, &
         wxID_NEW, wxID_OPEN, wxID_SAVE, wxID_EXIT, wxID_ABOUT, &
         wxID_UNDO, wxID_REDO, wxID_CUT, wxID_COPY, wxID_PASTE, &
-        wxVERTICAL, wxHORIZONTAL, wxALL, wxEXPAND, wxALIGN_CENTER_VERTICAL, &
-        wxOK, wxICON_INFORMATION
+        wxID_ANY, wxDEFAULT_FRAME_STYLE, wxSTB_DEFAULT_STYLE, wxBOTH, &
+        wxVERTICAL, wxHORIZONTAL, wxALL, wxEXPAND, wxALIGN_CENTER_VERTICAL
     use demo_globals
     use demo_handlers
     implicit none
 
+    type(wxWindow_t) :: no_parent
     type(wxFrame_t) :: frame
+    type(wxStatusBar_t) :: status_bar
     type(wxPanel_t) :: panel
 
     ! Sizers
@@ -125,7 +147,8 @@ program demo
     type(wxMenu_t) :: file_menu, edit_menu, help_menu
     type(wxMenuBar_t) :: menubar
 
-    integer :: exit_code
+    integer :: exit_code, dummy
+    logical :: shown
 
     ! Initialize wxWidgets
     if (.not. wx_initialize()) then
@@ -138,11 +161,9 @@ program demo
     ! Create the main frame
     !===================================================================
 
-    frame = wx_frame_create( &
-        title = "kwxFortran Demo", &
-        width = 480, &
-        height = 320 &
-    )
+    no_parent%ptr = c_null_ptr
+    frame = wx_frame_create(no_parent, wxID_ANY(), "kwxFortran Demo", &
+        -1_c_int, -1_c_int, 480_c_int, 320_c_int, wxDEFAULT_FRAME_STYLE())
     if (.not. frame%is_valid()) stop 1
     g_frame = frame
 
@@ -151,31 +172,33 @@ program demo
     !===================================================================
 
     ! File menu
-    file_menu = wx_menu_create()
-    call wx_menu_append(file_menu, wxID_NEW(), "&New", "Create new")
-    call wx_menu_append(file_menu, wxID_OPEN(), "&Open", "Open file")
-    call wx_menu_append(file_menu, wxID_SAVE(), "&Save", "Save file")
+    file_menu = wx_menu_create("", 0_c_long)
+    call wx_menu_append(file_menu, wxID_NEW(), "&New", "Create new", .false.)
+    call wx_menu_append(file_menu, wxID_OPEN(), "&Open", "Open file", .false.)
+    call wx_menu_append(file_menu, wxID_SAVE(), "&Save", "Save file", .false.)
     call wx_menu_append_separator(file_menu)
-    call wx_menu_append(file_menu, wxID_EXIT(), "E&xit", "Exit application")
+    call wx_menu_append(file_menu, wxID_EXIT(), "E&xit", &
+        "Exit application", .false.)
 
     ! Edit menu
-    edit_menu = wx_menu_create()
-    call wx_menu_append(edit_menu, wxID_UNDO(), "&Undo")
-    call wx_menu_append(edit_menu, wxID_REDO(), "&Redo")
+    edit_menu = wx_menu_create("", 0_c_long)
+    call wx_menu_append(edit_menu, wxID_UNDO(), "&Undo", "", .false.)
+    call wx_menu_append(edit_menu, wxID_REDO(), "&Redo", "", .false.)
     call wx_menu_append_separator(edit_menu)
-    call wx_menu_append(edit_menu, wxID_CUT(), "Cu&t")
-    call wx_menu_append(edit_menu, wxID_COPY(), "&Copy")
-    call wx_menu_append(edit_menu, wxID_PASTE(), "&Paste")
+    call wx_menu_append(edit_menu, wxID_CUT(), "Cu&t", "", .false.)
+    call wx_menu_append(edit_menu, wxID_COPY(), "&Copy", "", .false.)
+    call wx_menu_append(edit_menu, wxID_PASTE(), "&Paste", "", .false.)
 
     ! Help menu
-    help_menu = wx_menu_create()
-    call wx_menu_append(help_menu, wxID_ABOUT(), "&About", "About this demo")
+    help_menu = wx_menu_create("", 0_c_long)
+    call wx_menu_append(help_menu, wxID_ABOUT(), "&About", &
+        "About this demo", .false.)
 
     ! Assemble menu bar
-    menubar = wx_menubar_create()
-    call wx_menubar_append(menubar, file_menu, "&File")
-    call wx_menubar_append(menubar, edit_menu, "&Edit")
-    call wx_menubar_append(menubar, help_menu, "&Help")
+    menubar = wx_menu_bar_create(0_c_int)
+    dummy = wx_menu_bar_append(menubar, file_menu, "&File")
+    dummy = wx_menu_bar_append(menubar, edit_menu, "&Edit")
+    dummy = wx_menu_bar_append(menubar, help_menu, "&Help")
     call wx_frame_set_menu_bar(frame, menubar)
 
     ! Connect menu events
@@ -189,14 +212,16 @@ program demo
     ! Status bar
     !===================================================================
 
-    call wx_frame_create_status_bar(frame)
-    call wx_frame_set_status_text(frame, "Ready")
+    status_bar = wx_frame_create_status_bar(frame, 1_c_int, &
+        wxSTB_DEFAULT_STYLE(), 0_c_int)
+    call wx_frame_set_status_text(frame, "Ready", 0_c_int)
 
     !===================================================================
     ! Panel + sizer layout
     !===================================================================
 
-    panel = wx_panel_create(parent=frame)
+    panel = wx_panel_create(frame, wxID_ANY(), -1_c_int, -1_c_int, &
+        -1_c_int, -1_c_int, 0_c_int)
 
     ! Vertical box sizer (main layout)
     vbox = wx_box_sizer_create(wxVERTICAL())
@@ -204,28 +229,31 @@ program demo
     ! Horizontal child sizer: "Text:" label + text control
     hbox = wx_box_sizer_create(wxHORIZONTAL())
 
-    label = wx_static_text_create("Text:", parent=panel)
-    call wx_sizer_add_window(hbox, label, &
-        proportion=0, flag=ior(wxALL(), wxALIGN_CENTER_VERTICAL()), border=5)
+    label = wx_static_text_create(panel, wxID_ANY(), "Text:", &
+        -1_c_int, -1_c_int, -1_c_int, -1_c_int, 0_c_int)
+    call wx_sizer_add_window(hbox, label, 0_c_int, &
+        ior(wxALL(), wxALIGN_CENTER_VERTICAL()), 5_c_int, c_null_ptr)
 
-    g_text_ctrl = wx_text_ctrl_create(parent=panel)
+    g_text_ctrl = wx_text_ctrl_create(panel, wxID_ANY(), "", &
+        -1_c_int, -1_c_int, -1_c_int, -1_c_int, 0_c_long)
     if (.not. g_text_ctrl%is_valid()) then
         write(*, '(a)') "ERROR: wx_text_ctrl_create returned invalid pointer"
         stop 1
     end if
-    call wx_text_ctrl_set_hint(g_text_ctrl, "hint text")
-    call wx_sizer_add_window(hbox, g_text_ctrl, &
-        proportion=1, flag=ior(wxALL(), wxEXPAND()), border=5)
+    shown = wx_text_ctrl_set_hint(g_text_ctrl, "hint text")
+    call wx_sizer_add_window(hbox, g_text_ctrl, 1_c_int, &
+        ior(wxALL(), wxEXPAND()), 5_c_int, c_null_ptr)
 
-    call wx_sizer_add_sizer(vbox, hbox, &
-        proportion=0, flag=ior(wxEXPAND(), wxALL()), border=5)
+    call wx_sizer_add_sizer(vbox, hbox, 0_c_int, &
+        ior(wxEXPAND(), wxALL()), 5_c_int, c_null_ptr)
 
     ! "Click Me" button
-    button = wx_button_create("Click Me", parent=panel)
-    call wx_sizer_add_window(vbox, button, &
-        proportion=0, flag=wxALL(), border=10)
+    button = wx_button_create(panel, wxID_ANY(), "Click Me", &
+        -1_c_int, -1_c_int, -1_c_int, -1_c_int, 0_c_int)
+    call wx_sizer_add_window(vbox, button, 0_c_int, wxALL(), 10_c_int, &
+        c_null_ptr)
 
-    call wx_window_set_sizer(panel, vbox)
+    call wx_window_set_sizer(panel, vbox, .false.)
 
     !===================================================================
     ! Connect button event
@@ -237,9 +265,9 @@ program demo
     ! Show and run
     !===================================================================
 
-    call wx_frame_center(frame)
+    call wx_window_center(frame, wxBOTH())
     call wx_set_top_window(frame)
-    call wx_frame_show(frame)
+    shown = wx_window_show(frame)
 
     exit_code = wx_main_loop()
     call wx_shutdown()

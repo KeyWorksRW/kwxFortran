@@ -19,7 +19,7 @@ project(kwxFortran
     HOMEPAGE_URL "https://github.com/KeyWorksRW/wxUiEditor")
 
 # ###################### General Settings #######################
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
@@ -108,7 +108,10 @@ message(STATUS "Fetching kwxFFI and wxWidgets (this may take awhile) ...")
 
 FetchContent_Declare(
     kwxFFI
-    GIT_REPOSITORY https://github.com/KeyWorksRW/kwxFFI.git
+    # TEMPORARY: use the local sibling checkout so source changes show up immediately.
+    # Restore the GIT_REPOSITORY line below to fetch from GitHub again.
+    # GIT_REPOSITORY https://github.com/KeyWorksRW/kwxFFI.git
+    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../kwxFFI
     GIT_TAG origin/main
     GIT_SHALLOW TRUE
     UPDATE_DISCONNECTED FALSE  # Explicitly enable updates
@@ -116,9 +119,21 @@ FetchContent_Declare(
 
 message(NOTICE "Configuring kwxFFI...")
 
+# kwxFFI is always built as a static library (never a DLL) so that wxWidgets
+# exists in exactly one copy inside the final executable. Force both options
+# before kwxFFI's CMakeLists defines its targets, overriding any cached value.
+set(KWXFFI_BUILD_SHARED OFF CACHE BOOL "Build kwxFFI as shared library" FORCE)
+set(KWXFFI_BUILD_BOTH   OFF CACHE BOOL "Build both static and shared kwxFFI" FORCE)
+
 FetchContent_MakeAvailable(kwxFFI)
 
-# Override kwxFFI output directories to place DLLs in root bin/ directory
+if(KWXFFI_BUILD_SHARED OR KWXFFI_BUILD_BOTH)
+    message(FATAL_ERROR
+        "kwxFortran requires a static kwxFFI. Shared (DLL) builds are not supported "
+        "because kwxApp.cpp and wxWidgets must resolve to a single copy per process.")
+endif()
+
+# Override kwxFFI output directories to place the static library in root bin/ directory
 set_target_properties(kwxFFI PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY "${KWXF_BIN_DIR}/$<CONFIG>"
     LIBRARY_OUTPUT_DIRECTORY "${KWXF_BIN_DIR}/$<CONFIG>"
@@ -137,7 +152,7 @@ message(STATUS "wxWidgets build: " ${WX_BUILD_DIR})
 
 # ###################### kwxgen — Fortran binding generator #######################
 
-# disabled until the new kwxgen repository is ready
+# disabled — kwxFFI's own CMakeLists.txt adds kwxgen as a subdirectory
 # include (cmake/kwxgen.cmake)
 
 # ###################### Fortran Library Target #######################
@@ -151,11 +166,8 @@ if(TARGET generate_fortran_bindings)
     add_dependencies(kwxFortran generate_fortran_bindings)
 endif()
 
-# Define export macro for kwxApp.cpp on Windows
-target_compile_definitions(kwxFortran PRIVATE KWXFORTRAN_EXPORTS)
-
 # Link against kwxFFI for FFI symbols AND wxWidgets for kwxApp.cpp
-# kwxFFI is a shared library but wxWidgets are static
+# Both kwxFFI and wxWidgets are static libraries
 target_link_libraries(kwxFortran PRIVATE kwxFFI wxbase wxcore)
 
 # Include wxWidgets headers for kwxApp.cpp (platform-specific setup.h location)
@@ -201,7 +213,7 @@ target_include_directories(kwxFortran PUBLIC
 
 # ###################### Examples #######################
 
-set(EXAMPLE_TARGETS minimal hello controls_demo demo)
+set(EXAMPLE_TARGETS hello controls_demo demo)
 
 # Windows manifest for Common Controls v6 and DPI awareness
 if(WIN32)
@@ -230,6 +242,52 @@ if(WIN32)
         endforeach()
     endif()
 endif()
+
+# ###################### Samples #######################
+
+# Samples live in samples/<name>/<name>.f90. Only names whose entry file exists
+# are built, so a sample that has not been ported yet never breaks configure.
+set(SAMPLE_TARGETS about animate archive artprov calendar collpane combo font grid minimal notebook preferences widgets wizard)
+
+# Samples that use the wxAppConsole lifecycle (kwxConsoleInitialize /
+# kwxConsoleRun / kwxConsoleShutdown) are console-subsystem executables: they
+# must keep stdout/stderr attached, so the GUI-subsystem linker flags below are
+# not applied to them.
+set(SAMPLE_CONSOLE_TARGETS archive)
+
+# Samples are EXCLUDE_FROM_ALL: a plain build of the default target builds the
+# library and the examples but no sample. Build one sample with
+#     cmake --build build --config Debug --target <name>
+# (only that executable is relinked), or every sample on demand with
+#     cmake --build build --config Debug --target all_samples
+add_custom_target(all_samples)
+
+foreach(sample ${SAMPLE_TARGETS})
+    set(SAMPLE_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/samples/${sample}/${sample}.f90")
+    if(EXISTS "${SAMPLE_SOURCE}")
+        # A sample name can collide with another target name; such a sample
+        # builds as "<name>_sample" so both targets can coexist.
+        set(SAMPLE_TARGET ${sample})
+        if(TARGET ${sample})
+            set(SAMPLE_TARGET ${sample}_sample)
+        endif()
+        add_executable(${SAMPLE_TARGET} EXCLUDE_FROM_ALL ${SAMPLE_SOURCE} $<$<BOOL:${WIN32}>:${KWXF_RC_FILE}>)
+        add_dependencies(all_samples ${SAMPLE_TARGET})
+        target_link_libraries(${SAMPLE_TARGET} PRIVATE kwxFortran kwxFFI)
+        set_target_properties(${SAMPLE_TARGET} PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY ${KWXF_BIN_DIR}/$<CONFIG>
+        )
+        # Suppress console window for GUI apps (no WinMain — Fortran generates main())
+        # Console samples keep the default console subsystem so stdout/stderr work.
+        if(WIN32 AND NOT sample IN_LIST SAMPLE_CONSOLE_TARGETS)
+            if(KWXF_MSVC_ABI)
+                target_link_options(${SAMPLE_TARGET} PRIVATE "/SUBSYSTEM:WINDOWS" "/ENTRY:mainCRTStartup")
+            else()
+                target_link_options(${SAMPLE_TARGET} PRIVATE "-mwindows")
+            endif()
+        endif()
+    endif()
+endforeach()
 
 # ###################### Tests #######################
 

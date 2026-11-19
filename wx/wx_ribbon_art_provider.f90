@@ -29,7 +29,7 @@ contains
         class(wxribbonartprovider_t), intent(in) :: self
         integer(c_int), intent(in) :: id
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxRibbonArtProvider_GetColor(self%ptr, id), .false.)
+        result_object = wxcolour_from_ptr(wxRibbonArtProvider_GetColor(self%ptr, id), .true.)
     end function wx_ribbon_art_provider_get_color
 
     subroutine wx_ribbon_art_provider_get_colour_scheme(self, primary, secondary, tertiary)
@@ -68,14 +68,14 @@ contains
         class(wxribbonartprovider_t), intent(in) :: self
         integer(c_int), intent(in) :: id
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxRibbonArtProvider_GetColour(self%ptr, id), .false.)
+        result_object = wxcolour_from_ptr(wxRibbonArtProvider_GetColour(self%ptr, id), .true.)
     end function wx_ribbon_art_provider_get_colour
 
     function wx_ribbon_art_provider_get_font(self, id) result(result_object)
         class(wxribbonartprovider_t), intent(in) :: self
         integer(c_int), intent(in) :: id
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxRibbonArtProvider_GetFont(self%ptr, id), .false.)
+        result_object = wxfont_from_ptr(wxRibbonArtProvider_GetFont(self%ptr, id), .true.)
     end function wx_ribbon_art_provider_get_font
 
     subroutine wx_ribbon_art_provider_set_colour(self, id, colour)

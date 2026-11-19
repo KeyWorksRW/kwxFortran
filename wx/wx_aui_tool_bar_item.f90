@@ -9,6 +9,7 @@ module wx_aui_tool_bar_item
 
     public :: wx_aui_tool_bar_item_create_default
     public :: wx_aui_tool_bar_item_create
+    public :: wx_aui_tool_bar_item_delete
     public :: wx_aui_tool_bar_item_copy
     public :: wx_aui_tool_bar_item_assign
     public :: wx_aui_tool_bar_item_set_window
@@ -64,11 +65,20 @@ contains
         result_object = wxauitoolbaritem_from_ptr(wxAuiToolBarItem_Create(self%ptr), .false.)
     end function wx_aui_tool_bar_item_create
 
+    subroutine wx_aui_tool_bar_item_delete(self)
+        class(wxauitoolbaritem_t), intent(inout) :: self
+        if (self%owned .and. c_associated(self%ptr)) then
+            call wxAuiToolBarItem_Delete(self%ptr)
+        end if
+        self%ptr = c_null_ptr
+        self%owned = .false.
+    end subroutine wx_aui_tool_bar_item_delete
+
     function wx_aui_tool_bar_item_copy(self, source) result(result_object)
         class(wxauitoolbaritem_t), intent(in) :: self
         class(wxauitoolbaritem_t), intent(in) :: source
         type(wxauitoolbaritem_t) :: result_object
-        result_object = wxauitoolbaritem_from_ptr(wxAuiToolBarItem_Copy(self%ptr, source%ptr), .false.)
+        result_object = wxauitoolbaritem_from_ptr(wxAuiToolBarItem_Copy(self%ptr, source%ptr), .true.)
     end function wx_aui_tool_bar_item_copy
 
     subroutine wx_aui_tool_bar_item_assign(self, source)
@@ -237,7 +247,7 @@ contains
     function wx_aui_tool_bar_item_get_min_size(self) result(result_object)
         class(wxauitoolbaritem_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxAuiToolBarItem_GetMinSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxAuiToolBarItem_GetMinSize(self%ptr), .true.)
     end function wx_aui_tool_bar_item_get_min_size
 
     subroutine wx_aui_tool_bar_item_set_spacer_pixels(self, spacerpixels)

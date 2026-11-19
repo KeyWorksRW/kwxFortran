@@ -7,14 +7,22 @@ module wx_drop_target
     private
 
     public :: wx_drop_target_get_data
+    public :: wx_drop_target_get_data_object
     public :: wx_drop_target_set_data_object
 
 contains
 
-    subroutine wx_drop_target_get_data(self)
+    function wx_drop_target_get_data(self) result(result_value)
         class(wxdroptarget_t), intent(in) :: self
-        call wxDropTarget_GetData(self%ptr)
-    end subroutine wx_drop_target_get_data
+        logical :: result_value
+        result_value = (wxDropTarget_GetData(self%ptr) /= 0)
+    end function wx_drop_target_get_data
+
+    function wx_drop_target_get_data_object(self) result(result_object)
+        class(wxdroptarget_t), intent(in) :: self
+        type(wxdataobject_t) :: result_object
+        result_object = wxdataobject_from_ptr(wxDropTarget_GetDataObject(self%ptr), .false.)
+    end function wx_drop_target_get_data_object
 
     subroutine wx_drop_target_set_data_object(self, dataobject)
         class(wxdroptarget_t), intent(in) :: self

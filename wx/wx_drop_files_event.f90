@@ -16,7 +16,7 @@ contains
     function wx_drop_files_event_get_position(self) result(result_object)
         class(wxdropfilesevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxDropFilesEvent_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxDropFilesEvent_GetPosition(self%ptr), .true.)
     end function wx_drop_files_event_get_position
 
     function wx_drop_files_event_get_number_of_files(self) result(result_value)

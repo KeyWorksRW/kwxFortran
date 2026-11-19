@@ -3,7 +3,7 @@ module wx_locale
     use, intrinsic :: iso_c_binding
     use kwx_types
     use kwxffi
-    use wx_string, only: to_wxstring, from_wxstring, from_cstring
+    use wx_string, only: to_wxstring, from_wxstring, from_cstring, free_cstring
     implicit none
     private
 
@@ -250,6 +250,7 @@ contains
         szdomain_ptr = to_wxstring(szdomain)
         result_text_ptr = wxLocale_GetString(self%ptr, szorigstring_ptr, szdomain_ptr)
         result_text = from_cstring(result_text_ptr)
+        call free_cstring(result_text_ptr)
         call wxString_Delete(szorigstring_ptr)
         call wxString_Delete(szdomain_ptr)
     end function wx_locale_get_string

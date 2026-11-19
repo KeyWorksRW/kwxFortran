@@ -10,9 +10,14 @@ module wx_data_view_ctrl
     public :: wx_data_view_ctrl_set_header_attr
     public :: wx_data_view_ctrl_enable
     public :: wx_data_view_ctrl_enable_drag_source
+    public :: wx_data_view_ctrl_enable_drop_target
     public :: wx_data_view_ctrl_set_background_colour
     public :: wx_data_view_ctrl_set_focus
     public :: wx_data_view_ctrl_set_foreground_colour
+    public :: wx_data_view_ctrl_get_sorting_column_count
+    public :: wx_data_view_ctrl_get_sorting_column_at
+    public :: wx_data_view_ctrl_generic_get_header
+    public :: wx_data_view_ctrl_hit_test_column_position
     public :: wx_data_view_ctrl_create
     public :: wx_data_view_ctrl_associate_model
     public :: wx_data_view_ctrl_get_model
@@ -94,6 +99,13 @@ contains
         result_value = (wxDataViewCtrl_EnableDragSource(self%ptr, format%ptr) /= 0)
     end function wx_data_view_ctrl_enable_drag_source
 
+    function wx_data_view_ctrl_enable_drop_target(self, format) result(result_value)
+        class(wxdataviewctrl_t), intent(in) :: self
+        class(wxdataformat_t), intent(in) :: format
+        logical :: result_value
+        result_value = (wxDataViewCtrl_EnableDropTarget(self%ptr, format%ptr) /= 0)
+    end function wx_data_view_ctrl_enable_drop_target
+
     function wx_data_view_ctrl_set_background_colour(self, colour) result(result_value)
         class(wxdataviewctrl_t), intent(in) :: self
         class(wxcolour_t), intent(in) :: colour
@@ -109,9 +121,37 @@ contains
     function wx_data_view_ctrl_set_foreground_colour(self, colour) result(result_value)
         class(wxdataviewctrl_t), intent(in) :: self
         class(wxcolour_t), intent(in) :: colour
-        logical :: result_value
-        result_value = (wxDataViewCtrl_SetForegroundColour(self%ptr, colour%ptr) /= 0)
+        integer(c_int) :: result_value
+        result_value = wxDataViewCtrl_SetForegroundColour(self%ptr, colour%ptr)
     end function wx_data_view_ctrl_set_foreground_colour
+
+    function wx_data_view_ctrl_get_sorting_column_count(self) result(result_value)
+        class(wxdataviewctrl_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxDataViewCtrl_GetSortingColumnCount(self%ptr)
+    end function wx_data_view_ctrl_get_sorting_column_count
+
+    function wx_data_view_ctrl_get_sorting_column_at(self, pos) result(result_object)
+        class(wxdataviewctrl_t), intent(in) :: self
+        integer(c_int), intent(in) :: pos
+        type(wxdataviewcolumn_t) :: result_object
+        result_object = wxdataviewcolumn_from_ptr(wxDataViewCtrl_GetSortingColumnAt(self%ptr, pos), .false.)
+    end function wx_data_view_ctrl_get_sorting_column_at
+
+    function wx_data_view_ctrl_generic_get_header(self) result(result_object)
+        class(wxdataviewctrl_t), intent(in) :: self
+        type(wxheaderctrl_t) :: result_object
+        result_object = wxheaderctrl_from_ptr(wxDataViewCtrl_GenericGetHeader(self%ptr), .false.)
+    end function wx_data_view_ctrl_generic_get_header
+
+    function wx_data_view_ctrl_hit_test_column_position(self, x, y, item) result(result_value)
+        class(wxdataviewctrl_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        class(wxdataviewitem_t), intent(in) :: item
+        integer(c_int) :: result_value
+        result_value = wxDataViewCtrl_HitTestColumnPosition(self%ptr, x, y, item%ptr)
+    end function wx_data_view_ctrl_hit_test_column_position
 
     function wx_data_view_ctrl_create(parent, id, x, y, width, height, style) result(result_object)
         class(wxwindow_t), intent(in) :: parent

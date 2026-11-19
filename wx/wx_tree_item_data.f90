@@ -31,7 +31,7 @@ contains
     function wx_tree_item_data_get_id(self) result(result_object)
         class(wxtreeitemdata_t), intent(in) :: self
         type(wxtreeitemid_t) :: result_object
-        result_object = wxtreeitemid_from_ptr(wxTreeItemData_GetId(self%ptr), .false.)
+        result_object = wxtreeitemid_from_ptr(wxTreeItemData_GetId(self%ptr), .true.)
     end function wx_tree_item_data_get_id
 
     subroutine wx_tree_item_data_set_id(self, id)

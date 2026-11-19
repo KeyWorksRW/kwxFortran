@@ -15,6 +15,9 @@ module wx_graphics_context
     public :: wx_graphics_context_create_from_unknown_dc
     public :: wx_graphics_context_create_linear_gradient_brush
     public :: wx_graphics_context_create_pen
+    public :: wx_graphics_context_create_pen_from_info
+    public :: wx_graphics_context_create_linear_gradient_brush_from_stops
+    public :: wx_graphics_context_create_radial_gradient_brush_from_stops
     public :: wx_graphics_context_create_radial_gradient_brush
     public :: wx_graphics_context_create_sub_bitmap
     public :: wx_graphics_context_end_layer
@@ -34,6 +37,7 @@ module wx_graphics_context
     public :: wx_graphics_context_create_path
     public :: wx_graphics_context_delete
     public :: wx_graphics_context_draw_bitmap
+    public :: wx_graphics_context_draw_graphics_bitmap
     public :: wx_graphics_context_draw_ellipse
     public :: wx_graphics_context_draw_icon
     public :: wx_graphics_context_draw_lines
@@ -126,6 +130,38 @@ contains
         result_object = wxgraphicspen_from_ptr(wxGraphicsContext_CreatePen(self%ptr, pen%ptr), .false.)
     end function wx_graphics_context_create_pen
 
+    function wx_graphics_context_create_pen_from_info(self, info) result(result_object)
+        class(wxgraphicscontext_t), intent(in) :: self
+        class(wxgraphicspeninfo_t), intent(in) :: info
+        type(wxgraphicspen_t) :: result_object
+        result_object = wxgraphicspen_from_ptr(wxGraphicsContext_CreatePenFromInfo(self%ptr, info%ptr), .false.)
+    end function wx_graphics_context_create_pen_from_info
+
+    function wx_graphics_context_create_linear_gradient_brush_from_stops(self, x1, y1, x2, y2, stops, matrix) result(result_object)
+        class(wxgraphicscontext_t), intent(in) :: self
+        real(c_double), intent(in) :: x1
+        real(c_double), intent(in) :: y1
+        real(c_double), intent(in) :: x2
+        real(c_double), intent(in) :: y2
+        class(wxgraphicsgradientstops_t), intent(in) :: stops
+        class(wxgraphicsmatrix_t), intent(in) :: matrix
+        type(wxgraphicsbrush_t) :: result_object
+        result_object = wxgraphicsbrush_from_ptr(wxGraphicsContext_CreateLinearGradientBrushFromStops(self%ptr, x1, y1, x2, y2, stops%ptr, matrix%ptr), .false.)
+    end function wx_graphics_context_create_linear_gradient_brush_from_stops
+
+    function wx_graphics_context_create_radial_gradient_brush_from_stops(self, startx, starty, endx, endy, radius, stops, matrix) result(result_object)
+        class(wxgraphicscontext_t), intent(in) :: self
+        real(c_double), intent(in) :: startx
+        real(c_double), intent(in) :: starty
+        real(c_double), intent(in) :: endx
+        real(c_double), intent(in) :: endy
+        real(c_double), intent(in) :: radius
+        class(wxgraphicsgradientstops_t), intent(in) :: stops
+        class(wxgraphicsmatrix_t), intent(in) :: matrix
+        type(wxgraphicsbrush_t) :: result_object
+        result_object = wxgraphicsbrush_from_ptr(wxGraphicsContext_CreateRadialGradientBrushFromStops(self%ptr, startx, starty, endx, endy, radius, stops%ptr, matrix%ptr), .false.)
+    end function wx_graphics_context_create_radial_gradient_brush_from_stops
+
     function wx_graphics_context_create_radial_gradient_brush(self, startx, starty, endx, endy, radius, ocolor, ccolor, matrix) result(result_object)
         class(wxgraphicscontext_t), intent(in) :: self
         real(c_double), intent(in) :: startx
@@ -160,7 +196,7 @@ contains
         class(wxgraphicscontext_t), intent(in) :: self
         class(wxsize_t), intent(in) :: sz
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxGraphicsContext_FromDIP(self%ptr, sz%ptr), .false.)
+        result_object = wxsize_from_ptr(wxGraphicsContext_FromDIP(self%ptr, sz%ptr), .true.)
     end function wx_graphics_context_from_dip
 
     function wx_graphics_context_set_antialias_mode(self, antialias) result(result_value)
@@ -276,6 +312,16 @@ contains
         real(c_double), intent(in) :: height
         call wxGraphicsContext_DrawBitmap(self%ptr, bmp%ptr, x, y, width, height)
     end subroutine wx_graphics_context_draw_bitmap
+
+    subroutine wx_graphics_context_draw_graphics_bitmap(self, bmp, x, y, width, height)
+        class(wxgraphicscontext_t), intent(in) :: self
+        class(wxgraphicsbitmap_t), intent(in) :: bmp
+        real(c_double), intent(in) :: x
+        real(c_double), intent(in) :: y
+        real(c_double), intent(in) :: width
+        real(c_double), intent(in) :: height
+        call wxGraphicsContext_DrawGraphicsBitmap(self%ptr, bmp%ptr, x, y, width, height)
+    end subroutine wx_graphics_context_draw_graphics_bitmap
 
     subroutine wx_graphics_context_draw_ellipse(self, x, y, width, height)
         class(wxgraphicscontext_t), intent(in) :: self

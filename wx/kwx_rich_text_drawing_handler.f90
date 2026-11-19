@@ -14,11 +14,21 @@ module kwx_rich_text_drawing_handler
     public :: kwx_rich_text_drawing_handler_set_on_get_virtual_subobject_c791
     public :: kwx_rich_text_drawing_handler_set_on_has_virtual_text
     public :: kwx_rich_text_drawing_handler_set_on_get_virtual_text
+    public :: kwx_rich_text_drawing_handler_set_on_has_virtual_attribute_dbdc
+    public :: kwx_rich_text_drawing_handler_set_on_get_virtual_attribute_61b8
+    public :: kwx_rich_text_drawing_handler_set_on_get_virtual_subobject_c7_2
+    public :: kwx_rich_text_drawing_handler_set_on_has_virtual_text_with_data
+    public :: kwx_rich_text_drawing_handler_set_on_get_virtual_text_with_data
     public :: kwx_rich_text_drawing_handler_set_virtual_text_result
     public :: kwx_rich_text_drawing_handler_set_has_virtual_attributes_result
     public :: kwx_rich_text_drawing_handler_set_get_virtual_attributes_result
     public :: kwx_rich_text_drawing_handler_set_get_virtual_subobject_at_b730
     public :: kwx_rich_text_drawing_handler_set_has_virtual_text_result
+    interface kwx_rich_text_drawing_handler_set_on_get_virtual_subobject_c791
+        module procedure kwx_rich_text_drawing_handler_set_on_get_virtual_subobject_c791
+        module procedure kwx_rich_text_drawing_handler_set_on_get_virtual_subobject_c7_2
+    end interface
+
 
 contains
 
@@ -71,6 +81,41 @@ contains
         type(c_ptr), intent(in), value :: pfunction
         call kwxRichTextDrawingHandler_SetOnGetVirtualText(self%ptr, pfunction)
     end subroutine kwx_rich_text_drawing_handler_set_on_get_virtual_text
+
+    subroutine kwx_rich_text_drawing_handler_set_on_has_virtual_attribute_dbdc(self, pfunction, data)
+        class(kwxrichtextdrawinghandler_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextDrawingHandler_SetOnHasVirtualAttributesWithData(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_drawing_handler_set_on_has_virtual_attribute_dbdc
+
+    subroutine kwx_rich_text_drawing_handler_set_on_get_virtual_attribute_61b8(self, pfunction, data)
+        class(kwxrichtextdrawinghandler_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextDrawingHandler_SetOnGetVirtualAttributesWithData(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_drawing_handler_set_on_get_virtual_attribute_61b8
+
+    subroutine kwx_rich_text_drawing_handler_set_on_get_virtual_subobject_c7_2(self, pfunction, data)
+        class(kwxrichtextdrawinghandler_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextDrawingHandler_SetOnGetVirtualSubobjectAttribut_5fbc(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_drawing_handler_set_on_get_virtual_subobject_c7_2
+
+    subroutine kwx_rich_text_drawing_handler_set_on_has_virtual_text_with_data(self, pfunction, data)
+        class(kwxrichtextdrawinghandler_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextDrawingHandler_SetOnHasVirtualTextWithData(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_drawing_handler_set_on_has_virtual_text_with_data
+
+    subroutine kwx_rich_text_drawing_handler_set_on_get_virtual_text_with_data(self, pfunction, data)
+        class(kwxrichtextdrawinghandler_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextDrawingHandler_SetOnGetVirtualTextWithData(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_drawing_handler_set_on_get_virtual_text_with_data
 
     subroutine kwx_rich_text_drawing_handler_set_virtual_text_result(self, text)
         class(kwxrichtextdrawinghandler_t), intent(in) :: self

@@ -40,7 +40,7 @@ contains
         integer(c_int), intent(in) :: row
         integer(c_int), intent(in) :: col
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxGridBagSizer_GetCellSize(self%ptr, row, col), .false.)
+        result_object = wxsize_from_ptr(wxGridBagSizer_GetCellSize(self%ptr, row, col), .true.)
     end function wx_grid_bag_sizer_get_cell_size
 
     function wx_grid_bag_sizer_find_item(self, window) result(result_object)

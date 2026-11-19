@@ -14,13 +14,13 @@ contains
     function wx_dpi_changed_event_get_old_dpi(self) result(result_object)
         class(wxdpichangedevent_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxDPIChangedEvent_GetOldDPI(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxDPIChangedEvent_GetOldDPI(self%ptr), .true.)
     end function wx_dpi_changed_event_get_old_dpi
 
     function wx_dpi_changed_event_get_new_dpi(self) result(result_object)
         class(wxdpichangedevent_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxDPIChangedEvent_GetNewDPI(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxDPIChangedEvent_GetNewDPI(self%ptr), .true.)
     end function wx_dpi_changed_event_get_new_dpi
 
 end module wx_dpi_changed_event

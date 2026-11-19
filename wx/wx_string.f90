@@ -81,11 +81,16 @@ contains
         integer(c_size_t) :: slen
         integer :: idx
 
-        fstring = ""
-        if (.not. c_associated(cstr)) return
+        if (.not. c_associated(cstr)) then
+            fstring = ""
+            return
+        end if
 
         slen = c_strlen(cstr)
-        if (slen <= 0) return
+        if (slen <= 0) then
+            fstring = ""
+            return
+        end if
 
         allocate(character(len=int(slen)) :: fstring)
         call c_f_pointer(cstr, chars, [int(slen)])

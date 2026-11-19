@@ -11,6 +11,7 @@ module wx_cursor
     public :: wx_cursor_create_from_stock
     public :: wx_cursor_create_from_image
     public :: wx_cursor_create_load
+    public :: wx_cursor_create_from_xpm_string
 
 contains
 
@@ -49,5 +50,14 @@ contains
         result_object%owned = .true.
         call wxString_Delete(name_ptr)
     end function wx_cursor_create_load
+
+    function wx_cursor_create_from_xpm_string(xpm) result(result_object)
+        character(len=*), intent(in) :: xpm
+        character(kind=c_char, len=:), allocatable, target :: xpm_c
+        type(wxcursor_t) :: result_object
+        xpm_c = trim(xpm) // c_null_char
+        result_object%ptr = Cursor_CreateFromXPMString(c_loc(xpm_c))
+        result_object%owned = .true.
+    end function wx_cursor_create_from_xpm_string
 
 end module wx_cursor

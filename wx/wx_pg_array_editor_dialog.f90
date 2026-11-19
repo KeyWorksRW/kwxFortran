@@ -31,7 +31,7 @@ contains
     function wx_pg_array_editor_dialog_get_dialog_value(self) result(result_object)
         class(wxpgarrayeditordialog_t), intent(in) :: self
         type(wxvariant_t) :: result_object
-        result_object = wxvariant_from_ptr(wxPGArrayEditorDialog_GetDialogValue(self%ptr), .false.)
+        result_object = wxvariant_from_ptr(wxPGArrayEditorDialog_GetDialogValue(self%ptr), .true.)
     end function wx_pg_array_editor_dialog_get_dialog_value
 
     subroutine wx_pg_array_editor_dialog_enable_custom_new_action(self)

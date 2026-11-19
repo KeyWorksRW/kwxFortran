@@ -75,12 +75,12 @@ contains
 
     function wx_platform_info_get() result(result_object)
         type(wxplatforminfo_t) :: result_object
-        result_object = wxplatforminfo_from_ptr(wxPlatformInfo_Get(), .false.)
+        result_object = wxplatforminfo_from_ptr(wxPlatformInfo_Get(), .true.)
     end function wx_platform_info_get
 
     function wx_platform_info_get_current() result(result_object)
         type(wxplatforminfo_t) :: result_object
-        result_object = wxplatforminfo_from_ptr(wxPlatformInfo_GetCurrent(), .false.)
+        result_object = wxplatforminfo_from_ptr(wxPlatformInfo_GetCurrent(), .true.)
     end function wx_platform_info_get_current
 
     function wx_platform_info_get_operating_system_id_from_name(name) result(result_value)

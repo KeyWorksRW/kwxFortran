@@ -127,6 +127,11 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxEVT_AUI_PANE_ACTIVATED() &
+        bind(C, name='exp_wxEVT_AUI_PANE_ACTIVATED')
+      import :: c_int
+    end function
+
     integer(c_int) function wxEVT_AUI_PANE_BUTTON() &
         bind(C, name='exp_wxEVT_AUI_PANE_BUTTON')
       import :: c_int
@@ -139,6 +144,11 @@ module kwxffi
 
     integer(c_int) function wxEVT_AUI_PANE_MAXIMIZE() &
         bind(C, name='exp_wxEVT_AUI_PANE_MAXIMIZE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxEVT_AUI_PANE_MINIMIZE() &
+        bind(C, name='exp_wxEVT_AUI_PANE_MINIMIZE')
       import :: c_int
     end function
 
@@ -3291,289 +3301,434 @@ module kwxffi
       import :: c_int
     end function
 
-    type(c_ptr) function wxART_ADD_BOOKMARK() &
+    type(c_ptr) function expwxART_ADD_BOOKMARK() &
         bind(C, name='expwxART_ADD_BOOKMARK')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_BUTTON() &
+    type(c_ptr) function expwxART_BUTTON() &
         bind(C, name='expwxART_BUTTON')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_CDROM() &
+    type(c_ptr) function expwxART_CDROM() &
         bind(C, name='expwxART_CDROM')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_CMN_DIALOG() &
+    type(c_ptr) function expwxART_CLOSE() &
+        bind(C, name='expwxART_CLOSE')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function expwxART_CMN_DIALOG() &
         bind(C, name='expwxART_CMN_DIALOG')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_COPY() &
+    type(c_ptr) function expwxART_COPY() &
         bind(C, name='expwxART_COPY')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_CROSS_MARK() &
+    type(c_ptr) function expwxART_CROSS_MARK() &
         bind(C, name='expwxART_CROSS_MARK')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_CUT() &
+    type(c_ptr) function expwxART_CUT() &
         bind(C, name='expwxART_CUT')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_DELETE() &
+    type(c_ptr) function expwxART_DELETE() &
         bind(C, name='expwxART_DELETE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_DEL_BOOKMARK() &
+    type(c_ptr) function expwxART_DEL_BOOKMARK() &
         bind(C, name='expwxART_DEL_BOOKMARK')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_ERROR() &
+    type(c_ptr) function expwxART_EDIT() &
+        bind(C, name='expwxART_EDIT')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function expwxART_ERROR() &
         bind(C, name='expwxART_ERROR')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_EXECUTABLE_FILE() &
+    type(c_ptr) function expwxART_EXECUTABLE_FILE() &
         bind(C, name='expwxART_EXECUTABLE_FILE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_FILE_OPEN() &
+    type(c_ptr) function expwxART_FILE_OPEN() &
         bind(C, name='expwxART_FILE_OPEN')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_FILE_SAVE() &
+    type(c_ptr) function expwxART_FILE_SAVE() &
         bind(C, name='expwxART_FILE_SAVE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_FILE_SAVE_AS() &
+    type(c_ptr) function expwxART_FILE_SAVE_AS() &
         bind(C, name='expwxART_FILE_SAVE_AS')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_FIND() &
+    type(c_ptr) function expwxART_FIND() &
         bind(C, name='expwxART_FIND')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_FIND_AND_REPLACE() &
+    type(c_ptr) function expwxART_FIND_AND_REPLACE() &
         bind(C, name='expwxART_FIND_AND_REPLACE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_FLOPPY() &
+    type(c_ptr) function expwxART_FLOPPY() &
         bind(C, name='expwxART_FLOPPY')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_FOLDER() &
+    type(c_ptr) function expwxART_FOLDER() &
         bind(C, name='expwxART_FOLDER')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_FOLDER_OPEN() &
+    type(c_ptr) function expwxART_FOLDER_OPEN() &
         bind(C, name='expwxART_FOLDER_OPEN')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_FRAME_ICON() &
+    type(c_ptr) function expwxART_FRAME_ICON() &
         bind(C, name='expwxART_FRAME_ICON')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_FULL_SCREEN() &
+    type(c_ptr) function expwxART_FULL_SCREEN() &
         bind(C, name='expwxART_FULL_SCREEN')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_GO_BACK() &
+    type(c_ptr) function expwxART_GOTO_FIRST() &
+        bind(C, name='expwxART_GOTO_FIRST')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function expwxART_GOTO_LAST() &
+        bind(C, name='expwxART_GOTO_LAST')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function expwxART_GO_BACK() &
         bind(C, name='expwxART_GO_BACK')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_GO_DIR_UP() &
+    type(c_ptr) function expwxART_GO_DIR_UP() &
         bind(C, name='expwxART_GO_DIR_UP')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_GO_DOWN() &
+    type(c_ptr) function expwxART_GO_DOWN() &
         bind(C, name='expwxART_GO_DOWN')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_GO_FORWARD() &
+    type(c_ptr) function expwxART_GO_FORWARD() &
         bind(C, name='expwxART_GO_FORWARD')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_GO_HOME() &
+    type(c_ptr) function expwxART_GO_HOME() &
         bind(C, name='expwxART_GO_HOME')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_GO_TO_PARENT() &
+    type(c_ptr) function expwxART_GO_TO_PARENT() &
         bind(C, name='expwxART_GO_TO_PARENT')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_GO_UP() &
+    type(c_ptr) function expwxART_GO_UP() &
         bind(C, name='expwxART_GO_UP')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_HARDDISK() &
+    type(c_ptr) function expwxART_HARDDISK() &
         bind(C, name='expwxART_HARDDISK')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_HELP() &
+    type(c_ptr) function expwxART_HELP() &
         bind(C, name='expwxART_HELP')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_HELP_BOOK() &
+    type(c_ptr) function expwxART_HELP_BOOK() &
         bind(C, name='expwxART_HELP_BOOK')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_HELP_BROWSER() &
+    type(c_ptr) function expwxART_HELP_BROWSER() &
         bind(C, name='expwxART_HELP_BROWSER')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_HELP_FOLDER() &
+    type(c_ptr) function expwxART_HELP_FOLDER() &
         bind(C, name='expwxART_HELP_FOLDER')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_HELP_PAGE() &
+    type(c_ptr) function expwxART_HELP_PAGE() &
         bind(C, name='expwxART_HELP_PAGE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_HELP_SETTINGS() &
+    type(c_ptr) function expwxART_HELP_SETTINGS() &
         bind(C, name='expwxART_HELP_SETTINGS')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_HELP_SIDE_PANEL() &
+    type(c_ptr) function expwxART_HELP_SIDE_PANEL() &
         bind(C, name='expwxART_HELP_SIDE_PANEL')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_INFORMATION() &
+    type(c_ptr) function expwxART_INFORMATION() &
         bind(C, name='expwxART_INFORMATION')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_LIST_VIEW() &
+    type(c_ptr) function expwxART_LIST() &
+        bind(C, name='expwxART_LIST')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function expwxART_LIST_VIEW() &
         bind(C, name='expwxART_LIST_VIEW')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_MENU() &
+    type(c_ptr) function expwxART_MENU() &
         bind(C, name='expwxART_MENU')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_MESSAGE_BOX() &
+    type(c_ptr) function expwxART_MESSAGE_BOX() &
         bind(C, name='expwxART_MESSAGE_BOX')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_MISSING_IMAGE() &
+    type(c_ptr) function expwxART_MINUS() &
+        bind(C, name='expwxART_MINUS')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function expwxART_MISSING_IMAGE() &
         bind(C, name='expwxART_MISSING_IMAGE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_NEW() &
+    type(c_ptr) function expwxART_NEW() &
         bind(C, name='expwxART_NEW')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_NEW_DIR() &
+    type(c_ptr) function expwxART_NEW_DIR() &
         bind(C, name='expwxART_NEW_DIR')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_NORMAL_FILE() &
+    type(c_ptr) function expwxART_NORMAL_FILE() &
         bind(C, name='expwxART_NORMAL_FILE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_OTHER() &
+    type(c_ptr) function expwxART_OTHER() &
         bind(C, name='expwxART_OTHER')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_PASTE() &
+    type(c_ptr) function expwxART_PASTE() &
         bind(C, name='expwxART_PASTE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_PRINT() &
+    type(c_ptr) function expwxART_PLUS() &
+        bind(C, name='expwxART_PLUS')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function expwxART_PRINT() &
         bind(C, name='expwxART_PRINT')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_QUESTION() &
+    type(c_ptr) function expwxART_QUESTION() &
         bind(C, name='expwxART_QUESTION')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_QUIT() &
+    type(c_ptr) function expwxART_QUIT() &
         bind(C, name='expwxART_QUIT')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_REDO() &
+    type(c_ptr) function expwxART_REDO() &
         bind(C, name='expwxART_REDO')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_REMOVABLE() &
+    type(c_ptr) function expwxART_REFRESH() &
+        bind(C, name='expwxART_REFRESH')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function expwxART_REMOVABLE() &
         bind(C, name='expwxART_REMOVABLE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_REPORT_VIEW() &
+    type(c_ptr) function expwxART_REPORT_VIEW() &
         bind(C, name='expwxART_REPORT_VIEW')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_TICK_MARK() &
+    type(c_ptr) function expwxART_STOP() &
+        bind(C, name='expwxART_STOP')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function expwxART_TICK_MARK() &
         bind(C, name='expwxART_TICK_MARK')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_TIP() &
+    type(c_ptr) function expwxART_TIP() &
         bind(C, name='expwxART_TIP')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_TOOLBAR() &
+    type(c_ptr) function expwxART_TOOLBAR() &
         bind(C, name='expwxART_TOOLBAR')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_UNDO() &
+    type(c_ptr) function expwxART_UNDO() &
         bind(C, name='expwxART_UNDO')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxART_WARNING() &
+    type(c_ptr) function expwxART_WARNING() &
         bind(C, name='expwxART_WARNING')
       import :: c_ptr
+    end function
+
+    type(c_ptr) function expwxART_WX_LOGO() &
+        bind(C, name='expwxART_WX_LOGO')
+      import :: c_ptr
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_CLOSE() &
+        bind(C, name='expwxAUI_BUTTON_CLOSE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_CUSTOM1() &
+        bind(C, name='expwxAUI_BUTTON_CUSTOM1')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_CUSTOM2() &
+        bind(C, name='expwxAUI_BUTTON_CUSTOM2')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_CUSTOM3() &
+        bind(C, name='expwxAUI_BUTTON_CUSTOM3')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_DOWN() &
+        bind(C, name='expwxAUI_BUTTON_DOWN')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_LEFT() &
+        bind(C, name='expwxAUI_BUTTON_LEFT')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_MAXIMIZE_RESTORE() &
+        bind(C, name='expwxAUI_BUTTON_MAXIMIZE_RESTORE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_MINIMIZE() &
+        bind(C, name='expwxAUI_BUTTON_MINIMIZE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_OPTIONS() &
+        bind(C, name='expwxAUI_BUTTON_OPTIONS')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_PIN() &
+        bind(C, name='expwxAUI_BUTTON_PIN')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_RIGHT() &
+        bind(C, name='expwxAUI_BUTTON_RIGHT')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_STATE_CHECKED() &
+        bind(C, name='expwxAUI_BUTTON_STATE_CHECKED')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_STATE_DISABLED() &
+        bind(C, name='expwxAUI_BUTTON_STATE_DISABLED')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_STATE_HIDDEN() &
+        bind(C, name='expwxAUI_BUTTON_STATE_HIDDEN')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_STATE_HOVER() &
+        bind(C, name='expwxAUI_BUTTON_STATE_HOVER')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_STATE_NORMAL() &
+        bind(C, name='expwxAUI_BUTTON_STATE_NORMAL')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_STATE_PRESSED() &
+        bind(C, name='expwxAUI_BUTTON_STATE_PRESSED')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_UP() &
+        bind(C, name='expwxAUI_BUTTON_UP')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_BUTTON_WINDOWLIST() &
+        bind(C, name='expwxAUI_BUTTON_WINDOWLIST')
+      import :: c_int
     end function
 
     integer(c_int) function wxAUI_DOCKART_ACTIVE_CAPTION_COLOUR() &
@@ -3646,6 +3801,41 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxAUI_DOCK_BOTTOM() &
+        bind(C, name='expwxAUI_DOCK_BOTTOM')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_DOCK_CENTER() &
+        bind(C, name='expwxAUI_DOCK_CENTER')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_DOCK_CENTRE() &
+        bind(C, name='expwxAUI_DOCK_CENTRE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_DOCK_LEFT() &
+        bind(C, name='expwxAUI_DOCK_LEFT')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_DOCK_NONE() &
+        bind(C, name='expwxAUI_DOCK_NONE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_DOCK_RIGHT() &
+        bind(C, name='expwxAUI_DOCK_RIGHT')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_DOCK_TOP() &
+        bind(C, name='expwxAUI_DOCK_TOP')
+      import :: c_int
+    end function
+
     integer(c_int) function wxAUI_GRADIENT_HORIZONTAL() &
         bind(C, name='expwxAUI_GRADIENT_HORIZONTAL')
       import :: c_int
@@ -3661,6 +3851,21 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxAUI_INSERT_DOCK() &
+        bind(C, name='expwxAUI_INSERT_DOCK')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_INSERT_PANE() &
+        bind(C, name='expwxAUI_INSERT_PANE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_INSERT_ROW() &
+        bind(C, name='expwxAUI_INSERT_ROW')
+      import :: c_int
+    end function
+
     integer(c_int) function wxAUI_MGR_ALLOW_ACTIVE_PANE() &
         bind(C, name='expwxAUI_MGR_ALLOW_ACTIVE_PANE')
       import :: c_int
@@ -3671,6 +3876,11 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxAUI_MGR_DEFAULT() &
+        bind(C, name='expwxAUI_MGR_DEFAULT')
+      import :: c_int
+    end function
+
     integer(c_int) function wxAUI_MGR_HINT_FADE() &
         bind(C, name='expwxAUI_MGR_HINT_FADE')
       import :: c_int
@@ -3678,6 +3888,11 @@ module kwxffi
 
     integer(c_int) function wxAUI_MGR_LIVE_RESIZE() &
         bind(C, name='expwxAUI_MGR_LIVE_RESIZE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_MGR_NO_VENETIAN_BLINDS_FADE() &
+        bind(C, name='expwxAUI_MGR_NO_VENETIAN_BLINDS_FADE')
       import :: c_int
     end function
 
@@ -3746,6 +3961,11 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxAUI_NB_MIDDLE_CLICK_CLOSE() &
+        bind(C, name='expwxAUI_NB_MIDDLE_CLICK_CLOSE')
+      import :: c_int
+    end function
+
     integer(c_int) function wxAUI_NB_MULTILINE() &
         bind(C, name='expwxAUI_NB_MULTILINE')
       import :: c_int
@@ -3796,8 +4016,28 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxAUI_TAB_LOCKED() &
+        bind(C, name='expwxAUI_TAB_LOCKED')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_TAB_NORMAL() &
+        bind(C, name='expwxAUI_TAB_NORMAL')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_TAB_PINNED() &
+        bind(C, name='expwxAUI_TAB_PINNED')
+      import :: c_int
+    end function
+
     integer(c_int) function wxAUI_TB_DEFAULT_STYLE() &
         bind(C, name='expwxAUI_TB_DEFAULT_STYLE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_TB_GRIPPER() &
+        bind(C, name='expwxAUI_TB_GRIPPER')
       import :: c_int
     end function
 
@@ -3806,13 +4046,33 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxAUI_TB_HORZ_LAYOUT() &
+        bind(C, name='expwxAUI_TB_HORZ_LAYOUT')
+      import :: c_int
+    end function
+
     integer(c_int) function wxAUI_TB_HORZ_TEXT() &
         bind(C, name='expwxAUI_TB_HORZ_TEXT')
       import :: c_int
     end function
 
+    integer(c_int) function wxAUI_TB_NO_AUTORESIZE() &
+        bind(C, name='expwxAUI_TB_NO_AUTORESIZE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_TB_NO_TOOLTIPS() &
+        bind(C, name='expwxAUI_TB_NO_TOOLTIPS')
+      import :: c_int
+    end function
+
     integer(c_int) function wxAUI_TB_OVERFLOW() &
         bind(C, name='expwxAUI_TB_OVERFLOW')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxAUI_TB_PLAIN_BACKGROUND() &
+        bind(C, name='expwxAUI_TB_PLAIN_BACKGROUND')
       import :: c_int
     end function
 
@@ -3898,6 +4158,11 @@ module kwxffi
 
     integer(c_int) function wxBG_STYLE_PAINT() &
         bind(C, name='expwxBG_STYLE_PAINT')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxBG_STYLE_SYSTEM() &
+        bind(C, name='expwxBG_STYLE_SYSTEM')
       import :: c_int
     end function
 
@@ -4216,6 +4481,11 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxBORDER() &
+        bind(C, name='expwxBORDER')
+      import :: c_int
+    end function
+
     integer(c_int) function wxBORDER_DEFAULT() &
         bind(C, name='expwxBORDER_DEFAULT')
       import :: c_int
@@ -4338,6 +4608,56 @@ module kwxffi
 
     integer(c_int) function wxBRUSHSTYLE_VERTICAL_HATCH() &
         bind(C, name='expwxBRUSHSTYLE_VERTICAL_HATCH')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxBRUSH_STOCK_BLACK() &
+        bind(C, name='expwxBRUSH_STOCK_BLACK')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxBRUSH_STOCK_BLUE() &
+        bind(C, name='expwxBRUSH_STOCK_BLUE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxBRUSH_STOCK_CYAN() &
+        bind(C, name='expwxBRUSH_STOCK_CYAN')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxBRUSH_STOCK_GREEN() &
+        bind(C, name='expwxBRUSH_STOCK_GREEN')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxBRUSH_STOCK_GREY() &
+        bind(C, name='expwxBRUSH_STOCK_GREY')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxBRUSH_STOCK_LIGHT_GREY() &
+        bind(C, name='expwxBRUSH_STOCK_LIGHT_GREY')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxBRUSH_STOCK_MEDIUM_GREY() &
+        bind(C, name='expwxBRUSH_STOCK_MEDIUM_GREY')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxBRUSH_STOCK_RED() &
+        bind(C, name='expwxBRUSH_STOCK_RED')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxBRUSH_STOCK_TRANSPARENT() &
+        bind(C, name='expwxBRUSH_STOCK_TRANSPARENT')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxBRUSH_STOCK_WHITE() &
+        bind(C, name='expwxBRUSH_STOCK_WHITE')
       import :: c_int
     end function
 
@@ -4686,6 +5006,41 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxCOLOUR_STOCK_BLACK() &
+        bind(C, name='expwxCOLOUR_STOCK_BLACK')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxCOLOUR_STOCK_BLUE() &
+        bind(C, name='expwxCOLOUR_STOCK_BLUE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxCOLOUR_STOCK_CYAN() &
+        bind(C, name='expwxCOLOUR_STOCK_CYAN')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxCOLOUR_STOCK_GREEN() &
+        bind(C, name='expwxCOLOUR_STOCK_GREEN')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxCOLOUR_STOCK_LIGHT_GREY() &
+        bind(C, name='expwxCOLOUR_STOCK_LIGHT_GREY')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxCOLOUR_STOCK_RED() &
+        bind(C, name='expwxCOLOUR_STOCK_RED')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxCOLOUR_STOCK_WHITE() &
+        bind(C, name='expwxCOLOUR_STOCK_WHITE')
+      import :: c_int
+    end function
+
     integer(c_int) function wxCOL_DEFAULT_FLAGS() &
         bind(C, name='expwxCOL_DEFAULT_FLAGS')
       import :: c_int
@@ -5021,6 +5376,16 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxColourDatabase_CSS() &
+        bind(C, name='expwxColourDatabase_CSS')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxColourDatabase_Traditional() &
+        bind(C, name='expwxColourDatabase_Traditional')
+      import :: c_int
+    end function
+
     integer(c_int) function wxDATAVIEW_CELL_ACTIVATABLE() &
         bind(C, name='expwxDATAVIEW_CELL_ACTIVATABLE')
       import :: c_int
@@ -5083,6 +5448,11 @@ module kwxffi
 
     integer(c_int) function wxDEFAULT_FRAME_STYLE() &
         bind(C, name='expwxDEFAULT_FRAME_STYLE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxDEFAULT_TEMPLATE_FLAGS() &
+        bind(C, name='expwxDEFAULT_TEMPLATE_FLAGS')
       import :: c_int
     end function
 
@@ -5291,6 +5661,11 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxDOC_NEW() &
+        bind(C, name='expwxDOC_NEW')
+      import :: c_int
+    end function
+
     integer(c_int) function wxDOC_SILENT() &
         bind(C, name='expwxDOC_SILENT')
       import :: c_int
@@ -5343,6 +5718,46 @@ module kwxffi
 
     integer(c_int) function wxDUPLEX_VERTICAL() &
         bind(C, name='expwxDUPLEX_VERTICAL')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxDVR_DEFAULT_ALIGNMENT() &
+        bind(C, name='expwxDVR_DEFAULT_ALIGNMENT')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxDV_HORIZ_RULES() &
+        bind(C, name='expwxDV_HORIZ_RULES')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxDV_MULTIPLE() &
+        bind(C, name='expwxDV_MULTIPLE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxDV_NO_HEADER() &
+        bind(C, name='expwxDV_NO_HEADER')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxDV_ROW_LINES() &
+        bind(C, name='expwxDV_ROW_LINES')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxDV_SINGLE() &
+        bind(C, name='expwxDV_SINGLE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxDV_VARIABLE_LINE_HEIGHT() &
+        bind(C, name='expwxDV_VARIABLE_LINE_HEIGHT')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxDV_VERT_RULES() &
+        bind(C, name='expwxDV_VERT_RULES')
       import :: c_int
     end function
 
@@ -5486,12 +5901,22 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxDebugReport_Context_Current() &
+        bind(C, name='expwxDebugReport_Context_Current')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxDebugReport_Context_Exception() &
+        bind(C, name='expwxDebugReport_Context_Exception')
+      import :: c_int
+    end function
+
     integer(c_int) function wxDefaultCoord() &
         bind(C, name='expwxDefaultCoord')
       import :: c_int
     end function
 
-    type(c_ptr) function wxDirDialogDefaultFolderStr() &
+    type(c_ptr) function expwxDirDialogDefaultFolderStr() &
         bind(C, name='expwxDirDialogDefaultFolderStr')
       import :: c_ptr
     end function
@@ -6241,6 +6666,26 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxFONT_STOCK_ITALIC() &
+        bind(C, name='expwxFONT_STOCK_ITALIC')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxFONT_STOCK_NORMAL() &
+        bind(C, name='expwxFONT_STOCK_NORMAL')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxFONT_STOCK_SMALL() &
+        bind(C, name='expwxFONT_STOCK_SMALL')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxFONT_STOCK_SWISS() &
+        bind(C, name='expwxFONT_STOCK_SWISS')
+      import :: c_int
+    end function
+
     integer(c_int) function wxFORWARD() &
         bind(C, name='expwxFORWARD')
       import :: c_int
@@ -6396,7 +6841,7 @@ module kwxffi
       import :: c_int
     end function
 
-    type(c_ptr) function wxFileSelectorDefaultWildcardStr() &
+    type(c_ptr) function expwxFileSelectorDefaultWildcardStr() &
         bind(C, name='expwxFileSelectorDefaultWildcardStr')
       import :: c_ptr
     end function
@@ -6735,6 +7180,11 @@ module kwxffi
 
     integer(c_int) function wxICON_ERROR() &
         bind(C, name='expwxICON_ERROR')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxICON_HAND() &
+        bind(C, name='expwxICON_HAND')
       import :: c_int
     end function
 
@@ -9318,6 +9768,11 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxNO_BORDER() &
+        bind(C, name='expwxNO_BORDER')
+      import :: c_int
+    end function
+
     integer(c_int) function wxNO_DEFAULT() &
         bind(C, name='expwxNO_DEFAULT')
       import :: c_int
@@ -9340,6 +9795,11 @@ module kwxffi
 
     integer(c_int) function wxNUM_VAL_SIGN_PLUS() &
         bind(C, name='expwxNUM_VAL_SIGN_PLUS')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxNUM_VAL_SIGN_SPACE() &
+        bind(C, name='expwxNUM_VAL_SIGN_SPACE')
       import :: c_int
     end function
 
@@ -9435,6 +9895,11 @@ module kwxffi
 
     integer(c_int) function wxODCB_PAINTING_SELECTED() &
         bind(C, name='expwxODCB_PAINTING_SELECTED')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxODCB_STD_CONTROL_PAINT() &
+        bind(C, name='expwxODCB_STD_CONTROL_PAINT')
       import :: c_int
     end function
 
@@ -9993,57 +10458,107 @@ module kwxffi
       import :: c_int
     end function
 
-    type(c_ptr) function wxPG_ARRAY_DELIMITER() &
+    integer(c_int) function wxPEN_STOCK_BLACK() &
+        bind(C, name='expwxPEN_STOCK_BLACK')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxPEN_STOCK_BLACK_DASHED() &
+        bind(C, name='expwxPEN_STOCK_BLACK_DASHED')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxPEN_STOCK_CYAN() &
+        bind(C, name='expwxPEN_STOCK_CYAN')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxPEN_STOCK_GREEN() &
+        bind(C, name='expwxPEN_STOCK_GREEN')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxPEN_STOCK_GREY() &
+        bind(C, name='expwxPEN_STOCK_GREY')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxPEN_STOCK_LIGHT_GREY() &
+        bind(C, name='expwxPEN_STOCK_LIGHT_GREY')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxPEN_STOCK_MEDIUM_GREY() &
+        bind(C, name='expwxPEN_STOCK_MEDIUM_GREY')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxPEN_STOCK_RED() &
+        bind(C, name='expwxPEN_STOCK_RED')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxPEN_STOCK_TRANSPARENT() &
+        bind(C, name='expwxPEN_STOCK_TRANSPARENT')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxPEN_STOCK_WHITE() &
+        bind(C, name='expwxPEN_STOCK_WHITE')
+      import :: c_int
+    end function
+
+    type(c_ptr) function expwxPG_ARRAY_DELIMITER() &
         bind(C, name='expwxPG_ARRAY_DELIMITER')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_ATTR_AUTOCOMPLETE() &
+    type(c_ptr) function expwxPG_ATTR_AUTOCOMPLETE() &
         bind(C, name='expwxPG_ATTR_AUTOCOMPLETE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_ATTR_DEFAULT_VALUE() &
+    type(c_ptr) function expwxPG_ATTR_DEFAULT_VALUE() &
         bind(C, name='expwxPG_ATTR_DEFAULT_VALUE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_ATTR_HINT() &
+    type(c_ptr) function expwxPG_ATTR_HINT() &
         bind(C, name='expwxPG_ATTR_HINT')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_ATTR_MAX() &
+    type(c_ptr) function expwxPG_ATTR_MAX() &
         bind(C, name='expwxPG_ATTR_MAX')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_ATTR_MIN() &
+    type(c_ptr) function expwxPG_ATTR_MIN() &
         bind(C, name='expwxPG_ATTR_MIN')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_ATTR_MULTICHOICE_USERSTRINGMODE() &
+    type(c_ptr) function expwxPG_ATTR_MULTICHOICE_USERSTRINGMODE() &
         bind(C, name='expwxPG_ATTR_MULTICHOICE_USERSTRINGMODE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_ATTR_SPINCTRL_MOTION() &
+    type(c_ptr) function expwxPG_ATTR_SPINCTRL_MOTION() &
         bind(C, name='expwxPG_ATTR_SPINCTRL_MOTION')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_ATTR_SPINCTRL_STEP() &
+    type(c_ptr) function expwxPG_ATTR_SPINCTRL_STEP() &
         bind(C, name='expwxPG_ATTR_SPINCTRL_STEP')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_ATTR_SPINCTRL_WRAP() &
+    type(c_ptr) function expwxPG_ATTR_SPINCTRL_WRAP() &
         bind(C, name='expwxPG_ATTR_SPINCTRL_WRAP')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_ATTR_UNITS() &
+    type(c_ptr) function expwxPG_ATTR_UNITS() &
         bind(C, name='expwxPG_ATTR_UNITS')
       import :: c_ptr
     end function
@@ -10058,32 +10573,32 @@ module kwxffi
       import :: c_int
     end function
 
-    type(c_ptr) function wxPG_BOOL_USE_CHECKBOX() &
+    type(c_ptr) function expwxPG_BOOL_USE_CHECKBOX() &
         bind(C, name='expwxPG_BOOL_USE_CHECKBOX')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_BOOL_USE_DOUBLE_CLICK_CYCLING() &
+    type(c_ptr) function expwxPG_BOOL_USE_DOUBLE_CLICK_CYCLING() &
         bind(C, name='expwxPG_BOOL_USE_DOUBLE_CLICK_CYCLING')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_COLOUR_ALLOW_CUSTOM() &
+    type(c_ptr) function expwxPG_COLOUR_ALLOW_CUSTOM() &
         bind(C, name='expwxPG_COLOUR_ALLOW_CUSTOM')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_COLOUR_HAS_ALPHA() &
+    type(c_ptr) function expwxPG_COLOUR_HAS_ALPHA() &
         bind(C, name='expwxPG_COLOUR_HAS_ALPHA')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_DATE_FORMAT() &
+    type(c_ptr) function expwxPG_DATE_FORMAT() &
         bind(C, name='expwxPG_DATE_FORMAT')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_DATE_PICKER_STYLE() &
+    type(c_ptr) function expwxPG_DATE_PICKER_STYLE() &
         bind(C, name='expwxPG_DATE_PICKER_STYLE')
       import :: c_ptr
     end function
@@ -10093,7 +10608,7 @@ module kwxffi
       import :: c_int
     end function
 
-    type(c_ptr) function wxPG_DIALOG_TITLE() &
+    type(c_ptr) function expwxPG_DIALOG_TITLE() &
         bind(C, name='expwxPG_DIALOG_TITLE')
       import :: c_ptr
     end function
@@ -10163,32 +10678,32 @@ module kwxffi
       import :: c_int
     end function
 
-    type(c_ptr) function wxPG_FILE_DIALOG_STYLE() &
+    type(c_ptr) function expwxPG_FILE_DIALOG_STYLE() &
         bind(C, name='expwxPG_FILE_DIALOG_STYLE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_FILE_INITIAL_PATH() &
+    type(c_ptr) function expwxPG_FILE_INITIAL_PATH() &
         bind(C, name='expwxPG_FILE_INITIAL_PATH')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_FILE_SHOW_FULL_PATH() &
+    type(c_ptr) function expwxPG_FILE_SHOW_FULL_PATH() &
         bind(C, name='expwxPG_FILE_SHOW_FULL_PATH')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_FILE_SHOW_RELATIVE_PATH() &
+    type(c_ptr) function expwxPG_FILE_SHOW_RELATIVE_PATH() &
         bind(C, name='expwxPG_FILE_SHOW_RELATIVE_PATH')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_FILE_WILDCARD() &
+    type(c_ptr) function expwxPG_FILE_WILDCARD() &
         bind(C, name='expwxPG_FILE_WILDCARD')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_FLOAT_PRECISION() &
+    type(c_ptr) function expwxPG_FLOAT_PRECISION() &
         bind(C, name='expwxPG_FLOAT_PRECISION')
       import :: c_ptr
     end function
@@ -10223,7 +10738,7 @@ module kwxffi
       import :: c_int
     end function
 
-    type(c_ptr) function wxPG_LABEL() &
+    type(c_ptr) function expwxPG_LABEL() &
         bind(C, name='expwxPG_LABEL')
       import :: c_ptr
     end function
@@ -10253,7 +10768,7 @@ module kwxffi
       import :: c_int
     end function
 
-    type(c_ptr) function wxPG_STRING_PASSWORD() &
+    type(c_ptr) function expwxPG_STRING_PASSWORD() &
         bind(C, name='expwxPG_STRING_PASSWORD')
       import :: c_ptr
     end function
@@ -10268,12 +10783,12 @@ module kwxffi
       import :: c_int
     end function
 
-    type(c_ptr) function wxPG_UINT_BASE() &
+    type(c_ptr) function expwxPG_UINT_BASE() &
         bind(C, name='expwxPG_UINT_BASE')
       import :: c_ptr
     end function
 
-    type(c_ptr) function wxPG_UINT_PREFIX() &
+    type(c_ptr) function expwxPG_UINT_PREFIX() &
         bind(C, name='expwxPG_UINT_PREFIX')
       import :: c_ptr
     end function
@@ -10512,6 +11027,11 @@ module kwxffi
 
     integer(c_int) function wxPROPSHEET_TOOLBOOK() &
         bind(C, name='expwxPROPSHEET_TOOLBOOK')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxRAISED_BORDER() &
+        bind(C, name='expwxRAISED_BORDER')
       import :: c_int
     end function
 
@@ -11240,6 +11760,11 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxRichTextFormattingDialog_Option_AllowPixelFontSize() &
+        bind(C, name='expwxRichTextFormattingDialog_Option_AllowPixelFontSize')
+      import :: c_int
+    end function
+
     integer(c_int) function wxSASH_BOTTOM() &
         bind(C, name='expwxSASH_BOTTOM')
       import :: c_int
@@ -11477,6 +12002,11 @@ module kwxffi
 
     integer(c_int) function wxSIGTRAP() &
         bind(C, name='expwxSIGTRAP')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxSIMPLE_BORDER() &
+        bind(C, name='expwxSIMPLE_BORDER')
       import :: c_int
     end function
 
@@ -11785,6 +12315,11 @@ module kwxffi
       import :: c_ptr
     end function
 
+    integer(c_int) function wxSTATIC_BORDER() &
+        bind(C, name='expwxSTATIC_BORDER')
+      import :: c_int
+    end function
+
     integer(c_int) function wxSTAY_ON_TOP() &
         bind(C, name='expwxSTAY_ON_TOP')
       import :: c_int
@@ -11882,6 +12417,11 @@ module kwxffi
 
     integer(c_int) function wxST_WRAP() &
         bind(C, name='expwxST_WRAP')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxSUNKEN_BORDER() &
+        bind(C, name='expwxSUNKEN_BORDER')
       import :: c_int
     end function
 
@@ -12385,6 +12925,26 @@ module kwxffi
       import :: c_int
     end function
 
+    integer(c_int) function wxStaticBitmapBase_Scale_AspectFill() &
+        bind(C, name='expwxStaticBitmapBase_Scale_AspectFill')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxStaticBitmapBase_Scale_AspectFit() &
+        bind(C, name='expwxStaticBitmapBase_Scale_AspectFit')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxStaticBitmapBase_Scale_Fill() &
+        bind(C, name='expwxStaticBitmapBase_Scale_Fill')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxStaticBitmapBase_Scale_None() &
+        bind(C, name='expwxStaticBitmapBase_Scale_None')
+      import :: c_int
+    end function
+
     integer(c_int) function wxStrip_Accel() &
         bind(C, name='expwxStrip_Accel')
       import :: c_int
@@ -12447,6 +13007,16 @@ module kwxffi
 
     integer(c_int) function wxStyle_WithThousandsSep() &
         bind(C, name='expwxStyle_WithThousandsSep')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxSysMetric_CursorSize() &
+        bind(C, name='expwxSysMetric_CursorSize')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxSysMetric_Other() &
+        bind(C, name='expwxSysMetric_Other')
       import :: c_int
     end function
 
@@ -12597,6 +13167,16 @@ module kwxffi
 
     integer(c_int) function wxTC_RIGHTJUSTIFY() &
         bind(C, name='expwxTC_RIGHTJUSTIFY')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxTEMPLATE_INVISIBLE() &
+        bind(C, name='expwxTEMPLATE_INVISIBLE')
+      import :: c_int
+    end function
+
+    integer(c_int) function wxTEMPLATE_VISIBLE() &
+        bind(C, name='expwxTEMPLATE_VISIBLE')
       import :: c_int
     end function
 
@@ -13290,6 +13870,11 @@ module kwxffi
       import :: c_int
     end function
 
+    type(c_ptr) function expwxTRACE_OleCalls() &
+        bind(C, name='expwxTRACE_OleCalls')
+      import :: c_ptr
+    end function
+
     integer(c_int) function wxTRANSPARENT() &
         bind(C, name='expwxTRANSPARENT')
       import :: c_int
@@ -13490,7 +14075,7 @@ module kwxffi
       import :: c_int
     end function
 
-    type(c_ptr) function wxVERSION_NUM_DOT_STRING() &
+    type(c_ptr) function expwxVERSION_NUM_DOT_STRING() &
         bind(C, name='expwxVERSION_NUM_DOT_STRING')
       import :: c_ptr
     end function
@@ -13961,6 +14546,242 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end subroutine
 
+    subroutine wxAccessible_SetOnGetSelections(pObject, pFunction) &
+        bind(C, name='wxAccessible_SetOnGetSelections')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine wxAccessible_SetOnHitTestWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnHitTestWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetLocationWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetLocationWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnNavigateWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnNavigateWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetNameWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetNameWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetChildCountWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetChildCountWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetChildWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetChildWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetParentWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetParentWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnDoDefaultActionWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnDoDefaultActionWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetDefaultActionWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetDefaultActionWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetDescriptionWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetDescriptionWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetHelpTextWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetHelpTextWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetKeyboardShortcutWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetKeyboardShortcutWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetRoleWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetRoleWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetStateWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetStateWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetValueWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetValueWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnSelectWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnSelectWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetFocusWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetFocusWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetOnGetSelectionsWithData(pObject, pFunction, data_) &
+        bind(C, name='wxAccessible_SetOnGetSelectionsWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxAccessible_SetHookResult(pObject, result_) &
+        bind(C, name='wxAccessible_SetHookResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxAccessible_SetHitTestResult(pObject, childId, childObject) &
+        bind(C, name='wxAccessible_SetHitTestResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: childId
+      type(c_ptr), value :: childObject
+    end subroutine
+
+    subroutine wxAccessible_SetGetLocationResult(pObject, x, y, width, height) &
+        bind(C, name='wxAccessible_SetGetLocationResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+    end subroutine
+
+    subroutine wxAccessible_SetNavigateResult(pObject, toId, toObject) &
+        bind(C, name='wxAccessible_SetNavigateResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: toId
+      type(c_ptr), value :: toObject
+    end subroutine
+
+    subroutine wxAccessible_SetGetChildCountResult(pObject, childCount) &
+        bind(C, name='wxAccessible_SetGetChildCountResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: childCount
+    end subroutine
+
+    subroutine wxAccessible_SetGetChildResult(pObject, child) &
+        bind(C, name='wxAccessible_SetGetChildResult')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: child
+    end subroutine
+
+    subroutine wxAccessible_SetGetParentResult(pObject, parent) &
+        bind(C, name='wxAccessible_SetGetParentResult')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+    end subroutine
+
+    subroutine wxAccessible_SetGetRoleResult(pObject, role) &
+        bind(C, name='wxAccessible_SetGetRoleResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: role
+    end subroutine
+
+    subroutine wxAccessible_SetGetStateResult(pObject, state) &
+        bind(C, name='wxAccessible_SetGetStateResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: state
+    end subroutine
+
+    subroutine wxAccessible_SetGetFocusResult(pObject, childId, child) &
+        bind(C, name='wxAccessible_SetGetFocusResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: childId
+      type(c_ptr), value :: child
+    end subroutine
+
+    ! kwxAccString
+
+    subroutine kwxAccString_SetValue(name, value_) &
+        bind(C, name='kwxAccString_SetValue')
+      import :: c_ptr
+      type(c_ptr), value :: name
+      type(c_ptr), value :: value_
+    end subroutine
+
     ! wxWindow
 
     subroutine wxWindow_SetAccessible(pObject, accessible) &
@@ -14149,6 +14970,14 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: width
       type(c_ptr), value :: height
+    end subroutine
+
+    subroutine wxWindow_SetSizeWH(pObject, width, height) &
+        bind(C, name='wxWindow_SetSizeWH')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: width
+      integer(c_int), value :: height
     end subroutine
 
     subroutine wxWindow_WindowToClientSize(pObject, width, height) &
@@ -14551,6 +15380,29 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
       integer(c_int), value :: value_
+    end function
+
+    type(c_ptr) function wxWindow_FromDIPSize(pObject, width, height) &
+        bind(C, name='wxWindow_FromDIPSize')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+    end function
+
+    type(c_ptr) function wxWindow_FromDIPSizeForWindow(width, height, window) &
+        bind(C, name='wxWindow_FromDIPSizeForWindow')
+      import :: c_int, c_ptr
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      type(c_ptr), value :: window
+    end function
+
+    type(c_ptr) function wxWindow_FromDIPSizeDefault(width, height) &
+        bind(C, name='wxWindow_FromDIPSizeDefault')
+      import :: c_int, c_ptr
+      integer(c_int), value :: width
+      integer(c_int), value :: height
     end function
 
     integer(c_int) function wxWindow_HasCapture(pObject) &
@@ -15032,6 +15884,19 @@ module kwxffi
       integer(c_int), value :: width
       integer(c_int), value :: height
       integer(c_int), value :: style
+    end function
+
+    type(c_ptr) function wxWindow_CreateWithBackgroundStyle(parent, id, x, y, width, height, style, backgroundStyle) &
+        bind(C, name='wxWindow_CreateWithBackgroundStyle')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: parent
+      integer(c_int), value :: id
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      integer(c_int), value :: style
+      integer(c_int), value :: backgroundStyle
     end function
 
     integer(c_int) function wxWindow_Destroy(pObject) &
@@ -15577,6 +16442,13 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: cursor
     end function
+
+    subroutine wxWindow_SetCursorBundle(pObject, bundle) &
+        bind(C, name='wxWindow_SetCursorBundle')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: bundle
+    end subroutine
 
     subroutine wxWindow_SetDropTarget(pObject, dropTarget) &
         bind(C, name='wxWindow_SetDropTarget')
@@ -16992,6 +17864,12 @@ module kwxffi
       type(c_ptr), value :: data_
     end function
 
+    type(c_ptr) function wxBitmap_CreateFromXPMString(xpm) &
+        bind(C, name='wxBitmap_CreateFromXPMString')
+      import :: c_ptr
+      type(c_ptr), value :: xpm
+    end function
+
     type(c_ptr) function wxBitmap_CreateLoad(name, type_) &
         bind(C, name='wxBitmap_CreateLoad')
       import :: c_int, c_ptr
@@ -18233,6 +19111,12 @@ module kwxffi
       integer(c_long), value :: type_
       integer(c_int), value :: width
       integer(c_int), value :: height
+    end function
+
+    type(c_ptr) function Cursor_CreateFromXPMString(xpm) &
+        bind(C, name='Cursor_CreateFromXPMString')
+      import :: c_ptr
+      type(c_ptr), value :: xpm
     end function
 
     ! wxDateTime
@@ -20281,12 +21165,29 @@ module kwxffi
       type(c_ptr), value :: rect
     end function
 
+    integer(c_int) function wxDragImage_BeginDragFullScreenDefault(pObject, x_pos, y_pos, window, fullScreen) &
+        bind(C, name='wxDragImage_BeginDragFullScreenDefault')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: x_pos
+      integer(c_int), value :: y_pos
+      type(c_ptr), value :: window
+      integer(c_int), value :: fullScreen
+    end function
+
     type(c_ptr) function wxDragImage_Create(image, x, y) &
         bind(C, name='wxDragImage_Create')
       import :: c_int, c_ptr
       type(c_ptr), value :: image
       integer(c_int), value :: x
       integer(c_int), value :: y
+    end function
+
+    type(c_ptr) function wxDragImage_CreateWithCursor(image, cursor) &
+        bind(C, name='wxDragImage_CreateWithCursor')
+      import :: c_ptr
+      type(c_ptr), value :: image
+      type(c_ptr), value :: cursor
     end function
 
     subroutine wxDragImage_Delete(pObject) &
@@ -20417,6 +21318,19 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
       integer(c_int), value :: skip
+    end subroutine
+
+    integer(c_int) function wxEvent_StopPropagation(pObject) &
+        bind(C, name='wxEvent_StopPropagation')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxEvent_ResumePropagation(pObject, propagationLevel) &
+        bind(C, name='wxEvent_ResumePropagation')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: propagationLevel
     end subroutine
 
     subroutine wxEvent_SetOnClone(pObject, pFunction) &
@@ -20714,6 +21628,20 @@ module kwxffi
       type(c_ptr), value :: self
     end function
 
+    ! wxStringInputStream
+
+    type(c_ptr) function wxStringInputStream_Create(str) &
+        bind(C, name='wxStringInputStream_Create')
+      import :: c_ptr
+      type(c_ptr), value :: str
+    end function
+
+    subroutine wxStringInputStream_Delete(self) &
+        bind(C, name='wxStringInputStream_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: self
+    end subroutine
+
     ! wxFrame
 
     subroutine wxFrame_Centre(pObject, orientation) &
@@ -21003,6 +21931,11 @@ module kwxffi
         bind(C, name='wxGCDC_CreateFromPrinter')
       import :: c_ptr
       type(c_ptr), value :: dc
+    end function
+
+    type(c_ptr) function wxGCDC_CreateDefault() &
+        bind(C, name='wxGCDC_CreateDefault')
+      import :: c_ptr
     end function
 
     subroutine wxGCDC_Delete(pObject) &
@@ -21375,6 +22308,38 @@ module kwxffi
       type(c_ptr), value :: pen
     end function
 
+    type(c_ptr) function wxGraphicsContext_CreatePenFromInfo(pObject, info) &
+        bind(C, name='wxGraphicsContext_CreatePenFromInfo')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: info
+    end function
+
+    type(c_ptr) function wxGraphicsContext_CreateLinearGradientBrushFromStops(pObject, x1, y1, x2, y2, stops, matrix) &
+        bind(C, name='wxGraphicsContext_CreateLinearGradientBrushFromStops')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: pObject
+      real(c_double), value :: x1
+      real(c_double), value :: y1
+      real(c_double), value :: x2
+      real(c_double), value :: y2
+      type(c_ptr), value :: stops
+      type(c_ptr), value :: matrix
+    end function
+
+    type(c_ptr) function wxGraphicsContext_CreateRadialGradientBrushFromStops(pObject, startX, startY, endX, endY, radius, stops, matrix) &
+        bind(C, name='wxGraphicsContext_CreateRadialGradientBrushFromStops')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: pObject
+      real(c_double), value :: startX
+      real(c_double), value :: startY
+      real(c_double), value :: endX
+      real(c_double), value :: endY
+      real(c_double), value :: radius
+      type(c_ptr), value :: stops
+      type(c_ptr), value :: matrix
+    end function
+
     type(c_ptr) function wxGraphicsContext_CreateRadialGradientBrush(pObject, startX, startY, endX, endY, radius, oColor, cColor, matrix) &
         bind(C, name='wxGraphicsContext_CreateRadialGradientBrush')
       import :: c_double, c_ptr
@@ -21512,6 +22477,17 @@ module kwxffi
 
     subroutine wxGraphicsContext_DrawBitmap(pObject, bmp, x, y, width, height) &
         bind(C, name='wxGraphicsContext_DrawBitmap')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: bmp
+      real(c_double), value :: x
+      real(c_double), value :: y
+      real(c_double), value :: width
+      real(c_double), value :: height
+    end subroutine
+
+    subroutine wxGraphicsContext_DrawGraphicsBitmap(pObject, bmp, x, y, width, height) &
+        bind(C, name='wxGraphicsContext_DrawGraphicsBitmap')
       import :: c_double, c_ptr
       type(c_ptr), value :: pObject
       type(c_ptr), value :: bmp
@@ -21907,6 +22883,14 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
+    ! wxGraphicsBitmap
+
+    subroutine wxGraphicsBitmap_Delete(pObject) &
+        bind(C, name='wxGraphicsBitmap_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
     ! wxGraphicsPath
 
     subroutine wxGraphicsPath_AddArc(pObject, x, y, r, startAngle, endAngle, clockwise) &
@@ -22089,6 +23073,132 @@ module kwxffi
       type(c_ptr), value :: pObject
     end subroutine
 
+    ! wxGraphicsGradientStops
+
+    type(c_ptr) function wxGraphicsGradientStops_Create(startColour, endColour) &
+        bind(C, name='wxGraphicsGradientStops_Create')
+      import :: c_ptr
+      type(c_ptr), value :: startColour
+      type(c_ptr), value :: endColour
+    end function
+
+    subroutine wxGraphicsGradientStops_Add(pObject, colour, pos) &
+        bind(C, name='wxGraphicsGradientStops_Add')
+      import :: c_float, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colour
+      real(c_float), value :: pos
+    end subroutine
+
+    integer(c_size_t) function wxGraphicsGradientStops_GetCount(pObject) &
+        bind(C, name='wxGraphicsGradientStops_GetCount')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxGraphicsGradientStops_GetStartColour(pObject) &
+        bind(C, name='wxGraphicsGradientStops_GetStartColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxGraphicsGradientStops_SetStartColour(pObject, colour) &
+        bind(C, name='wxGraphicsGradientStops_SetStartColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colour
+    end subroutine
+
+    type(c_ptr) function wxGraphicsGradientStops_GetEndColour(pObject) &
+        bind(C, name='wxGraphicsGradientStops_GetEndColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxGraphicsGradientStops_SetEndColour(pObject, colour) &
+        bind(C, name='wxGraphicsGradientStops_SetEndColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colour
+    end subroutine
+
+    subroutine wxGraphicsGradientStops_Delete(pObject) &
+        bind(C, name='wxGraphicsGradientStops_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    ! wxGraphicsPenInfo
+
+    type(c_ptr) function wxGraphicsPenInfo_Create(colour, width, style) &
+        bind(C, name='wxGraphicsPenInfo_Create')
+      import :: c_double, c_int, c_ptr
+      type(c_ptr), value :: colour
+      real(c_double), value :: width
+      integer(c_int), value :: style
+    end function
+
+    subroutine wxGraphicsPenInfo_Delete(pObject) &
+        bind(C, name='wxGraphicsPenInfo_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxGraphicsPenInfo_SetWidth(pObject, width) &
+        bind(C, name='wxGraphicsPenInfo_SetWidth')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: pObject
+      real(c_double), value :: width
+    end subroutine
+
+    subroutine wxGraphicsPenInfo_SetLinearGradient(pObject, x1, y1, x2, y2, c1, c2) &
+        bind(C, name='wxGraphicsPenInfo_SetLinearGradient')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: pObject
+      real(c_double), value :: x1
+      real(c_double), value :: y1
+      real(c_double), value :: x2
+      real(c_double), value :: y2
+      type(c_ptr), value :: c1
+      type(c_ptr), value :: c2
+    end subroutine
+
+    subroutine wxGraphicsPenInfo_SetLinearGradientStops(pObject, x1, y1, x2, y2, stops) &
+        bind(C, name='wxGraphicsPenInfo_SetLinearGradientStops')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: pObject
+      real(c_double), value :: x1
+      real(c_double), value :: y1
+      real(c_double), value :: x2
+      real(c_double), value :: y2
+      type(c_ptr), value :: stops
+    end subroutine
+
+    subroutine wxGraphicsPenInfo_SetRadialGradient(pObject, startX, startY, endX, endY, radius, oColor, cColor) &
+        bind(C, name='wxGraphicsPenInfo_SetRadialGradient')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: pObject
+      real(c_double), value :: startX
+      real(c_double), value :: startY
+      real(c_double), value :: endX
+      real(c_double), value :: endY
+      real(c_double), value :: radius
+      type(c_ptr), value :: oColor
+      type(c_ptr), value :: cColor
+    end subroutine
+
+    subroutine wxGraphicsPenInfo_SetRadialGradientStops(pObject, startX, startY, endX, endY, radius, stops) &
+        bind(C, name='wxGraphicsPenInfo_SetRadialGradientStops')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: pObject
+      real(c_double), value :: startX
+      real(c_double), value :: startY
+      real(c_double), value :: endX
+      real(c_double), value :: endY
+      real(c_double), value :: radius
+      type(c_ptr), value :: stops
+    end subroutine
+
     ! wxGraphicsRenderer
 
     type(c_ptr) function wxGraphicsRenderer_CreateContext(pObject, dc) &
@@ -22103,6 +23213,20 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
       type(c_ptr), value :: window
+    end function
+
+    type(c_ptr) function wxGraphicsRenderer_CreateContextFromMemory(pObject, dc) &
+        bind(C, name='wxGraphicsRenderer_CreateContextFromMemory')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: dc
+    end function
+
+    type(c_ptr) function wxGraphicsRenderer_CreateContextFromUnknownDC(pObject, dc) &
+        bind(C, name='wxGraphicsRenderer_CreateContextFromUnknownDC')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: dc
     end function
 
     type(c_ptr) function wxGraphicsRenderer_CreateContextFromNativeContext(pObject, context) &
@@ -22130,6 +23254,12 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
     end subroutine
+
+    type(c_ptr) function wxGraphicsRenderer_GetCairoRenderer(pObject) &
+        bind(C, name='wxGraphicsRenderer_GetCairoRenderer')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
 
     type(c_ptr) function wxGraphicsRenderer_GetDefaultRenderer(pObject) &
         bind(C, name='wxGraphicsRenderer_GetDefaultRenderer')
@@ -24031,6 +25161,13 @@ module kwxffi
       integer(c_size_t), value :: data_
     end function
 
+    integer(c_size_t) function wxListCtrl_GetItemPtrData(pObject, item) &
+        bind(C, name='wxListCtrl_GetItemPtrData')
+      import :: c_long, c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+      integer(c_long), value :: item
+    end function
+
     type(c_ptr) function wxListCtrl_GetItemTextColour(pObject, item) &
         bind(C, name='wxListCtrl_GetItemTextColour')
       import :: c_long, c_ptr
@@ -24714,9 +25851,9 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
-    integer(c_int) function wxListEvent_GetData(pObject) &
+    integer(c_size_t) function wxListEvent_GetData(pObject) &
         bind(C, name='wxListEvent_GetData')
-      import :: c_int, c_ptr
+      import :: c_ptr, c_size_t
       type(c_ptr), value :: pObject
     end function
 
@@ -25033,6 +26170,11 @@ module kwxffi
       import :: c_long, c_ptr
       type(c_ptr), value :: title
       integer(c_long), value :: style
+    end function
+
+    type(c_ptr) function wxMenu_CreateDefault() &
+        bind(C, name='wxMenu_CreateDefault')
+      import :: c_ptr
     end function
 
     subroutine wxMenu_DeleteById(pObject, id) &
@@ -26527,6 +27669,13 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
+    integer(c_int) function wxObject_IsOfClass(pObject, className) &
+        bind(C, name='wxObject_IsOfClass')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: className
+    end function
+
     subroutine wxObject_SetClientClosure(pObject, closure) &
         bind(C, name='wxObject_SetClientClosure')
       import :: c_ptr
@@ -27494,6 +28643,31 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: x
       type(c_ptr), value :: y
+    end subroutine
+
+    subroutine wxScrolledWindow_EnableAutoScrollInside(pObject, insideWidth) &
+        bind(C, name='wxScrolledWindow_EnableAutoScrollInside')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: insideWidth
+    end subroutine
+
+    subroutine wxScrolledWindow_DisableAutoScrollOutside(pObject) &
+        bind(C, name='wxScrolledWindow_DisableAutoScrollOutside')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxScrolledWindow_EnableAutoscrollWithoutCapture(pObject) &
+        bind(C, name='wxScrolledWindow_EnableAutoscrollWithoutCapture')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxScrolledWindow_DisableAutoscrollWithoutCapture(pObject) &
+        bind(C, name='wxScrolledWindow_DisableAutoscrollWithoutCapture')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
     end subroutine
 
     ! wxSockAddress
@@ -34686,6 +35860,180 @@ module kwxffi
       integer(c_int), value :: no_conversion
     end subroutine
 
+    ! wxXmlDocument
+
+    integer(c_int) function wxXmlDocument_LoadFile(pObject, filename, flags) &
+        bind(C, name='wxXmlDocument_LoadFile')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: filename
+      integer(c_int), value :: flags
+    end function
+
+    integer(c_int) function wxXmlDocument_LoadStream(pObject, stream, flags) &
+        bind(C, name='wxXmlDocument_LoadStream')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: stream
+      integer(c_int), value :: flags
+    end function
+
+    integer(c_int) function wxXmlDocument_SaveFile(pObject, filename, indentstep) &
+        bind(C, name='wxXmlDocument_SaveFile')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: filename
+      integer(c_int), value :: indentstep
+    end function
+
+    integer(c_int) function wxXmlDocument_SaveStream(pObject, stream, indentstep) &
+        bind(C, name='wxXmlDocument_SaveStream')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: stream
+      integer(c_int), value :: indentstep
+    end function
+
+    type(c_ptr) function wxXmlDocument_Create() &
+        bind(C, name='wxXmlDocument_Create')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function wxXmlDocument_GetDocumentNode(pObject) &
+        bind(C, name='wxXmlDocument_GetDocumentNode')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxXmlDocument_CreateFromFile(file_name, flags) &
+        bind(C, name='wxXmlDocument_CreateFromFile')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: file_name
+      integer(c_int), value :: flags
+    end function
+
+    type(c_ptr) function wxXmlDocument_CreateFromString(text, flags) &
+        bind(C, name='wxXmlDocument_CreateFromString')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: text
+      integer(c_int), value :: flags
+    end function
+
+    subroutine wxXmlDocument_Delete(pObject) &
+        bind(C, name='wxXmlDocument_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    integer(c_int) function wxXmlDocument_Load(pObject, file_name, flags) &
+        bind(C, name='wxXmlDocument_Load')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: file_name
+      integer(c_int), value :: flags
+    end function
+
+    integer(c_int) function wxXmlDocument_LoadFromString(pObject, text, flags) &
+        bind(C, name='wxXmlDocument_LoadFromString')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: text
+      integer(c_int), value :: flags
+    end function
+
+    integer(c_int) function wxXmlDocument_Save(pObject, file_name, indent_step) &
+        bind(C, name='wxXmlDocument_Save')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: file_name
+      integer(c_int), value :: indent_step
+    end function
+
+    type(c_ptr) function wxXmlDocument_SaveToString(pObject, indent_step) &
+        bind(C, name='wxXmlDocument_SaveToString')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: indent_step
+    end function
+
+    type(c_ptr) function wxXmlDocument_GetRoot(pObject) &
+        bind(C, name='wxXmlDocument_GetRoot')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxXmlDocument_SetRoot(pObject, root) &
+        bind(C, name='wxXmlDocument_SetRoot')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: root
+    end subroutine
+
+    type(c_ptr) function wxXmlDocument_DetachRoot(pObject) &
+        bind(C, name='wxXmlDocument_DetachRoot')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxXmlDocument_GetVersion(pObject) &
+        bind(C, name='wxXmlDocument_GetVersion')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxXmlDocument_SetVersion(pObject, version) &
+        bind(C, name='wxXmlDocument_SetVersion')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: version
+    end subroutine
+
+    type(c_ptr) function wxXmlDocument_GetFileEncoding(pObject) &
+        bind(C, name='wxXmlDocument_GetFileEncoding')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxXmlDocument_SetFileEncoding(pObject, encoding) &
+        bind(C, name='wxXmlDocument_SetFileEncoding')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: encoding
+    end subroutine
+
+    integer(c_int) function wxXmlDocument_GetFileType(pObject) &
+        bind(C, name='wxXmlDocument_GetFileType')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxXmlDocument_SetFileType(pObject, file_type) &
+        bind(C, name='wxXmlDocument_SetFileType')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: file_type
+    end subroutine
+
+    subroutine wxXmlDocument_AppendToProlog(pObject, node) &
+        bind(C, name='wxXmlDocument_AppendToProlog')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: node
+    end subroutine
+
+    integer(c_int) function wxXmlDocument_AppendChild(pObject, child) &
+        bind(C, name='wxXmlDocument_AppendChild')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: child
+    end function
+
+    integer(c_int) function wxXmlDocument_IsOk(pObject) &
+        bind(C, name='wxXmlDocument_IsOk')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     ! wxFSFile
 
     subroutine wxFSFile_Delete(pObject) &
@@ -35913,6 +37261,40 @@ module kwxffi
       type(c_ptr), value :: file_name
     end subroutine
 
+    ! kwxCustomBackgroundWindow
+
+    type(c_ptr) function kwxCustomBackgroundWindow_Create(parent, id, x, y, width, height, style) &
+        bind(C, name='kwxCustomBackgroundWindow_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: parent
+      integer(c_int), value :: id
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      integer(c_int), value :: style
+    end function
+
+    type(c_ptr) function kwxCustomBackgroundWindow_CreateDefault(parent, id) &
+        bind(C, name='kwxCustomBackgroundWindow_CreateDefault')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: parent
+      integer(c_int), value :: id
+    end function
+
+    subroutine kwxCustomBackgroundWindow_SetBackgroundBitmap(pObject, bitmap) &
+        bind(C, name='kwxCustomBackgroundWindow_SetBackgroundBitmap')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: bitmap
+    end subroutine
+
+    subroutine kwxCustomBackgroundWindow_ClearBackgroundBitmap(pObject) &
+        bind(C, name='kwxCustomBackgroundWindow_ClearBackgroundBitmap')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
     ! wxTimeSpan
 
     type(c_ptr) function wxTimeSpan_Create(hours, minutes) &
@@ -36940,6 +38322,14 @@ module kwxffi
       type(c_ptr), value :: command_line
     end function
 
+    integer(c_int) function wxCmdLineParser_ParseArgv(pObject, argc, argv) &
+        bind(C, name='wxCmdLineParser_ParseArgv')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: argc
+      type(c_ptr), value :: argv
+    end function
+
     integer(c_int) function wxCmdLineParser_Found(pObject, name) &
         bind(C, name='wxCmdLineParser_Found')
       import :: c_int, c_ptr
@@ -37087,6 +38477,37 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: value_
       type(c_ptr), value :: name
+    end function
+
+    type(c_ptr) function wxVariant_CreateFromDataViewIconText(text, icon, name) &
+        bind(C, name='wxVariant_CreateFromDataViewIconText')
+      import :: c_ptr
+      type(c_ptr), value :: text
+      type(c_ptr), value :: icon
+      type(c_ptr), value :: name
+    end function
+
+    type(c_ptr) function wxVariant_CreateFromDataViewCheckIconText(text, icon, checkedState, name) &
+        bind(C, name='wxVariant_CreateFromDataViewCheckIconText')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: text
+      type(c_ptr), value :: icon
+      integer(c_int), value :: checkedState
+      type(c_ptr), value :: name
+    end function
+
+    integer(c_int) function wxVariant_GetDataViewIconText(pObject, result_) &
+        bind(C, name='wxVariant_GetDataViewIconText')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: result_
+    end function
+
+    integer(c_int) function wxVariant_GetDataViewCheckIconText(pObject, result_) &
+        bind(C, name='wxVariant_GetDataViewCheckIconText')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: result_
     end function
 
     subroutine wxVariant_SetName(pObject, name) &
@@ -37331,6 +38752,216 @@ module kwxffi
         bind(C, name='wxVariant_GetDouble')
       import :: c_double, c_ptr
       type(c_ptr), value :: pObject
+    end function
+
+    ! wxDebugReport
+
+    type(c_ptr) function wxDebugReport_Create() &
+        bind(C, name='wxDebugReport_Create')
+      import :: c_ptr
+    end function
+
+    subroutine wxDebugReport_Delete(pObject) &
+        bind(C, name='wxDebugReport_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    type(c_ptr) function wxDebugReport_GetDirectory(pObject) &
+        bind(C, name='wxDebugReport_GetDirectory')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDebugReport_IsOk(pObject) &
+        bind(C, name='wxDebugReport_IsOk')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDebugReport_Reset(pObject) &
+        bind(C, name='wxDebugReport_Reset')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDebugReport_AddFile(pObject, filename, description) &
+        bind(C, name='wxDebugReport_AddFile')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: filename
+      type(c_ptr), value :: description
+    end subroutine
+
+    integer(c_int) function wxDebugReport_AddText(pObject, filename, text, description) &
+        bind(C, name='wxDebugReport_AddText')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: filename
+      type(c_ptr), value :: text
+      type(c_ptr), value :: description
+    end function
+
+    integer(c_int) function wxDebugReport_AddContext(pObject, ctx) &
+        bind(C, name='wxDebugReport_AddContext')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: ctx
+    end function
+
+    integer(c_int) function wxDebugReport_AddCurrentContext(pObject) &
+        bind(C, name='wxDebugReport_AddCurrentContext')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDebugReport_AddExceptionContext(pObject) &
+        bind(C, name='wxDebugReport_AddExceptionContext')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDebugReport_AddDump(pObject, ctx) &
+        bind(C, name='wxDebugReport_AddDump')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: ctx
+    end function
+
+    integer(c_int) function wxDebugReport_AddCurrentDump(pObject) &
+        bind(C, name='wxDebugReport_AddCurrentDump')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDebugReport_AddExceptionDump(pObject) &
+        bind(C, name='wxDebugReport_AddExceptionDump')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDebugReport_AddAll(pObject, context) &
+        bind(C, name='wxDebugReport_AddAll')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: context
+    end subroutine
+
+    integer(c_int) function wxDebugReport_Process(pObject) &
+        bind(C, name='wxDebugReport_Process')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDebugReport_GetReportName(pObject) &
+        bind(C, name='wxDebugReport_GetReportName')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_size_t) function wxDebugReport_GetFilesCount(pObject) &
+        bind(C, name='wxDebugReport_GetFilesCount')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDebugReport_GetFileName(pObject, index) &
+        bind(C, name='wxDebugReport_GetFileName')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+      integer(c_size_t), value :: index
+    end function
+
+    type(c_ptr) function wxDebugReport_GetFileDescription(pObject, index) &
+        bind(C, name='wxDebugReport_GetFileDescription')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+      integer(c_size_t), value :: index
+    end function
+
+    subroutine wxDebugReport_RemoveFile(pObject, name) &
+        bind(C, name='wxDebugReport_RemoveFile')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: name
+    end subroutine
+
+    ! wxDebugReportCompress
+
+    type(c_ptr) function wxDebugReportCompress_Create() &
+        bind(C, name='wxDebugReportCompress_Create')
+      import :: c_ptr
+    end function
+
+    subroutine wxDebugReportCompress_Delete(pObject) &
+        bind(C, name='wxDebugReportCompress_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDebugReportCompress_SetCompressedFileDirectory(pObject, dir) &
+        bind(C, name='wxDebugReportCompress_SetCompressedFileDirectory')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: dir
+    end subroutine
+
+    subroutine wxDebugReportCompress_SetCompressedFileBaseName(pObject, name) &
+        bind(C, name='wxDebugReportCompress_SetCompressedFileBaseName')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: name
+    end subroutine
+
+    type(c_ptr) function wxDebugReportCompress_GetCompressedFileName(pObject) &
+        bind(C, name='wxDebugReportCompress_GetCompressedFileName')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    ! wxDebugReportUpload
+
+    type(c_ptr) function wxDebugReportUpload_Create(url, input, action, curl) &
+        bind(C, name='wxDebugReportUpload_Create')
+      import :: c_ptr
+      type(c_ptr), value :: url
+      type(c_ptr), value :: input
+      type(c_ptr), value :: action
+      type(c_ptr), value :: curl
+    end function
+
+    type(c_ptr) function wxDebugReportUpload_CreateDefault(url, input, action) &
+        bind(C, name='wxDebugReportUpload_CreateDefault')
+      import :: c_ptr
+      type(c_ptr), value :: url
+      type(c_ptr), value :: input
+      type(c_ptr), value :: action
+    end function
+
+    subroutine wxDebugReportUpload_Delete(pObject) &
+        bind(C, name='wxDebugReportUpload_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    ! wxDebugReportPreviewStd
+
+    type(c_ptr) function wxDebugReportPreviewStd_Create() &
+        bind(C, name='wxDebugReportPreviewStd_Create')
+      import :: c_ptr
+    end function
+
+    subroutine wxDebugReportPreviewStd_Delete(pObject) &
+        bind(C, name='wxDebugReportPreviewStd_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    integer(c_int) function wxDebugReportPreviewStd_Show(pObject, report) &
+        bind(C, name='wxDebugReportPreviewStd_Show')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: report
     end function
 
     ! wxCredentialEntryDialog
@@ -37780,6 +39411,26 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
+    subroutine wxGenericFileDialog_SetDirectory(pObject, dir) &
+        bind(C, name='wxGenericFileDialog_SetDirectory')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: dir
+    end subroutine
+
+    type(c_ptr) function wxGenericFileDialog_GetMessage(pObject) &
+        bind(C, name='wxGenericFileDialog_GetMessage')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxGenericFileDialog_SetMessage(pObject, message) &
+        bind(C, name='wxGenericFileDialog_SetMessage')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: message
+    end subroutine
+
     type(c_ptr) function wxGenericFileDialog_GetFilename(pObject) &
         bind(C, name='wxGenericFileDialog_GetFilename')
       import :: c_ptr
@@ -37824,6 +39475,12 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
       type(c_ptr), value :: customizeHook
+    end function
+
+    type(c_ptr) function wxGenericFileDialog_GetCurrentlySelectedFilename(pObject) &
+        bind(C, name='wxGenericFileDialog_GetCurrentlySelectedFilename')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
     end function
 
     subroutine wxGenericFileDialog_Delete(pObject) &
@@ -38014,6 +39671,13 @@ module kwxffi
       import :: c_double, c_ptr
       type(c_ptr), value :: pObject
       real(c_double), value :: min_value
+    end subroutine
+
+    subroutine wxNumValidator_SetPrecision(pObject, precision) &
+        bind(C, name='wxNumValidator_SetPrecision')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: precision
     end subroutine
 
     subroutine wxNumValidator_SetRange(pObject, min_value, max_value) &
@@ -41366,6 +43030,72 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end subroutine
 
+    subroutine kwxApp_SetOnOnFatalException(pObject, pFunction) &
+        bind(C, name='kwxApp_SetOnOnFatalException')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxApp_SetOnOnUnhandledException(pObject, pFunction) &
+        bind(C, name='kwxApp_SetOnOnUnhandledException')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxApp_SetOnStoreCurrentException(pObject, pFunction) &
+        bind(C, name='kwxApp_SetOnStoreCurrentException')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxApp_SetOnOnExceptionInMainLoop(pObject, pFunction) &
+        bind(C, name='kwxApp_SetOnOnExceptionInMainLoop')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxApp_SetOnRethrowStoredException(pObject, pFunction) &
+        bind(C, name='kwxApp_SetOnRethrowStoredException')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    ! kwxDebugReportUpload
+
+    type(c_ptr) function kwxDebugReportUpload_Create(pObject, url, input, action) &
+        bind(C, name='kwxDebugReportUpload_Create')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: url
+      type(c_ptr), value :: input
+      type(c_ptr), value :: action
+    end function
+
+    subroutine kwxDebugReportUpload_Delete(pObject) &
+        bind(C, name='kwxDebugReportUpload_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine kwxDebugReportUpload_SetOnOnServerReply(pObject, pFunction) &
+        bind(C, name='kwxDebugReportUpload_SetOnOnServerReply')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxDebugReportUpload_SetOnServerReplyResult(pObject, result_) &
+        bind(C, name='kwxDebugReportUpload_SetOnServerReplyResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
     ! kwxObject
 
     type(c_ptr) function kwxObject_Create(pObject) &
@@ -41436,6 +43166,36 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end subroutine
 
+    ! kwxDialog
+
+    type(c_ptr) function kwxDialog_Create(pObject, parent, id, title, x, y, width, height, style) &
+        bind(C, name='kwxDialog_Create')
+      import :: c_int, c_long, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      integer(c_int), value :: id
+      type(c_ptr), value :: title
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      integer(c_long), value :: style
+    end function
+
+    subroutine kwxDialog_SetOnTransferDataFromWindow(pObject, pFunction) &
+        bind(C, name='kwxDialog_SetOnTransferDataFromWindow')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxDialog_SetOnTransferDataToWindow(pObject, pFunction) &
+        bind(C, name='kwxDialog_SetOnTransferDataToWindow')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
     ! kwxNativeWindow
 
     type(c_ptr) function kwxNativeWindow_Create(pObject, parent, id, handle) &
@@ -41479,6 +43239,84 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
       type(c_ptr), value :: pFunction
+    end subroutine
+
+    ! kwxFrame
+
+    type(c_ptr) function kwxFrame_Create(parent, id, title, x, y, width, height, style) &
+        bind(C, name='kwxFrame_Create')
+      import :: c_int, c_long, c_ptr
+      type(c_ptr), value :: parent
+      integer(c_int), value :: id
+      type(c_ptr), value :: title
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      integer(c_long), value :: style
+    end function
+
+    subroutine kwxFrame_Delete(pObject) &
+        bind(C, name='kwxFrame_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine kwxFrame_SetCallbackObject(pObject, object) &
+        bind(C, name='kwxFrame_SetCallbackObject')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: object
+    end subroutine
+
+    type(c_ptr) function kwxFrame_GetCallbackObject(pObject) &
+        bind(C, name='kwxFrame_GetCallbackObject')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine kwxFrame_SetOnProcessEvent(pObject, pFunction) &
+        bind(C, name='kwxFrame_SetOnProcessEvent')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxFrame_SetOnProcessEventWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxFrame_SetOnProcessEventWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxFrame_SetProcessEventResult(pObject, result_) &
+        bind(C, name='kwxFrame_SetProcessEventResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxFrame_SetOnTryBefore(pObject, pFunction) &
+        bind(C, name='kwxFrame_SetOnTryBefore')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxFrame_SetOnTryBeforeWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxFrame_SetOnTryBeforeWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxFrame_SetTryBeforeResult(pObject, result_) &
+        bind(C, name='kwxFrame_SetTryBeforeResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
     end subroutine
 
     ! kwxVarHScrollHelper
@@ -42252,6 +44090,124 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end subroutine
 
+    subroutine kwxDocument_SetOnDoOpenDocumentWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxDocument_SetOnDoOpenDocumentWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxDocument_SetDoOpenDocumentResult(pObject, result_) &
+        bind(C, name='kwxDocument_SetDoOpenDocumentResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxDocument_SetOnDoSaveDocumentWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxDocument_SetOnDoSaveDocumentWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxDocument_SetDoSaveDocumentResult(pObject, result_) &
+        bind(C, name='kwxDocument_SetDoSaveDocumentResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxDocument_SetOnIsModifiedWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxDocument_SetOnIsModifiedWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxDocument_SetIsModifiedResult(pObject, result_) &
+        bind(C, name='kwxDocument_SetIsModifiedResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxDocument_SetOnModifyWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxDocument_SetOnModifyWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxDocument_SetOnOnCreateWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxDocument_SetOnOnCreateWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxDocument_SetOnCreateResult(pObject, result_) &
+        bind(C, name='kwxDocument_SetOnCreateResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxDocument_SetOnOnOpenDocumentWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxDocument_SetOnOnOpenDocumentWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxDocument_SetOnOpenDocumentResult(pObject, result_) &
+        bind(C, name='kwxDocument_SetOnOpenDocumentResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    integer(c_int) function kwxDocument_OnCreateBase(pObject, path, flags) &
+        bind(C, name='kwxDocument_OnCreateBase')
+      import :: c_int, c_long, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: path
+      integer(c_long), value :: flags
+    end function
+
+    integer(c_int) function kwxDocument_OnOpenDocumentBase(pObject, filename) &
+        bind(C, name='kwxDocument_OnOpenDocumentBase')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: filename
+    end function
+
+    integer(c_int) function kwxDocument_IsModifiedBase(pObject) &
+        bind(C, name='kwxDocument_IsModifiedBase')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine kwxDocument_ModifyBase(pObject, modified) &
+        bind(C, name='kwxDocument_ModifyBase')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: modified
+    end subroutine
+
+    type(c_ptr) function kwxDocument_CreateWithParent(pObject, parent) &
+        bind(C, name='kwxDocument_CreateWithParent')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+    end function
+
     ! kwxView
 
     type(c_ptr) function kwxView_Create(pObject) &
@@ -42293,6 +44249,138 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: pFunction
     end subroutine
+
+    subroutine kwxView_SetOnOnCreateWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxView_SetOnOnCreateWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxView_SetOnCreateResult(pObject, result_) &
+        bind(C, name='kwxView_SetOnCreateResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxView_SetOnOnCloseWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxView_SetOnOnCloseWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxView_SetOnCloseResult(pObject, result_) &
+        bind(C, name='kwxView_SetOnCloseResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    integer(c_int) function kwxView_OnCloseBase(pObject, deleteWindow) &
+        bind(C, name='kwxView_OnCloseBase')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: deleteWindow
+    end function
+
+    ! kwxDocTemplate
+
+    type(c_ptr) function kwxDocTemplate_Create(pObject, manager, descr, filter, dir, ext, docTypeName, viewTypeName, flags) &
+        bind(C, name='kwxDocTemplate_Create')
+      import :: c_long, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: manager
+      type(c_ptr), value :: descr
+      type(c_ptr), value :: filter
+      type(c_ptr), value :: dir
+      type(c_ptr), value :: ext
+      type(c_ptr), value :: docTypeName
+      type(c_ptr), value :: viewTypeName
+      integer(c_long), value :: flags
+    end function
+
+    subroutine kwxDocTemplate_SetOnCreateDocument(pObject, pFunction) &
+        bind(C, name='kwxDocTemplate_SetOnCreateDocument')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxDocTemplate_SetOnCreateView(pObject, pFunction) &
+        bind(C, name='kwxDocTemplate_SetOnCreateView')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxDocTemplate_SetCreatedDocument(pObject, doc) &
+        bind(C, name='kwxDocTemplate_SetCreatedDocument')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: doc
+    end subroutine
+
+    subroutine kwxDocTemplate_SetCreatedView(pObject, view) &
+        bind(C, name='kwxDocTemplate_SetCreatedView')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: view
+    end subroutine
+
+    ! kwxDocAuiParentFrame
+
+    type(c_ptr) function kwxDocAuiParentFrame_Create(manager, parent, id, title, x, y, width, height, style) &
+        bind(C, name='kwxDocAuiParentFrame_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: manager
+      type(c_ptr), value :: parent
+      integer(c_int), value :: id
+      type(c_ptr), value :: title
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      integer(c_int), value :: style
+    end function
+
+    type(c_ptr) function kwxDocAuiParentFrame_GetDocumentManager(self) &
+        bind(C, name='kwxDocAuiParentFrame_GetDocumentManager')
+      import :: c_ptr
+      type(c_ptr), value :: self
+    end function
+
+    ! kwxDocAuiChildFrame
+
+    type(c_ptr) function kwxDocAuiChildFrame_Create(doc, view, parent, id, title, x, y, width, height, style) &
+        bind(C, name='kwxDocAuiChildFrame_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: doc
+      type(c_ptr), value :: view
+      type(c_ptr), value :: parent
+      integer(c_int), value :: id
+      type(c_ptr), value :: title
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      integer(c_int), value :: style
+    end function
+
+    type(c_ptr) function kwxDocAuiChildFrame_GetDocument(self) &
+        bind(C, name='kwxDocAuiChildFrame_GetDocument')
+      import :: c_ptr
+      type(c_ptr), value :: self
+    end function
+
+    type(c_ptr) function kwxDocAuiChildFrame_GetView(self) &
+        bind(C, name='kwxDocAuiChildFrame_GetView')
+      import :: c_ptr
+      type(c_ptr), value :: self
+    end function
 
     ! kwxFileSystemHandler
 
@@ -42477,6 +44565,80 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end subroutine
 
+    ! kwxWizardPageSimple
+
+    type(c_ptr) function kwxWizardPageSimple_Create(pObject, parent, prev, next, bitmap) &
+        bind(C, name='kwxWizardPageSimple_Create')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: prev
+      type(c_ptr), value :: next
+      type(c_ptr), value :: bitmap
+    end function
+
+    subroutine kwxWizardPageSimple_Delete(pObject) &
+        bind(C, name='kwxWizardPageSimple_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine kwxWizardPageSimple_SetOnGetNext(pObject, pFunction) &
+        bind(C, name='kwxWizardPageSimple_SetOnGetNext')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxWizardPageSimple_SetOnGetPrev(pObject, pFunction) &
+        bind(C, name='kwxWizardPageSimple_SetOnGetPrev')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxWizardPageSimple_SetOnTransferDataFromWindow(pObject, pFunction) &
+        bind(C, name='kwxWizardPageSimple_SetOnTransferDataFromWindow')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxWizardPageSimple_SetOnTransferDataToWindow(pObject, pFunction) &
+        bind(C, name='kwxWizardPageSimple_SetOnTransferDataToWindow')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxWizardPageSimple_SetOnGetNextOut(pObject, pFunction) &
+        bind(C, name='kwxWizardPageSimple_SetOnGetNextOut')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxWizardPageSimple_SetOnGetPrevOut(pObject, pFunction) &
+        bind(C, name='kwxWizardPageSimple_SetOnGetPrevOut')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxWizardPageSimple_SetOnTransferDataFromWindowOut(pObject, pFunction) &
+        bind(C, name='kwxWizardPageSimple_SetOnTransferDataFromWindowOut')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxWizardPageSimple_SetOnTransferDataToWindowOut(pObject, pFunction) &
+        bind(C, name='kwxWizardPageSimple_SetOnTransferDataToWindowOut')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
     ! kwxPopupTransientWindow
 
     type(c_ptr) function kwxPopupTransientWindow_Create(pObject, parent, style) &
@@ -42547,6 +44709,1769 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
     end subroutine
+
+    ! wxDataViewModel
+
+    type(c_ptr) function wxDataViewModel_CreateDefault(pObject) &
+        bind(C, name='wxDataViewModel_CreateDefault')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewModel_SetOnGetValueWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnGetValueWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewModel_SetOnSetValueWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnSetValueWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewModel_SetOnGetParentWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnGetParentWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewModel_SetOnIsContainerWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnIsContainerWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewModel_SetOnGetChildrenWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnGetChildrenWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewModel_SetOnHasValueWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnHasValueWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewModel_SetOnIsEnabledWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnIsEnabledWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewModel_SetOnHasContainerColumnsWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnHasContainerColumnsWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewModel_SetOnCompareWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnCompareWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewModel_SetOnHasDefaultCompareWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnHasDefaultCompareWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewModel_SetOnResortWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnResortWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewModel_SetOnGetAttrWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewModel_SetOnGetAttrWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    integer(c_int) function wxDataViewModel_GetPendingColumn(pObject) &
+        bind(C, name='wxDataViewModel_GetPendingColumn')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewModel_GetPendingAscending(pObject) &
+        bind(C, name='wxDataViewModel_GetPendingAscending')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewModel_SetGetValueResult(pObject, value_) &
+        bind(C, name='wxDataViewModel_SetGetValueResult')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+    end subroutine
+
+    subroutine wxDataViewModel_SetSetValueResult(pObject, result_) &
+        bind(C, name='wxDataViewModel_SetSetValueResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewModel_SetGetParentResult(pObject, parent) &
+        bind(C, name='wxDataViewModel_SetGetParentResult')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+    end subroutine
+
+    subroutine wxDataViewModel_SetIsContainerResult(pObject, result_) &
+        bind(C, name='wxDataViewModel_SetIsContainerResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewModel_SetGetChildrenCountResult(pObject, count) &
+        bind(C, name='wxDataViewModel_SetGetChildrenCountResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: count
+    end subroutine
+
+    subroutine wxDataViewModel_AddChildResult(pObject, item) &
+        bind(C, name='wxDataViewModel_AddChildResult')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end subroutine
+
+    subroutine wxDataViewModel_SetHasValueResult(pObject, result_) &
+        bind(C, name='wxDataViewModel_SetHasValueResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewModel_SetIsEnabledResult(pObject, result_) &
+        bind(C, name='wxDataViewModel_SetIsEnabledResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewModel_SetHasContainerColumnsResult(pObject, result_) &
+        bind(C, name='wxDataViewModel_SetHasContainerColumnsResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewModel_SetCompareResult(pObject, result_) &
+        bind(C, name='wxDataViewModel_SetCompareResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewModel_SetHasDefaultCompareResult(pObject, result_) &
+        bind(C, name='wxDataViewModel_SetHasDefaultCompareResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewModel_SetGetAttrResult(pObject, attr) &
+        bind(C, name='wxDataViewModel_SetGetAttrResult')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: attr
+    end subroutine
+
+    subroutine wxDataViewModel_GetValue(pObject, variant, item, col) &
+        bind(C, name='wxDataViewModel_GetValue')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: variant
+      type(c_ptr), value :: item
+      integer(c_int), value :: col
+    end subroutine
+
+    integer(c_int) function wxDataViewModel_SetValue(pObject, variant, item, col) &
+        bind(C, name='wxDataViewModel_SetValue')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: variant
+      type(c_ptr), value :: item
+      integer(c_int), value :: col
+    end function
+
+    integer(c_int) function wxDataViewModel_ChangeValue(pObject, variant, item, col) &
+        bind(C, name='wxDataViewModel_ChangeValue')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: variant
+      type(c_ptr), value :: item
+      integer(c_int), value :: col
+    end function
+
+    integer(c_int) function wxDataViewModel_HasValue(pObject, item, col) &
+        bind(C, name='wxDataViewModel_HasValue')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      integer(c_int), value :: col
+    end function
+
+    integer(c_int) function wxDataViewModel_IsEnabled(pObject, item, col) &
+        bind(C, name='wxDataViewModel_IsEnabled')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      integer(c_int), value :: col
+    end function
+
+    integer(c_int) function wxDataViewModel_GetAttr(pObject, item, col, attr) &
+        bind(C, name='wxDataViewModel_GetAttr')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      integer(c_int), value :: col
+      type(c_ptr), value :: attr
+    end function
+
+    subroutine wxDataViewModel_GetParent(pObject, item, parent) &
+        bind(C, name='wxDataViewModel_GetParent')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      type(c_ptr), value :: parent
+    end subroutine
+
+    integer(c_int) function wxDataViewModel_IsContainer(pObject, item) &
+        bind(C, name='wxDataViewModel_IsContainer')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    integer(c_int) function wxDataViewModel_HasContainerColumns(pObject, item) &
+        bind(C, name='wxDataViewModel_HasContainerColumns')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    integer(c_int) function wxDataViewModel_GetChildren(pObject, item, children) &
+        bind(C, name='wxDataViewModel_GetChildren')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      type(c_ptr), value :: children
+    end function
+
+    integer(c_int) function wxDataViewModel_ItemAdded(pObject, parent, item) &
+        bind(C, name='wxDataViewModel_ItemAdded')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: item
+    end function
+
+    integer(c_int) function wxDataViewModel_ItemsAdded(pObject, parent, items) &
+        bind(C, name='wxDataViewModel_ItemsAdded')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: items
+    end function
+
+    integer(c_int) function wxDataViewModel_ItemDeleted(pObject, parent, item) &
+        bind(C, name='wxDataViewModel_ItemDeleted')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: item
+    end function
+
+    integer(c_int) function wxDataViewModel_ItemsDeleted(pObject, parent, items) &
+        bind(C, name='wxDataViewModel_ItemsDeleted')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: items
+    end function
+
+    integer(c_int) function wxDataViewModel_ItemChanged(pObject, item) &
+        bind(C, name='wxDataViewModel_ItemChanged')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    integer(c_int) function wxDataViewModel_ItemsChanged(pObject, items) &
+        bind(C, name='wxDataViewModel_ItemsChanged')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: items
+    end function
+
+    integer(c_int) function wxDataViewModel_ValueChanged(pObject, item, col) &
+        bind(C, name='wxDataViewModel_ValueChanged')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      integer(c_int), value :: col
+    end function
+
+    integer(c_int) function wxDataViewModel_Cleared(pObject) &
+        bind(C, name='wxDataViewModel_Cleared')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewModel_BeforeReset(pObject) &
+        bind(C, name='wxDataViewModel_BeforeReset')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewModel_AfterReset(pObject) &
+        bind(C, name='wxDataViewModel_AfterReset')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewModel_Compare(pObject, item1, item2, column, ascending) &
+        bind(C, name='wxDataViewModel_Compare')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item1
+      type(c_ptr), value :: item2
+      integer(c_int), value :: column
+      integer(c_int), value :: ascending
+    end function
+
+    integer(c_int) function wxDataViewModel_HasDefaultCompare(pObject) &
+        bind(C, name='wxDataViewModel_HasDefaultCompare')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewModel_Resort(pObject) &
+        bind(C, name='wxDataViewModel_Resort')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDataViewModel_IncRef(pObject) &
+        bind(C, name='wxDataViewModel_IncRef')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDataViewModel_DecRef(pObject) &
+        bind(C, name='wxDataViewModel_DecRef')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    ! wxDataViewVirtualListModel
+
+    type(c_ptr) function wxDataViewVirtualListModel_Create(pObject, initialSize) &
+        bind(C, name='wxDataViewVirtualListModel_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: initialSize
+    end function
+
+    subroutine wxDataViewVirtualListModel_SetOnGetValueByRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewVirtualListModel_SetOnGetValueByRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetOnSetValueByRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewVirtualListModel_SetOnSetValueByRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetOnGetRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewVirtualListModel_SetOnGetRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetOnGetCountWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewVirtualListModel_SetOnGetCountWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetOnGetAttrByRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewVirtualListModel_SetOnGetAttrByRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetOnIsEnabledByRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewVirtualListModel_SetOnIsEnabledByRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetOnCompareWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewVirtualListModel_SetOnCompareWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetOnHasDefaultCompareWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewVirtualListModel_SetOnHasDefaultCompareWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    integer(c_int) function wxDataViewVirtualListModel_GetPendingColumn(pObject) &
+        bind(C, name='wxDataViewVirtualListModel_GetPendingColumn')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewVirtualListModel_GetPendingRow(pObject) &
+        bind(C, name='wxDataViewVirtualListModel_GetPendingRow')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewVirtualListModel_GetPendingAscending(pObject) &
+        bind(C, name='wxDataViewVirtualListModel_GetPendingAscending')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewVirtualListModel_SetGetValueByRowResult(pObject, value_) &
+        bind(C, name='wxDataViewVirtualListModel_SetGetValueByRowResult')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetSetValueByRowResult(pObject, result_) &
+        bind(C, name='wxDataViewVirtualListModel_SetSetValueByRowResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetGetRowResult(pObject, row) &
+        bind(C, name='wxDataViewVirtualListModel_SetGetRowResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetGetCountResult(pObject, count) &
+        bind(C, name='wxDataViewVirtualListModel_SetGetCountResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: count
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetGetAttrByRowResult(pObject, result_) &
+        bind(C, name='wxDataViewVirtualListModel_SetGetAttrByRowResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetGetAttrByRowAttr(pObject, attr) &
+        bind(C, name='wxDataViewVirtualListModel_SetGetAttrByRowAttr')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: attr
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetIsEnabledByRowResult(pObject, result_) &
+        bind(C, name='wxDataViewVirtualListModel_SetIsEnabledByRowResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetCompareResult(pObject, result_) &
+        bind(C, name='wxDataViewVirtualListModel_SetCompareResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_SetHasDefaultCompareResult(pObject, result_) &
+        bind(C, name='wxDataViewVirtualListModel_SetHasDefaultCompareResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_RowPrepended(pObject) &
+        bind(C, name='wxDataViewVirtualListModel_RowPrepended')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_RowInserted(pObject, before) &
+        bind(C, name='wxDataViewVirtualListModel_RowInserted')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: before
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_RowAppended(pObject) &
+        bind(C, name='wxDataViewVirtualListModel_RowAppended')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_RowDeleted(pObject, row) &
+        bind(C, name='wxDataViewVirtualListModel_RowDeleted')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_RowsDeleted(pObject, rows) &
+        bind(C, name='wxDataViewVirtualListModel_RowsDeleted')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: rows
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_RowChanged(pObject, row) &
+        bind(C, name='wxDataViewVirtualListModel_RowChanged')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_RowValueChanged(pObject, row, col) &
+        bind(C, name='wxDataViewVirtualListModel_RowValueChanged')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+      integer(c_int), value :: col
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_Reset(pObject, newSize) &
+        bind(C, name='wxDataViewVirtualListModel_Reset')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: newSize
+    end subroutine
+
+    subroutine wxDataViewVirtualListModel_GetItem(pObject, row, result_) &
+        bind(C, name='wxDataViewVirtualListModel_GetItem')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+      type(c_ptr), value :: result_
+    end subroutine
+
+    ! wxDataViewIndexListModel
+
+    type(c_ptr) function wxDataViewIndexListModel_Create(pObject, initialSize) &
+        bind(C, name='wxDataViewIndexListModel_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: initialSize
+    end function
+
+    subroutine wxDataViewIndexListModel_SetOnGetValueByRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewIndexListModel_SetOnGetValueByRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetOnSetValueByRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewIndexListModel_SetOnSetValueByRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetOnGetRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewIndexListModel_SetOnGetRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetOnGetCountWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewIndexListModel_SetOnGetCountWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetOnGetAttrByRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewIndexListModel_SetOnGetAttrByRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetOnIsEnabledByRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewIndexListModel_SetOnIsEnabledByRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetOnCompareWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewIndexListModel_SetOnCompareWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetOnHasDefaultCompareWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewIndexListModel_SetOnHasDefaultCompareWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    integer(c_int) function wxDataViewIndexListModel_GetPendingColumn(pObject) &
+        bind(C, name='wxDataViewIndexListModel_GetPendingColumn')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewIndexListModel_GetPendingRow(pObject) &
+        bind(C, name='wxDataViewIndexListModel_GetPendingRow')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewIndexListModel_GetPendingAscending(pObject) &
+        bind(C, name='wxDataViewIndexListModel_GetPendingAscending')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewIndexListModel_SetGetValueByRowResult(pObject, value_) &
+        bind(C, name='wxDataViewIndexListModel_SetGetValueByRowResult')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetSetValueByRowResult(pObject, result_) &
+        bind(C, name='wxDataViewIndexListModel_SetSetValueByRowResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetGetRowResult(pObject, row) &
+        bind(C, name='wxDataViewIndexListModel_SetGetRowResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetGetCountResult(pObject, count) &
+        bind(C, name='wxDataViewIndexListModel_SetGetCountResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: count
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetGetAttrByRowResult(pObject, result_) &
+        bind(C, name='wxDataViewIndexListModel_SetGetAttrByRowResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetGetAttrByRowAttr(pObject, attr) &
+        bind(C, name='wxDataViewIndexListModel_SetGetAttrByRowAttr')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: attr
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetIsEnabledByRowResult(pObject, result_) &
+        bind(C, name='wxDataViewIndexListModel_SetIsEnabledByRowResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetCompareResult(pObject, result_) &
+        bind(C, name='wxDataViewIndexListModel_SetCompareResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_SetHasDefaultCompareResult(pObject, result_) &
+        bind(C, name='wxDataViewIndexListModel_SetHasDefaultCompareResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_RowPrepended(pObject) &
+        bind(C, name='wxDataViewIndexListModel_RowPrepended')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_RowInserted(pObject, before) &
+        bind(C, name='wxDataViewIndexListModel_RowInserted')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: before
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_RowAppended(pObject) &
+        bind(C, name='wxDataViewIndexListModel_RowAppended')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_RowDeleted(pObject, row) &
+        bind(C, name='wxDataViewIndexListModel_RowDeleted')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_RowsDeleted(pObject, rows) &
+        bind(C, name='wxDataViewIndexListModel_RowsDeleted')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: rows
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_RowChanged(pObject, row) &
+        bind(C, name='wxDataViewIndexListModel_RowChanged')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_RowValueChanged(pObject, row, col) &
+        bind(C, name='wxDataViewIndexListModel_RowValueChanged')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+      integer(c_int), value :: col
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_Reset(pObject, newSize) &
+        bind(C, name='wxDataViewIndexListModel_Reset')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: newSize
+    end subroutine
+
+    subroutine wxDataViewIndexListModel_GetItem(pObject, row, result_) &
+        bind(C, name='wxDataViewIndexListModel_GetItem')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+      type(c_ptr), value :: result_
+    end subroutine
+
+    ! wxDataViewListStore
+
+    subroutine wxDataViewListStore_SetOnHasValueWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewListStore_SetOnHasValueWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewListStore_SetOnIsEnabledByRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewListStore_SetOnIsEnabledByRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewListStore_SetOnGetAttrByRowWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewListStore_SetOnGetAttrByRowWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewListStore_SetHasValueResult(pObject, result_) &
+        bind(C, name='wxDataViewListStore_SetHasValueResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewListStore_SetIsEnabledByRowResult(pObject, result_) &
+        bind(C, name='wxDataViewListStore_SetIsEnabledByRowResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewListStore_SetGetAttrByRowResult(pObject, result_) &
+        bind(C, name='wxDataViewListStore_SetGetAttrByRowResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewListStore_SetGetAttrByRowAttr(pObject, attr) &
+        bind(C, name='wxDataViewListStore_SetGetAttrByRowAttr')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: attr
+    end subroutine
+
+    integer(c_int) function wxDataViewListStore_GetPendingRow(pObject) &
+        bind(C, name='wxDataViewListStore_GetPendingRow')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewListStore_GetPendingColumn(pObject) &
+        bind(C, name='wxDataViewListStore_GetPendingColumn')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewListStore_PrependColumn(pObject, variant_type) &
+        bind(C, name='wxDataViewListStore_PrependColumn')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: variant_type
+    end subroutine
+
+    subroutine wxDataViewListStore_AppendColumn(pObject, variant_type) &
+        bind(C, name='wxDataViewListStore_AppendColumn')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: variant_type
+    end subroutine
+
+    subroutine wxDataViewListStore_InsertColumn(pObject, pos, variant_type) &
+        bind(C, name='wxDataViewListStore_InsertColumn')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: pos
+      type(c_ptr), value :: variant_type
+    end subroutine
+
+    subroutine wxDataViewListStore_AppendItem(pObject, values, data_) &
+        bind(C, name='wxDataViewListStore_AppendItem')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: values
+      integer(c_size_t), value :: data_
+    end subroutine
+
+    subroutine wxDataViewListStore_PrependItem(pObject, values, data_) &
+        bind(C, name='wxDataViewListStore_PrependItem')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: values
+      integer(c_size_t), value :: data_
+    end subroutine
+
+    subroutine wxDataViewListStore_InsertItem(pObject, row, values, data_) &
+        bind(C, name='wxDataViewListStore_InsertItem')
+      import :: c_int, c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+      type(c_ptr), value :: values
+      integer(c_size_t), value :: data_
+    end subroutine
+
+    subroutine wxDataViewListStore_DeleteItem(pObject, pos) &
+        bind(C, name='wxDataViewListStore_DeleteItem')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: pos
+    end subroutine
+
+    subroutine wxDataViewListStore_DeleteAllItems(pObject) &
+        bind(C, name='wxDataViewListStore_DeleteAllItems')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDataViewListStore_ClearColumns(pObject) &
+        bind(C, name='wxDataViewListStore_ClearColumns')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    integer(c_int) function wxDataViewListStore_GetItemCount(pObject) &
+        bind(C, name='wxDataViewListStore_GetItemCount')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewListStore_SetItemData(pObject, item, data_) &
+        bind(C, name='wxDataViewListStore_SetItemData')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      integer(c_size_t), value :: data_
+    end subroutine
+
+    integer(c_size_t) function wxDataViewListStore_GetItemData(pObject, item) &
+        bind(C, name='wxDataViewListStore_GetItemData')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    subroutine wxDataViewListStore_GetValueByRow(pObject, value_, row, col) &
+        bind(C, name='wxDataViewListStore_GetValueByRow')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+      integer(c_int), value :: row
+      integer(c_int), value :: col
+    end subroutine
+
+    integer(c_int) function wxDataViewListStore_SetValueByRow(pObject, value_, row, col) &
+        bind(C, name='wxDataViewListStore_SetValueByRow')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+      integer(c_int), value :: row
+      integer(c_int), value :: col
+    end function
+
+    type(c_ptr) function wxDataViewListStore_Create(pObject) &
+        bind(C, name='wxDataViewListStore_Create')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewListStore_IsEnabledByRow(pObject, row, col) &
+        bind(C, name='wxDataViewListStore_IsEnabledByRow')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+      integer(c_int), value :: col
+    end function
+
+    integer(c_int) function wxDataViewListStore_GetAttrByRow(pObject, row, col, attr) &
+        bind(C, name='wxDataViewListStore_GetAttrByRow')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: row
+      integer(c_int), value :: col
+      type(c_ptr), value :: attr
+    end function
+
+    ! wxDataViewRenderer
+
+    subroutine wxDataViewRenderer_SetMode(pObject, mode) &
+        bind(C, name='wxDataViewRenderer_SetMode')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: mode
+    end subroutine
+
+    integer(c_int) function wxDataViewRenderer_GetMode(pObject) &
+        bind(C, name='wxDataViewRenderer_GetMode')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewRenderer_SetAlignment(pObject, align) &
+        bind(C, name='wxDataViewRenderer_SetAlignment')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: align
+    end subroutine
+
+    integer(c_int) function wxDataViewRenderer_GetAlignment(pObject) &
+        bind(C, name='wxDataViewRenderer_GetAlignment')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewRenderer_EnableEllipsize(pObject, mode) &
+        bind(C, name='wxDataViewRenderer_EnableEllipsize')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: mode
+    end subroutine
+
+    integer(c_int) function wxDataViewRenderer_GetEllipsizeMode(pObject) &
+        bind(C, name='wxDataViewRenderer_GetEllipsizeMode')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewRenderer_GetVariantType(pObject) &
+        bind(C, name='wxDataViewRenderer_GetVariantType')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewRenderer_GetValue(pObject, value_) &
+        bind(C, name='wxDataViewRenderer_GetValue')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+    end function
+
+    integer(c_int) function wxDataViewRenderer_SetValue(pObject, value_) &
+        bind(C, name='wxDataViewRenderer_SetValue')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+    end function
+
+    subroutine wxDataViewRenderer_SetEnabled(pObject, enabled) &
+        bind(C, name='wxDataViewRenderer_SetEnabled')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: enabled
+    end subroutine
+
+    integer(c_int) function wxDataViewRenderer_IsHighlighted(pObject) &
+        bind(C, name='wxDataViewRenderer_IsHighlighted')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewRenderer_GetAccessibleDescription(pObject) &
+        bind(C, name='wxDataViewRenderer_GetAccessibleDescription')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    ! wxDataViewCustomRenderer
+
+    type(c_ptr) function wxDataViewCustomRenderer_Create(variantType, mode, align) &
+        bind(C, name='wxDataViewCustomRenderer_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: variantType
+      integer(c_int), value :: mode
+      integer(c_int), value :: align
+    end function
+
+    subroutine wxDataViewCustomRenderer_SetOnRenderWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnRenderWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnGetSizeWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnGetSizeWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnSetValueWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnSetValueWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnGetValueWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnGetValueWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnActivateCellWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnActivateCellWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnActivateWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnActivateWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnLeftClickWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnLeftClickWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnStartDragWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnStartDragWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnCreateEditorCtrlWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnCreateEditorCtrlWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnGetValueFromEditorCtrlWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnGetValueFromEditorCtrlWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnValidateWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnValidateWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnHasEditorCtrlWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnHasEditorCtrlWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetOnGetAccessibleDescriptionWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDataViewCustomRenderer_SetOnGetAccessibleDescriptionWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    type(c_ptr) function wxDataViewCustomRenderer_GetRenderDC(pObject) &
+        bind(C, name='wxDataViewCustomRenderer_GetRenderDC')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewCustomRenderer_GetRenderRect(pObject, x, y, width, height) &
+        bind(C, name='wxDataViewCustomRenderer_GetRenderRect')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: x
+      type(c_ptr), value :: y
+      type(c_ptr), value :: width
+      type(c_ptr), value :: height
+    end subroutine
+
+    integer(c_int) function wxDataViewCustomRenderer_GetRenderState(pObject) &
+        bind(C, name='wxDataViewCustomRenderer_GetRenderState')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewCustomRenderer_GetCurrentValue(pObject) &
+        bind(C, name='wxDataViewCustomRenderer_GetCurrentValue')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewCustomRenderer_GetEditorRect(pObject) &
+        bind(C, name='wxDataViewCustomRenderer_GetEditorRect')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewCustomRenderer_GetEditorParent(pObject) &
+        bind(C, name='wxDataViewCustomRenderer_GetEditorParent')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewCustomRenderer_GetEditorCtrl(pObject) &
+        bind(C, name='wxDataViewCustomRenderer_GetEditorCtrl')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewCustomRenderer_GetPendingColumn(pObject) &
+        bind(C, name='wxDataViewCustomRenderer_GetPendingColumn')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewCustomRenderer_GetActivateCellMouseEvent(pObject) &
+        bind(C, name='wxDataViewCustomRenderer_GetActivateCellMouseEvent')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewCustomRenderer_GetPendingCursorX(pObject) &
+        bind(C, name='wxDataViewCustomRenderer_GetPendingCursorX')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewCustomRenderer_GetPendingCursorY(pObject) &
+        bind(C, name='wxDataViewCustomRenderer_GetPendingCursorY')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewCustomRenderer_RenderText(pObject, text, xoffset, cell_x, cell_y, cell_width, cell_height, dc, state) &
+        bind(C, name='wxDataViewCustomRenderer_RenderText')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: text
+      integer(c_int), value :: xoffset
+      integer(c_int), value :: cell_x
+      integer(c_int), value :: cell_y
+      integer(c_int), value :: cell_width
+      integer(c_int), value :: cell_height
+      type(c_ptr), value :: dc
+      integer(c_int), value :: state
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_GetTextExtent(pObject, text, width, height) &
+        bind(C, name='wxDataViewCustomRenderer_GetTextExtent')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: text
+      type(c_ptr), value :: width
+      type(c_ptr), value :: height
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetRenderResult(pObject, result_) &
+        bind(C, name='wxDataViewCustomRenderer_SetRenderResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetGetSizeResult(pObject, width, height) &
+        bind(C, name='wxDataViewCustomRenderer_SetGetSizeResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetGetValueResult(pObject, value_) &
+        bind(C, name='wxDataViewCustomRenderer_SetGetValueResult')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetSetValueResult(pObject, result_) &
+        bind(C, name='wxDataViewCustomRenderer_SetSetValueResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetActivateCellResult(pObject, result_) &
+        bind(C, name='wxDataViewCustomRenderer_SetActivateCellResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetActivateResult(pObject, result_) &
+        bind(C, name='wxDataViewCustomRenderer_SetActivateResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetLeftClickResult(pObject, result_) &
+        bind(C, name='wxDataViewCustomRenderer_SetLeftClickResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetStartDragResult(pObject, result_) &
+        bind(C, name='wxDataViewCustomRenderer_SetStartDragResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetCreateEditorCtrlResult(pObject, editor) &
+        bind(C, name='wxDataViewCustomRenderer_SetCreateEditorCtrlResult')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: editor
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetGetValueFromEditorCtrlResult(pObject, result_) &
+        bind(C, name='wxDataViewCustomRenderer_SetGetValueFromEditorCtrlResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetGetValueFromEditorCtrlValue(pObject, value_) &
+        bind(C, name='wxDataViewCustomRenderer_SetGetValueFromEditorCtrlValue')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetValidateResult(pObject, result_) &
+        bind(C, name='wxDataViewCustomRenderer_SetValidateResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetHasEditorCtrlResult(pObject, result_) &
+        bind(C, name='wxDataViewCustomRenderer_SetHasEditorCtrlResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDataViewCustomRenderer_SetAccessibleDescription(pObject, description) &
+        bind(C, name='wxDataViewCustomRenderer_SetAccessibleDescription')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: description
+    end subroutine
+
+    ! wxDataViewTextRenderer
+
+    type(c_ptr) function wxDataViewTextRenderer_CreateDefault() &
+        bind(C, name='wxDataViewTextRenderer_CreateDefault')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function wxDataViewTextRenderer_Create(variantType, mode, align) &
+        bind(C, name='wxDataViewTextRenderer_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: variantType
+      integer(c_int), value :: mode
+      integer(c_int), value :: align
+    end function
+
+    subroutine wxDataViewTextRenderer_EnableMarkup(pObject, enable) &
+        bind(C, name='wxDataViewTextRenderer_EnableMarkup')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: enable
+    end subroutine
+
+    ! wxDataViewToggleRenderer
+
+    type(c_ptr) function wxDataViewToggleRenderer_CreateDefault() &
+        bind(C, name='wxDataViewToggleRenderer_CreateDefault')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function wxDataViewToggleRenderer_Create(variantType, mode, align) &
+        bind(C, name='wxDataViewToggleRenderer_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: variantType
+      integer(c_int), value :: mode
+      integer(c_int), value :: align
+    end function
+
+    subroutine wxDataViewToggleRenderer_ShowAsRadio(pObject, radio) &
+        bind(C, name='wxDataViewToggleRenderer_ShowAsRadio')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: radio
+    end subroutine
+
+    ! wxDataViewBitmapRenderer
+
+    type(c_ptr) function wxDataViewBitmapRenderer_CreateDefault() &
+        bind(C, name='wxDataViewBitmapRenderer_CreateDefault')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function wxDataViewBitmapRenderer_Create(variantType, mode, align) &
+        bind(C, name='wxDataViewBitmapRenderer_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: variantType
+      integer(c_int), value :: mode
+      integer(c_int), value :: align
+    end function
+
+    ! wxDataViewProgressRenderer
+
+    type(c_ptr) function wxDataViewProgressRenderer_Create(label, variantType, mode, align) &
+        bind(C, name='wxDataViewProgressRenderer_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: label
+      type(c_ptr), value :: variantType
+      integer(c_int), value :: mode
+      integer(c_int), value :: align
+    end function
+
+    ! wxDataViewIconTextRenderer
+
+    type(c_ptr) function wxDataViewIconTextRenderer_CreateDefault() &
+        bind(C, name='wxDataViewIconTextRenderer_CreateDefault')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function wxDataViewIconTextRenderer_Create(variantType, mode, align) &
+        bind(C, name='wxDataViewIconTextRenderer_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: variantType
+      integer(c_int), value :: mode
+      integer(c_int), value :: align
+    end function
+
+    ! wxDataViewSpinRenderer
+
+    type(c_ptr) function wxDataViewSpinRenderer_Create(min, max, mode, align) &
+        bind(C, name='wxDataViewSpinRenderer_Create')
+      import :: c_int, c_ptr
+      integer(c_int), value :: min
+      integer(c_int), value :: max
+      integer(c_int), value :: mode
+      integer(c_int), value :: align
+    end function
+
+    ! wxDataViewChoiceRenderer
+
+    type(c_ptr) function wxDataViewChoiceRenderer_Create(choices, mode, align) &
+        bind(C, name='wxDataViewChoiceRenderer_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: choices
+      integer(c_int), value :: mode
+      integer(c_int), value :: align
+    end function
+
+    type(c_ptr) function wxDataViewChoiceRenderer_GetChoice(pObject, index) &
+        bind(C, name='wxDataViewChoiceRenderer_GetChoice')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: index
+    end function
+
+    type(c_ptr) function wxDataViewChoiceRenderer_GetChoices(pObject) &
+        bind(C, name='wxDataViewChoiceRenderer_GetChoices')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    ! wxDataViewChoiceByIndexRenderer
+
+    type(c_ptr) function wxDataViewChoiceByIndexRenderer_Create(choices, mode, align) &
+        bind(C, name='wxDataViewChoiceByIndexRenderer_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: choices
+      integer(c_int), value :: mode
+      integer(c_int), value :: align
+    end function
+
+    ! wxDataViewDateRenderer
+
+    type(c_ptr) function wxDataViewDateRenderer_Create(variantType, mode, align) &
+        bind(C, name='wxDataViewDateRenderer_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: variantType
+      integer(c_int), value :: mode
+      integer(c_int), value :: align
+    end function
+
+    ! wxDataViewCheckIconTextRenderer
+
+    type(c_ptr) function wxDataViewCheckIconTextRenderer_CreateDefault() &
+        bind(C, name='wxDataViewCheckIconTextRenderer_CreateDefault')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function wxDataViewCheckIconTextRenderer_Create(mode, align) &
+        bind(C, name='wxDataViewCheckIconTextRenderer_Create')
+      import :: c_int, c_ptr
+      integer(c_int), value :: mode
+      integer(c_int), value :: align
+    end function
+
+    subroutine wxDataViewCheckIconTextRenderer_Allow3rdStateForUser(pObject, allow) &
+        bind(C, name='wxDataViewCheckIconTextRenderer_Allow3rdStateForUser')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: allow
+    end subroutine
+
+    ! wxDataViewColumn
+
+    type(c_ptr) function wxDataViewColumn_CreateWithRenderer(title, renderer, modelColumn, width, align, flags) &
+        bind(C, name='wxDataViewColumn_CreateWithRenderer')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: title
+      type(c_ptr), value :: renderer
+      integer(c_int), value :: modelColumn
+      integer(c_int), value :: width
+      integer(c_int), value :: align
+      integer(c_int), value :: flags
+    end function
+
+    type(c_ptr) function wxDataViewColumn_GetTitle(pObject) &
+        bind(C, name='wxDataViewColumn_GetTitle')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_SetTitle(pObject, title) &
+        bind(C, name='wxDataViewColumn_SetTitle')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: title
+    end subroutine
+
+    type(c_ptr) function wxDataViewColumn_GetBitmapBundle(pObject) &
+        bind(C, name='wxDataViewColumn_GetBitmapBundle')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_SetBitmap(pObject, bitmap) &
+        bind(C, name='wxDataViewColumn_SetBitmap')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: bitmap
+    end subroutine
+
+    integer(c_int) function wxDataViewColumn_GetWidth(pObject) &
+        bind(C, name='wxDataViewColumn_GetWidth')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_SetWidth(pObject, width) &
+        bind(C, name='wxDataViewColumn_SetWidth')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: width
+    end subroutine
+
+    integer(c_int) function wxDataViewColumn_GetMinWidth(pObject) &
+        bind(C, name='wxDataViewColumn_GetMinWidth')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_SetMinWidth(pObject, min_width) &
+        bind(C, name='wxDataViewColumn_SetMinWidth')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: min_width
+    end subroutine
+
+    integer(c_int) function wxDataViewColumn_GetAlignment(pObject) &
+        bind(C, name='wxDataViewColumn_GetAlignment')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_SetAlignment(pObject, alignment) &
+        bind(C, name='wxDataViewColumn_SetAlignment')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: alignment
+    end subroutine
+
+    integer(c_int) function wxDataViewColumn_GetFlags(pObject) &
+        bind(C, name='wxDataViewColumn_GetFlags')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_SetFlags(pObject, flags) &
+        bind(C, name='wxDataViewColumn_SetFlags')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: flags
+    end subroutine
+
+    subroutine wxDataViewColumn_SetFlag(pObject, flag) &
+        bind(C, name='wxDataViewColumn_SetFlag')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: flag
+    end subroutine
+
+    subroutine wxDataViewColumn_ChangeFlag(pObject, flag, set) &
+        bind(C, name='wxDataViewColumn_ChangeFlag')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: flag
+      integer(c_int), value :: set
+    end subroutine
+
+    integer(c_int) function wxDataViewColumn_IsResizeable(pObject) &
+        bind(C, name='wxDataViewColumn_IsResizeable')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_SetResizeable(pObject, resizeable) &
+        bind(C, name='wxDataViewColumn_SetResizeable')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: resizeable
+    end subroutine
+
+    integer(c_int) function wxDataViewColumn_IsSortable(pObject) &
+        bind(C, name='wxDataViewColumn_IsSortable')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_SetSortable(pObject, sortable) &
+        bind(C, name='wxDataViewColumn_SetSortable')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: sortable
+    end subroutine
+
+    integer(c_int) function wxDataViewColumn_IsReorderable(pObject) &
+        bind(C, name='wxDataViewColumn_IsReorderable')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_SetReorderable(pObject, reorderable) &
+        bind(C, name='wxDataViewColumn_SetReorderable')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: reorderable
+    end subroutine
+
+    integer(c_int) function wxDataViewColumn_IsHidden(pObject) &
+        bind(C, name='wxDataViewColumn_IsHidden')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_SetHidden(pObject, hidden) &
+        bind(C, name='wxDataViewColumn_SetHidden')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: hidden
+    end subroutine
+
+    integer(c_int) function wxDataViewColumn_IsShown(pObject) &
+        bind(C, name='wxDataViewColumn_IsShown')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewColumn_IsSortKey(pObject) &
+        bind(C, name='wxDataViewColumn_IsSortKey')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_SetSortOrder(pObject, ascending) &
+        bind(C, name='wxDataViewColumn_SetSortOrder')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: ascending
+    end subroutine
+
+    integer(c_int) function wxDataViewColumn_IsSortOrderAscending(pObject) &
+        bind(C, name='wxDataViewColumn_IsSortOrderAscending')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewColumn_UnsetAsSortKey(pObject) &
+        bind(C, name='wxDataViewColumn_UnsetAsSortKey')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    integer(c_int) function wxDataViewColumn_GetModelColumn(pObject) &
+        bind(C, name='wxDataViewColumn_GetModelColumn')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewColumn_GetRenderer(pObject) &
+        bind(C, name='wxDataViewColumn_GetRenderer')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
 
     ! wxHtmlCell
 
@@ -45317,6 +49242,254 @@ module kwxffi
       type(c_ptr), value :: pObject
     end subroutine
 
+    ! wxDCPenChanger
+
+    type(c_ptr) function wxDCPenChanger_Create(dc, pen) &
+        bind(C, name='wxDCPenChanger_Create')
+      import :: c_ptr
+      type(c_ptr), value :: dc
+      type(c_ptr), value :: pen
+    end function
+
+    subroutine wxDCPenChanger_Set(pObject, pen) &
+        bind(C, name='wxDCPenChanger_Set')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pen
+    end subroutine
+
+    subroutine wxDCPenChanger_Delete(pObject) &
+        bind(C, name='wxDCPenChanger_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    ! wxDCBrushChanger
+
+    type(c_ptr) function wxDCBrushChanger_Create(dc, brush) &
+        bind(C, name='wxDCBrushChanger_Create')
+      import :: c_ptr
+      type(c_ptr), value :: dc
+      type(c_ptr), value :: brush
+    end function
+
+    subroutine wxDCBrushChanger_Set(pObject, brush) &
+        bind(C, name='wxDCBrushChanger_Set')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: brush
+    end subroutine
+
+    subroutine wxDCBrushChanger_Delete(pObject) &
+        bind(C, name='wxDCBrushChanger_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    ! wxDCFontChanger
+
+    type(c_ptr) function wxDCFontChanger_Create(dc, font) &
+        bind(C, name='wxDCFontChanger_Create')
+      import :: c_ptr
+      type(c_ptr), value :: dc
+      type(c_ptr), value :: font
+    end function
+
+    subroutine wxDCFontChanger_Set(pObject, font) &
+        bind(C, name='wxDCFontChanger_Set')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: font
+    end subroutine
+
+    subroutine wxDCFontChanger_Delete(pObject) &
+        bind(C, name='wxDCFontChanger_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    ! wxDCTextColourChanger
+
+    type(c_ptr) function wxDCTextColourChanger_Create(dc, colour) &
+        bind(C, name='wxDCTextColourChanger_Create')
+      import :: c_ptr
+      type(c_ptr), value :: dc
+      type(c_ptr), value :: colour
+    end function
+
+    subroutine wxDCTextColourChanger_Set(pObject, colour) &
+        bind(C, name='wxDCTextColourChanger_Set')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colour
+    end subroutine
+
+    subroutine wxDCTextColourChanger_Delete(pObject) &
+        bind(C, name='wxDCTextColourChanger_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    ! wxDCTextBgColourChanger
+
+    type(c_ptr) function wxDCTextBgColourChanger_Create(dc, colour) &
+        bind(C, name='wxDCTextBgColourChanger_Create')
+      import :: c_ptr
+      type(c_ptr), value :: dc
+      type(c_ptr), value :: colour
+    end function
+
+    subroutine wxDCTextBgColourChanger_Set(pObject, colour) &
+        bind(C, name='wxDCTextBgColourChanger_Set')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colour
+    end subroutine
+
+    subroutine wxDCTextBgColourChanger_Delete(pObject) &
+        bind(C, name='wxDCTextBgColourChanger_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    ! wxDCTextBgModeChanger
+
+    type(c_ptr) function wxDCTextBgModeChanger_Create(dc, mode) &
+        bind(C, name='wxDCTextBgModeChanger_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: dc
+      integer(c_int), value :: mode
+    end function
+
+    subroutine wxDCTextBgModeChanger_Set(pObject, mode) &
+        bind(C, name='wxDCTextBgModeChanger_Set')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: mode
+    end subroutine
+
+    subroutine wxDCTextBgModeChanger_Delete(pObject) &
+        bind(C, name='wxDCTextBgModeChanger_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    ! wxDataViewItemAttr
+
+    type(c_ptr) function wxDataViewItemAttr_Create() &
+        bind(C, name='wxDataViewItemAttr_Create')
+      import :: c_ptr
+    end function
+
+    subroutine wxDataViewItemAttr_Copy(pObject, other) &
+        bind(C, name='wxDataViewItemAttr_Copy')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: other
+    end subroutine
+
+    subroutine wxDataViewItemAttr_Delete(pObject) &
+        bind(C, name='wxDataViewItemAttr_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDataViewItemAttr_SetColour(pObject, colour) &
+        bind(C, name='wxDataViewItemAttr_SetColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colour
+    end subroutine
+
+    subroutine wxDataViewItemAttr_SetBackgroundColour(pObject, colour) &
+        bind(C, name='wxDataViewItemAttr_SetBackgroundColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colour
+    end subroutine
+
+    subroutine wxDataViewItemAttr_SetBold(pObject, set) &
+        bind(C, name='wxDataViewItemAttr_SetBold')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: set
+    end subroutine
+
+    subroutine wxDataViewItemAttr_SetItalic(pObject, set) &
+        bind(C, name='wxDataViewItemAttr_SetItalic')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: set
+    end subroutine
+
+    subroutine wxDataViewItemAttr_SetStrikethrough(pObject, set) &
+        bind(C, name='wxDataViewItemAttr_SetStrikethrough')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: set
+    end subroutine
+
+    integer(c_int) function wxDataViewItemAttr_HasColour(pObject) &
+        bind(C, name='wxDataViewItemAttr_HasColour')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewItemAttr_HasFont(pObject) &
+        bind(C, name='wxDataViewItemAttr_HasFont')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewItemAttr_HasBackgroundColour(pObject) &
+        bind(C, name='wxDataViewItemAttr_HasBackgroundColour')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewItemAttr_GetBold(pObject) &
+        bind(C, name='wxDataViewItemAttr_GetBold')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewItemAttr_GetItalic(pObject) &
+        bind(C, name='wxDataViewItemAttr_GetItalic')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewItemAttr_GetStrikethrough(pObject) &
+        bind(C, name='wxDataViewItemAttr_GetStrikethrough')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewItemAttr_IsDefault(pObject) &
+        bind(C, name='wxDataViewItemAttr_IsDefault')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewItemAttr_GetColour(pObject) &
+        bind(C, name='wxDataViewItemAttr_GetColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewItemAttr_GetBackgroundColour(pObject) &
+        bind(C, name='wxDataViewItemAttr_GetBackgroundColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewItemAttr_GetEffectiveFont(pObject, font) &
+        bind(C, name='wxDataViewItemAttr_GetEffectiveFont')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: font
+    end function
+
     ! wxDataViewCtrl
 
     integer(c_int) function wxDataViewCtrl_SetHeaderAttr(pObject, attr) &
@@ -45340,6 +49513,13 @@ module kwxffi
       type(c_ptr), value :: format
     end function
 
+    integer(c_int) function wxDataViewCtrl_EnableDropTarget(pObject, format) &
+        bind(C, name='wxDataViewCtrl_EnableDropTarget')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: format
+    end function
+
     integer(c_int) function wxDataViewCtrl_SetBackgroundColour(pObject, colour) &
         bind(C, name='wxDataViewCtrl_SetBackgroundColour')
       import :: c_int, c_ptr
@@ -45358,6 +49538,34 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: pObject
       type(c_ptr), value :: colour
+    end function
+
+    integer(c_int) function wxDataViewCtrl_GetSortingColumnCount(pObject) &
+        bind(C, name='wxDataViewCtrl_GetSortingColumnCount')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewCtrl_GetSortingColumnAt(pObject, pos) &
+        bind(C, name='wxDataViewCtrl_GetSortingColumnAt')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: pos
+    end function
+
+    type(c_ptr) function wxDataViewCtrl_GenericGetHeader(pObject) &
+        bind(C, name='wxDataViewCtrl_GenericGetHeader')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDataViewCtrl_HitTestColumnPosition(pObject, x, y, item) &
+        bind(C, name='wxDataViewCtrl_HitTestColumnPosition')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      type(c_ptr), value :: item
     end function
 
     type(c_ptr) function wxDataViewCtrl_Create(parent, id, x, y, width, height, style) &
@@ -46064,6 +50272,595 @@ module kwxffi
       integer(c_int), value :: row
     end function
 
+    ! wxDataViewTreeStore
+
+    type(c_ptr) function wxDataViewTreeStore_Create() &
+        bind(C, name='wxDataViewTreeStore_Create')
+      import :: c_ptr
+    end function
+
+    subroutine wxDataViewTreeStore_Delete(pObject) &
+        bind(C, name='wxDataViewTreeStore_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDataViewTreeStore_AppendContainer(pObject, parent, text, icon, expanded, data_, result_) &
+        bind(C, name='wxDataViewTreeStore_AppendContainer')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: text
+      type(c_ptr), value :: icon
+      type(c_ptr), value :: expanded
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeStore_AppendItem(pObject, parent, text, icon, data_, result_) &
+        bind(C, name='wxDataViewTreeStore_AppendItem')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: text
+      type(c_ptr), value :: icon
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeStore_PrependContainer(pObject, parent, text, icon, expanded, data_, result_) &
+        bind(C, name='wxDataViewTreeStore_PrependContainer')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: text
+      type(c_ptr), value :: icon
+      type(c_ptr), value :: expanded
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeStore_PrependItem(pObject, parent, text, icon, data_, result_) &
+        bind(C, name='wxDataViewTreeStore_PrependItem')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: text
+      type(c_ptr), value :: icon
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeStore_InsertContainer(pObject, parent, previous, text, icon, expanded, data_, result_) &
+        bind(C, name='wxDataViewTreeStore_InsertContainer')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: previous
+      type(c_ptr), value :: text
+      type(c_ptr), value :: icon
+      type(c_ptr), value :: expanded
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeStore_InsertItem(pObject, parent, previous, text, icon, data_, result_) &
+        bind(C, name='wxDataViewTreeStore_InsertItem')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: previous
+      type(c_ptr), value :: text
+      type(c_ptr), value :: icon
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeStore_GetNthChild(pObject, parent, pos, result_) &
+        bind(C, name='wxDataViewTreeStore_GetNthChild')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      integer(c_int), value :: pos
+      type(c_ptr), value :: result_
+    end subroutine
+
+    integer(c_int) function wxDataViewTreeStore_GetChildCount(pObject, parent) &
+        bind(C, name='wxDataViewTreeStore_GetChildCount')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+    end function
+
+    subroutine wxDataViewTreeStore_SetItemText(pObject, item, text) &
+        bind(C, name='wxDataViewTreeStore_SetItemText')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      type(c_ptr), value :: text
+    end subroutine
+
+    type(c_ptr) function wxDataViewTreeStore_GetItemText(pObject, item) &
+        bind(C, name='wxDataViewTreeStore_GetItemText')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    subroutine wxDataViewTreeStore_SetItemIcon(pObject, item, icon) &
+        bind(C, name='wxDataViewTreeStore_SetItemIcon')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      type(c_ptr), value :: icon
+    end subroutine
+
+    type(c_ptr) function wxDataViewTreeStore_GetItemIcon(pObject, item) &
+        bind(C, name='wxDataViewTreeStore_GetItemIcon')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    subroutine wxDataViewTreeStore_SetItemExpandedIcon(pObject, item, icon) &
+        bind(C, name='wxDataViewTreeStore_SetItemExpandedIcon')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      type(c_ptr), value :: icon
+    end subroutine
+
+    type(c_ptr) function wxDataViewTreeStore_GetItemExpandedIcon(pObject, item) &
+        bind(C, name='wxDataViewTreeStore_GetItemExpandedIcon')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    subroutine wxDataViewTreeStore_SetItemData(pObject, item, data_) &
+        bind(C, name='wxDataViewTreeStore_SetItemData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      type(c_ptr), value :: data_
+    end subroutine
+
+    type(c_ptr) function wxDataViewTreeStore_GetItemData(pObject, item) &
+        bind(C, name='wxDataViewTreeStore_GetItemData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    subroutine wxDataViewTreeStore_DeleteItem(pObject, item) &
+        bind(C, name='wxDataViewTreeStore_DeleteItem')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end subroutine
+
+    subroutine wxDataViewTreeStore_DeleteChildren(pObject, item) &
+        bind(C, name='wxDataViewTreeStore_DeleteChildren')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end subroutine
+
+    subroutine wxDataViewTreeStore_DeleteAllItems(pObject) &
+        bind(C, name='wxDataViewTreeStore_DeleteAllItems')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    ! wxDataViewTreeCtrl
+
+    type(c_ptr) function wxDataViewTreeCtrl_Create(parent, id, x, y, width, height, style) &
+        bind(C, name='wxDataViewTreeCtrl_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: parent
+      integer(c_int), value :: id
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      integer(c_int), value :: style
+    end function
+
+    type(c_ptr) function wxDataViewTreeCtrl_GetStore(pObject) &
+        bind(C, name='wxDataViewTreeCtrl_GetStore')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewTreeCtrl_AppendContainer(pObject, parent, text, icon, expanded, data_, result_) &
+        bind(C, name='wxDataViewTreeCtrl_AppendContainer')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: text
+      integer(c_int), value :: icon
+      integer(c_int), value :: expanded
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_AppendItem(pObject, parent, text, icon, data_, result_) &
+        bind(C, name='wxDataViewTreeCtrl_AppendItem')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: text
+      integer(c_int), value :: icon
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_PrependContainer(pObject, parent, text, icon, expanded, data_, result_) &
+        bind(C, name='wxDataViewTreeCtrl_PrependContainer')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: text
+      integer(c_int), value :: icon
+      integer(c_int), value :: expanded
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_PrependItem(pObject, parent, text, icon, data_, result_) &
+        bind(C, name='wxDataViewTreeCtrl_PrependItem')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: text
+      integer(c_int), value :: icon
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_InsertContainer(pObject, parent, previous, text, icon, expanded, data_, result_) &
+        bind(C, name='wxDataViewTreeCtrl_InsertContainer')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: previous
+      type(c_ptr), value :: text
+      integer(c_int), value :: icon
+      integer(c_int), value :: expanded
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_InsertItem(pObject, parent, previous, text, icon, data_, result_) &
+        bind(C, name='wxDataViewTreeCtrl_InsertItem')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: previous
+      type(c_ptr), value :: text
+      integer(c_int), value :: icon
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_DeleteItem(pObject, item) &
+        bind(C, name='wxDataViewTreeCtrl_DeleteItem')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_DeleteChildren(pObject, item) &
+        bind(C, name='wxDataViewTreeCtrl_DeleteChildren')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_DeleteAllItems(pObject) &
+        bind(C, name='wxDataViewTreeCtrl_DeleteAllItems')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    integer(c_int) function wxDataViewTreeCtrl_GetChildCount(pObject, parent) &
+        bind(C, name='wxDataViewTreeCtrl_GetChildCount')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+    end function
+
+    type(c_ptr) function wxDataViewTreeCtrl_GetItemText(pObject, item) &
+        bind(C, name='wxDataViewTreeCtrl_GetItemText')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    subroutine wxDataViewTreeCtrl_SetItemText(pObject, item, text) &
+        bind(C, name='wxDataViewTreeCtrl_SetItemText')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      type(c_ptr), value :: text
+    end subroutine
+
+    type(c_ptr) function wxDataViewTreeCtrl_GetItemIcon(pObject, item) &
+        bind(C, name='wxDataViewTreeCtrl_GetItemIcon')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    subroutine wxDataViewTreeCtrl_SetItemIcon(pObject, item, icon) &
+        bind(C, name='wxDataViewTreeCtrl_SetItemIcon')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      type(c_ptr), value :: icon
+    end subroutine
+
+    type(c_ptr) function wxDataViewTreeCtrl_GetItemExpandedIcon(pObject, item) &
+        bind(C, name='wxDataViewTreeCtrl_GetItemExpandedIcon')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    subroutine wxDataViewTreeCtrl_SetItemExpandedIcon(pObject, item, icon) &
+        bind(C, name='wxDataViewTreeCtrl_SetItemExpandedIcon')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      type(c_ptr), value :: icon
+    end subroutine
+
+    type(c_ptr) function wxDataViewTreeCtrl_GetItemData(pObject, item) &
+        bind(C, name='wxDataViewTreeCtrl_GetItemData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    subroutine wxDataViewTreeCtrl_SetItemData(pObject, item, data_) &
+        bind(C, name='wxDataViewTreeCtrl_SetItemData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      type(c_ptr), value :: data_
+    end subroutine
+
+    integer(c_int) function wxDataViewTreeCtrl_IsContainer(pObject, item) &
+        bind(C, name='wxDataViewTreeCtrl_IsContainer')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    subroutine wxDataViewTreeCtrl_GetItemParent(pObject, item, result_) &
+        bind(C, name='wxDataViewTreeCtrl_GetItemParent')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_GetNthChild(pObject, parent, pos, result_) &
+        bind(C, name='wxDataViewTreeCtrl_GetNthChild')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+      integer(c_int), value :: pos
+      type(c_ptr), value :: result_
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_Expand(pObject, item) &
+        bind(C, name='wxDataViewTreeCtrl_Expand')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_Collapse(pObject, item) &
+        bind(C, name='wxDataViewTreeCtrl_Collapse')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end subroutine
+
+    integer(c_int) function wxDataViewTreeCtrl_IsExpanded(pObject, item) &
+        bind(C, name='wxDataViewTreeCtrl_IsExpanded')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end function
+
+    subroutine wxDataViewTreeCtrl_SetImageList(pObject, list) &
+        bind(C, name='wxDataViewTreeCtrl_SetImageList')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: list
+    end subroutine
+
+    type(c_ptr) function wxDataViewTreeCtrl_GetImageList(pObject) &
+        bind(C, name='wxDataViewTreeCtrl_GetImageList')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewTreeCtrl_AssignImageList(pObject, list) &
+        bind(C, name='wxDataViewTreeCtrl_AssignImageList')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: list
+    end subroutine
+
+    subroutine wxDataViewTreeCtrl_SetImages(pObject, images) &
+        bind(C, name='wxDataViewTreeCtrl_SetImages')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: images
+    end subroutine
+
+    ! wxDataViewEvent
+
+    subroutine wxDataViewEvent_GetItem(pObject, item) &
+        bind(C, name='wxDataViewEvent_GetItem')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: item
+    end subroutine
+
+    integer(c_int) function wxDataViewEvent_GetColumn(pObject) &
+        bind(C, name='wxDataViewEvent_GetColumn')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewEvent_GetDataViewColumn(pObject) &
+        bind(C, name='wxDataViewEvent_GetDataViewColumn')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDataViewEvent_GetValue(pObject) &
+        bind(C, name='wxDataViewEvent_GetValue')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewEvent_SetValue(pObject, value_) &
+        bind(C, name='wxDataViewEvent_SetValue')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+    end subroutine
+
+    type(c_ptr) function wxDataViewEvent_GetDataObject(pObject) &
+        bind(C, name='wxDataViewEvent_GetDataObject')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewEvent_SetDataObject(pObject, obj) &
+        bind(C, name='wxDataViewEvent_SetDataObject')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: obj
+    end subroutine
+
+    type(c_ptr) function wxDataViewEvent_GetDataFormat(pObject) &
+        bind(C, name='wxDataViewEvent_GetDataFormat')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewEvent_SetDataFormat(pObject, format) &
+        bind(C, name='wxDataViewEvent_SetDataFormat')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: format
+    end subroutine
+
+    integer(c_size_t) function wxDataViewEvent_GetDataSize(pObject) &
+        bind(C, name='wxDataViewEvent_GetDataSize')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewEvent_SetDataSize(pObject, size) &
+        bind(C, name='wxDataViewEvent_SetDataSize')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+      integer(c_size_t), value :: size
+    end subroutine
+
+    type(c_ptr) function wxDataViewEvent_GetDataBuffer(pObject) &
+        bind(C, name='wxDataViewEvent_GetDataBuffer')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewEvent_SetDataBuffer(pObject, buffer) &
+        bind(C, name='wxDataViewEvent_SetDataBuffer')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: buffer
+    end subroutine
+
+    integer(c_int) function wxDataViewEvent_GetDropEffect(pObject) &
+        bind(C, name='wxDataViewEvent_GetDropEffect')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewEvent_SetDropEffect(pObject, effect) &
+        bind(C, name='wxDataViewEvent_SetDropEffect')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: effect
+    end subroutine
+
+    subroutine wxDataViewEvent_SetDragFlags(pObject, flags) &
+        bind(C, name='wxDataViewEvent_SetDragFlags')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: flags
+    end subroutine
+
+    integer(c_int) function wxDataViewEvent_GetDragFlags(pObject) &
+        bind(C, name='wxDataViewEvent_GetDragFlags')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewEvent_SetProposedDropIndex(pObject, index) &
+        bind(C, name='wxDataViewEvent_SetProposedDropIndex')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: index
+    end subroutine
+
+    integer(c_int) function wxDataViewEvent_GetProposedDropIndex(pObject) &
+        bind(C, name='wxDataViewEvent_GetProposedDropIndex')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewEvent_GetPosition(pObject, x, y) &
+        bind(C, name='wxDataViewEvent_GetPosition')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: x
+      type(c_ptr), value :: y
+    end subroutine
+
+    subroutine wxDataViewEvent_SetPosition(pObject, x, y) &
+        bind(C, name='wxDataViewEvent_SetPosition')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+    end subroutine
+
+    integer(c_int) function wxDataViewEvent_IsEditCancelled(pObject) &
+        bind(C, name='wxDataViewEvent_IsEditCancelled')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewEvent_SetEditCancelled(pObject) &
+        bind(C, name='wxDataViewEvent_SetEditCancelled')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    type(c_ptr) function wxDataViewEvent_GetModel(pObject) &
+        bind(C, name='wxDataViewEvent_GetModel')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     ! wxTreeListCtrl
 
     subroutine wxTreeListCtrl_SetItemTextSimple(pObject, item, text) &
@@ -46544,6 +51341,113 @@ module kwxffi
       integer(c_int), value :: n
     end function
 
+    ! wxDataViewIconText
+
+    type(c_ptr) function wxDataViewIconText_Create(text, icon) &
+        bind(C, name='wxDataViewIconText_Create')
+      import :: c_ptr
+      type(c_ptr), value :: text
+      type(c_ptr), value :: icon
+    end function
+
+    type(c_ptr) function wxDataViewIconText_CreateDefault() &
+        bind(C, name='wxDataViewIconText_CreateDefault')
+      import :: c_ptr
+    end function
+
+    subroutine wxDataViewIconText_Copy(pObject, other) &
+        bind(C, name='wxDataViewIconText_Copy')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: other
+    end subroutine
+
+    subroutine wxDataViewIconText_Delete(pObject) &
+        bind(C, name='wxDataViewIconText_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDataViewIconText_SetText(pObject, text) &
+        bind(C, name='wxDataViewIconText_SetText')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: text
+    end subroutine
+
+    type(c_ptr) function wxDataViewIconText_GetText(pObject) &
+        bind(C, name='wxDataViewIconText_GetText')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewIconText_SetBitmapBundle(pObject, icon) &
+        bind(C, name='wxDataViewIconText_SetBitmapBundle')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: icon
+    end subroutine
+
+    type(c_ptr) function wxDataViewIconText_GetBitmapBundle(pObject) &
+        bind(C, name='wxDataViewIconText_GetBitmapBundle')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDataViewIconText_SetIcon(pObject, icon) &
+        bind(C, name='wxDataViewIconText_SetIcon')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: icon
+    end subroutine
+
+    type(c_ptr) function wxDataViewIconText_GetIcon(pObject) &
+        bind(C, name='wxDataViewIconText_GetIcon')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    ! wxDataViewCheckIconText
+
+    type(c_ptr) function wxDataViewCheckIconText_Create(text, icon, checkedState) &
+        bind(C, name='wxDataViewCheckIconText_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: text
+      type(c_ptr), value :: icon
+      integer(c_int), value :: checkedState
+    end function
+
+    type(c_ptr) function wxDataViewCheckIconText_CreateDefault() &
+        bind(C, name='wxDataViewCheckIconText_CreateDefault')
+      import :: c_ptr
+    end function
+
+    subroutine wxDataViewCheckIconText_Copy(pObject, other) &
+        bind(C, name='wxDataViewCheckIconText_Copy')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: other
+    end subroutine
+
+    subroutine wxDataViewCheckIconText_Delete(pObject) &
+        bind(C, name='wxDataViewCheckIconText_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDataViewCheckIconText_SetCheckedState(pObject, state) &
+        bind(C, name='wxDataViewCheckIconText_SetCheckedState')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: state
+    end subroutine
+
+    integer(c_int) function wxDataViewCheckIconText_GetCheckedState(pObject) &
+        bind(C, name='wxDataViewCheckIconText_GetCheckedState')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     ! wxControl
 
     integer(c_int) function wxControl_FindAccelIndex(label) &
@@ -46937,6 +51841,13 @@ module kwxffi
       type(c_ptr), value :: items
     end function
 
+    integer(c_int) function wxTextEntry_AutoCompleteStrings(self, items) &
+        bind(C, name='wxTextEntry_AutoCompleteStrings')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: self
+      type(c_ptr), value :: items
+    end function
+
     integer(c_int) function wxTextEntry_AutoCompleteFileNames(self) &
         bind(C, name='wxTextEntry_AutoCompleteFileNames')
       import :: c_int, c_ptr
@@ -46947,6 +51858,13 @@ module kwxffi
         bind(C, name='wxTextEntry_AutoCompleteDirectories')
       import :: c_int, c_ptr
       type(c_ptr), value :: self
+    end function
+
+    integer(c_int) function wxTextEntry_AutoCompleteCompleter(self, completer) &
+        bind(C, name='wxTextEntry_AutoCompleteCompleter')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: self
+      type(c_ptr), value :: completer
     end function
 
     ! wxItemContainer
@@ -47581,6 +52499,114 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: filename
     end subroutine
+
+    ! kwxMSAA
+
+    type(c_ptr) function kwxMSAA_FromWindow(window, objectId) &
+        bind(C, name='kwxMSAA_FromWindow')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: window
+      integer(c_int), value :: objectId
+    end function
+
+    subroutine kwxMSAA_Release(accessible) &
+        bind(C, name='kwxMSAA_Release')
+      import :: c_ptr
+      type(c_ptr), value :: accessible
+    end subroutine
+
+    integer(c_int) function kwxMSAA_GetChildCount(accessible) &
+        bind(C, name='kwxMSAA_GetChildCount')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+    end function
+
+    type(c_ptr) function kwxMSAA_GetName(accessible, childId) &
+        bind(C, name='kwxMSAA_GetName')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+      integer(c_int), value :: childId
+    end function
+
+    type(c_ptr) function kwxMSAA_GetRoleText(accessible, childId) &
+        bind(C, name='kwxMSAA_GetRoleText')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+      integer(c_int), value :: childId
+    end function
+
+    type(c_ptr) function kwxMSAA_GetValue(accessible, childId) &
+        bind(C, name='kwxMSAA_GetValue')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+      integer(c_int), value :: childId
+    end function
+
+    type(c_ptr) function kwxMSAA_GetDescription(accessible, childId) &
+        bind(C, name='kwxMSAA_GetDescription')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+      integer(c_int), value :: childId
+    end function
+
+    type(c_ptr) function kwxMSAA_GetNameWithStatus(accessible, childId, result_) &
+        bind(C, name='kwxMSAA_GetNameWithStatus')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+      integer(c_int), value :: childId
+      type(c_ptr), value :: result_
+    end function
+
+    type(c_ptr) function kwxMSAA_GetRoleTextWithStatus(accessible, childId, result_) &
+        bind(C, name='kwxMSAA_GetRoleTextWithStatus')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+      integer(c_int), value :: childId
+      type(c_ptr), value :: result_
+    end function
+
+    type(c_ptr) function kwxMSAA_GetValueWithStatus(accessible, childId, result_) &
+        bind(C, name='kwxMSAA_GetValueWithStatus')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+      integer(c_int), value :: childId
+      type(c_ptr), value :: result_
+    end function
+
+    type(c_ptr) function kwxMSAA_GetDescriptionWithStatus(accessible, childId, result_) &
+        bind(C, name='kwxMSAA_GetDescriptionWithStatus')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+      integer(c_int), value :: childId
+      type(c_ptr), value :: result_
+    end function
+
+    integer(c_int) function kwxMSAA_GetState(accessible, childId) &
+        bind(C, name='kwxMSAA_GetState')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+      integer(c_int), value :: childId
+    end function
+
+    type(c_ptr) function kwxMSAA_GetChild(accessible, childId) &
+        bind(C, name='kwxMSAA_GetChild')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+      integer(c_int), value :: childId
+    end function
+
+    integer(c_int) function kwxMSAA_GetAccessibleChildCount(accessible) &
+        bind(C, name='kwxMSAA_GetAccessibleChildCount')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+    end function
+
+    type(c_ptr) function kwxMSAA_GetAccessibleChild(accessible, index) &
+        bind(C, name='kwxMSAA_GetAccessibleChild')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: accessible
+      integer(c_int), value :: index
+    end function
 
     ! wxProtocol
 
@@ -51798,148 +56824,6 @@ module kwxffi
       type(c_ptr), value :: replacement
     end function
 
-    ! wxXmlDocument
-
-    type(c_ptr) function wxXmlDocument_Create() &
-        bind(C, name='wxXmlDocument_Create')
-      import :: c_ptr
-    end function
-
-    type(c_ptr) function wxXmlDocument_GetDocumentNode(pObject) &
-        bind(C, name='wxXmlDocument_GetDocumentNode')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxXmlDocument_CreateFromFile(file_name, flags) &
-        bind(C, name='wxXmlDocument_CreateFromFile')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: file_name
-      integer(c_int), value :: flags
-    end function
-
-    type(c_ptr) function wxXmlDocument_CreateFromString(text, flags) &
-        bind(C, name='wxXmlDocument_CreateFromString')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: text
-      integer(c_int), value :: flags
-    end function
-
-    subroutine wxXmlDocument_Delete(pObject) &
-        bind(C, name='wxXmlDocument_Delete')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end subroutine
-
-    integer(c_int) function wxXmlDocument_Load(pObject, file_name, flags) &
-        bind(C, name='wxXmlDocument_Load')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: file_name
-      integer(c_int), value :: flags
-    end function
-
-    integer(c_int) function wxXmlDocument_LoadFromString(pObject, text, flags) &
-        bind(C, name='wxXmlDocument_LoadFromString')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: text
-      integer(c_int), value :: flags
-    end function
-
-    integer(c_int) function wxXmlDocument_Save(pObject, file_name, indent_step) &
-        bind(C, name='wxXmlDocument_Save')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: file_name
-      integer(c_int), value :: indent_step
-    end function
-
-    type(c_ptr) function wxXmlDocument_SaveToString(pObject, indent_step) &
-        bind(C, name='wxXmlDocument_SaveToString')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: indent_step
-    end function
-
-    type(c_ptr) function wxXmlDocument_GetRoot(pObject) &
-        bind(C, name='wxXmlDocument_GetRoot')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxXmlDocument_SetRoot(pObject, root) &
-        bind(C, name='wxXmlDocument_SetRoot')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: root
-    end subroutine
-
-    type(c_ptr) function wxXmlDocument_DetachRoot(pObject) &
-        bind(C, name='wxXmlDocument_DetachRoot')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    type(c_ptr) function wxXmlDocument_GetVersion(pObject) &
-        bind(C, name='wxXmlDocument_GetVersion')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxXmlDocument_SetVersion(pObject, version) &
-        bind(C, name='wxXmlDocument_SetVersion')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: version
-    end subroutine
-
-    type(c_ptr) function wxXmlDocument_GetFileEncoding(pObject) &
-        bind(C, name='wxXmlDocument_GetFileEncoding')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxXmlDocument_SetFileEncoding(pObject, encoding) &
-        bind(C, name='wxXmlDocument_SetFileEncoding')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: encoding
-    end subroutine
-
-    integer(c_int) function wxXmlDocument_GetFileType(pObject) &
-        bind(C, name='wxXmlDocument_GetFileType')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
-    subroutine wxXmlDocument_SetFileType(pObject, file_type) &
-        bind(C, name='wxXmlDocument_SetFileType')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: file_type
-    end subroutine
-
-    subroutine wxXmlDocument_AppendToProlog(pObject, node) &
-        bind(C, name='wxXmlDocument_AppendToProlog')
-      import :: c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: node
-    end subroutine
-
-    integer(c_int) function wxXmlDocument_AppendChild(pObject, child) &
-        bind(C, name='wxXmlDocument_AppendChild')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      type(c_ptr), value :: child
-    end function
-
-    integer(c_int) function wxXmlDocument_IsOk(pObject) &
-        bind(C, name='wxXmlDocument_IsOk')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-    end function
-
     ! wxURI
 
     type(c_ptr) function wxURI_Create() &
@@ -52979,6 +57863,27 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: self
     end function
+
+    subroutine wxRichTextAttr_SetBackgroundColour(self, colour) &
+        bind(C, name='wxRichTextAttr_SetBackgroundColour')
+      import :: c_ptr
+      type(c_ptr), value :: self
+      type(c_ptr), value :: colour
+    end subroutine
+
+    subroutine wxRichTextAttr_SetParagraphSpacingAfter(self, spacing) &
+        bind(C, name='wxRichTextAttr_SetParagraphSpacingAfter')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: self
+      integer(c_int), value :: spacing
+    end subroutine
+
+    subroutine wxRichTextAttr_SetLineSpacing(self, spacing) &
+        bind(C, name='wxRichTextAttr_SetLineSpacing')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: self
+      integer(c_int), value :: spacing
+    end subroutine
 
     ! wxRichTextProperties
 
@@ -54129,6 +59034,33 @@ module kwxffi
 
     subroutine wxRichTextCompositeObject_Delete(self) &
         bind(C, name='wxRichTextCompositeObject_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: self
+    end subroutine
+
+    ! wxRichTextParagraph
+
+    type(c_ptr) function wxRichTextParagraph_Create() &
+        bind(C, name='wxRichTextParagraph_Create')
+      import :: c_ptr
+    end function
+
+    subroutine wxRichTextParagraph_Delete(self) &
+        bind(C, name='wxRichTextParagraph_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: self
+    end subroutine
+
+    ! wxRichTextPlainText
+
+    type(c_ptr) function wxRichTextPlainText_Create(text) &
+        bind(C, name='wxRichTextPlainText_Create')
+      import :: c_ptr
+      type(c_ptr), value :: text
+    end function
+
+    subroutine wxRichTextPlainText_Delete(self) &
+        bind(C, name='wxRichTextPlainText_Delete')
       import :: c_ptr
       type(c_ptr), value :: self
     end subroutine
@@ -56223,6 +61155,20 @@ module kwxffi
       integer(c_long), value :: caretPosition
     end function
 
+    integer(c_long) function wxRichTextCtrl_GetCaretPosition(self) &
+        bind(C, name='wxRichTextCtrl_GetCaretPosition')
+      import :: c_long, c_ptr
+      type(c_ptr), value :: self
+    end function
+
+    integer(c_int) function wxRichTextCtrl_SetMargins(self, left, top) &
+        bind(C, name='wxRichTextCtrl_SetMargins')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: self
+      integer(c_int), value :: left
+      integer(c_int), value :: top
+    end function
+
     integer(c_long) function wxRichTextCtrl_FindNextWordPosition(self, direction) &
         bind(C, name='wxRichTextCtrl_FindNextWordPosition')
       import :: c_int, c_long, c_ptr
@@ -58103,6 +63049,30 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end subroutine
 
+    subroutine kwxRichTextCtrl_SetOnPrepareContentWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextCtrl_SetOnPrepareContentWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxRichTextCtrl_SetOnCanDeleteRangeWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextCtrl_SetOnCanDeleteRangeWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxRichTextCtrl_SetOnCanInsertContentWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextCtrl_SetOnCanInsertContentWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
     subroutine kwxRichTextCtrl_SetCanDeleteRangeResult(pObject, result_) &
         bind(C, name='kwxRichTextCtrl_SetCanDeleteRangeResult')
       import :: c_int, c_ptr
@@ -58117,6 +63087,50 @@ module kwxffi
       integer(c_int), value :: result_
     end subroutine
 
+    subroutine kwxRichTextCtrl_SetCallbackObject(pObject, object) &
+        bind(C, name='kwxRichTextCtrl_SetCallbackObject')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: object
+    end subroutine
+
+    type(c_ptr) function kwxRichTextCtrl_GetCallbackObject(pObject) &
+        bind(C, name='kwxRichTextCtrl_GetCallbackObject')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine kwxRichTextCtrl_SetLockId(pObject, id) &
+        bind(C, name='kwxRichTextCtrl_SetLockId')
+      import :: c_long, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_long), value :: id
+    end subroutine
+
+    integer(c_long) function kwxRichTextCtrl_GetLockId(pObject) &
+        bind(C, name='kwxRichTextCtrl_GetLockId')
+      import :: c_long, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine kwxRichTextCtrl_BeginLock(pObject) &
+        bind(C, name='kwxRichTextCtrl_BeginLock')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine kwxRichTextCtrl_EndLock(pObject) &
+        bind(C, name='kwxRichTextCtrl_EndLock')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    integer(c_int) function kwxRichTextCtrl_IsLocked(pObject) &
+        bind(C, name='kwxRichTextCtrl_IsLocked')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     ! kwxRichTextFieldTypeStandard
 
     type(c_ptr) function kwxRichTextFieldTypeStandard_Create(pObject, name, label, displayStyle) &
@@ -58125,6 +63139,15 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: name
       type(c_ptr), value :: label
+      integer(c_int), value :: displayStyle
+    end function
+
+    type(c_ptr) function kwxRichTextFieldTypeStandard_CreateWithBitmap(pObject, name, bitmap, displayStyle) &
+        bind(C, name='kwxRichTextFieldTypeStandard_CreateWithBitmap')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: name
+      type(c_ptr), value :: bitmap
       integer(c_int), value :: displayStyle
     end function
 
@@ -58204,6 +63227,46 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end subroutine
 
+    subroutine kwxRichTextFieldTypeStandard_SetOnCanEditPropertiesWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextFieldTypeStandard_SetOnCanEditPropertiesWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxRichTextFieldTypeStandard_SetOnEditPropertiesWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextFieldTypeStandard_SetOnEditPropertiesWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxRichTextFieldTypeStandard_SetOnGetPropertiesMenuLabelWi_0883(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextFieldTypeStandard_SetOnGetPropertiesMenuLabelWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxRichTextFieldTypeStandard_SetOnUpdateFieldWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextFieldTypeStandard_SetOnUpdateFieldWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxRichTextFieldTypeStandard_SetOnIsTopLevelWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextFieldTypeStandard_SetOnIsTopLevelWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
     ! kwxRichTextDrawingHandler
 
     type(c_ptr) function kwxRichTextDrawingHandler_Create(pObject, name) &
@@ -58252,6 +63315,46 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
       type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine kwxRichTextDrawingHandler_SetOnHasVirtualAttributesWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextDrawingHandler_SetOnHasVirtualAttributesWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxRichTextDrawingHandler_SetOnGetVirtualAttributesWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextDrawingHandler_SetOnGetVirtualAttributesWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxRichTextDrawingHandler_SetOnGetVirtualSubobjectAttribut_5fbc(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextDrawingHandler_SetOnGetVirtualSubobjectAttributesCountWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxRichTextDrawingHandler_SetOnHasVirtualTextWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextDrawingHandler_SetOnHasVirtualTextWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxRichTextDrawingHandler_SetOnGetVirtualTextWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxRichTextDrawingHandler_SetOnGetVirtualTextWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
     end subroutine
 
     subroutine kwxRichTextDrawingHandler_SetVirtualTextResult(pObject, text) &
@@ -58641,6 +63744,12 @@ module kwxffi
     integer(c_long) function wxTextUrlEvent_GetURLEnd(pObject) &
         bind(C, name='wxTextUrlEvent_GetURLEnd')
       import :: c_long, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxTextUrlEvent_GetString(pObject) &
+        bind(C, name='wxTextUrlEvent_GetString')
+      import :: c_ptr
       type(c_ptr), value :: pObject
     end function
 
@@ -59142,6 +64251,38 @@ module kwxffi
       type(c_ptr), value :: pObject
     end subroutine
 
+    ! wxOverlayDC
+
+    type(c_ptr) function wxOverlayDC_Create(overlay, win) &
+        bind(C, name='wxOverlayDC_Create')
+      import :: c_ptr
+      type(c_ptr), value :: overlay
+      type(c_ptr), value :: win
+    end function
+
+    type(c_ptr) function wxOverlayDC_CreateWithRect(overlay, win, x, y, width, height) &
+        bind(C, name='wxOverlayDC_CreateWithRect')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: overlay
+      type(c_ptr), value :: win
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+    end function
+
+    type(c_ptr) function wxOverlayDC_CreateGCDC(pObject) &
+        bind(C, name='wxOverlayDC_CreateGCDC')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxOverlayDC_Delete(pObject) &
+        bind(C, name='wxOverlayDC_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
     ! wxAffineMatrix2D
 
     type(c_ptr) function wxAffineMatrix2D_Create() &
@@ -59280,6 +64421,18 @@ module kwxffi
       type(c_ptr), value :: client
       integer(c_int), value :: width
       integer(c_int), value :: height
+    end function
+
+    type(c_ptr) function wxArtProvider_GetBitmapBundleDefault(id) &
+        bind(C, name='wxArtProvider_GetBitmapBundleDefault')
+      import :: c_ptr
+      type(c_ptr), value :: id
+    end function
+
+    type(c_ptr) function wxArtProvider_MakeClientId(id) &
+        bind(C, name='wxArtProvider_MakeClientId')
+      import :: c_ptr
+      type(c_ptr), value :: id
     end function
 
     type(c_ptr) function wxArtProvider_GetIcon(id, client, width, height) &
@@ -60378,6 +65531,64 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
+    ! wxDynamicLibraryDetails
+
+    type(c_ptr) function wxDynamicLibraryDetails_GetName(pObject) &
+        bind(C, name='wxDynamicLibraryDetails_GetName')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDynamicLibraryDetails_GetPath(pObject) &
+        bind(C, name='wxDynamicLibraryDetails_GetPath')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDynamicLibraryDetails_GetVersion(pObject) &
+        bind(C, name='wxDynamicLibraryDetails_GetVersion')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDynamicLibraryDetails_GetAddress(pObject) &
+        bind(C, name='wxDynamicLibraryDetails_GetAddress')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_size_t) function wxDynamicLibraryDetails_GetLength(pObject) &
+        bind(C, name='wxDynamicLibraryDetails_GetLength')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+    end function
+
+    ! kwxDynamicLibraryList
+
+    type(c_ptr) function kwxDynamicLibraryList_Create() &
+        bind(C, name='kwxDynamicLibraryList_Create')
+      import :: c_ptr
+    end function
+
+    subroutine kwxDynamicLibraryList_Delete(pObject) &
+        bind(C, name='kwxDynamicLibraryList_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    integer(c_size_t) function kwxDynamicLibraryList_GetCount(pObject) &
+        bind(C, name='kwxDynamicLibraryList_GetCount')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function kwxDynamicLibraryList_GetDetails(pObject, index) &
+        bind(C, name='kwxDynamicLibraryList_GetDetails')
+      import :: c_ptr, c_size_t
+      type(c_ptr), value :: pObject
+      integer(c_size_t), value :: index
+    end function
+
     ! wxMutex
 
     integer(c_int) function wxMutex_IsOk(pObject) &
@@ -60506,6 +65717,115 @@ module kwxffi
       integer(c_int), value :: nsec
     end function
 
+    ! wxItemAttr
+
+    type(c_ptr) function wxItemAttr_Create() &
+        bind(C, name='wxItemAttr_Create')
+      import :: c_ptr
+    end function
+
+    subroutine wxItemAttr_Copy(pObject, other) &
+        bind(C, name='wxItemAttr_Copy')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: other
+    end subroutine
+
+    subroutine wxItemAttr_Delete(pObject) &
+        bind(C, name='wxItemAttr_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxItemAttr_SetTextColour(pObject, colour) &
+        bind(C, name='wxItemAttr_SetTextColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colour
+    end subroutine
+
+    subroutine wxItemAttr_SetBackgroundColour(pObject, colour) &
+        bind(C, name='wxItemAttr_SetBackgroundColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colour
+    end subroutine
+
+    subroutine wxItemAttr_SetFont(pObject, font) &
+        bind(C, name='wxItemAttr_SetFont')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: font
+    end subroutine
+
+    integer(c_int) function wxItemAttr_HasTextColour(pObject) &
+        bind(C, name='wxItemAttr_HasTextColour')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxItemAttr_HasBackgroundColour(pObject) &
+        bind(C, name='wxItemAttr_HasBackgroundColour')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxItemAttr_HasFont(pObject) &
+        bind(C, name='wxItemAttr_HasFont')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxItemAttr_HasColours(pObject) &
+        bind(C, name='wxItemAttr_HasColours')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxItemAttr_GetTextColour(pObject) &
+        bind(C, name='wxItemAttr_GetTextColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxItemAttr_GetBackgroundColour(pObject) &
+        bind(C, name='wxItemAttr_GetBackgroundColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxItemAttr_GetFont(pObject) &
+        bind(C, name='wxItemAttr_GetFont')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    ! wxOverlay
+
+    type(c_ptr) function wxOverlay_Create() &
+        bind(C, name='wxOverlay_Create')
+      import :: c_ptr
+    end function
+
+    subroutine wxOverlay_Delete(pObject) &
+        bind(C, name='wxOverlay_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxOverlay_Reset(pObject) &
+        bind(C, name='wxOverlay_Reset')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxOverlay_SetOpacity(pObject, alpha) &
+        bind(C, name='wxOverlay_SetOpacity')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: alpha
+    end subroutine
+
     ! kwxArtProv
 
     type(c_ptr) function kwxArtProv_Create(pObject, callback) &
@@ -60519,6 +65839,45 @@ module kwxffi
         bind(C, name='kwxArtProv_Release')
       import :: c_ptr
       type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine kwxArtProv_Push(pObject) &
+        bind(C, name='kwxArtProv_Push')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine kwxArtProv_PushBack(pObject) &
+        bind(C, name='kwxArtProv_PushBack')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine kwxArtProv_SetOnCreateBitmapWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxArtProv_SetOnCreateBitmapWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    integer(c_int) function kwxArtProv_GetRequestedWidth(pObject) &
+        bind(C, name='kwxArtProv_GetRequestedWidth')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function kwxArtProv_GetRequestedHeight(pObject) &
+        bind(C, name='kwxArtProv_GetRequestedHeight')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine kwxArtProv_SetCreateBitmapResult(pObject, bitmap) &
+        bind(C, name='kwxArtProv_SetCreateBitmapResult')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: bitmap
     end subroutine
 
     ! kwxClient
@@ -60777,6 +66136,80 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end subroutine
 
+    subroutine kwxDropTarget_SetOnDataWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxDropTarget_SetOnDataWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxDropTarget_SetOnDropWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxDropTarget_SetOnDropWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxDropTarget_SetOnEnterWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxDropTarget_SetOnEnterWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxDropTarget_SetOnDragOverWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxDropTarget_SetOnDragOverWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxDropTarget_SetOnLeaveWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxDropTarget_SetOnLeaveWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxDropTarget_SetDataResult(pObject, result_) &
+        bind(C, name='kwxDropTarget_SetDataResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxDropTarget_SetDropResult(pObject, result_) &
+        bind(C, name='kwxDropTarget_SetDropResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxDropTarget_SetEnterResult(pObject, result_) &
+        bind(C, name='kwxDropTarget_SetEnterResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxDropTarget_SetDragOverResult(pObject, result_) &
+        bind(C, name='kwxDropTarget_SetDragOverResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    integer(c_int) function kwxDropTarget_GetDropResult(pObject) &
+        bind(C, name='kwxDropTarget_GetDropResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     ! kwxFileDropTarget
 
     type(c_ptr) function kwxFileDropTarget_Create(pObject, pFunction) &
@@ -60826,6 +66259,101 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: pFunction
     end subroutine
+
+    subroutine kwxFileDropTarget_SetOnDataWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxFileDropTarget_SetOnDataWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxFileDropTarget_SetOnDropWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxFileDropTarget_SetOnDropWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxFileDropTarget_SetOnEnterWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxFileDropTarget_SetOnEnterWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxFileDropTarget_SetOnDragOverWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxFileDropTarget_SetOnDragOverWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxFileDropTarget_SetOnLeaveWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxFileDropTarget_SetOnLeaveWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxFileDropTarget_SetDataResult(pObject, result_) &
+        bind(C, name='kwxFileDropTarget_SetDataResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxFileDropTarget_SetDropResult(pObject, result_) &
+        bind(C, name='kwxFileDropTarget_SetDropResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxFileDropTarget_SetEnterResult(pObject, result_) &
+        bind(C, name='kwxFileDropTarget_SetEnterResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxFileDropTarget_SetDragOverResult(pObject, result_) &
+        bind(C, name='kwxFileDropTarget_SetDragOverResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    integer(c_int) function kwxFileDropTarget_GetDropResult(pObject) &
+        bind(C, name='kwxFileDropTarget_GetDropResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine kwxFileDropTarget_SetOnDropFilesWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxFileDropTarget_SetOnDropFilesWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxFileDropTarget_SetDropFilesResult(pObject, result_) &
+        bind(C, name='kwxFileDropTarget_SetDropFilesResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    type(c_ptr) function kwxFileDropTarget_GetDropFiles(pObject) &
+        bind(C, name='kwxFileDropTarget_GetDropFiles')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
 
     ! kwxGridTable
 
@@ -61367,6 +66895,101 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end subroutine
 
+    subroutine kwxTextDropTarget_SetOnDataWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxTextDropTarget_SetOnDataWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxTextDropTarget_SetOnDropWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxTextDropTarget_SetOnDropWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxTextDropTarget_SetOnEnterWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxTextDropTarget_SetOnEnterWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxTextDropTarget_SetOnDragOverWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxTextDropTarget_SetOnDragOverWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxTextDropTarget_SetOnLeaveWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxTextDropTarget_SetOnLeaveWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxTextDropTarget_SetDataResult(pObject, result_) &
+        bind(C, name='kwxTextDropTarget_SetDataResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxTextDropTarget_SetDropResult(pObject, result_) &
+        bind(C, name='kwxTextDropTarget_SetDropResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxTextDropTarget_SetEnterResult(pObject, result_) &
+        bind(C, name='kwxTextDropTarget_SetEnterResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine kwxTextDropTarget_SetDragOverResult(pObject, result_) &
+        bind(C, name='kwxTextDropTarget_SetDragOverResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    integer(c_int) function kwxTextDropTarget_GetDropResult(pObject) &
+        bind(C, name='kwxTextDropTarget_GetDropResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine kwxTextDropTarget_SetOnDropTextWithData(pObject, pFunction, data_) &
+        bind(C, name='kwxTextDropTarget_SetOnDropTextWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine kwxTextDropTarget_SetDropTextResult(pObject, result_) &
+        bind(C, name='kwxTextDropTarget_SetDropTextResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    type(c_ptr) function kwxTextDropTarget_GetDropText(pObject) &
+        bind(C, name='kwxTextDropTarget_GetDropText')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     ! kwxTextValidator
 
     type(c_ptr) function kwxTextValidator_Create(pObject, pFunction, text, style) &
@@ -61796,6 +67419,41 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end subroutine
 
+    subroutine wxApp_SetOnOnFatalException(pObject, pFunction) &
+        bind(C, name='wxApp_SetOnOnFatalException')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine wxApp_SetOnOnUnhandledException(pObject, pFunction) &
+        bind(C, name='wxApp_SetOnOnUnhandledException')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine wxApp_SetOnStoreCurrentException(pObject, pFunction) &
+        bind(C, name='wxApp_SetOnStoreCurrentException')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine wxApp_SetOnOnExceptionInMainLoop(pObject, pFunction) &
+        bind(C, name='wxApp_SetOnOnExceptionInMainLoop')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
+    subroutine wxApp_SetOnRethrowStoredException(pObject, pFunction) &
+        bind(C, name='wxApp_SetOnRethrowStoredException')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+    end subroutine
+
     ! wxArrayString
 
     type(c_ptr) function wxArrayString_Create() &
@@ -62098,6 +67756,12 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: source
     end function
+
+    subroutine wxAuiToolBarItem_Delete(pObject) &
+        bind(C, name='wxAuiToolBarItem_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
 
     type(c_ptr) function wxAuiToolBarItem_Copy(pObject, source) &
         bind(C, name='wxAuiToolBarItem_Copy')
@@ -62924,6 +68588,35 @@ module kwxffi
       integer(c_int), value :: tool_id
     end function
 
+    integer(c_int) function wxAuiToolBar_DestroyTool(pObject, tool_id) &
+        bind(C, name='wxAuiToolBar_DestroyTool')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: tool_id
+    end function
+
+    integer(c_int) function wxAuiToolBar_DestroyToolByIndex(pObject, idx) &
+        bind(C, name='wxAuiToolBar_DestroyToolByIndex')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: idx
+    end function
+
+    type(c_ptr) function wxAuiToolBar_GetToolClientData(pObject, tool_id) &
+        bind(C, name='wxAuiToolBar_GetToolClientData')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: tool_id
+    end function
+
+    subroutine wxAuiToolBar_SetToolClientData(pObject, tool_id, clientData) &
+        bind(C, name='wxAuiToolBar_SetToolClientData')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: tool_id
+      type(c_ptr), value :: clientData
+    end subroutine
+
     integer(c_size_t) function wxAuiToolBar_GetToolCount(pObject) &
         bind(C, name='wxAuiToolBar_GetToolCount')
       import :: c_ptr, c_size_t
@@ -63246,6 +68939,52 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: pane
     end function
+
+    type(c_ptr) function wxAuiToolBar_AddToolByLabelBundle(pObject, tool_id, label, bitmap, shortHelpString, kind_) &
+        bind(C, name='wxAuiToolBar_AddToolByLabelBundle')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: tool_id
+      type(c_ptr), value :: label
+      type(c_ptr), value :: bitmap
+      type(c_ptr), value :: shortHelpString
+      integer(c_int), value :: kind_
+    end function
+
+    type(c_ptr) function wxAuiToolBar_AddToolBundle(pObject, tool_id, label, bitmap, disabledBitmap, kind_, shortHelpString, longHelpString, clientData) &
+        bind(C, name='wxAuiToolBar_AddToolBundle')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: tool_id
+      type(c_ptr), value :: label
+      type(c_ptr), value :: bitmap
+      type(c_ptr), value :: disabledBitmap
+      integer(c_int), value :: kind_
+      type(c_ptr), value :: shortHelpString
+      type(c_ptr), value :: longHelpString
+      type(c_ptr), value :: clientData
+    end function
+
+    type(c_ptr) function wxAuiToolBar_AddToolByBitmapBundle(pObject, tool_id, bitmap, disabledBitmap, toggle, clientData, shortHelpString, longHelpString) &
+        bind(C, name='wxAuiToolBar_AddToolByBitmapBundle')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: tool_id
+      type(c_ptr), value :: bitmap
+      type(c_ptr), value :: disabledBitmap
+      integer(c_int), value :: toggle
+      type(c_ptr), value :: clientData
+      type(c_ptr), value :: shortHelpString
+      type(c_ptr), value :: longHelpString
+    end function
+
+    subroutine wxAuiToolBar_SetToolBitmapBundle(pObject, tool_id, bitmap) &
+        bind(C, name='wxAuiToolBar_SetToolBitmapBundle')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: tool_id
+      type(c_ptr), value :: bitmap
+    end subroutine
 
     ! wxAuiNotebook
 
@@ -63622,6 +69361,63 @@ module kwxffi
       type(c_ptr), value :: name
       type(c_ptr), value :: deserializer
     end subroutine
+
+    integer(c_int) function wxAuiNotebook_AddPageWithBundle(pObject, page, caption, select_, bitmap) &
+        bind(C, name='wxAuiNotebook_AddPageWithBundle')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: page
+      type(c_ptr), value :: caption
+      integer(c_int), value :: select_
+      type(c_ptr), value :: bitmap
+    end function
+
+    integer(c_int) function wxAuiNotebook_InsertPageWithBundle(pObject, page_idx, page, caption, select_, bitmap) &
+        bind(C, name='wxAuiNotebook_InsertPageWithBundle')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: page_idx
+      type(c_ptr), value :: page
+      type(c_ptr), value :: caption
+      integer(c_int), value :: select_
+      type(c_ptr), value :: bitmap
+    end function
+
+    integer(c_int) function wxAuiNotebook_SetPageBitmapBundle(pObject, page, bitmap) &
+        bind(C, name='wxAuiNotebook_SetPageBitmapBundle')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: page
+      type(c_ptr), value :: bitmap
+    end function
+
+    type(c_ptr) function wxAuiNotebook_CalculateNewSplitSize(pObject) &
+        bind(C, name='wxAuiNotebook_CalculateNewSplitSize')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxAuiNotebook_GetTabCtrlFromPoint(pObject, x, y) &
+        bind(C, name='wxAuiNotebook_GetTabCtrlFromPoint')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+    end function
+
+    type(c_ptr) function wxAuiNotebook_FindTabCtrl(pObject, page) &
+        bind(C, name='wxAuiNotebook_FindTabCtrl')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: page
+    end function
+
+    integer(c_int) function wxAuiNotebook_FindTabIndex(pObject, page) &
+        bind(C, name='wxAuiNotebook_FindTabIndex')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: page
+    end function
 
     ! wxAuiTabContainerButton
 
@@ -64675,6 +70471,108 @@ module kwxffi
       type(c_ptr), value :: window
     end function
 
+    integer(c_int) function wxAuiManager_CanDockPanel(pObject, pane) &
+        bind(C, name='wxAuiManager_CanDockPanel')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pane
+    end function
+
+    type(c_ptr) function wxAuiManager_CalculateNewSplitSize(pObject) &
+        bind(C, name='wxAuiManager_CalculateNewSplitSize')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxAuiManager_CalculateHintRect(pObject, paneWindow, x, y, offsetX, offsetY) &
+        bind(C, name='wxAuiManager_CalculateHintRect')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: paneWindow
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      integer(c_int), value :: offsetX
+      integer(c_int), value :: offsetY
+    end function
+
+    subroutine wxAuiManager_ClosePane(pObject, paneInfo) &
+        bind(C, name='wxAuiManager_ClosePane')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: paneInfo
+    end subroutine
+
+    subroutine wxAuiManager_DrawHintRect(pObject, paneWindow, x, y, offsetX, offsetY) &
+        bind(C, name='wxAuiManager_DrawHintRect')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: paneWindow
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+      integer(c_int), value :: offsetX
+      integer(c_int), value :: offsetY
+    end subroutine
+
+    integer(c_int) function wxAuiManager_HasLiveResize(pObject) &
+        bind(C, name='wxAuiManager_HasLiveResize')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxAuiManager_MaximizePane(pObject, paneInfo) &
+        bind(C, name='wxAuiManager_MaximizePane')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: paneInfo
+    end subroutine
+
+    subroutine wxAuiManager_MinimizePane(pObject, paneInfo) &
+        bind(C, name='wxAuiManager_MinimizePane')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: paneInfo
+    end subroutine
+
+    subroutine wxAuiManager_RestoreMaximizedPane(pObject) &
+        bind(C, name='wxAuiManager_RestoreMaximizedPane')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxAuiManager_RestorePane(pObject, paneInfo) &
+        bind(C, name='wxAuiManager_RestorePane')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: paneInfo
+    end subroutine
+
+    integer(c_int) function wxAuiManager_SplitPane(pObject, window, newWindow, direction, dropX, dropY) &
+        bind(C, name='wxAuiManager_SplitPane')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: window
+      type(c_ptr), value :: newWindow
+      integer(c_int), value :: direction
+      integer(c_int), value :: dropX
+      integer(c_int), value :: dropY
+    end function
+
+    subroutine wxAuiManager_StartPaneDrag(pObject, paneWindow, offsetX, offsetY) &
+        bind(C, name='wxAuiManager_StartPaneDrag')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: paneWindow
+      integer(c_int), value :: offsetX
+      integer(c_int), value :: offsetY
+    end subroutine
+
+    subroutine wxAuiManager_UpdateHint(pObject, rect) &
+        bind(C, name='wxAuiManager_UpdateHint')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: rect
+    end subroutine
+
     ! wxAuiDockArt
 
     subroutine wxAuiDockArt_DrawBackground(pObject, dc, window, orientation, rect) &
@@ -65427,6 +71325,13 @@ module kwxffi
       integer(c_int), value :: y
     end function
 
+    type(c_ptr) function wxAuiPaneInfo_IconBundle(pObject, bitmap) &
+        bind(C, name='wxAuiPaneInfo_IconBundle')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: bitmap
+    end function
+
     ! wxAuiManagerEvent
 
     type(c_ptr) function wxAuiManagerEvent_Create(type_) &
@@ -66000,6 +71905,19 @@ module kwxffi
       integer(c_int), value :: style
     end function
 
+    type(c_ptr) function wxBitmapButton_CreateWithBundle(parent, id, bitmap, left, top, width, height, style) &
+        bind(C, name='wxBitmapButton_CreateWithBundle')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: parent
+      integer(c_int), value :: id
+      type(c_ptr), value :: bitmap
+      integer(c_int), value :: left
+      integer(c_int), value :: top
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      integer(c_int), value :: style
+    end function
+
     subroutine wxBitmapButton_GetBitmapDisabled(pObject, ref) &
         bind(C, name='wxBitmapButton_GetBitmapDisabled')
       import :: c_ptr
@@ -66063,6 +71981,34 @@ module kwxffi
 
     subroutine wxBitmapButton_SetBitmapSelected(pObject, sel) &
         bind(C, name='wxBitmapButton_SetBitmapSelected')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: sel
+    end subroutine
+
+    subroutine wxBitmapButton_SetBitmapDisabledBundle(pObject, disabled) &
+        bind(C, name='wxBitmapButton_SetBitmapDisabledBundle')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: disabled
+    end subroutine
+
+    subroutine wxBitmapButton_SetBitmapFocusBundle(pObject, focus) &
+        bind(C, name='wxBitmapButton_SetBitmapFocusBundle')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: focus
+    end subroutine
+
+    subroutine wxBitmapButton_SetBitmapLabelBundle(pObject, bitmap) &
+        bind(C, name='wxBitmapButton_SetBitmapLabelBundle')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: bitmap
+    end subroutine
+
+    subroutine wxBitmapButton_SetBitmapSelectedBundle(pObject, sel) &
+        bind(C, name='wxBitmapButton_SetBitmapSelectedBundle')
       import :: c_ptr
       type(c_ptr), value :: pObject
       type(c_ptr), value :: sel
@@ -66279,6 +72225,11 @@ module kwxffi
       type(c_ptr), value :: data_
       integer(c_size_t), value :: size
       integer(c_int), value :: bitmap_type
+    end function
+
+    type(c_ptr) function wxBitmapBundle_CreateDefault() &
+        bind(C, name='wxBitmapBundle_CreateDefault')
+      import :: c_ptr
     end function
 
     type(c_ptr) function wxBitmapBundle_CreateFromBase64(base64, len_, bitmap_type) &
@@ -67277,6 +73228,12 @@ module kwxffi
       integer(c_int), value :: height
     end function
 
+    subroutine wxCaret_Delete(pObject) &
+        bind(C, name='wxCaret_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
     integer(c_int) function wxCaret_GetBlinkTime() &
         bind(C, name='wxCaret_GetBlinkTime')
       import :: c_int
@@ -67825,6 +73782,55 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
     end function
+
+    ! wxColourDatabase
+
+    type(c_ptr) function wxColourDatabase_Get() &
+        bind(C, name='wxColourDatabase_Get')
+      import :: c_ptr
+    end function
+
+    subroutine wxColourDatabase_AddColour(pObject, colourName, colour) &
+        bind(C, name='wxColourDatabase_AddColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colourName
+      type(c_ptr), value :: colour
+    end subroutine
+
+    type(c_ptr) function wxColourDatabase_Find(pObject, colourName) &
+        bind(C, name='wxColourDatabase_Find')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colourName
+    end function
+
+    type(c_ptr) function wxColourDatabase_FindName(pObject, colour) &
+        bind(C, name='wxColourDatabase_FindName')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colour
+    end function
+
+    integer(c_int) function wxColourDatabase_GetNameCount(pObject) &
+        bind(C, name='wxColourDatabase_GetNameCount')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxColourDatabase_GetNameAt(pObject, index) &
+        bind(C, name='wxColourDatabase_GetNameAt')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: index
+    end function
+
+    subroutine wxColourDatabase_UseScheme(pObject, scheme) &
+        bind(C, name='wxColourDatabase_UseScheme')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: scheme
+    end subroutine
 
     ! wxColourData
 
@@ -68408,6 +74414,52 @@ module kwxffi
       integer(c_int), value :: y
     end subroutine
 
+    ! wxCursorBundle
+
+    type(c_ptr) function wxCursorBundle_Create(bitmaps, hotSpotX, hotSpotY) &
+        bind(C, name='wxCursorBundle_Create')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: bitmaps
+      integer(c_int), value :: hotSpotX
+      integer(c_int), value :: hotSpotY
+    end function
+
+    type(c_ptr) function wxCursorBundle_CreateDefault() &
+        bind(C, name='wxCursorBundle_CreateDefault')
+      import :: c_ptr
+    end function
+
+    subroutine wxCursorBundle_Delete(pObject) &
+        bind(C, name='wxCursorBundle_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxCursorBundle_Clear(pObject) &
+        bind(C, name='wxCursorBundle_Clear')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    integer(c_int) function wxCursorBundle_IsOk(pObject) &
+        bind(C, name='wxCursorBundle_IsOk')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxCursorBundle_GetCursorFor(pObject, window) &
+        bind(C, name='wxCursorBundle_GetCursorFor')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: window
+    end function
+
+    type(c_ptr) function wxCursorBundle_GetCursorForMainWindow(pObject) &
+        bind(C, name='wxCursorBundle_GetCursorForMainWindow')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     ! wxCustomDataObject
 
     type(c_ptr) function wxCustomDataObject_Create(format) &
@@ -68614,6 +74666,12 @@ module kwxffi
       integer(c_int), value :: preferred
     end subroutine
 
+    type(c_ptr) function wxDataObjectComposite_GetReceivedFormat(pObject) &
+        bind(C, name='wxDataObjectComposite_GetReceivedFormat')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     type(c_ptr) function wxDataObjectComposite_Create() &
         bind(C, name='wxDataObjectComposite_Create')
       import :: c_ptr
@@ -68672,6 +74730,38 @@ module kwxffi
       integer(c_size_t), value :: len_
       type(c_ptr), value :: buffer
     end function
+
+    ! wxURLDataObject
+
+    type(c_ptr) function wxURLDataObject_Create(url) &
+        bind(C, name='wxURLDataObject_Create')
+      import :: c_ptr
+      type(c_ptr), value :: url
+    end function
+
+    type(c_ptr) function wxURLDataObject_CreateDefault() &
+        bind(C, name='wxURLDataObject_CreateDefault')
+      import :: c_ptr
+    end function
+
+    subroutine wxURLDataObject_Delete(pObject) &
+        bind(C, name='wxURLDataObject_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    type(c_ptr) function wxURLDataObject_GetURL(pObject) &
+        bind(C, name='wxURLDataObject_GetURL')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxURLDataObject_SetURL(pObject, url) &
+        bind(C, name='wxURLDataObject_SetURL')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: url
+    end subroutine
 
     ! wxDataOutputStream
 
@@ -69075,6 +75165,45 @@ module kwxffi
 
     ! wxDocManager
 
+    type(c_ptr) function wxDocManager_Create(flags, initialize) &
+        bind(C, name='wxDocManager_Create')
+      import :: c_int, c_ptr
+      integer(c_int), value :: flags
+      integer(c_int), value :: initialize
+    end function
+
+    type(c_ptr) function wxDocManager_CreateDefault() &
+        bind(C, name='wxDocManager_CreateDefault')
+      import :: c_ptr
+    end function
+
+    subroutine wxDocManager_Delete(pObject) &
+        bind(C, name='wxDocManager_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxDocManager_AddDocument(pObject, doc) &
+        bind(C, name='wxDocManager_AddDocument')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: doc
+    end subroutine
+
+    subroutine wxDocManager_AssociateTemplate(pObject, docTemplate) &
+        bind(C, name='wxDocManager_AssociateTemplate')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: docTemplate
+    end subroutine
+
+    integer(c_int) function wxDocManager_Clear(pObject, force) &
+        bind(C, name='wxDocManager_Clear')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: force
+    end function
+
     integer(c_int) function wxDocManager_CloseDocuments(pObject, force) &
         bind(C, name='wxDocManager_CloseDocuments')
       import :: c_int, c_ptr
@@ -69095,6 +75224,13 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
     end function
+
+    subroutine wxDocManager_DisassociateTemplate(pObject, docTemplate) &
+        bind(C, name='wxDocManager_DisassociateTemplate')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: docTemplate
+    end subroutine
 
     subroutine wxDocManager_FileHistoryLoad(pObject, config) &
         bind(C, name='wxDocManager_FileHistoryLoad')
@@ -69117,10 +75253,61 @@ module kwxffi
       type(c_ptr), value :: menu
     end subroutine
 
+    type(c_ptr) function wxDocManager_GetCurrentDocument(pObject) &
+        bind(C, name='wxDocManager_GetCurrentDocument')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDocManager_GetCurrentView(pObject) &
+        bind(C, name='wxDocManager_GetCurrentView')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDocManager_GetDocumentCount(pObject) &
+        bind(C, name='wxDocManager_GetDocumentCount')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDocManager_GetDocumentAt(pObject, pos) &
+        bind(C, name='wxDocManager_GetDocumentAt')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: pos
+    end function
+
     type(c_ptr) function wxDocManager_GetDocumentManager() &
         bind(C, name='wxDocManager_GetDocumentManager')
       import :: c_ptr
     end function
+
+    integer(c_int) function wxDocManager_GetMaxDocsOpen(pObject) &
+        bind(C, name='wxDocManager_GetMaxDocsOpen')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDocManager_GetTemplateAt(pObject, pos) &
+        bind(C, name='wxDocManager_GetTemplateAt')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: pos
+    end function
+
+    integer(c_int) function wxDocManager_GetTemplateCount(pObject) &
+        bind(C, name='wxDocManager_GetTemplateCount')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDocManager_RemoveDocument(pObject, doc) &
+        bind(C, name='wxDocManager_RemoveDocument')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: doc
+    end subroutine
 
     subroutine wxDocManager_SetMaxDocsOpen(pObject, n) &
         bind(C, name='wxDocManager_SetMaxDocsOpen')
@@ -69151,6 +75338,77 @@ module kwxffi
       type(c_ptr), value :: self
     end function
 
+    ! wxDocTemplate
+
+    type(c_ptr) function wxDocTemplate_GetDescription(pObject) &
+        bind(C, name='wxDocTemplate_GetDescription')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDocTemplate_GetFileFilter(pObject) &
+        bind(C, name='wxDocTemplate_GetFileFilter')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDocTemplate_SetFileFilter(pObject, filter) &
+        bind(C, name='wxDocTemplate_SetFileFilter')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: filter
+    end subroutine
+
+    type(c_ptr) function wxDocTemplate_GetDefaultExtension(pObject) &
+        bind(C, name='wxDocTemplate_GetDefaultExtension')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDocTemplate_GetDirectory(pObject) &
+        bind(C, name='wxDocTemplate_GetDirectory')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDocTemplate_SetDirectory(pObject, dir) &
+        bind(C, name='wxDocTemplate_SetDirectory')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: dir
+    end subroutine
+
+    type(c_ptr) function wxDocTemplate_GetViewName(pObject) &
+        bind(C, name='wxDocTemplate_GetViewName')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDocTemplate_GetDocumentName(pObject) &
+        bind(C, name='wxDocTemplate_GetDocumentName')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_long) function wxDocTemplate_GetFlags(pObject) &
+        bind(C, name='wxDocTemplate_GetFlags')
+      import :: c_long, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDocTemplate_GetDocumentManager(pObject) &
+        bind(C, name='wxDocTemplate_GetDocumentManager')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDocTemplate_FileMatchesTemplate(pObject, path) &
+        bind(C, name='wxDocTemplate_FileMatchesTemplate')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: path
+    end function
+
     ! wxDocument
 
     integer(c_int) function wxDocument_DeleteContents(pObject) &
@@ -69177,6 +75435,12 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
+    integer(c_int) function wxDocument_IsModified(pObject) &
+        bind(C, name='wxDocument_IsModified')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     subroutine wxDocument_SetFilename(pObject, filename, notifyViews) &
         bind(C, name='wxDocument_SetFilename')
       import :: c_int, c_ptr
@@ -69192,6 +75456,42 @@ module kwxffi
       type(c_ptr), value :: sender
       type(c_ptr), value :: hint
     end subroutine
+
+    integer(c_int) function wxDocument_Close(pObject) &
+        bind(C, name='wxDocument_Close')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDocument_Save(pObject) &
+        bind(C, name='wxDocument_Save')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDocument_SaveAs(pObject) &
+        bind(C, name='wxDocument_SaveAs')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDocument_Revert(pObject) &
+        bind(C, name='wxDocument_Revert')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDocument_AlreadySaved(pObject) &
+        bind(C, name='wxDocument_AlreadySaved')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxDocument_CanClose(pObject) &
+        bind(C, name='wxDocument_CanClose')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
 
     subroutine wxDocument_SetOnDoOpenDocument(pObject, pFunction) &
         bind(C, name='wxDocument_SetOnDoOpenDocument')
@@ -69241,6 +75541,124 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: pFunction
     end subroutine
+
+    subroutine wxDocument_SetOnDoOpenDocumentWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDocument_SetOnDoOpenDocumentWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDocument_SetDoOpenDocumentResult(pObject, result_) &
+        bind(C, name='wxDocument_SetDoOpenDocumentResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDocument_SetOnDoSaveDocumentWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDocument_SetOnDoSaveDocumentWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDocument_SetDoSaveDocumentResult(pObject, result_) &
+        bind(C, name='wxDocument_SetDoSaveDocumentResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDocument_SetOnIsModifiedWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDocument_SetOnIsModifiedWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDocument_SetIsModifiedResult(pObject, result_) &
+        bind(C, name='wxDocument_SetIsModifiedResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDocument_SetOnModifyWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDocument_SetOnModifyWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDocument_SetOnOnCreateWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDocument_SetOnOnCreateWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDocument_SetOnCreateResult(pObject, result_) &
+        bind(C, name='wxDocument_SetOnCreateResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxDocument_SetOnOnOpenDocumentWithData(pObject, pFunction, data_) &
+        bind(C, name='wxDocument_SetOnOnOpenDocumentWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxDocument_SetOnOpenDocumentResult(pObject, result_) &
+        bind(C, name='wxDocument_SetOnOpenDocumentResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    integer(c_int) function wxDocument_OnCreateBase(pObject, path, flags) &
+        bind(C, name='wxDocument_OnCreateBase')
+      import :: c_int, c_long, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: path
+      integer(c_long), value :: flags
+    end function
+
+    integer(c_int) function wxDocument_OnOpenDocumentBase(pObject, filename) &
+        bind(C, name='wxDocument_OnOpenDocumentBase')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: filename
+    end function
+
+    integer(c_int) function wxDocument_IsModifiedBase(pObject) &
+        bind(C, name='wxDocument_IsModifiedBase')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxDocument_ModifyBase(pObject, modified) &
+        bind(C, name='wxDocument_ModifyBase')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: modified
+    end subroutine
+
+    type(c_ptr) function wxDocument_CreateWithParent(pObject, parent) &
+        bind(C, name='wxDocument_CreateWithParent')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: parent
+    end function
 
     ! wxDrawControl
 
@@ -69317,6 +75735,13 @@ module kwxffi
       type(c_ptr), value :: none_
     end function
 
+    type(c_ptr) function DropSource_CreateDefault(data_, win) &
+        bind(C, name='DropSource_CreateDefault')
+      import :: c_ptr
+      type(c_ptr), value :: data_
+      type(c_ptr), value :: win
+    end function
+
     integer(c_int) function wxDropSource_DoDragDrop(pObject, flags) &
         bind(C, name='wxDropSource_DoDragDrop')
       import :: c_int, c_ptr
@@ -69330,20 +75755,19 @@ module kwxffi
       type(c_ptr), value :: pObject
     end subroutine
 
-    integer(c_int) function DropSource_DoDragDrop(pObject, move) &
-        bind(C, name='DropSource_DoDragDrop')
-      import :: c_int, c_ptr
-      type(c_ptr), value :: pObject
-      integer(c_int), value :: move
-    end function
-
     ! wxDropTarget
 
-    subroutine wxDropTarget_GetData(pObject) &
+    integer(c_int) function wxDropTarget_GetData(pObject) &
         bind(C, name='wxDropTarget_GetData')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxDropTarget_GetDataObject(pObject) &
+        bind(C, name='wxDropTarget_GetDataObject')
       import :: c_ptr
       type(c_ptr), value :: pObject
-    end subroutine
+    end function
 
     subroutine wxDropTarget_SetDataObject(pObject, dataObject) &
         bind(C, name='wxDropTarget_SetDataObject')
@@ -69465,6 +75889,96 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: list
       integer(c_int), value :: capacity
+    end function
+
+    subroutine wxFileDataObject_GetFilenamesArray(pObject, filenames) &
+        bind(C, name='wxFileDataObject_GetFilenamesArray')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: filenames
+    end subroutine
+
+    ! wxVirtualFileDataObject
+
+    type(c_ptr) function wxVirtualFileDataObject_Create() &
+        bind(C, name='wxVirtualFileDataObject_Create')
+      import :: c_ptr
+    end function
+
+    subroutine wxVirtualFileDataObject_Delete(pObject) &
+        bind(C, name='wxVirtualFileDataObject_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    integer(c_int) function wxVirtualFileDataObject_GetCount(pObject) &
+        bind(C, name='wxVirtualFileDataObject_GetCount')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxVirtualFileDataObject_GetName(pObject, index) &
+        bind(C, name='wxVirtualFileDataObject_GetName')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: index
+    end function
+
+    integer(c_int) function wxVirtualFileDataObject_IsDir(pObject, index) &
+        bind(C, name='wxVirtualFileDataObject_IsDir')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: index
+    end function
+
+    integer(c_int64_t) function wxVirtualFileDataObject_GetSize(pObject, index) &
+        bind(C, name='wxVirtualFileDataObject_GetSize')
+      import :: c_int, c_int64_t, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: index
+    end function
+
+    type(c_ptr) function wxVirtualFileDataObject_GetModificationTime(pObject, index) &
+        bind(C, name='wxVirtualFileDataObject_GetModificationTime')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: index
+    end function
+
+    type(c_ptr) function wxVirtualFileDataObject_OpenStream(pObject, index) &
+        bind(C, name='wxVirtualFileDataObject_OpenStream')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: index
+    end function
+
+    integer(c_int) function wxVirtualFileDataObject_SaveTo(pObject, index, path) &
+        bind(C, name='wxVirtualFileDataObject_SaveTo')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: index
+      type(c_ptr), value :: path
+    end function
+
+    integer(c_int) function wxVirtualFileDataObject_SaveAll(pObject, dir, paths) &
+        bind(C, name='wxVirtualFileDataObject_SaveAll')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: dir
+      type(c_ptr), value :: paths
+    end function
+
+    integer(c_int) function wxVirtualFileDataObject_SaveAllToTempDir(pObject, paths) &
+        bind(C, name='wxVirtualFileDataObject_SaveAllToTempDir')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: paths
+    end function
+
+    integer(c_int) function wxVirtualFileDataObject_DeleteAllTempFiles(pObject) &
+        bind(C, name='wxVirtualFileDataObject_DeleteAllTempFiles')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
     end function
 
     ! wxFileCtrl
@@ -70521,6 +77035,48 @@ module kwxffi
 
     type(c_ptr) function wxGenericValidator_CreateString(value_) &
         bind(C, name='wxGenericValidator_CreateString')
+      import :: c_ptr
+      type(c_ptr), value :: value_
+    end function
+
+    type(c_ptr) function wxGenericValidator_CreateArrayInt(value_) &
+        bind(C, name='wxGenericValidator_CreateArrayInt')
+      import :: c_ptr
+      type(c_ptr), value :: value_
+    end function
+
+    type(c_ptr) function wxGenericValidator_CreateDateTime(value_) &
+        bind(C, name='wxGenericValidator_CreateDateTime')
+      import :: c_ptr
+      type(c_ptr), value :: value_
+    end function
+
+    type(c_ptr) function wxGenericValidator_CreateFileName(value_) &
+        bind(C, name='wxGenericValidator_CreateFileName')
+      import :: c_ptr
+      type(c_ptr), value :: value_
+    end function
+
+    type(c_ptr) function wxGenericValidator_CreateFloat(value_) &
+        bind(C, name='wxGenericValidator_CreateFloat')
+      import :: c_ptr
+      type(c_ptr), value :: value_
+    end function
+
+    type(c_ptr) function wxGenericValidator_CreateDouble(value_) &
+        bind(C, name='wxGenericValidator_CreateDouble')
+      import :: c_ptr
+      type(c_ptr), value :: value_
+    end function
+
+    type(c_ptr) function wxGenericValidator_CreateColour(value_) &
+        bind(C, name='wxGenericValidator_CreateColour')
+      import :: c_ptr
+      type(c_ptr), value :: value_
+    end function
+
+    type(c_ptr) function wxGenericValidator_CreateCheckBoxState(value_) &
+        bind(C, name='wxGenericValidator_CreateCheckBoxState')
       import :: c_ptr
       type(c_ptr), value :: value_
     end function
@@ -73391,6 +79947,12 @@ module kwxffi
       type(c_ptr), value :: xpm
     end function
 
+    type(c_ptr) function wxIcon_CreateFromXPMString(xpm) &
+        bind(C, name='wxIcon_CreateFromXPMString')
+      import :: c_ptr
+      type(c_ptr), value :: xpm
+    end function
+
     integer(c_int) function wxIcon_GetDepth(pObject) &
         bind(C, name='wxIcon_GetDepth')
       import :: c_int, c_ptr
@@ -75283,6 +81845,56 @@ module kwxffi
       integer(c_int), value :: height
     end function
 
+    integer(c_int) function wxMetafile_GetWidth(pObject) &
+        bind(C, name='wxMetafile_GetWidth')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxMetafile_GetHeight(pObject) &
+        bind(C, name='wxMetafile_GetHeight')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxMetafile_GetSize(pObject) &
+        bind(C, name='wxMetafile_GetSize')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    ! wxMetafileDataObject
+
+    type(c_ptr) function wxMetafileDataObject_CreateDefault() &
+        bind(C, name='wxMetafileDataObject_CreateDefault')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function wxMetafileDataObject_Create(metafile) &
+        bind(C, name='wxMetafileDataObject_Create')
+      import :: c_ptr
+      type(c_ptr), value :: metafile
+    end function
+
+    subroutine wxMetafileDataObject_Delete(pObject) &
+        bind(C, name='wxMetafileDataObject_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    type(c_ptr) function wxMetafileDataObject_GetMetafile(pObject) &
+        bind(C, name='wxMetafileDataObject_GetMetafile')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxMetafileDataObject_SetMetafile(pObject, metafile) &
+        bind(C, name='wxMetafileDataObject_SetMetafile')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: metafile
+    end subroutine
+
     ! wxMetafileDC
 
     type(c_ptr) function wxMetafileDC_Close(pObject) &
@@ -75295,6 +81907,21 @@ module kwxffi
         bind(C, name='wxMetafileDC_Create')
       import :: c_ptr
       type(c_ptr), value :: filePath
+    end function
+
+    type(c_ptr) function wxMetafileDC_CreateDefault() &
+        bind(C, name='wxMetafileDC_CreateDefault')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function wxMetafileDC_CreateWithExtent(filePath, xext, yext, xorg, yorg) &
+        bind(C, name='wxMetafileDC_CreateWithExtent')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: filePath
+      integer(c_int), value :: xext
+      integer(c_int), value :: yext
+      integer(c_int), value :: xorg
+      integer(c_int), value :: yorg
     end function
 
     subroutine wxMetafileDC_Delete(pObject) &
@@ -80147,6 +86774,163 @@ module kwxffi
       type(c_ptr), value :: region
     end subroutine
 
+    ! wxSVGAttributes
+
+    type(c_ptr) function wxSVGAttributes_Create() &
+        bind(C, name='wxSVGAttributes_Create')
+      import :: c_ptr
+    end function
+
+    subroutine wxSVGAttributes_Delete(pObject) &
+        bind(C, name='wxSVGAttributes_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxSVGAttributes_SetRole(pObject, role) &
+        bind(C, name='wxSVGAttributes_SetRole')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: role
+    end subroutine
+
+    subroutine wxSVGAttributes_SetAriaLabel(pObject, label) &
+        bind(C, name='wxSVGAttributes_SetAriaLabel')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: label
+    end subroutine
+
+    subroutine wxSVGAttributes_SetAriaLabelledBy(pObject, id) &
+        bind(C, name='wxSVGAttributes_SetAriaLabelledBy')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: id
+    end subroutine
+
+    subroutine wxSVGAttributes_SetAriaDescribedBy(pObject, id) &
+        bind(C, name='wxSVGAttributes_SetAriaDescribedBy')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: id
+    end subroutine
+
+    subroutine wxSVGAttributes_SetAriaHidden(pObject, hidden) &
+        bind(C, name='wxSVGAttributes_SetAriaHidden')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: hidden
+    end subroutine
+
+    subroutine wxSVGAttributes_SetAriaDetails(pObject, id) &
+        bind(C, name='wxSVGAttributes_SetAriaDetails')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: id
+    end subroutine
+
+    subroutine wxSVGAttributes_SetAriaRoleDescription(pObject, description) &
+        bind(C, name='wxSVGAttributes_SetAriaRoleDescription')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: description
+    end subroutine
+
+    subroutine wxSVGAttributes_SetId(pObject, id) &
+        bind(C, name='wxSVGAttributes_SetId')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: id
+    end subroutine
+
+    subroutine wxSVGAttributes_SetClass(pObject, className) &
+        bind(C, name='wxSVGAttributes_SetClass')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: className
+    end subroutine
+
+    subroutine wxSVGAttributes_Add(pObject, name, value_) &
+        bind(C, name='wxSVGAttributes_Add')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: name
+      type(c_ptr), value :: value_
+    end subroutine
+
+    type(c_ptr) function wxSVGAttributes_GetAttribute(pObject, name) &
+        bind(C, name='wxSVGAttributes_GetAttribute')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: name
+    end function
+
+    type(c_ptr) function wxSVGAttributes_GetAsString(pObject) &
+        bind(C, name='wxSVGAttributes_GetAsString')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxSVGAttributes_GetRole(pObject) &
+        bind(C, name='wxSVGAttributes_GetRole')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxSVGAttributes_GetAriaLabel(pObject) &
+        bind(C, name='wxSVGAttributes_GetAriaLabel')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxSVGAttributes_GetAriaLabelledBy(pObject) &
+        bind(C, name='wxSVGAttributes_GetAriaLabelledBy')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxSVGAttributes_GetAriaDescribedBy(pObject) &
+        bind(C, name='wxSVGAttributes_GetAriaDescribedBy')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxSVGAttributes_IsAriaHidden(pObject) &
+        bind(C, name='wxSVGAttributes_IsAriaHidden')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxSVGAttributes_GetAriaDetails(pObject) &
+        bind(C, name='wxSVGAttributes_GetAriaDetails')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxSVGAttributes_GetAriaRoleDescription(pObject) &
+        bind(C, name='wxSVGAttributes_GetAriaRoleDescription')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxSVGAttributes_GetId(pObject) &
+        bind(C, name='wxSVGAttributes_GetId')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxSVGAttributes_GetClass(pObject) &
+        bind(C, name='wxSVGAttributes_GetClass')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxSVGAttributes_IsEmpty(pObject) &
+        bind(C, name='wxSVGAttributes_IsEmpty')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     ! wxSVGFileDC
 
     type(c_ptr) function wxSVGFileDC_Create(fileName) &
@@ -80155,10 +86939,51 @@ module kwxffi
       type(c_ptr), value :: fileName
     end function
 
+    subroutine wxSVGFileDC_BeginAccessibleGroup(pObject, attributes, title, desc) &
+        bind(C, name='wxSVGFileDC_BeginAccessibleGroup')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: attributes
+      type(c_ptr), value :: title
+      type(c_ptr), value :: desc
+    end subroutine
+
     subroutine wxSVGFileDC_EndAccessibleGroup(pObject) &
         bind(C, name='wxSVGFileDC_EndAccessibleGroup')
       import :: c_ptr
       type(c_ptr), value :: pObject
+    end subroutine
+
+    subroutine wxSVGFileDC_BeginLayer(pObject, opacity) &
+        bind(C, name='wxSVGFileDC_BeginLayer')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: pObject
+      real(c_double), value :: opacity
+    end subroutine
+
+    subroutine wxSVGFileDC_EndLayer(pObject) &
+        bind(C, name='wxSVGFileDC_EndLayer')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    integer(c_int) function wxSVGFileDC_Save(pObject) &
+        bind(C, name='wxSVGFileDC_Save')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    type(c_ptr) function wxSVGFileDC_GetSVGDocument(pObject) &
+        bind(C, name='wxSVGFileDC_GetSVGDocument')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxSVGFileDC_SetShapeRenderingMode(pObject, mode) &
+        bind(C, name='wxSVGFileDC_SetShapeRenderingMode')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: mode
     end subroutine
 
     subroutine wxSVGFileDC_SetBitmapHandler(pObject, handler) &
@@ -80185,10 +87010,114 @@ module kwxffi
       real(c_float), value :: a_dpi
     end function
 
+    type(c_ptr) function wxSVGFileDC_CreateWithTitle(fileName, title) &
+        bind(C, name='wxSVGFileDC_CreateWithTitle')
+      import :: c_ptr
+      type(c_ptr), value :: fileName
+      type(c_ptr), value :: title
+    end function
+
+    type(c_ptr) function wxSVGFileDC_CreateWithSizeAndTitle(fileName, width, height, title) &
+        bind(C, name='wxSVGFileDC_CreateWithSizeAndTitle')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: fileName
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      type(c_ptr), value :: title
+    end function
+
+    type(c_ptr) function wxSVGFileDC_CreateWithSizeResolutionAndTitle(fileName, width, height, a_dpi, title) &
+        bind(C, name='wxSVGFileDC_CreateWithSizeResolutionAndTitle')
+      import :: c_float, c_int, c_ptr
+      type(c_ptr), value :: fileName
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      real(c_float), value :: a_dpi
+      type(c_ptr), value :: title
+    end function
+
+    type(c_ptr) function wxSVGFileDC_CreateFromSize(width, height) &
+        bind(C, name='wxSVGFileDC_CreateFromSize')
+      import :: c_int, c_ptr
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+    end function
+
+    type(c_ptr) function wxSVGFileDC_CreateFromSizeWithFileAndTitle(width, height, fileName, title) &
+        bind(C, name='wxSVGFileDC_CreateFromSizeWithFileAndTitle')
+      import :: c_int, c_ptr
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      type(c_ptr), value :: fileName
+      type(c_ptr), value :: title
+    end function
+
+    type(c_ptr) function wxSVGFileDC_CreateFromSizeWithFileTitleAndResolution(width, height, fileName, title, a_dpi) &
+        bind(C, name='wxSVGFileDC_CreateFromSizeWithFileTitleAndResolution')
+      import :: c_float, c_int, c_ptr
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      type(c_ptr), value :: fileName
+      type(c_ptr), value :: title
+      real(c_float), value :: a_dpi
+    end function
+
     subroutine wxSVGFileDC_Delete(obj) &
         bind(C, name='wxSVGFileDC_Delete')
       import :: c_ptr
       type(c_ptr), value :: obj
+    end subroutine
+
+    ! wxSVGGraphicsContext
+
+    type(c_ptr) function wxSVGGraphicsContext_Create(dc) &
+        bind(C, name='wxSVGGraphicsContext_Create')
+      import :: c_ptr
+      type(c_ptr), value :: dc
+    end function
+
+    type(c_ptr) function wxSVGGraphicsContext_CreateFromFile(fileName, width, height, a_dpi, title) &
+        bind(C, name='wxSVGGraphicsContext_CreateFromFile')
+      import :: c_float, c_int, c_ptr
+      type(c_ptr), value :: fileName
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      real(c_float), value :: a_dpi
+      type(c_ptr), value :: title
+    end function
+
+    type(c_ptr) function wxSVGGraphicsContext_CreateFromSize(width, height, fileName, title) &
+        bind(C, name='wxSVGGraphicsContext_CreateFromSize')
+      import :: c_int, c_ptr
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      type(c_ptr), value :: fileName
+      type(c_ptr), value :: title
+    end function
+
+    type(c_ptr) function wxSVGGraphicsContext_GetSVGDocument(pObject) &
+        bind(C, name='wxSVGGraphicsContext_GetSVGDocument')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxSVGGraphicsContext_Save(pObject) &
+        bind(C, name='wxSVGGraphicsContext_Save')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxSVGGraphicsContext_SetBitmapHandler(pObject, handler) &
+        bind(C, name='wxSVGGraphicsContext_SetBitmapHandler')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: handler
+    end subroutine
+
+    subroutine wxSVGGraphicsContext_Delete(pObject) &
+        bind(C, name='wxSVGGraphicsContext_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
     end subroutine
 
     ! wxSashEvent
@@ -80926,6 +87855,11 @@ module kwxffi
     real(c_double) function wxSizerFlags_GetDefaultBorderFractional() &
         bind(C, name='wxSizerFlags_GetDefaultBorderFractional')
       import :: c_double
+    end function
+
+    integer(c_int) function wxSizerFlags_GetDefaultBorder() &
+        bind(C, name='wxSizerFlags_GetDefaultBorder')
+      import :: c_int
     end function
 
     subroutine wxSizerFlags_DisableConsistencyChecks() &
@@ -82115,6 +89049,27 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
+    integer(c_int) function wxString_ToLong(pObject, value_) &
+        bind(C, name='wxString_ToLong')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+    end function
+
+    integer(c_int) function wxString_ToLongLong(pObject, value_) &
+        bind(C, name='wxString_ToLongLong')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+    end function
+
+    integer(c_int) function wxString_ToDouble(pObject, value_) &
+        bind(C, name='wxString_ToDouble')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: value_
+    end function
+
     ! wxStringClientData
 
     type(c_ptr) function wxStringClientData_Create() &
@@ -82147,6 +89102,12 @@ module kwxffi
       type(c_ptr), value :: data_
     end subroutine
 
+    type(c_ptr) function wxStringClientData_FromClientData(data_) &
+        bind(C, name='wxStringClientData_FromClientData')
+      import :: c_ptr
+      type(c_ptr), value :: data_
+    end function
+
     ! wxSysColourChangedEvent
 
     type(c_ptr) function wxSysColourChangedEvent_Create() &
@@ -82159,6 +89120,25 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
     end subroutine
+
+    ! wxSysMetricChangedEvent
+
+    type(c_ptr) function wxSysMetricChangedEvent_Create() &
+        bind(C, name='wxSysMetricChangedEvent_Create')
+      import :: c_ptr
+    end function
+
+    subroutine wxSysMetricChangedEvent_Delete(pObject) &
+        bind(C, name='wxSysMetricChangedEvent_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
+
+    integer(c_int) function wxSysMetricChangedEvent_GetMetric(pObject) &
+        bind(C, name='wxSysMetricChangedEvent_GetMetric')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
 
     ! wxSystemSettings
 
@@ -82207,6 +89187,18 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
+    integer(c_int) function wxSystemAppearance_IsSystemDark(pObject) &
+        bind(C, name='wxSystemAppearance_IsSystemDark')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxSystemAppearance_AreAppsDark(pObject) &
+        bind(C, name='wxSystemAppearance_AreAppsDark')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     integer(c_int) function wxSystemAppearance_IsUsingDarkBackground(pObject) &
         bind(C, name='wxSystemAppearance_IsUsingDarkBackground')
       import :: c_int, c_ptr
@@ -82218,6 +89210,12 @@ module kwxffi
       import :: c_ptr
       type(c_ptr), value :: pObject
     end function
+
+    subroutine wxSystemAppearance_Delete(pObject) &
+        bind(C, name='wxSystemAppearance_Delete')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+    end subroutine
 
     ! wxTaskBarIcon
 
@@ -82340,6 +89338,20 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: value_
     end subroutine
+
+    ! wxPasswordEntryDialog
+
+    type(c_ptr) function wxPasswordEntryDialog_Create(parent, message, caption, value_, style, x, y) &
+        bind(C, name='wxPasswordEntryDialog_Create')
+      import :: c_int, c_long, c_ptr
+      type(c_ptr), value :: parent
+      type(c_ptr), value :: message
+      type(c_ptr), value :: caption
+      type(c_ptr), value :: value_
+      integer(c_long), value :: style
+      integer(c_int), value :: x
+      integer(c_int), value :: y
+    end function
 
     ! wxTextValidator
 
@@ -83072,6 +90084,36 @@ module kwxffi
       type(c_ptr), value :: pFunction
     end subroutine
 
+    subroutine wxView_SetOnOnCreateWithData(pObject, pFunction, data_) &
+        bind(C, name='wxView_SetOnOnCreateWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxView_SetOnCreateResult(pObject, result_) &
+        bind(C, name='wxView_SetOnCreateResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
+    subroutine wxView_SetOnOnCloseWithData(pObject, pFunction, data_) &
+        bind(C, name='wxView_SetOnOnCloseWithData')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: pFunction
+      type(c_ptr), value :: data_
+    end subroutine
+
+    subroutine wxView_SetOnCloseResult(pObject, result_) &
+        bind(C, name='wxView_SetOnCloseResult')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: result_
+    end subroutine
+
     subroutine wxView_Activate(pObject, activate) &
         bind(C, name='wxView_Activate')
       import :: c_int, c_ptr
@@ -83104,6 +90146,19 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: frame
     end subroutine
+
+    integer(c_int) function wxView_Close(pObject, deleteWindow) &
+        bind(C, name='wxView_Close')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: deleteWindow
+    end function
+
+    integer(c_int) function wxView_CloseDefault(pObject) &
+        bind(C, name='wxView_CloseDefault')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
 
     ! wxWebViewEvent
 
@@ -83373,6 +90428,50 @@ module kwxffi
       type(c_ptr), value :: pObject
     end function
 
+    integer(c_int) function wxWizard_IsRunning(pObject) &
+        bind(C, name='wxWizard_IsRunning')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    subroutine wxWizard_SetBitmapBackgroundColour(pObject, colour) &
+        bind(C, name='wxWizard_SetBitmapBackgroundColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: colour
+    end subroutine
+
+    subroutine wxWizard_GetBitmapBackgroundColour(pObject, ref) &
+        bind(C, name='wxWizard_GetBitmapBackgroundColour')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: ref
+    end subroutine
+
+    subroutine wxWizard_SetMinimumBitmapWidth(pObject, width) &
+        bind(C, name='wxWizard_SetMinimumBitmapWidth')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+      integer(c_int), value :: width
+    end subroutine
+
+    integer(c_int) function wxWizard_GetMinimumBitmapWidth(pObject) &
+        bind(C, name='wxWizard_GetMinimumBitmapWidth')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function wxWizard_TileBitmap(left, top, width, height, dc, bitmap) &
+        bind(C, name='wxWizard_TileBitmap')
+      import :: c_int, c_ptr
+      integer(c_int), value :: left
+      integer(c_int), value :: top
+      integer(c_int), value :: width
+      integer(c_int), value :: height
+      type(c_ptr), value :: dc
+      type(c_ptr), value :: bitmap
+    end function
+
     ! wxWizardEvent
 
     integer(c_int) function wxWizardEvent_GetDirection(pObject) &
@@ -83429,6 +90528,13 @@ module kwxffi
       type(c_ptr), value :: pObject
       type(c_ptr), value :: prev
     end subroutine
+
+    type(c_ptr) function wxWizardPageSimple_Chain(pObject, next) &
+        bind(C, name='wxWizardPageSimple_Chain')
+      import :: c_ptr
+      type(c_ptr), value :: pObject
+      type(c_ptr), value :: next
+    end function
 
     type(c_ptr) function wxWizardPageSimple_CreateWithBundle(parent, prev, next, bitmap) &
         bind(C, name='wxWizardPageSimple_CreateWithBundle')
@@ -83721,6 +90827,12 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: var
       type(c_ptr), value :: value_
+    end function
+
+    type(c_ptr) function wxGetEnvValue(var) &
+        bind(C, name='wxGetEnvValue')
+      import :: c_ptr
+      type(c_ptr), value :: var
     end function
 
     integer(c_int) function wxSetEnv(var, value_) &
@@ -84190,6 +91302,15 @@ module kwxffi
       type(c_ptr), value :: parent
     end function
 
+    integer(c_int) function wxGetSingleChoiceIndexArray(message, caption, choices, parent) &
+        bind(C, name='wxGetSingleChoiceIndexArray')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: message
+      type(c_ptr), value :: caption
+      type(c_ptr), value :: choices
+      type(c_ptr), value :: parent
+    end function
+
     integer(c_int) function wxGetSingleChoiceIndexEx(message, caption, n, choices, parent, x, y, centre, width, height, initialSelection) &
         bind(C, name='wxGetSingleChoiceIndexEx')
       import :: c_int, c_ptr
@@ -84269,6 +91390,13 @@ module kwxffi
       import :: c_int, c_ptr
       type(c_ptr), value :: buffer
       integer(c_int), value :: size
+      type(c_ptr), value :: stream
+    end function
+
+    integer(c_int) function wxFputs(str, stream) &
+        bind(C, name='wxFputs')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: str
       type(c_ptr), value :: stream
     end function
 
@@ -84378,12 +91506,12 @@ module kwxffi
       import :: c_int
     end function
 
-    integer(c_int) function wxGetSelectedChoices(selections, choices, count, message, caption, parent) &
+    integer(c_int) function wxGetSelectedChoices(selections, count, choices, message, caption, parent) &
         bind(C, name='wxGetSelectedChoices')
       import :: c_int, c_ptr
       type(c_ptr), value :: selections
-      type(c_ptr), value :: choices
       integer(c_int), value :: count
+      type(c_ptr), value :: choices
       type(c_ptr), value :: message
       type(c_ptr), value :: caption
       type(c_ptr), value :: parent
@@ -84405,23 +91533,23 @@ module kwxffi
       integer(c_int), value :: height
     end function
 
-    type(c_ptr) function wxGetSingleChoice(message, caption, choices, count, parent) &
+    type(c_ptr) function wxGetSingleChoice(message, caption, count, choices, parent) &
         bind(C, name='wxGetSingleChoice')
       import :: c_int, c_ptr
       type(c_ptr), value :: message
       type(c_ptr), value :: caption
-      type(c_ptr), value :: choices
       integer(c_int), value :: count
+      type(c_ptr), value :: choices
       type(c_ptr), value :: parent
     end function
 
-    type(c_ptr) function wxGetSingleChoiceData(message, caption, choices, count, client_data, parent) &
+    type(c_ptr) function wxGetSingleChoiceData(message, caption, count, choices, client_data, parent) &
         bind(C, name='wxGetSingleChoiceData')
       import :: c_int, c_ptr
       type(c_ptr), value :: message
       type(c_ptr), value :: caption
-      type(c_ptr), value :: choices
       integer(c_int), value :: count
+      type(c_ptr), value :: choices
       type(c_ptr), value :: client_data
       type(c_ptr), value :: parent
     end function
@@ -84494,6 +91622,69 @@ module kwxffi
       integer(c_int), value :: style
     end function
 
+    type(c_ptr) function wxMakeFloatingPointValidatorWithPrecision(precision, value_, style) &
+        bind(C, name='wxMakeFloatingPointValidatorWithPrecision')
+      import :: c_int, c_ptr
+      integer(c_int), value :: precision
+      type(c_ptr), value :: value_
+      integer(c_int), value :: style
+    end function
+
+    subroutine wxFloatingPointValidator_SetPrecision(validator, precision) &
+        bind(C, name='wxFloatingPointValidator_SetPrecision')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: validator
+      integer(c_int), value :: precision
+    end subroutine
+
+    subroutine wxFloatingPointValidator_SetFactor(validator, factor) &
+        bind(C, name='wxFloatingPointValidator_SetFactor')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: validator
+      real(c_double), value :: factor
+    end subroutine
+
+    subroutine wxFloatingPointValidator_SetStyle(validator, style) &
+        bind(C, name='wxFloatingPointValidator_SetStyle')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: validator
+      integer(c_int), value :: style
+    end subroutine
+
+    subroutine wxFloatingPointValidator_SetMin(validator, min) &
+        bind(C, name='wxFloatingPointValidator_SetMin')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: validator
+      real(c_double), value :: min
+    end subroutine
+
+    real(c_double) function wxFloatingPointValidator_GetMin(validator) &
+        bind(C, name='wxFloatingPointValidator_GetMin')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: validator
+    end function
+
+    subroutine wxFloatingPointValidator_SetMax(validator, max) &
+        bind(C, name='wxFloatingPointValidator_SetMax')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: validator
+      real(c_double), value :: max
+    end subroutine
+
+    real(c_double) function wxFloatingPointValidator_GetMax(validator) &
+        bind(C, name='wxFloatingPointValidator_GetMax')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: validator
+    end function
+
+    subroutine wxFloatingPointValidator_SetRange(validator, min, max) &
+        bind(C, name='wxFloatingPointValidator_SetRange')
+      import :: c_double, c_ptr
+      type(c_ptr), value :: validator
+      real(c_double), value :: min
+      real(c_double), value :: max
+    end subroutine
+
     subroutine wxMutexGuiEnter() &
         bind(C, name='wxMutexGuiEnter')
     end subroutine
@@ -84563,6 +91754,12 @@ module kwxffi
     type(c_ptr) function wxStrdup(str) &
         bind(C, name='wxStrdup')
       import :: c_ptr
+      type(c_ptr), value :: str
+    end function
+
+    integer(c_size_t) function wxStrlen(str) &
+        bind(C, name='wxStrlen')
+      import :: c_ptr, c_size_t
       type(c_ptr), value :: str
     end function
 
@@ -84732,6 +91929,13 @@ module kwxffi
       integer(c_int), value :: y
     end function
 
+    type(c_ptr) function wxDragIconWithCursor(icon, cursor) &
+        bind(C, name='wxDragIconWithCursor')
+      import :: c_ptr
+      type(c_ptr), value :: icon
+      type(c_ptr), value :: cursor
+    end function
+
     type(c_ptr) function wxDragListItem(listCtrl, id) &
         bind(C, name='wxDragListItem')
       import :: c_long, c_ptr
@@ -84747,6 +91951,13 @@ module kwxffi
       integer(c_int), value :: y
     end function
 
+    type(c_ptr) function wxDragStringWithCursor(text, cursor) &
+        bind(C, name='wxDragStringWithCursor')
+      import :: c_ptr
+      type(c_ptr), value :: text
+      type(c_ptr), value :: cursor
+    end function
+
     type(c_ptr) function wxDragTreeItem(treeCtrl, id) &
         bind(C, name='wxDragTreeItem')
       import :: c_ptr
@@ -84760,6 +91971,13 @@ module kwxffi
       type(c_ptr), value :: icon
     end function
 
+    type(c_ptr) function wxGenericDragIconWithCursor(icon, cursor) &
+        bind(C, name='wxGenericDragIconWithCursor')
+      import :: c_ptr
+      type(c_ptr), value :: icon
+      type(c_ptr), value :: cursor
+    end function
+
     type(c_ptr) function wxGenericDragListItem(listCtrl, id) &
         bind(C, name='wxGenericDragListItem')
       import :: c_long, c_ptr
@@ -84771,6 +91989,13 @@ module kwxffi
         bind(C, name='wxGenericDragString')
       import :: c_ptr
       type(c_ptr), value :: text
+    end function
+
+    type(c_ptr) function wxGenericDragStringWithCursor(text, cursor) &
+        bind(C, name='wxGenericDragStringWithCursor')
+      import :: c_ptr
+      type(c_ptr), value :: text
+      type(c_ptr), value :: cursor
     end function
 
     type(c_ptr) function wxGenericDragTreeItem(treeCtrl, id) &
@@ -84896,6 +92121,13 @@ module kwxffi
       type(c_ptr), value :: argv
     end function
 
+    integer(c_int) function kwxConsoleInitializeFromArgs(argc, argv) &
+        bind(C, name='kwxConsoleInitializeFromArgs')
+      import :: c_int, c_ptr
+      integer(c_int), value :: argc
+      type(c_ptr), value :: argv
+    end function
+
     integer(c_int) function kwxConsoleRun() &
         bind(C, name='kwxConsoleRun')
       import :: c_int
@@ -84928,10 +92160,62 @@ module kwxffi
       import :: c_int
     end function
 
+    subroutine kwxConsoleOnInitCmdLineBase(parser) &
+        bind(C, name='kwxConsoleOnInitCmdLineBase')
+      import :: c_ptr
+      type(c_ptr), value :: parser
+    end subroutine
+
+    integer(c_int) function kwxConsoleOnCmdLineParsedBase(parser) &
+        bind(C, name='kwxConsoleOnCmdLineParsedBase')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: parser
+    end function
+
+    type(c_ptr) function kwxStdin() &
+        bind(C, name='kwxStdin')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function kwxStdout() &
+        bind(C, name='kwxStdout')
+      import :: c_ptr
+    end function
+
+    type(c_ptr) function kwxStderr() &
+        bind(C, name='kwxStderr')
+      import :: c_ptr
+    end function
+
+    integer(c_int) function kwxConsoleCheckBuildOptions(componentName) &
+        bind(C, name='kwxConsoleCheckBuildOptions')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: componentName
+    end function
+
+    integer(c_int) function kwxDialogOnTransferDataFromWindowBase(pObject) &
+        bind(C, name='kwxDialogOnTransferDataFromWindowBase')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
+    integer(c_int) function kwxDialogOnTransferDataToWindowBase(pObject) &
+        bind(C, name='kwxDialogOnTransferDataToWindowBase')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: pObject
+    end function
+
     integer(c_int) function wxPrintf(text) &
         bind(C, name='wxPrintf')
       import :: c_int, c_ptr
       type(c_ptr), value :: text
+    end function
+
+    integer(c_int) function wxPrintfLen(text, len_) &
+        bind(C, name='wxPrintfLen')
+      import :: c_int, c_ptr
+      type(c_ptr), value :: text
+      integer(c_int), value :: len_
     end function
 
     subroutine kwxMessageOutputUseStderr() &
@@ -84944,6 +92228,10 @@ module kwxffi
 
     subroutine kwxMessageOutputReset() &
         bind(C, name='kwxMessageOutputReset')
+    end subroutine
+
+    subroutine kwxLogUseStderr() &
+        bind(C, name='kwxLogUseStderr')
     end subroutine
 
     type(c_ptr) function wxBase64EncodeBuffer(source, src_length) &
@@ -85158,6 +92446,11 @@ module kwxffi
     integer(c_int) function expPROPSHEET_SHRINKTOFIT() &
         bind(C, name='expPROPSHEET_SHRINKTOFIT')
       import :: c_int
+    end function
+
+    type(c_ptr) function wxCreateSVGBitmapEmbedHandler() &
+        bind(C, name='wxCreateSVGBitmapEmbedHandler')
+      import :: c_ptr
     end function
 
     type(c_ptr) function kwxGetMousePositionPoint() &

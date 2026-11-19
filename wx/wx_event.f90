@@ -21,6 +21,8 @@ module wx_event
     public :: wx_event_set_id
     public :: wx_event_set_timestamp
     public :: wx_event_skip
+    public :: wx_event_stop_propagation
+    public :: wx_event_resume_propagation
     public :: wx_event_set_on_clone
 
 contains
@@ -116,6 +118,18 @@ contains
         logical, intent(in) :: skip
         call wxEvent_Skip(self%ptr, merge(1_c_int, 0_c_int, skip))
     end subroutine wx_event_skip
+
+    function wx_event_stop_propagation(self) result(result_value)
+        class(wxevent_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxEvent_StopPropagation(self%ptr)
+    end function wx_event_stop_propagation
+
+    subroutine wx_event_resume_propagation(self, propagationlevel)
+        class(wxevent_t), intent(in) :: self
+        integer(c_int), intent(in) :: propagationlevel
+        call wxEvent_ResumePropagation(self%ptr, propagationlevel)
+    end subroutine wx_event_resume_propagation
 
     subroutine wx_event_set_on_clone(self, pfunction)
         class(wxevent_t), intent(in) :: self

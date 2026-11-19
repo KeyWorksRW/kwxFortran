@@ -27,7 +27,7 @@ contains
     function wx_sash_event_get_drag_rect(self) result(result_object)
         class(wxsashevent_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxSashEvent_GetDragRect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxSashEvent_GetDragRect(self%ptr), .true.)
     end function wx_sash_event_get_drag_rect
 
     function wx_sash_event_get_drag_status(self) result(result_value)

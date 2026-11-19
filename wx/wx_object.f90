@@ -12,6 +12,7 @@ module wx_object
     public :: wx_object_get_client_closure
     public :: wx_object_is_kind_of
     public :: wx_object_is_scrolled_window
+    public :: wx_object_is_of_class
     public :: wx_object_set_client_closure
     public :: wx_object_set_on_get_class_info
 
@@ -57,6 +58,15 @@ contains
         logical :: result_value
         result_value = (wxObject_IsScrolledWindow(self%ptr) /= 0)
     end function wx_object_is_scrolled_window
+
+    function wx_object_is_of_class(self, classname) result(result_value)
+        class(wxobject_t), intent(in) :: self
+        character(len=*), intent(in) :: classname
+        character(kind=c_char, len=:), allocatable, target :: classname_c
+        logical :: result_value
+        classname_c = trim(classname) // c_null_char
+        result_value = (wxObject_IsOfClass(self%ptr, c_loc(classname_c)) /= 0)
+    end function wx_object_is_of_class
 
     subroutine wx_object_set_client_closure(self, closure)
         class(wxobject_t), intent(in) :: self

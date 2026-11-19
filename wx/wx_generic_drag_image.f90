@@ -34,7 +34,7 @@ contains
         integer(c_int), intent(in) :: x_pos
         integer(c_int), intent(in) :: y_pos
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxGenericDragImage_GetImageRect(self%ptr, x_pos, y_pos), .false.)
+        result_object = wxrect_from_ptr(wxGenericDragImage_GetImageRect(self%ptr, x_pos, y_pos), .true.)
     end function wx_generic_drag_image_get_image_rect
 
     function wx_generic_drag_image_update_backing_from_window(self, windowdc, destdc, x, y, width, height, xdest, ydest, destwidth, destheight) result(result_value)

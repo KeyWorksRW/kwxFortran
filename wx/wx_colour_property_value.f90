@@ -70,7 +70,7 @@ contains
     function wx_colour_property_value_get_colour(self) result(result_object)
         class(wxcolourpropertyvalue_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxColourPropertyValue_GetColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxColourPropertyValue_GetColour(self%ptr), .true.)
     end function wx_colour_property_value_get_colour
 
     subroutine wx_colour_property_value_set_colour(self, colour)

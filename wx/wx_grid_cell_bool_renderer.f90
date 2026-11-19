@@ -36,7 +36,7 @@ contains
         integer(c_int), intent(in) :: row
         integer(c_int), intent(in) :: col
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxGridCellBoolRenderer_GetPreferredSize(self%ptr, grid%ptr, attr%ptr, dc%ptr, row, col), .false.)
+        result_object = wxsize_from_ptr(wxGridCellBoolRenderer_GetPreferredSize(self%ptr, grid%ptr, attr%ptr, dc%ptr, row, col), .true.)
     end function wx_grid_cell_bool_renderer_get_preferred_size
 
     function wx_grid_cell_bool_renderer_get_max_best_size(self, grid, attr, dc) result(result_object)
@@ -45,7 +45,7 @@ contains
         class(wxgridcellattr_t), intent(in) :: attr
         class(wxdc_t), intent(in) :: dc
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxGridCellBoolRenderer_GetMaxBestSize(self%ptr, grid%ptr, attr%ptr, dc%ptr), .false.)
+        result_object = wxsize_from_ptr(wxGridCellBoolRenderer_GetMaxBestSize(self%ptr, grid%ptr, attr%ptr, dc%ptr), .true.)
     end function wx_grid_cell_bool_renderer_get_max_best_size
 
     function wx_grid_cell_bool_renderer_ctor() result(result_object)

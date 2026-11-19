@@ -35,7 +35,7 @@ contains
     function wx_data_object_simple_get_format(self) result(result_object)
         class(wxdataobjectsimple_t), intent(in) :: self
         type(wxdataformat_t) :: result_object
-        result_object = wxdataformat_from_ptr(wxDataObjectSimple_GetFormat(self%ptr), .false.)
+        result_object = wxdataformat_from_ptr(wxDataObjectSimple_GetFormat(self%ptr), .true.)
     end function wx_data_object_simple_get_format
 
     subroutine wx_data_object_simple_set_format(self, format)

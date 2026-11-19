@@ -23,6 +23,7 @@ module wx_menu
     public :: wx_menu_break
     public :: wx_menu_check
     public :: wx_menu_create
+    public :: wx_menu_create_default
     public :: wx_menu_delete_by_id
     public :: wx_menu_delete_by_item
     public :: wx_menu_delete_pointer
@@ -202,6 +203,12 @@ contains
         result_object%owned = .true.
         call wxString_Delete(title_ptr)
     end function wx_menu_create
+
+    function wx_menu_create_default() result(result_object)
+        type(wxmenu_t) :: result_object
+        result_object%ptr = wxMenu_CreateDefault()
+        result_object%owned = .true.
+    end function wx_menu_create_default
 
     subroutine wx_menu_delete_by_id(self, id)
         class(wxmenu_t), intent(in) :: self

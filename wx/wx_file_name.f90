@@ -202,7 +202,7 @@ contains
         type(c_ptr) :: dir_ptr
         type(wxfilename_t) :: result_object
         dir_ptr = to_wxstring(dir)
-        result_object = wxfilename_from_ptr(wxFileName_DirName(dir_ptr, format), .false.)
+        result_object = wxfilename_from_ptr(wxFileName_DirName(dir_ptr, format), .true.)
         call wxString_Delete(dir_ptr)
     end function wx_file_name_dir_name
 
@@ -212,7 +212,7 @@ contains
         type(c_ptr) :: file_ptr
         type(wxfilename_t) :: result_object
         file_ptr = to_wxstring(file)
-        result_object = wxfilename_from_ptr(wxFileName_FileName(file_ptr, format), .false.)
+        result_object = wxfilename_from_ptr(wxFileName_FileName(file_ptr, format), .true.)
         call wxString_Delete(file_ptr)
     end function wx_file_name_file_name
 
@@ -221,7 +221,7 @@ contains
         type(c_ptr) :: url_ptr
         type(wxfilename_t) :: result_object
         url_ptr = to_wxstring(url)
-        result_object = wxfilename_from_ptr(wxFileName_URLToFileName(url_ptr), .false.)
+        result_object = wxfilename_from_ptr(wxFileName_URLToFileName(url_ptr), .true.)
         call wxString_Delete(url_ptr)
     end function wx_file_name_url_to_file_name
 
@@ -640,7 +640,7 @@ contains
     function wx_file_name_resolve_link(self) result(result_object)
         class(wxfilename_t), intent(in) :: self
         type(wxfilename_t) :: result_object
-        result_object = wxfilename_from_ptr(wxFileName_ResolveLink(self%ptr), .false.)
+        result_object = wxfilename_from_ptr(wxFileName_ResolveLink(self%ptr), .true.)
     end function wx_file_name_resolve_link
 
     function wx_file_name_mkdir(self, perm, flags) result(result_value)
@@ -683,7 +683,7 @@ contains
     function wx_file_name_get_modification_time(self) result(result_object)
         class(wxfilename_t), intent(in) :: self
         type(wxdatetime_t) :: result_object
-        result_object = wxdatetime_from_ptr(wxFileName_GetModificationTime(self%ptr), .false.)
+        result_object = wxdatetime_from_ptr(wxFileName_GetModificationTime(self%ptr), .true.)
     end function wx_file_name_get_modification_time
 
     function wx_file_name_get_size(self) result(result_value)

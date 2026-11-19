@@ -14,6 +14,9 @@ module wx_rich_text_attr
     public :: wx_rich_text_attr_get_text_box_attr
     public :: wx_rich_text_attr_set_text_box_attr
     public :: wx_rich_text_attr_has_text_box_attr
+    public :: wx_rich_text_attr_set_background_colour
+    public :: wx_rich_text_attr_set_paragraph_spacing_after
+    public :: wx_rich_text_attr_set_line_spacing
 
 contains
 
@@ -68,5 +71,23 @@ contains
         logical :: result_value
         result_value = (wxRichTextAttr_HasTextBoxAttr(self%ptr) /= 0)
     end function wx_rich_text_attr_has_text_box_attr
+
+    subroutine wx_rich_text_attr_set_background_colour(self, colour)
+        class(wxrichtextattr_t), intent(in) :: self
+        class(wxcolour_t), intent(in) :: colour
+        call wxRichTextAttr_SetBackgroundColour(self%ptr, colour%ptr)
+    end subroutine wx_rich_text_attr_set_background_colour
+
+    subroutine wx_rich_text_attr_set_paragraph_spacing_after(self, spacing)
+        class(wxrichtextattr_t), intent(in) :: self
+        integer(c_int), intent(in) :: spacing
+        call wxRichTextAttr_SetParagraphSpacingAfter(self%ptr, spacing)
+    end subroutine wx_rich_text_attr_set_paragraph_spacing_after
+
+    subroutine wx_rich_text_attr_set_line_spacing(self, spacing)
+        class(wxrichtextattr_t), intent(in) :: self
+        integer(c_int), intent(in) :: spacing
+        call wxRichTextAttr_SetLineSpacing(self%ptr, spacing)
+    end subroutine wx_rich_text_attr_set_line_spacing
 
 end module wx_rich_text_attr

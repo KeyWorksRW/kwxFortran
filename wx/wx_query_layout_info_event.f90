@@ -54,7 +54,7 @@ contains
     function wx_query_layout_info_event_get_size(self) result(result_object)
         class(wxquerylayoutinfoevent_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxQueryLayoutInfoEvent_GetSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxQueryLayoutInfoEvent_GetSize(self%ptr), .true.)
     end function wx_query_layout_info_event_get_size
 
     subroutine wx_query_layout_info_event_set_alignment(self, align)

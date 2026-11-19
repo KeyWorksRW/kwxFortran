@@ -19,7 +19,7 @@ contains
 
     function wx_secret_store_get_default() result(result_object)
         type(wxsecretstore_t) :: result_object
-        result_object = wxsecretstore_from_ptr(wxSecretStore_GetDefault(), .false.)
+        result_object = wxsecretstore_from_ptr(wxSecretStore_GetDefault(), .true.)
     end function wx_secret_store_get_default
 
     subroutine wx_secret_store_delete(self)

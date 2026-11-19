@@ -51,7 +51,7 @@ contains
         real(c_double), intent(in) :: xscale
         real(c_double), intent(in) :: yscale
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSize_Scale(self%ptr, xscale, yscale), .false.)
+        result_object = wxsize_from_ptr(wxSize_Scale(self%ptr, xscale, yscale), .true.)
     end function wx_size_scale
 
     subroutine wx_size_delete(self)

@@ -133,7 +133,7 @@ contains
         type(c_ptr) :: caption_ptr
         type(wxsize_t) :: result_object
         caption_ptr = to_wxstring(caption)
-        result_object = wxsize_from_ptr(wxAuiDefaultTabArt_GetTabSize(self%ptr, dc%ptr, window%ptr, caption_ptr, bitmap%ptr, merge(1_c_int, 0_c_int, active), closebuttonstate, c_loc(xextent)), .false.)
+        result_object = wxsize_from_ptr(wxAuiDefaultTabArt_GetTabSize(self%ptr, dc%ptr, window%ptr, caption_ptr, bitmap%ptr, merge(1_c_int, 0_c_int, active), closebuttonstate, c_loc(xextent)), .true.)
         call wxString_Delete(caption_ptr)
     end function wx_aui_default_tab_art_get_tab_size
 

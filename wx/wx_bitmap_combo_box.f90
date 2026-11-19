@@ -57,8 +57,10 @@ module wx_bitmap_combo_box
     public :: wx_bitmap_combo_box_set_margins
     public :: wx_bitmap_combo_box_get_margins
     public :: wx_bitmap_combo_box_auto_complete
+    public :: wx_bitmap_combo_box_auto_complete_strings
     public :: wx_bitmap_combo_box_auto_complete_file_names
     public :: wx_bitmap_combo_box_auto_complete_directories
+    public :: wx_bitmap_combo_box_auto_complete_completer
     public :: wx_bitmap_combo_box_append_string
     public :: wx_bitmap_combo_box_set_client_object
     public :: wx_bitmap_combo_box_get_client_object
@@ -170,7 +172,7 @@ contains
         class(wxbitmapcombobox_t), intent(in) :: self
         integer(c_int), intent(in) :: index
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxBitmapComboBox_GetItemBitmap(self%ptr, index), .false.)
+        result_object = wxbitmap_from_ptr(wxBitmapComboBox_GetItemBitmap(self%ptr, index), .true.)
     end function wx_bitmap_combo_box_get_item_bitmap
 
     subroutine wx_bitmap_combo_box_set_item_bitmap(self, index, bitmap)
@@ -183,7 +185,7 @@ contains
     function wx_bitmap_combo_box_get_bitmap_size(self) result(result_object)
         class(wxbitmapcombobox_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxBitmapComboBox_GetBitmapSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxBitmapComboBox_GetBitmapSize(self%ptr), .true.)
     end function wx_bitmap_combo_box_get_bitmap_size
 
     subroutine wx_bitmap_combo_box_convert_to_upper_case(self)
@@ -469,6 +471,13 @@ contains
         result_value = (wxTextEntry_AutoComplete(self%ptr, count, items) /= 0)
     end function wx_bitmap_combo_box_auto_complete
 
+    function wx_bitmap_combo_box_auto_complete_strings(self, items) result(result_value)
+        class(wxbitmapcombobox_t), intent(in) :: self
+        class(wxarraystring_t), intent(in) :: items
+        logical :: result_value
+        result_value = (wxTextEntry_AutoCompleteStrings(self%ptr, items%ptr) /= 0)
+    end function wx_bitmap_combo_box_auto_complete_strings
+
     function wx_bitmap_combo_box_auto_complete_file_names(self) result(result_value)
         class(wxbitmapcombobox_t), intent(in) :: self
         logical :: result_value
@@ -480,6 +489,13 @@ contains
         logical :: result_value
         result_value = (wxTextEntry_AutoCompleteDirectories(self%ptr) /= 0)
     end function wx_bitmap_combo_box_auto_complete_directories
+
+    function wx_bitmap_combo_box_auto_complete_completer(self, completer) result(result_value)
+        class(wxbitmapcombobox_t), intent(in) :: self
+        class(wxtextcompletersimple_t), intent(in) :: completer
+        logical :: result_value
+        result_value = (wxTextEntry_AutoCompleteCompleter(self%ptr, completer%ptr) /= 0)
+    end function wx_bitmap_combo_box_auto_complete_completer
 
     subroutine wx_bitmap_combo_box_append_string(self, item)
         class(wxbitmapcombobox_t), intent(in) :: self

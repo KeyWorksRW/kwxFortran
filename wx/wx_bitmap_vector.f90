@@ -45,7 +45,7 @@ contains
         class(wxbitmapvector_t), intent(in) :: self
         integer(c_int), intent(in) :: index
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxBitmapVector_Item(self%ptr, index), .false.)
+        result_object = wxbitmap_from_ptr(wxBitmapVector_Item(self%ptr, index), .true.)
     end function wx_bitmap_vector_item
 
 end module wx_bitmap_vector

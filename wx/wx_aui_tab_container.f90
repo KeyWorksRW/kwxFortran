@@ -151,13 +151,13 @@ contains
         class(wxauitabcontainer_t), intent(in) :: self
         integer(c_size_t), intent(in) :: idx
         type(wxauinotebookpage_t) :: result_object
-        result_object = wxauinotebookpage_from_ptr(wxAuiTabContainer_GetPage(self%ptr, idx), .false.)
+        result_object = wxauinotebookpage_from_ptr(wxAuiTabContainer_GetPage(self%ptr, idx), .true.)
     end function wx_aui_tab_container_get_page
 
     function wx_aui_tab_container_get_pages(self) result(result_object)
         class(wxauitabcontainer_t), intent(in) :: self
         type(wxauinotebookpagearray_t) :: result_object
-        result_object = wxauinotebookpagearray_from_ptr(wxAuiTabContainer_GetPages(self%ptr), .false.)
+        result_object = wxauinotebookpagearray_from_ptr(wxAuiTabContainer_GetPages(self%ptr), .true.)
     end function wx_aui_tab_container_get_pages
 
     subroutine wx_aui_tab_container_set_normal_font(self, normalfont)

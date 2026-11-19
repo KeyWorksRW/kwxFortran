@@ -164,25 +164,25 @@ contains
     function wx_page_setup_dialog_data_get_margin_bottom_right(self) result(result_object)
         class(wxpagesetupdialogdata_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxPageSetupDialogData_GetMarginBottomRight(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxPageSetupDialogData_GetMarginBottomRight(self%ptr), .true.)
     end function wx_page_setup_dialog_data_get_margin_bottom_right
 
     function wx_page_setup_dialog_data_get_margin_top_left(self) result(result_object)
         class(wxpagesetupdialogdata_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxPageSetupDialogData_GetMarginTopLeft(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxPageSetupDialogData_GetMarginTopLeft(self%ptr), .true.)
     end function wx_page_setup_dialog_data_get_margin_top_left
 
     function wx_page_setup_dialog_data_get_min_margin_bottom_right(self) result(result_object)
         class(wxpagesetupdialogdata_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxPageSetupDialogData_GetMinMarginBottomRight(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxPageSetupDialogData_GetMinMarginBottomRight(self%ptr), .true.)
     end function wx_page_setup_dialog_data_get_min_margin_bottom_right
 
     function wx_page_setup_dialog_data_get_min_margin_top_left(self) result(result_object)
         class(wxpagesetupdialogdata_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxPageSetupDialogData_GetMinMarginTopLeft(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxPageSetupDialogData_GetMinMarginTopLeft(self%ptr), .true.)
     end function wx_page_setup_dialog_data_get_min_margin_top_left
 
     function wx_page_setup_dialog_data_get_paper_id(self) result(result_value)
@@ -194,7 +194,7 @@ contains
     function wx_page_setup_dialog_data_get_paper_size(self) result(result_object)
         class(wxpagesetupdialogdata_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxPageSetupDialogData_GetPaperSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxPageSetupDialogData_GetPaperSize(self%ptr), .true.)
     end function wx_page_setup_dialog_data_get_paper_size
 
     subroutine wx_page_setup_dialog_data_get_print_data(self, ref)

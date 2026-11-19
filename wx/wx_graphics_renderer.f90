@@ -9,10 +9,13 @@ module wx_graphics_renderer
 
     public :: wx_graphics_renderer_create_context
     public :: wx_graphics_renderer_create_context_from_window
+    public :: wx_graphics_renderer_create_context_from_memory
+    public :: wx_graphics_renderer_create_context_from_unknown_dc
     public :: wx_graphics_renderer_create_context_from_native_context
     public :: wx_graphics_renderer_create_context_from_native_window
     public :: wx_graphics_renderer_create_path
     public :: wx_graphics_renderer_delete
+    public :: wx_graphics_renderer_get_cairo_renderer
     public :: wx_graphics_renderer_get_default_renderer
     public :: wx_graphics_renderer_get_direct2d_renderer
     public :: wx_graphics_renderer_get_gdi_plus_renderer
@@ -34,6 +37,20 @@ contains
         type(wxgraphicscontext_t) :: result_object
         result_object = wxgraphicscontext_from_ptr(wxGraphicsRenderer_CreateContextFromWindow(self%ptr, window%ptr), .false.)
     end function wx_graphics_renderer_create_context_from_window
+
+    function wx_graphics_renderer_create_context_from_memory(self, dc) result(result_object)
+        class(wxgraphicsrenderer_t), intent(in) :: self
+        class(wxmemorydc_t), intent(in) :: dc
+        type(wxgraphicscontext_t) :: result_object
+        result_object = wxgraphicscontext_from_ptr(wxGraphicsRenderer_CreateContextFromMemory(self%ptr, dc%ptr), .false.)
+    end function wx_graphics_renderer_create_context_from_memory
+
+    function wx_graphics_renderer_create_context_from_unknown_dc(self, dc) result(result_object)
+        class(wxgraphicsrenderer_t), intent(in) :: self
+        class(wxdc_t), intent(in) :: dc
+        type(wxgraphicscontext_t) :: result_object
+        result_object = wxgraphicscontext_from_ptr(wxGraphicsRenderer_CreateContextFromUnknownDC(self%ptr, dc%ptr), .false.)
+    end function wx_graphics_renderer_create_context_from_unknown_dc
 
     function wx_graphics_renderer_create_context_from_native_context(self, context) result(result_object)
         class(wxgraphicsrenderer_t), intent(in) :: self
@@ -63,6 +80,12 @@ contains
         self%ptr = c_null_ptr
         self%owned = .false.
     end subroutine wx_graphics_renderer_delete
+
+    function wx_graphics_renderer_get_cairo_renderer(self) result(result_object)
+        class(wxgraphicsrenderer_t), intent(in) :: self
+        type(wxgraphicsrenderer_t) :: result_object
+        result_object = wxgraphicsrenderer_from_ptr(wxGraphicsRenderer_GetCairoRenderer(self%ptr), .false.)
+    end function wx_graphics_renderer_get_cairo_renderer
 
     function wx_graphics_renderer_get_default_renderer(self) result(result_object)
         class(wxgraphicsrenderer_t), intent(in) :: self

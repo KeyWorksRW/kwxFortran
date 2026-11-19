@@ -48,7 +48,7 @@ contains
     function wx_aui_tab_container_button_rect(self) result(result_object)
         class(wxauitabcontainerbutton_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxAuiTabContainerButton_Rect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxAuiTabContainerButton_Rect(self%ptr), .true.)
     end function wx_aui_tab_container_button_rect
 
 end module wx_aui_tab_container_button

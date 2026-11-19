@@ -33,6 +33,7 @@ module wx_bitmap
     public :: wx_bitmap_create_default
     public :: wx_bitmap_create_empty
     public :: wx_bitmap_create_from_xpm
+    public :: wx_bitmap_create_from_xpm_string
     public :: wx_bitmap_create_load
     public :: wx_bitmap_create_from_data
     public :: wx_bitmap_create_from_base64
@@ -75,7 +76,7 @@ contains
     function wx_bitmap_get_size(self) result(result_object)
         class(wxbitmap_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxBitmap_GetSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxBitmap_GetSize(self%ptr), .true.)
     end function wx_bitmap_get_size
 
     subroutine wx_bitmap_set_scale_factor(self, scale)
@@ -93,13 +94,13 @@ contains
     function wx_bitmap_get_dip_size(self) result(result_object)
         class(wxbitmap_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxBitmap_GetDIPSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxBitmap_GetDIPSize(self%ptr), .true.)
     end function wx_bitmap_get_dip_size
 
     function wx_bitmap_get_logical_size(self) result(result_object)
         class(wxbitmap_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxBitmap_GetLogicalSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxBitmap_GetLogicalSize(self%ptr), .true.)
     end function wx_bitmap_get_logical_size
 
     function wx_bitmap_get_logical_width(self) result(result_value)
@@ -127,20 +128,20 @@ contains
     function wx_bitmap_convert_to_image(self) result(result_object)
         class(wxbitmap_t), intent(in) :: self
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxBitmap_ConvertToImage(self%ptr), .false.)
+        result_object = wximage_from_ptr(wxBitmap_ConvertToImage(self%ptr), .true.)
     end function wx_bitmap_convert_to_image
 
     function wx_bitmap_convert_to_disabled(self, brightness) result(result_object)
         class(wxbitmap_t), intent(in) :: self
         character(c_char), intent(in) :: brightness
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxBitmap_ConvertToDisabled(self%ptr, brightness), .false.)
+        result_object = wxbitmap_from_ptr(wxBitmap_ConvertToDisabled(self%ptr, brightness), .true.)
     end function wx_bitmap_convert_to_disabled
 
     function wx_bitmap_get_palette(self) result(result_object)
         class(wxbitmap_t), intent(in) :: self
         type(wxpalette_t) :: result_object
-        result_object = wxpalette_from_ptr(wxBitmap_GetPalette(self%ptr), .false.)
+        result_object = wxpalette_from_ptr(wxBitmap_GetPalette(self%ptr), .true.)
     end function wx_bitmap_get_palette
 
     subroutine wx_bitmap_set_palette(self, palette)
@@ -178,7 +179,7 @@ contains
         type(c_ptr), intent(in), value :: data
         integer(c_size_t), intent(in) :: size
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxBitmap_NewFromPNGData(data, size), .false.)
+        result_object = wxbitmap_from_ptr(wxBitmap_NewFromPNGData(data, size), .true.)
     end function wx_bitmap_new_from_png_data
 
     subroutine wx_bitmap_add_handler(handler)
@@ -231,6 +232,15 @@ contains
         result_object%ptr = wxBitmap_CreateFromXPM(data)
         result_object%owned = .true.
     end function wx_bitmap_create_from_xpm
+
+    function wx_bitmap_create_from_xpm_string(xpm) result(result_object)
+        character(len=*), intent(in) :: xpm
+        character(kind=c_char, len=:), allocatable, target :: xpm_c
+        type(wxbitmap_t) :: result_object
+        xpm_c = trim(xpm) // c_null_char
+        result_object%ptr = wxBitmap_CreateFromXPMString(c_loc(xpm_c))
+        result_object%owned = .true.
+    end function wx_bitmap_create_from_xpm_string
 
     function wx_bitmap_create_load(name, type) result(result_object)
         character(len=*), intent(in) :: name

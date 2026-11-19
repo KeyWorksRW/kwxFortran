@@ -7,6 +7,10 @@ module wx_xml_document
     implicit none
     private
 
+    public :: wx_xml_document_load_file
+    public :: wx_xml_document_load_stream
+    public :: wx_xml_document_save_file
+    public :: wx_xml_document_save_stream
     public :: wx_xml_document_create
     public :: wx_xml_document_get_document_node
     public :: wx_xml_document_create_from_file
@@ -30,6 +34,44 @@ module wx_xml_document
     public :: wx_xml_document_is_ok
 
 contains
+
+    function wx_xml_document_load_file(self, filename, flags) result(result_value)
+        class(wxxmldocument_t), intent(in) :: self
+        character(len=*), intent(in) :: filename
+        integer(c_int), intent(in) :: flags
+        type(c_ptr) :: filename_ptr
+        logical :: result_value
+        filename_ptr = to_wxstring(filename)
+        result_value = (wxXmlDocument_LoadFile(self%ptr, filename_ptr, flags) /= 0)
+        call wxString_Delete(filename_ptr)
+    end function wx_xml_document_load_file
+
+    function wx_xml_document_load_stream(self, stream, flags) result(result_value)
+        class(wxxmldocument_t), intent(in) :: self
+        class(wxinputstream_t), intent(in) :: stream
+        integer(c_int), intent(in) :: flags
+        logical :: result_value
+        result_value = (wxXmlDocument_LoadStream(self%ptr, stream%ptr, flags) /= 0)
+    end function wx_xml_document_load_stream
+
+    function wx_xml_document_save_file(self, filename, indentstep) result(result_value)
+        class(wxxmldocument_t), intent(in) :: self
+        character(len=*), intent(in) :: filename
+        integer(c_int), intent(in) :: indentstep
+        type(c_ptr) :: filename_ptr
+        logical :: result_value
+        filename_ptr = to_wxstring(filename)
+        result_value = (wxXmlDocument_SaveFile(self%ptr, filename_ptr, indentstep) /= 0)
+        call wxString_Delete(filename_ptr)
+    end function wx_xml_document_save_file
+
+    function wx_xml_document_save_stream(self, stream, indentstep) result(result_value)
+        class(wxxmldocument_t), intent(in) :: self
+        class(wxoutputstream_t), intent(in) :: stream
+        integer(c_int), intent(in) :: indentstep
+        logical :: result_value
+        result_value = (wxXmlDocument_SaveStream(self%ptr, stream%ptr, indentstep) /= 0)
+    end function wx_xml_document_save_stream
 
     function wx_xml_document_create() result(result_object)
         type(wxxmldocument_t) :: result_object

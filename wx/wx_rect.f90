@@ -50,7 +50,7 @@ contains
         class(wxrect_t), intent(in) :: r
         integer(c_int), intent(in) :: dir
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxRect_CentreIn(self%ptr, r%ptr, dir), .false.)
+        result_object = wxrect_from_ptr(wxRect_CentreIn(self%ptr, r%ptr, dir), .true.)
     end function wx_rect_centre_in
 
     function wx_rect_contains(self, x, y) result(result_value)
@@ -66,7 +66,7 @@ contains
         integer(c_int), intent(in) :: dx
         integer(c_int), intent(in) :: dy
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxRect_Deflate(self%ptr, dx, dy), .false.)
+        result_object = wxrect_from_ptr(wxRect_Deflate(self%ptr, dx, dy), .true.)
     end function wx_rect_deflate
 
     function wx_rect_get_bottom(self) result(result_value)
@@ -78,7 +78,7 @@ contains
     function wx_rect_get_bottom_left(self) result(result_object)
         class(wxrect_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxRect_GetBottomLeft(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxRect_GetBottomLeft(self%ptr), .true.)
     end function wx_rect_get_bottom_left
 
     function wx_rect_get_left(self) result(result_value)
@@ -90,13 +90,13 @@ contains
     function wx_rect_get_left_top(self) result(result_object)
         class(wxrect_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxRect_GetLeftTop(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxRect_GetLeftTop(self%ptr), .true.)
     end function wx_rect_get_left_top
 
     function wx_rect_get_position(self) result(result_object)
         class(wxrect_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxRect_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxRect_GetPosition(self%ptr), .true.)
     end function wx_rect_get_position
 
     function wx_rect_get_right(self) result(result_value)
@@ -108,7 +108,7 @@ contains
     function wx_rect_get_size(self) result(result_object)
         class(wxrect_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxRect_GetSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxRect_GetSize(self%ptr), .true.)
     end function wx_rect_get_size
 
     function wx_rect_get_top(self) result(result_value)
@@ -120,13 +120,13 @@ contains
     function wx_rect_get_top_left(self) result(result_object)
         class(wxrect_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxRect_GetTopLeft(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxRect_GetTopLeft(self%ptr), .true.)
     end function wx_rect_get_top_left
 
     function wx_rect_get_top_right(self) result(result_object)
         class(wxrect_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxRect_GetTopRight(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxRect_GetTopRight(self%ptr), .true.)
     end function wx_rect_get_top_right
 
     function wx_rect_inflate(self, dx, dy) result(result_object)
@@ -134,7 +134,7 @@ contains
         integer(c_int), intent(in) :: dx
         integer(c_int), intent(in) :: dy
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxRect_Inflate(self%ptr, dx, dy), .false.)
+        result_object = wxrect_from_ptr(wxRect_Inflate(self%ptr, dx, dy), .true.)
     end function wx_rect_inflate
 
     subroutine wx_rect_offset(self, dx, dy)

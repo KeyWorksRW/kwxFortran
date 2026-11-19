@@ -77,7 +77,7 @@ contains
     function wx_pg_multi_button_get_primary_size(self) result(result_object)
         class(wxpgmultibutton_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxPGMultiButton_GetPrimarySize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxPGMultiButton_GetPrimarySize(self%ptr), .true.)
     end function wx_pg_multi_button_get_primary_size
 
     subroutine wx_pg_multi_button_finalize(self, propgrid, x, y)

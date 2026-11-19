@@ -45,13 +45,13 @@ contains
     function wx_hyperlink_ctrl_get_hover_colour(self) result(result_object)
         class(wxhyperlinkctrl_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxHyperlinkCtrl_GetHoverColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxHyperlinkCtrl_GetHoverColour(self%ptr), .true.)
     end function wx_hyperlink_ctrl_get_hover_colour
 
     function wx_hyperlink_ctrl_get_normal_colour(self) result(result_object)
         class(wxhyperlinkctrl_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxHyperlinkCtrl_GetNormalColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxHyperlinkCtrl_GetNormalColour(self%ptr), .true.)
     end function wx_hyperlink_ctrl_get_normal_colour
 
     function wx_hyperlink_ctrl_get_url(self) result(result_text)
@@ -72,7 +72,7 @@ contains
     function wx_hyperlink_ctrl_get_visited_colour(self) result(result_object)
         class(wxhyperlinkctrl_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxHyperlinkCtrl_GetVisitedColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxHyperlinkCtrl_GetVisitedColour(self%ptr), .true.)
     end function wx_hyperlink_ctrl_get_visited_colour
 
     subroutine wx_hyperlink_ctrl_set_hover_colour(self, colour)

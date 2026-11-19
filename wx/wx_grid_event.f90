@@ -52,7 +52,7 @@ contains
     function wx_grid_event_get_position(self) result(result_object)
         class(wxgridevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxGridEvent_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxGridEvent_GetPosition(self%ptr), .true.)
     end function wx_grid_event_get_position
 
     function wx_grid_event_get_row(self) result(result_value)

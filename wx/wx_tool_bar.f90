@@ -88,7 +88,7 @@ contains
     function wx_tool_bar_get_tool_margins(self) result(result_object)
         class(wxtoolbar_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxToolBar_GetToolMargins(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxToolBar_GetToolMargins(self%ptr), .true.)
     end function wx_tool_bar_get_tool_margins
 
     subroutine wx_tool_bar_set_max_rows_cols(self, rows, cols)
@@ -211,13 +211,13 @@ contains
     function wx_tool_bar_get_margins(self) result(result_object)
         class(wxtoolbar_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxToolBar_GetMargins(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxToolBar_GetMargins(self%ptr), .true.)
     end function wx_tool_bar_get_margins
 
     function wx_tool_bar_get_tool_bitmap_size(self) result(result_object)
         class(wxtoolbar_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxToolBar_GetToolBitmapSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxToolBar_GetToolBitmapSize(self%ptr), .true.)
     end function wx_tool_bar_get_tool_bitmap_size
 
     function wx_tool_bar_get_tool_client_data(self, id) result(result_object)
@@ -263,7 +263,7 @@ contains
     function wx_tool_bar_get_tool_size(self) result(result_object)
         class(wxtoolbar_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxToolBar_GetToolSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxToolBar_GetToolSize(self%ptr), .true.)
     end function wx_tool_bar_get_tool_size
 
     function wx_tool_bar_get_tool_state(self, id) result(result_value)

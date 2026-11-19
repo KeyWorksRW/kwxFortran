@@ -7,6 +7,7 @@ module wx_bitmap_button
     private
 
     public :: wx_bitmap_button_create
+    public :: wx_bitmap_button_create_with_bundle
     public :: wx_bitmap_button_get_bitmap_disabled
     public :: wx_bitmap_button_get_bitmap_focus
     public :: wx_bitmap_button_get_bitmap_label
@@ -17,6 +18,10 @@ module wx_bitmap_button
     public :: wx_bitmap_button_set_bitmap_focus
     public :: wx_bitmap_button_set_bitmap_label
     public :: wx_bitmap_button_set_bitmap_selected
+    public :: wx_bitmap_button_set_bitmap_disabled_bundle
+    public :: wx_bitmap_button_set_bitmap_focus_bundle
+    public :: wx_bitmap_button_set_bitmap_label_bundle
+    public :: wx_bitmap_button_set_bitmap_selected_bundle
     public :: wx_bitmap_button_set_margins
 
 contains
@@ -34,6 +39,20 @@ contains
         result_object%ptr = wxBitmapButton_Create(parent%ptr, id, bitmap%ptr, left, top, width, height, style)
         result_object%owned = .true.
     end function wx_bitmap_button_create
+
+    function wx_bitmap_button_create_with_bundle(parent, id, bitmap, left, top, width, height, style) result(result_object)
+        class(wxwindow_t), intent(in) :: parent
+        integer(c_int), intent(in) :: id
+        class(wxbitmapbundle_t), intent(in) :: bitmap
+        integer(c_int), intent(in) :: left
+        integer(c_int), intent(in) :: top
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        integer(c_int), intent(in) :: style
+        type(wxbitmapbutton_t) :: result_object
+        result_object%ptr = wxBitmapButton_CreateWithBundle(parent%ptr, id, bitmap%ptr, left, top, width, height, style)
+        result_object%owned = .true.
+    end function wx_bitmap_button_create_with_bundle
 
     subroutine wx_bitmap_button_get_bitmap_disabled(self, ref)
         class(wxbitmapbutton_t), intent(in) :: self
@@ -94,6 +113,30 @@ contains
         class(wxbitmap_t), intent(in) :: sel
         call wxBitmapButton_SetBitmapSelected(self%ptr, sel%ptr)
     end subroutine wx_bitmap_button_set_bitmap_selected
+
+    subroutine wx_bitmap_button_set_bitmap_disabled_bundle(self, disabled)
+        class(wxbitmapbutton_t), intent(in) :: self
+        class(wxbitmapbundle_t), intent(in) :: disabled
+        call wxBitmapButton_SetBitmapDisabledBundle(self%ptr, disabled%ptr)
+    end subroutine wx_bitmap_button_set_bitmap_disabled_bundle
+
+    subroutine wx_bitmap_button_set_bitmap_focus_bundle(self, focus)
+        class(wxbitmapbutton_t), intent(in) :: self
+        class(wxbitmapbundle_t), intent(in) :: focus
+        call wxBitmapButton_SetBitmapFocusBundle(self%ptr, focus%ptr)
+    end subroutine wx_bitmap_button_set_bitmap_focus_bundle
+
+    subroutine wx_bitmap_button_set_bitmap_label_bundle(self, bitmap)
+        class(wxbitmapbutton_t), intent(in) :: self
+        class(wxbitmapbundle_t), intent(in) :: bitmap
+        call wxBitmapButton_SetBitmapLabelBundle(self%ptr, bitmap%ptr)
+    end subroutine wx_bitmap_button_set_bitmap_label_bundle
+
+    subroutine wx_bitmap_button_set_bitmap_selected_bundle(self, sel)
+        class(wxbitmapbutton_t), intent(in) :: self
+        class(wxbitmapbundle_t), intent(in) :: sel
+        call wxBitmapButton_SetBitmapSelectedBundle(self%ptr, sel%ptr)
+    end subroutine wx_bitmap_button_set_bitmap_selected_bundle
 
     subroutine wx_bitmap_button_set_margins(self, x, y)
         class(wxbitmapbutton_t), intent(in) :: self

@@ -57,7 +57,7 @@ contains
     function wx_aui_tool_bar_art_get_font(self) result(result_object)
         class(wxauitoolbarart_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxAuiToolBarArt_GetFont(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxAuiToolBarArt_GetFont(self%ptr), .true.)
     end function wx_aui_tool_bar_art_get_font
 
     subroutine wx_aui_tool_bar_art_set_text_orientation(self, orientation)
@@ -155,7 +155,7 @@ contains
         class(wxwindow_t), intent(in) :: window
         class(wxauitoolbaritem_t), intent(in) :: item
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxAuiToolBarArt_GetLabelSize(self%ptr, dc%ptr, window%ptr, item%ptr), .false.)
+        result_object = wxsize_from_ptr(wxAuiToolBarArt_GetLabelSize(self%ptr, dc%ptr, window%ptr, item%ptr), .true.)
     end function wx_aui_tool_bar_art_get_label_size
 
     function wx_aui_tool_bar_art_get_tool_size(self, dc, window, item) result(result_object)
@@ -164,7 +164,7 @@ contains
         class(wxwindow_t), intent(in) :: window
         class(wxauitoolbaritem_t), intent(in) :: item
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxAuiToolBarArt_GetToolSize(self%ptr, dc%ptr, window%ptr, item%ptr), .false.)
+        result_object = wxsize_from_ptr(wxAuiToolBarArt_GetToolSize(self%ptr, dc%ptr, window%ptr, item%ptr), .true.)
     end function wx_aui_tool_bar_art_get_tool_size
 
     function wx_aui_tool_bar_art_get_element_size(self, element_id) result(result_value)

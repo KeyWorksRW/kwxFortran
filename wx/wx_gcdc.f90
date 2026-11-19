@@ -9,6 +9,7 @@ module wx_gcdc
     public :: wx_gcdc_create
     public :: wx_gcdc_create_from_memory
     public :: wx_gcdc_create_from_printer
+    public :: wx_gcdc_create_default
     public :: wx_gcdc_delete
     public :: wx_gcdc_get_graphics_context
     public :: wx_gcdc_set_graphics_context
@@ -35,6 +36,12 @@ contains
         result_object%ptr = wxGCDC_CreateFromPrinter(dc%ptr)
         result_object%owned = .true.
     end function wx_gcdc_create_from_printer
+
+    function wx_gcdc_create_default() result(result_object)
+        type(wxgcdc_t) :: result_object
+        result_object%ptr = wxGCDC_CreateDefault()
+        result_object%owned = .true.
+    end function wx_gcdc_create_default
 
     subroutine wx_gcdc_delete(self)
         class(wxgcdc_t), intent(inout) :: self

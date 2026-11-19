@@ -45,7 +45,7 @@ contains
         class(wxauitoolbaritemarray_t), intent(in) :: self
         integer(c_int), intent(in) :: index
         type(wxauitoolbaritem_t) :: result_object
-        result_object = wxauitoolbaritem_from_ptr(wxAuiToolBarItemArray_Item(self%ptr, index), .false.)
+        result_object = wxauitoolbaritem_from_ptr(wxAuiToolBarItemArray_Item(self%ptr, index), .true.)
     end function wx_aui_tool_bar_item_array_item
 
 end module wx_aui_tool_bar_item_array

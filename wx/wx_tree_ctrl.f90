@@ -362,7 +362,7 @@ contains
         class(wxtreeitemid_t), intent(in) :: item
         logical, intent(in) :: textonly
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxTreeCtrl_GetBoundingRect(self%ptr, item%ptr, merge(1_c_int, 0_c_int, textonly)), .false.)
+        result_object = wxrect_from_ptr(wxTreeCtrl_GetBoundingRect(self%ptr, item%ptr, merge(1_c_int, 0_c_int, textonly)), .true.)
     end function wx_tree_ctrl_get_bounding_rect
 
     function wx_tree_ctrl_get_children_count(self, item, recursively) result(result_value)
@@ -820,21 +820,21 @@ contains
         class(wxtreectrl_t), intent(in) :: self
         class(wxtreeitemid_t), intent(in) :: item
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxTreeCtrl_GetItemTextColour(self%ptr, item%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxTreeCtrl_GetItemTextColour(self%ptr, item%ptr), .true.)
     end function wx_tree_ctrl_get_item_text_colour
 
     function wx_tree_ctrl_get_item_background_colour(self, item) result(result_object)
         class(wxtreectrl_t), intent(in) :: self
         class(wxtreeitemid_t), intent(in) :: item
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxTreeCtrl_GetItemBackgroundColour(self%ptr, item%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxTreeCtrl_GetItemBackgroundColour(self%ptr, item%ptr), .true.)
     end function wx_tree_ctrl_get_item_background_colour
 
     function wx_tree_ctrl_get_item_font(self, item) result(result_object)
         class(wxtreectrl_t), intent(in) :: self
         class(wxtreeitemid_t), intent(in) :: item
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxTreeCtrl_GetItemFont(self%ptr, item%ptr), .false.)
+        result_object = wxfont_from_ptr(wxTreeCtrl_GetItemFont(self%ptr, item%ptr), .true.)
     end function wx_tree_ctrl_get_item_font
 
     subroutine wx_tree_ctrl_init(self)

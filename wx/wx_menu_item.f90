@@ -276,7 +276,7 @@ contains
     function wx_menu_item_get_bitmap(self) result(result_object)
         class(wxmenuitem_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxMenuItem_GetBitmap(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxMenuItem_GetBitmap(self%ptr), .true.)
     end function wx_menu_item_get_bitmap
 
     function wx_menu_item_get_accel(self) result(result_object)

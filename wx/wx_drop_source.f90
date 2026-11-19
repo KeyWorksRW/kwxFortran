@@ -7,6 +7,7 @@ module wx_drop_source
     private
 
     public :: wx_drop_source_create
+    public :: wx_drop_source_create_default
     public :: wx_drop_source_do_drag_drop
     public :: wx_drop_source_delete
 
@@ -22,6 +23,14 @@ contains
         result_object%ptr = DropSource_Create(data%ptr, win%ptr, copy, move, none)
         result_object%owned = .true.
     end function wx_drop_source_create
+
+    function wx_drop_source_create_default(data, win) result(result_object)
+        class(wxdataobject_t), intent(in) :: data
+        class(wxwindow_t), intent(in) :: win
+        type(wxdropsource_t) :: result_object
+        result_object%ptr = DropSource_CreateDefault(data%ptr, win%ptr)
+        result_object%owned = .true.
+    end function wx_drop_source_create_default
 
     function wx_drop_source_do_drag_drop(self, flags) result(result_value)
         class(wxdropsource_t), intent(in) :: self

@@ -57,6 +57,13 @@ module wx_aui_notebook
     public :: wx_aui_notebook_get_pages_in_display_order
     public :: wx_aui_notebook_save_layout
     public :: wx_aui_notebook_load_layout
+    public :: wx_aui_notebook_add_page_with_bundle
+    public :: wx_aui_notebook_insert_page_with_bundle
+    public :: wx_aui_notebook_set_page_bitmap_bundle
+    public :: wx_aui_notebook_calculate_new_split_size
+    public :: wx_aui_notebook_get_tab_ctrl_from_point
+    public :: wx_aui_notebook_find_tab_ctrl
+    public :: wx_aui_notebook_find_tab_index
 
 contains
 
@@ -451,5 +458,68 @@ contains
         call wxAuiNotebook_LoadLayout(self%ptr, name_ptr, deserializer%ptr)
         call wxString_Delete(name_ptr)
     end subroutine wx_aui_notebook_load_layout
+
+    function wx_aui_notebook_add_page_with_bundle(self, page, caption, select, bitmap) result(result_value)
+        class(wxauinotebook_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: page
+        character(len=*), intent(in) :: caption
+        logical, intent(in) :: select
+        class(wxbitmapbundle_t), intent(in) :: bitmap
+        type(c_ptr) :: caption_ptr
+        logical :: result_value
+        caption_ptr = to_wxstring(caption)
+        result_value = (wxAuiNotebook_AddPageWithBundle(self%ptr, page%ptr, caption_ptr, merge(1_c_int, 0_c_int, select), bitmap%ptr) /= 0)
+        call wxString_Delete(caption_ptr)
+    end function wx_aui_notebook_add_page_with_bundle
+
+    function wx_aui_notebook_insert_page_with_bundle(self, page_idx, page, caption, select, bitmap) result(result_value)
+        class(wxauinotebook_t), intent(in) :: self
+        integer(c_int), intent(in) :: page_idx
+        class(wxwindow_t), intent(in) :: page
+        character(len=*), intent(in) :: caption
+        logical, intent(in) :: select
+        class(wxbitmapbundle_t), intent(in) :: bitmap
+        type(c_ptr) :: caption_ptr
+        logical :: result_value
+        caption_ptr = to_wxstring(caption)
+        result_value = (wxAuiNotebook_InsertPageWithBundle(self%ptr, page_idx, page%ptr, caption_ptr, merge(1_c_int, 0_c_int, select), bitmap%ptr) /= 0)
+        call wxString_Delete(caption_ptr)
+    end function wx_aui_notebook_insert_page_with_bundle
+
+    function wx_aui_notebook_set_page_bitmap_bundle(self, page, bitmap) result(result_value)
+        class(wxauinotebook_t), intent(in) :: self
+        integer(c_int), intent(in) :: page
+        class(wxbitmapbundle_t), intent(in) :: bitmap
+        logical :: result_value
+        result_value = (wxAuiNotebook_SetPageBitmapBundle(self%ptr, page, bitmap%ptr) /= 0)
+    end function wx_aui_notebook_set_page_bitmap_bundle
+
+    function wx_aui_notebook_calculate_new_split_size(self) result(result_object)
+        class(wxauinotebook_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxAuiNotebook_CalculateNewSplitSize(self%ptr), .true.)
+    end function wx_aui_notebook_calculate_new_split_size
+
+    function wx_aui_notebook_get_tab_ctrl_from_point(self, x, y) result(result_object)
+        class(wxauinotebook_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        type(wxauitabctrl_t) :: result_object
+        result_object = wxauitabctrl_from_ptr(wxAuiNotebook_GetTabCtrlFromPoint(self%ptr, x, y), .false.)
+    end function wx_aui_notebook_get_tab_ctrl_from_point
+
+    function wx_aui_notebook_find_tab_ctrl(self, page) result(result_object)
+        class(wxauinotebook_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: page
+        type(wxauitabctrl_t) :: result_object
+        result_object = wxauitabctrl_from_ptr(wxAuiNotebook_FindTabCtrl(self%ptr, page%ptr), .false.)
+    end function wx_aui_notebook_find_tab_ctrl
+
+    function wx_aui_notebook_find_tab_index(self, page) result(result_value)
+        class(wxauinotebook_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: page
+        integer(c_int) :: result_value
+        result_value = wxAuiNotebook_FindTabIndex(self%ptr, page%ptr)
+    end function wx_aui_notebook_find_tab_index
 
 end module wx_aui_notebook

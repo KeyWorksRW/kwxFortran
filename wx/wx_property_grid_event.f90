@@ -61,7 +61,7 @@ contains
     function wx_property_grid_event_get_value(self) result(result_object)
         class(wxpropertygridevent_t), intent(in) :: self
         type(wxvariant_t) :: result_object
-        result_object = wxvariant_from_ptr(wxPropertyGridEvent_GetValue(self%ptr), .false.)
+        result_object = wxvariant_from_ptr(wxPropertyGridEvent_GetValue(self%ptr), .true.)
     end function wx_property_grid_event_get_value
 
     subroutine wx_property_grid_event_veto(self, veto)

@@ -69,7 +69,7 @@ contains
 
     function wx_list_event_get_data(self) result(result_value)
         class(wxlistevent_t), intent(in) :: self
-        integer(c_int) :: result_value
+        integer(c_size_t) :: result_value
         result_value = wxListEvent_GetData(self%ptr)
     end function wx_list_event_get_data
 
@@ -109,7 +109,7 @@ contains
     function wx_list_event_get_point(self) result(result_object)
         class(wxlistevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxListEvent_GetPoint(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxListEvent_GetPoint(self%ptr), .true.)
     end function wx_list_event_get_point
 
     function wx_list_event_get_text(self) result(result_text)

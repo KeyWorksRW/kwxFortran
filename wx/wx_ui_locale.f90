@@ -3,7 +3,7 @@ module wx_ui_locale
     use, intrinsic :: iso_c_binding
     use kwx_types
     use kwxffi
-    use wx_string, only: to_wxstring, from_wxstring, from_cstring
+    use wx_string, only: to_wxstring, from_wxstring, from_cstring, free_cstring
     implicit none
     private
 
@@ -52,7 +52,7 @@ contains
         type(c_ptr) :: tag_ptr
         type(wxuilocale_t) :: result_object
         tag_ptr = to_wxstring(tag)
-        result_object = wxuilocale_from_ptr(wxUILocale_FromTag(tag_ptr), .false.)
+        result_object = wxuilocale_from_ptr(wxUILocale_FromTag(tag_ptr), .true.)
         call wxString_Delete(tag_ptr)
     end function wx_ui_locale_from_tag
 
@@ -64,7 +64,7 @@ contains
 
     function wx_ui_locale_get_current() result(result_object)
         type(wxuilocale_t) :: result_object
-        result_object = wxuilocale_from_ptr(wxUILocale_GetCurrent(), .false.)
+        result_object = wxuilocale_from_ptr(wxUILocale_GetCurrent(), .true.)
     end function wx_ui_locale_get_current
 
     subroutine wx_ui_locale_delete(self)
@@ -242,6 +242,7 @@ contains
         character(len=:), allocatable :: result_text
         result_text_ptr = wxUILocale_GetInfo(index, category)
         result_text = from_cstring(result_text_ptr)
+        call free_cstring(result_text_ptr)
     end function wx_ui_locale_get_info
 
     function wx_ui_locale_is_set() result(result_value)

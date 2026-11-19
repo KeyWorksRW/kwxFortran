@@ -18,13 +18,13 @@ contains
     function wx_set_cursor_event_get_cursor(self) result(result_object)
         class(wxsetcursorevent_t), intent(in) :: self
         type(wxcursor_t) :: result_object
-        result_object = wxcursor_from_ptr(wxSetCursorEvent_GetCursor(self%ptr), .false.)
+        result_object = wxcursor_from_ptr(wxSetCursorEvent_GetCursor(self%ptr), .true.)
     end function wx_set_cursor_event_get_cursor
 
     function wx_set_cursor_event_get_position(self) result(result_object)
         class(wxsetcursorevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxSetCursorEvent_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxSetCursorEvent_GetPosition(self%ptr), .true.)
     end function wx_set_cursor_event_get_position
 
     function wx_set_cursor_event_get_x(self) result(result_value)

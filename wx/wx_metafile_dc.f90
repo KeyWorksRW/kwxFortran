@@ -9,14 +9,16 @@ module wx_metafile_dc
 
     public :: wx_metafile_dc_close
     public :: wx_metafile_dc_create
+    public :: wx_metafile_dc_create_default
+    public :: wx_metafile_dc_create_with_extent
     public :: wx_metafile_dc_delete
 
 contains
 
-    function wx_metafile_dc_close(self) result(result_value)
+    function wx_metafile_dc_close(self) result(result_object)
         class(wxmetafiledc_t), intent(in) :: self
-        type(c_ptr) :: result_value
-        result_value = wxMetafileDC_Close(self%ptr)
+        type(wxmetafile_t) :: result_object
+        result_object = wxmetafile_from_ptr(wxMetafileDC_Close(self%ptr), .true.)
     end function wx_metafile_dc_close
 
     function wx_metafile_dc_create(filepath) result(result_object)
@@ -28,6 +30,26 @@ contains
         result_object%owned = .true.
         call wxString_Delete(filepath_ptr)
     end function wx_metafile_dc_create
+
+    function wx_metafile_dc_create_default() result(result_object)
+        type(wxmetafiledc_t) :: result_object
+        result_object%ptr = wxMetafileDC_CreateDefault()
+        result_object%owned = .true.
+    end function wx_metafile_dc_create_default
+
+    function wx_metafile_dc_create_with_extent(filepath, xext, yext, xorg, yorg) result(result_object)
+        character(len=*), intent(in) :: filepath
+        integer(c_int), intent(in) :: xext
+        integer(c_int), intent(in) :: yext
+        integer(c_int), intent(in) :: xorg
+        integer(c_int), intent(in) :: yorg
+        type(c_ptr) :: filepath_ptr
+        type(wxmetafiledc_t) :: result_object
+        filepath_ptr = to_wxstring(filepath)
+        result_object%ptr = wxMetafileDC_CreateWithExtent(filepath_ptr, xext, yext, xorg, yorg)
+        result_object%owned = .true.
+        call wxString_Delete(filepath_ptr)
+    end function wx_metafile_dc_create_with_extent
 
     subroutine wx_metafile_dc_delete(self)
         class(wxmetafiledc_t), intent(inout) :: self

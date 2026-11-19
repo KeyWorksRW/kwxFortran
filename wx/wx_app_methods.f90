@@ -30,6 +30,11 @@ module wx_app_methods
     public :: wx_app_set_on_get_class_info
     public :: wx_app_set_on_on_assert_failure
     public :: wx_app_set_on_create_traits
+    public :: wx_app_set_on_on_fatal_exception
+    public :: wx_app_set_on_on_unhandled_exception
+    public :: wx_app_set_on_store_current_exception
+    public :: wx_app_set_on_on_exception_in_main_loop
+    public :: wx_app_set_on_rethrow_stored_exception
 
 contains
 
@@ -186,5 +191,35 @@ contains
         type(c_ptr), intent(in), value :: pfunction
         call wxApp_SetOnCreateTraits(self%ptr, pfunction)
     end subroutine wx_app_set_on_create_traits
+
+    subroutine wx_app_set_on_on_fatal_exception(self, pfunction)
+        class(wxapp_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        call wxApp_SetOnOnFatalException(self%ptr, pfunction)
+    end subroutine wx_app_set_on_on_fatal_exception
+
+    subroutine wx_app_set_on_on_unhandled_exception(self, pfunction)
+        class(wxapp_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        call wxApp_SetOnOnUnhandledException(self%ptr, pfunction)
+    end subroutine wx_app_set_on_on_unhandled_exception
+
+    subroutine wx_app_set_on_store_current_exception(self, pfunction)
+        class(wxapp_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        call wxApp_SetOnStoreCurrentException(self%ptr, pfunction)
+    end subroutine wx_app_set_on_store_current_exception
+
+    subroutine wx_app_set_on_on_exception_in_main_loop(self, pfunction)
+        class(wxapp_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        call wxApp_SetOnOnExceptionInMainLoop(self%ptr, pfunction)
+    end subroutine wx_app_set_on_on_exception_in_main_loop
+
+    subroutine wx_app_set_on_rethrow_stored_exception(self, pfunction)
+        class(wxapp_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        call wxApp_SetOnRethrowStoredException(self%ptr, pfunction)
+    end subroutine wx_app_set_on_rethrow_stored_exception
 
 end module wx_app_methods

@@ -35,7 +35,7 @@ contains
     function wx_colour_picker_event_get_colour(self) result(result_object)
         class(wxcolourpickerevent_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxColourPickerEvent_GetColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxColourPickerEvent_GetColour(self%ptr), .true.)
     end function wx_colour_picker_event_get_colour
 
     subroutine wx_colour_picker_event_set_colour(self, colour)

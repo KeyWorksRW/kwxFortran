@@ -38,7 +38,7 @@ contains
         class(wxauidockart_t), intent(in) :: self
         integer(c_int), intent(in) :: id
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxAuiDockArt_GetColor(self%ptr, id), .false.)
+        result_object = wxcolour_from_ptr(wxAuiDockArt_GetColor(self%ptr, id), .true.)
     end function wx_aui_dock_art_get_color
 
     function wx_aui_dock_art_get_metric_for_window(self, id, window) result(result_value)
@@ -111,14 +111,14 @@ contains
         class(wxauidockart_t), intent(in) :: self
         integer(c_int), intent(in) :: id
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxAuiDockArt_GetColour(self%ptr, id), .false.)
+        result_object = wxcolour_from_ptr(wxAuiDockArt_GetColour(self%ptr, id), .true.)
     end function wx_aui_dock_art_get_colour
 
     function wx_aui_dock_art_get_font(self, id) result(result_object)
         class(wxauidockart_t), intent(in) :: self
         integer(c_int), intent(in) :: id
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxAuiDockArt_GetFont(self%ptr, id), .false.)
+        result_object = wxfont_from_ptr(wxAuiDockArt_GetFont(self%ptr, id), .true.)
     end function wx_aui_dock_art_get_font
 
     function wx_aui_dock_art_get_metric(self, id) result(result_value)

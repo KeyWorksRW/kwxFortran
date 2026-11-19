@@ -17,7 +17,7 @@ contains
     function wx_static_box_sizer_calc_min(self) result(result_object)
         class(wxstaticboxsizer_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxStaticBoxSizer_CalcMin(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxStaticBoxSizer_CalcMin(self%ptr), .true.)
     end function wx_static_box_sizer_calc_min
 
     function wx_static_box_sizer_detach(self, window) result(result_value)

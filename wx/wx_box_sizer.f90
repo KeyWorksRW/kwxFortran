@@ -31,7 +31,7 @@ contains
     function wx_box_sizer_calc_min(self) result(result_object)
         class(wxboxsizer_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxBoxSizer_CalcMin(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxBoxSizer_CalcMin(self%ptr), .true.)
     end function wx_box_sizer_calc_min
 
     function wx_box_sizer_add_spacer(self, size) result(result_object)

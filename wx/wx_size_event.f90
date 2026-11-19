@@ -13,7 +13,7 @@ contains
     function wx_size_event_get_size(self) result(result_object)
         class(wxsizeevent_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSizeEvent_GetSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxSizeEvent_GetSize(self%ptr), .true.)
     end function wx_size_event_get_size
 
 end module wx_size_event

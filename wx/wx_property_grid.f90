@@ -205,7 +205,7 @@ contains
         type(c_ptr), intent(in), value :: p
         class(wxsize_t), intent(in) :: sz
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxPropertyGrid_GetGoodEditorDialogPosition(self%ptr, p, sz%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxPropertyGrid_GetGoodEditorDialogPosition(self%ptr, p, sz%ptr), .true.)
     end function wx_property_grid_get_good_editor_dialog_position
 
     function wx_property_grid_register_editor_class(editor, nodefcheck) result(result_value)
@@ -309,7 +309,7 @@ contains
     function wx_property_grid_get_validation_info(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxpgvalidationinfo_t) :: result_object
-        result_object = wxpgvalidationinfo_from_ptr(wxPropertyGrid_GetValidationInfo(self%ptr), .false.)
+        result_object = wxpgvalidationinfo_from_ptr(wxPropertyGrid_GetValidationInfo(self%ptr), .true.)
     end function wx_property_grid_get_validation_info
 
     function wx_property_grid_get_image_size(self, property, item) result(result_object)
@@ -317,7 +317,7 @@ contains
         class(wxpgproperty_t), intent(in) :: property
         integer(c_int), intent(in) :: item
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxPropertyGrid_GetImageSize(self%ptr, property%ptr, item), .false.)
+        result_object = wxsize_from_ptr(wxPropertyGrid_GetImageSize(self%ptr, property%ptr, item), .true.)
     end function wx_property_grid_get_image_size
 
     function wx_property_grid_get_image_rect(self, property, item) result(result_object)
@@ -325,7 +325,7 @@ contains
         class(wxpgproperty_t), intent(in) :: property
         integer(c_int), intent(in) :: item
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxPropertyGrid_GetImageRect(self%ptr, property%ptr, item), .false.)
+        result_object = wxrect_from_ptr(wxPropertyGrid_GetImageRect(self%ptr, property%ptr, item), .true.)
     end function wx_property_grid_get_image_rect
 
     function wx_property_grid_get_property_rect(self, first, last) result(result_object)
@@ -333,79 +333,79 @@ contains
         class(wxpgproperty_t), intent(in) :: first
         class(wxpgproperty_t), intent(in) :: last
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxPropertyGrid_GetPropertyRect(self%ptr, first%ptr, last%ptr), .false.)
+        result_object = wxrect_from_ptr(wxPropertyGrid_GetPropertyRect(self%ptr, first%ptr, last%ptr), .true.)
     end function wx_property_grid_get_property_rect
 
     function wx_property_grid_fit_columns(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxPropertyGrid_FitColumns(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxPropertyGrid_FitColumns(self%ptr), .true.)
     end function wx_property_grid_fit_columns
 
     function wx_property_grid_get_caption_font(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxPropertyGrid_GetCaptionFont(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxPropertyGrid_GetCaptionFont(self%ptr), .true.)
     end function wx_property_grid_get_caption_font
 
     function wx_property_grid_get_caption_background_colour(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGrid_GetCaptionBackgroundColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGrid_GetCaptionBackgroundColour(self%ptr), .true.)
     end function wx_property_grid_get_caption_background_colour
 
     function wx_property_grid_get_caption_foreground_colour(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGrid_GetCaptionForegroundColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGrid_GetCaptionForegroundColour(self%ptr), .true.)
     end function wx_property_grid_get_caption_foreground_colour
 
     function wx_property_grid_get_cell_background_colour(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGrid_GetCellBackgroundColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGrid_GetCellBackgroundColour(self%ptr), .true.)
     end function wx_property_grid_get_cell_background_colour
 
     function wx_property_grid_get_cell_disabled_text_colour(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGrid_GetCellDisabledTextColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGrid_GetCellDisabledTextColour(self%ptr), .true.)
     end function wx_property_grid_get_cell_disabled_text_colour
 
     function wx_property_grid_get_cell_text_colour(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGrid_GetCellTextColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGrid_GetCellTextColour(self%ptr), .true.)
     end function wx_property_grid_get_cell_text_colour
 
     function wx_property_grid_get_empty_space_colour(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGrid_GetEmptySpaceColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGrid_GetEmptySpaceColour(self%ptr), .true.)
     end function wx_property_grid_get_empty_space_colour
 
     function wx_property_grid_get_line_colour(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGrid_GetLineColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGrid_GetLineColour(self%ptr), .true.)
     end function wx_property_grid_get_line_colour
 
     function wx_property_grid_get_margin_colour(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGrid_GetMarginColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGrid_GetMarginColour(self%ptr), .true.)
     end function wx_property_grid_get_margin_colour
 
     function wx_property_grid_get_selection_background_colour(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGrid_GetSelectionBackgroundColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGrid_GetSelectionBackgroundColour(self%ptr), .true.)
     end function wx_property_grid_get_selection_background_colour
 
     function wx_property_grid_get_selection_foreground_colour(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGrid_GetSelectionForegroundColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGrid_GetSelectionForegroundColour(self%ptr), .true.)
     end function wx_property_grid_get_selection_foreground_colour
 
     subroutine wx_property_grid_set_caption_background_colour(self, colour)
@@ -471,19 +471,19 @@ contains
     function wx_property_grid_get_property_default_cell(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxpgcell_t) :: result_object
-        result_object = wxpgcell_from_ptr(wxPropertyGrid_GetPropertyDefaultCell(self%ptr), .false.)
+        result_object = wxpgcell_from_ptr(wxPropertyGrid_GetPropertyDefaultCell(self%ptr), .true.)
     end function wx_property_grid_get_property_default_cell
 
     function wx_property_grid_get_category_default_cell(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxpgcell_t) :: result_object
-        result_object = wxpgcell_from_ptr(wxPropertyGrid_GetCategoryDefaultCell(self%ptr), .false.)
+        result_object = wxpgcell_from_ptr(wxPropertyGrid_GetCategoryDefaultCell(self%ptr), .true.)
     end function wx_property_grid_get_category_default_cell
 
     function wx_property_grid_get_unspecified_value_appearance(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxpgcell_t) :: result_object
-        result_object = wxpgcell_from_ptr(wxPropertyGrid_GetUnspecifiedValueAppearance(self%ptr), .false.)
+        result_object = wxpgcell_from_ptr(wxPropertyGrid_GetUnspecifiedValueAppearance(self%ptr), .true.)
     end function wx_property_grid_get_unspecified_value_appearance
 
     subroutine wx_property_grid_set_unspecified_value_appearance(self, cell)
@@ -697,7 +697,7 @@ contains
         class(wxpropertygrid_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxvariant_t) :: result_object
-        result_object = wxvariant_from_ptr(wxPropertyGrid_GetPropertyValue(self%ptr, id%ptr), .false.)
+        result_object = wxvariant_from_ptr(wxPropertyGrid_GetPropertyValue(self%ptr, id%ptr), .true.)
     end function wx_property_grid_get_property_value
 
     subroutine wx_property_grid_set_property_value(self, id, value)
@@ -743,7 +743,7 @@ contains
     function wx_property_grid_get_uncommitted_property_value(self) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         type(wxvariant_t) :: result_object
-        result_object = wxvariant_from_ptr(wxPropertyGrid_GetUncommittedPropertyValue(self%ptr), .false.)
+        result_object = wxvariant_from_ptr(wxPropertyGrid_GetUncommittedPropertyValue(self%ptr), .true.)
     end function wx_property_grid_get_uncommitted_property_value
 
     function wx_property_grid_append(self, prop) result(result_object)
@@ -1295,7 +1295,7 @@ contains
         type(c_ptr) :: attrname_ptr
         type(wxvariant_t) :: result_object
         attrname_ptr = to_wxstring(attrname)
-        result_object = wxvariant_from_ptr(wxPropertyGridInterface_GetPropertyAttribute(self%ptr, id%ptr, attrname_ptr), .false.)
+        result_object = wxvariant_from_ptr(wxPropertyGridInterface_GetPropertyAttribute(self%ptr, id%ptr, attrname_ptr), .true.)
         call wxString_Delete(attrname_ptr)
     end function wx_property_grid_get_property_attribute
 
@@ -1347,7 +1347,7 @@ contains
         type(c_ptr) :: listname_ptr
         type(wxvariant_t) :: result_object
         listname_ptr = to_wxstring(listname)
-        result_object = wxvariant_from_ptr(wxPropertyGridInterface_GetPropertyValues(self%ptr, listname_ptr, baseparent%ptr, flags), .false.)
+        result_object = wxvariant_from_ptr(wxPropertyGridInterface_GetPropertyValues(self%ptr, listname_ptr, baseparent%ptr, flags), .true.)
         call wxString_Delete(listname_ptr)
     end function wx_property_grid_get_property_values
 
@@ -1385,14 +1385,14 @@ contains
         class(wxpropertygrid_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGridInterface_GetPropertyBackgroundColour(self%ptr, id%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGridInterface_GetPropertyBackgroundColour(self%ptr, id%ptr), .true.)
     end function wx_property_grid_get_property_background_colour
 
     function wx_property_grid_get_property_text_colour(self, id) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGridInterface_GetPropertyTextColour(self%ptr, id%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGridInterface_GetPropertyTextColour(self%ptr, id%ptr), .true.)
     end function wx_property_grid_get_property_text_colour
 
     function wx_property_grid_set_property_max_length(self, id, maxlen) result(result_value)
@@ -1427,21 +1427,21 @@ contains
         class(wxpropertygrid_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxarraystring_t) :: result_object
-        result_object = wxarraystring_from_ptr(wxPropertyGridInterface_GetPropertyValueAsArrayString(self%ptr, id%ptr), .false.)
+        result_object = wxarraystring_from_ptr(wxPropertyGridInterface_GetPropertyValueAsArrayString(self%ptr, id%ptr), .true.)
     end function wx_property_grid_get_property_value_as_array_string
 
     function wx_property_grid_get_property_value_as_array_int(self, id) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxarrayint_t) :: result_object
-        result_object = wxarrayint_from_ptr(wxPropertyGridInterface_GetPropertyValueAsArrayInt(self%ptr, id%ptr), .false.)
+        result_object = wxarrayint_from_ptr(wxPropertyGridInterface_GetPropertyValueAsArrayInt(self%ptr, id%ptr), .true.)
     end function wx_property_grid_get_property_value_as_array_int
 
     function wx_property_grid_get_property_value_as_date_time(self, id) result(result_object)
         class(wxpropertygrid_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxdatetime_t) :: result_object
-        result_object = wxdatetime_from_ptr(wxPropertyGridInterface_GetPropertyValueAsDateTime(self%ptr, id%ptr), .false.)
+        result_object = wxdatetime_from_ptr(wxPropertyGridInterface_GetPropertyValueAsDateTime(self%ptr, id%ptr), .true.)
     end function wx_property_grid_get_property_value_as_date_time
 
     function wx_property_grid_get_editor_by_name(name) result(result_object)

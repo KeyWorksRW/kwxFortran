@@ -34,49 +34,49 @@ contains
     function wx_any_button_get_bitmap(self) result(result_object)
         class(wxanybutton_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmap(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmap(self%ptr), .true.)
     end function wx_any_button_get_bitmap
 
     function wx_any_button_get_bitmap_label(self) result(result_object)
         class(wxanybutton_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapLabel(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapLabel(self%ptr), .true.)
     end function wx_any_button_get_bitmap_label
 
     function wx_any_button_get_bitmap_pressed(self) result(result_object)
         class(wxanybutton_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapPressed(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapPressed(self%ptr), .true.)
     end function wx_any_button_get_bitmap_pressed
 
     function wx_any_button_get_bitmap_disabled(self) result(result_object)
         class(wxanybutton_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapDisabled(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapDisabled(self%ptr), .true.)
     end function wx_any_button_get_bitmap_disabled
 
     function wx_any_button_get_bitmap_current(self) result(result_object)
         class(wxanybutton_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapCurrent(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapCurrent(self%ptr), .true.)
     end function wx_any_button_get_bitmap_current
 
     function wx_any_button_get_bitmap_focus(self) result(result_object)
         class(wxanybutton_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapFocus(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapFocus(self%ptr), .true.)
     end function wx_any_button_get_bitmap_focus
 
     function wx_any_button_get_bitmap_selected(self) result(result_object)
         class(wxanybutton_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapSelected(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapSelected(self%ptr), .true.)
     end function wx_any_button_get_bitmap_selected
 
     function wx_any_button_get_bitmap_hover(self) result(result_object)
         class(wxanybutton_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapHover(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxAnyButton_GetBitmapHover(self%ptr), .true.)
     end function wx_any_button_get_bitmap_hover
 
     subroutine wx_any_button_set_bitmap(self, bitmap, dir)
@@ -138,7 +138,7 @@ contains
     function wx_any_button_get_bitmap_margins(self) result(result_object)
         class(wxanybutton_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxAnyButton_GetBitmapMargins(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxAnyButton_GetBitmapMargins(self%ptr), .true.)
     end function wx_any_button_get_bitmap_margins
 
     subroutine wx_any_button_set_bitmap_position(self, dir)

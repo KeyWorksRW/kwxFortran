@@ -62,7 +62,7 @@ contains
     function wx_pg_property_get_choices(self) result(result_object)
         class(wxpgproperty_t), intent(in) :: self
         type(wxpgchoices_t) :: result_object
-        result_object = wxpgchoices_from_ptr(wxPGProperty_GetChoices(self%ptr), .false.)
+        result_object = wxpgchoices_from_ptr(wxPGProperty_GetChoices(self%ptr), .true.)
     end function wx_pg_property_get_choices
 
     function wx_pg_property_get_base_name(self) result(result_text)
@@ -114,7 +114,7 @@ contains
         class(wxpgproperty_t), intent(in) :: self
         integer(c_int), intent(in) :: column
         type(wxpgcell_t) :: result_object
-        result_object = wxpgcell_from_ptr(wxPGProperty_GetCell(self%ptr, column), .false.)
+        result_object = wxpgcell_from_ptr(wxPGProperty_GetCell(self%ptr, column), .true.)
     end function wx_pg_property_get_cell
 
     function wx_pg_property_get_displayed_string(self) result(result_text)
@@ -210,7 +210,7 @@ contains
     function wx_pg_property_get_value(self) result(result_object)
         class(wxpgproperty_t), intent(in) :: self
         type(wxvariant_t) :: result_object
-        result_object = wxvariant_from_ptr(wxPGProperty_GetValue(self%ptr), .false.)
+        result_object = wxvariant_from_ptr(wxPGProperty_GetValue(self%ptr), .true.)
     end function wx_pg_property_get_value
 
     function wx_pg_property_get_hint_text(self) result(result_text)

@@ -8,6 +8,7 @@ module kwx_rich_text_field_type_standard
     private
 
     public :: kwx_rich_text_field_type_standard_create
+    public :: kwx_rich_text_field_type_standard_create_with_bitmap
     public :: kwx_rich_text_field_type_standard_delete
     public :: kwx_rich_text_field_type_standard_set_on_can_edit_properties
     public :: kwx_rich_text_field_type_standard_set_on_edit_properties
@@ -19,6 +20,11 @@ module kwx_rich_text_field_type_standard
     public :: kwx_rich_text_field_type_standard_set_is_top_level_result
     public :: kwx_rich_text_field_type_standard_set_on_update_field
     public :: kwx_rich_text_field_type_standard_set_on_is_top_level
+    public :: kwx_rich_text_field_type_standard_set_on_can_edit_properti_e717
+    public :: kwx_rich_text_field_type_standard_set_on_edit_properties_w_9576
+    public :: kwx_rich_text_field_type_standard_set_on_get_properties_me_018a
+    public :: kwx_rich_text_field_type_standard_set_on_update_field_with_data
+    public :: kwx_rich_text_field_type_standard_set_on_is_top_level_with_data
 
 contains
 
@@ -37,6 +43,19 @@ contains
         call wxString_Delete(name_ptr)
         call wxString_Delete(label_ptr)
     end function kwx_rich_text_field_type_standard_create
+
+    function kwx_rich_text_field_type_standard_create_with_bitmap(pobject, name, bitmap, displaystyle) result(result_object)
+        type(c_ptr), intent(in), value :: pobject
+        character(len=*), intent(in) :: name
+        class(wxbitmap_t), intent(in) :: bitmap
+        integer(c_int), intent(in) :: displaystyle
+        type(c_ptr) :: name_ptr
+        type(kwxrichtextfieldtypestandard_t) :: result_object
+        name_ptr = to_wxstring(name)
+        result_object%ptr = kwxRichTextFieldTypeStandard_CreateWithBitmap(pobject, name_ptr, bitmap%ptr, displaystyle)
+        result_object%owned = .true.
+        call wxString_Delete(name_ptr)
+    end function kwx_rich_text_field_type_standard_create_with_bitmap
 
     subroutine kwx_rich_text_field_type_standard_delete(self)
         class(kwxrichtextfieldtypestandard_t), intent(inout) :: self
@@ -109,5 +128,40 @@ contains
         type(c_ptr), intent(in), value :: pfunction
         call kwxRichTextFieldTypeStandard_SetOnIsTopLevel(self%ptr, pfunction)
     end subroutine kwx_rich_text_field_type_standard_set_on_is_top_level
+
+    subroutine kwx_rich_text_field_type_standard_set_on_can_edit_properti_e717(self, pfunction, data)
+        class(kwxrichtextfieldtypestandard_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextFieldTypeStandard_SetOnCanEditPropertiesWithData(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_field_type_standard_set_on_can_edit_properti_e717
+
+    subroutine kwx_rich_text_field_type_standard_set_on_edit_properties_w_9576(self, pfunction, data)
+        class(kwxrichtextfieldtypestandard_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextFieldTypeStandard_SetOnEditPropertiesWithData(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_field_type_standard_set_on_edit_properties_w_9576
+
+    subroutine kwx_rich_text_field_type_standard_set_on_get_properties_me_018a(self, pfunction, data)
+        class(kwxrichtextfieldtypestandard_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextFieldTypeStandard_SetOnGetPropertiesMenuLabelWi_0883(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_field_type_standard_set_on_get_properties_me_018a
+
+    subroutine kwx_rich_text_field_type_standard_set_on_update_field_with_data(self, pfunction, data)
+        class(kwxrichtextfieldtypestandard_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextFieldTypeStandard_SetOnUpdateFieldWithData(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_field_type_standard_set_on_update_field_with_data
+
+    subroutine kwx_rich_text_field_type_standard_set_on_is_top_level_with_data(self, pfunction, data)
+        class(kwxrichtextfieldtypestandard_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextFieldTypeStandard_SetOnIsTopLevelWithData(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_field_type_standard_set_on_is_top_level_with_data
 
 end module kwx_rich_text_field_type_standard

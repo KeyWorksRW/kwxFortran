@@ -15,6 +15,7 @@ module wx_bitmap_bundle
     public :: wx_bitmap_bundle_get_default_size
     public :: wx_bitmap_bundle_is_ok
     public :: wx_bitmap_bundle_create_from_data
+    public :: wx_bitmap_bundle_create_default
     public :: wx_bitmap_bundle_create_from_base64
     public :: wx_bitmap_bundle_create_from_svg_base64
     public :: wx_bitmap_bundle_from_svg_file
@@ -81,6 +82,12 @@ contains
         result_object%ptr = wxBitmapBundle_CreateFromData(c_loc(data), size, bitmap_type)
         result_object%owned = .true.
     end function wx_bitmap_bundle_create_from_data
+
+    function wx_bitmap_bundle_create_default() result(result_object)
+        type(wxbitmapbundle_t) :: result_object
+        result_object%ptr = wxBitmapBundle_CreateDefault()
+        result_object%owned = .true.
+    end function wx_bitmap_bundle_create_default
 
     function wx_bitmap_bundle_create_from_base64(base64, len, bitmap_type) result(result_object)
         integer(c_int8_t), dimension(:), intent(in), target, contiguous :: base64

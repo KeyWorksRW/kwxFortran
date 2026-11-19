@@ -22,13 +22,13 @@ contains
     function wx_aui_tool_bar_event_get_click_point(self) result(result_object)
         class(wxauitoolbarevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxAuiToolBarEvent_GetClickPoint(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxAuiToolBarEvent_GetClickPoint(self%ptr), .true.)
     end function wx_aui_tool_bar_event_get_click_point
 
     function wx_aui_tool_bar_event_get_item_rect(self) result(result_object)
         class(wxauitoolbarevent_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxAuiToolBarEvent_GetItemRect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxAuiToolBarEvent_GetItemRect(self%ptr), .true.)
     end function wx_aui_tool_bar_event_get_item_rect
 
     function wx_aui_tool_bar_event_get_tool_id(self) result(result_value)

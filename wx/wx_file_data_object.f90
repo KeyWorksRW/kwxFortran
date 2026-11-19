@@ -11,6 +11,7 @@ module wx_file_data_object
     public :: wx_file_data_object_create
     public :: wx_file_data_object_delete
     public :: wx_file_data_object_get_filenames
+    public :: wx_file_data_object_get_filenames_array
 
 contains
 
@@ -58,5 +59,11 @@ contains
         integer(c_int) :: result_value
         result_value = FileDataObject_GetFilenames(self%ptr, c_loc(list), capacity)
     end function wx_file_data_object_get_filenames
+
+    subroutine wx_file_data_object_get_filenames_array(self, filenames)
+        class(wxfiledataobject_t), intent(in) :: self
+        class(wxarraystring_t), intent(in) :: filenames
+        call wxFileDataObject_GetFilenamesArray(self%ptr, filenames%ptr)
+    end subroutine wx_file_data_object_get_filenames_array
 
 end module wx_file_data_object

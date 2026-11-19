@@ -13,7 +13,7 @@ contains
     function wx_move_event_get_position(self) result(result_object)
         class(wxmoveevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxMoveEvent_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxMoveEvent_GetPosition(self%ptr), .true.)
     end function wx_move_event_get_position
 
 end module wx_move_event

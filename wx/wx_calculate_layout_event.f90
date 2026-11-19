@@ -30,7 +30,7 @@ contains
     function wx_calculate_layout_event_get_rect(self) result(result_object)
         class(wxcalculatelayoutevent_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxCalculateLayoutEvent_GetRect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxCalculateLayoutEvent_GetRect(self%ptr), .true.)
     end function wx_calculate_layout_event_get_rect
 
     subroutine wx_calculate_layout_event_set_flags(self, flags)

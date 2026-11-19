@@ -11,6 +11,9 @@ module kwx_types
         procedure :: is_valid => wxobject_is_valid
     end type wxobject_t
 
+    type, extends(wxobject_t), public :: kwxaccstring_t
+    end type kwxaccstring_t
+
     type, extends(wxobject_t), public :: kwxaddremoveadaptor_t
     end type kwxaddremoveadaptor_t
 
@@ -26,6 +29,9 @@ module kwx_types
     type, extends(wxobject_t), public :: kwxdragdataobject_t
     end type kwxdragdataobject_t
 
+    type, extends(wxobject_t), public :: kwxdynamiclibrarylist_t
+    end type kwxdynamiclibrarylist_t
+
     type, extends(wxobject_t), public :: kwxgridtablebase_t
     end type kwxgridtablebase_t
 
@@ -37,6 +43,9 @@ module kwx_types
 
     type, extends(wxobject_t), public :: kwxlistviewcombopopup_t
     end type kwxlistviewcombopopup_t
+
+    type, extends(wxobject_t), public :: kwxmsaa_t
+    end type kwxmsaa_t
 
     type, extends(wxobject_t), public :: kwxobject_t
     end type kwxobject_t
@@ -209,6 +218,9 @@ module kwx_types
     type, extends(wxobject_t), public :: wxcolourdata_t
     end type wxcolourdata_t
 
+    type, extends(wxobject_t), public :: wxcolourdatabase_t
+    end type wxcolourdatabase_t
+
     type, extends(wxobject_t), public :: wxcolourpropertyvalue_t
     end type wxcolourpropertyvalue_t
 
@@ -242,14 +254,35 @@ module kwx_types
     type, extends(wxobject_t), public :: wxcriticalsectionlocker_t
     end type wxcriticalsectionlocker_t
 
+    type, extends(wxobject_t), public :: wxcursorbundle_t
+    end type wxcursorbundle_t
+
     type, extends(wxobject_t), public :: wxdc_t
     end type wxdc_t
+
+    type, extends(wxobject_t), public :: wxdcbrushchanger_t
+    end type wxdcbrushchanger_t
 
     type, extends(wxobject_t), public :: wxdcclipper_t
     end type wxdcclipper_t
 
+    type, extends(wxobject_t), public :: wxdcfontchanger_t
+    end type wxdcfontchanger_t
+
     type, extends(wxobject_t), public :: wxdcoverlay_t
     end type wxdcoverlay_t
+
+    type, extends(wxobject_t), public :: wxdcpenchanger_t
+    end type wxdcpenchanger_t
+
+    type, extends(wxobject_t), public :: wxdctextbgcolourchanger_t
+    end type wxdctextbgcolourchanger_t
+
+    type, extends(wxobject_t), public :: wxdctextbgmodechanger_t
+    end type wxdctextbgmodechanger_t
+
+    type, extends(wxobject_t), public :: wxdctextcolourchanger_t
+    end type wxdctextcolourchanger_t
 
     type, extends(wxobject_t), public :: wxdataformat_t
     end type wxdataformat_t
@@ -266,8 +299,8 @@ module kwx_types
     type, extends(wxobject_t), public :: wxdataviewcolumn_t
     end type wxdataviewcolumn_t
 
-    type, extends(wxobject_t), public :: wxdataviewctrl_t
-    end type wxdataviewctrl_t
+    type, extends(wxobject_t), public :: wxdataviewicontext_t
+    end type wxdataviewicontext_t
 
     type, extends(wxobject_t), public :: wxdataviewitem_t
     end type wxdataviewitem_t
@@ -275,17 +308,26 @@ module kwx_types
     type, extends(wxobject_t), public :: wxdataviewitemarray_t
     end type wxdataviewitemarray_t
 
-    type, extends(wxobject_t), public :: wxdataviewlistctrl_t
-    end type wxdataviewlistctrl_t
+    type, extends(wxobject_t), public :: wxdataviewitemattr_t
+    end type wxdataviewitemattr_t
 
     type, extends(wxobject_t), public :: wxdataviewmodel_t
     end type wxdataviewmodel_t
+
+    type, extends(wxobject_t), public :: wxdataviewrenderer_t
+    end type wxdataviewrenderer_t
 
     type, extends(wxobject_t), public :: wxdatespan_t
     end type wxdatespan_t
 
     type, extends(wxobject_t), public :: wxdatetime_t
     end type wxdatetime_t
+
+    type, extends(wxobject_t), public :: wxdebugreport_t
+    end type wxdebugreport_t
+
+    type, extends(wxobject_t), public :: wxdebugreportpreviewstd_t
+    end type wxdebugreportpreviewstd_t
 
     type, extends(wxobject_t), public :: wxdir_t
     end type wxdir_t
@@ -310,6 +352,9 @@ module kwx_types
 
     type, extends(wxobject_t), public :: wxdynamiclibrary_t
     end type wxdynamiclibrary_t
+
+    type, extends(wxobject_t), public :: wxdynamiclibrarydetails_t
+    end type wxdynamiclibrarydetails_t
 
     type, extends(wxobject_t), public :: wxencodingconverter_t
     end type wxencodingconverter_t
@@ -392,6 +437,9 @@ module kwx_types
     type, extends(wxobject_t), public :: wxgraphicsfont_t
     end type wxgraphicsfont_t
 
+    type, extends(wxobject_t), public :: wxgraphicsgradientstops_t
+    end type wxgraphicsgradientstops_t
+
     type, extends(wxobject_t), public :: wxgraphicsmatrix_t
     end type wxgraphicsmatrix_t
 
@@ -403,6 +451,9 @@ module kwx_types
 
     type, extends(wxobject_t), public :: wxgraphicspen_t
     end type wxgraphicspen_t
+
+    type, extends(wxobject_t), public :: wxgraphicspeninfo_t
+    end type wxgraphicspeninfo_t
 
     type, extends(wxobject_t), public :: wxgraphicsrenderer_t
     end type wxgraphicsrenderer_t
@@ -722,6 +773,9 @@ module kwx_types
     type, extends(wxobject_t), public :: wxrichtooltip_t
     end type wxrichtooltip_t
 
+    type, extends(wxobject_t), public :: wxsvgattributes_t
+    end type wxsvgattributes_t
+
     type, extends(wxobject_t), public :: wxsecretstore_t
     end type wxsecretstore_t
 
@@ -1010,12 +1064,6 @@ module kwx_types
     type, extends(wxdc_t), public :: wxautobufferedpaintdc_t
     end type wxautobufferedpaintdc_t
 
-    type, extends(wxdc_t), public :: wxbuffereddc_t
-    end type wxbuffereddc_t
-
-    type, extends(wxdc_t), public :: wxbufferedpaintdc_t
-    end type wxbufferedpaintdc_t
-
     type, extends(wxdc_t), public :: wxgcdc_t
     end type wxgcdc_t
 
@@ -1027,6 +1075,9 @@ module kwx_types
 
     type, extends(wxdc_t), public :: wxmirrordc_t
     end type wxmirrordc_t
+
+    type, extends(wxdc_t), public :: wxoverlaydc_t
+    end type wxoverlaydc_t
 
     type, extends(wxdc_t), public :: wxpostscriptdc_t
     end type wxpostscriptdc_t
@@ -1049,8 +1100,47 @@ module kwx_types
     type, extends(wxdataobject_t), public :: wxdataobjectsimple_t
     end type wxdataobjectsimple_t
 
+    type, extends(wxdataviewicontext_t), public :: wxdataviewcheckicontext_t
+    end type wxdataviewcheckicontext_t
+
+    type, extends(wxdataviewmodel_t), public :: wxdataviewindexlistmodel_t
+    end type wxdataviewindexlistmodel_t
+
     type, extends(wxdataviewmodel_t), public :: wxdataviewliststore_t
     end type wxdataviewliststore_t
+
+    type, extends(wxdataviewmodel_t), public :: wxdataviewtreestore_t
+    end type wxdataviewtreestore_t
+
+    type, extends(wxdataviewmodel_t), public :: wxdataviewvirtuallistmodel_t
+    end type wxdataviewvirtuallistmodel_t
+
+    type, extends(wxdataviewrenderer_t), public :: wxdataviewbitmaprenderer_t
+    end type wxdataviewbitmaprenderer_t
+
+    type, extends(wxdataviewrenderer_t), public :: wxdataviewcustomrenderer_t
+    end type wxdataviewcustomrenderer_t
+
+    type, extends(wxdataviewrenderer_t), public :: wxdataviewdaterenderer_t
+    end type wxdataviewdaterenderer_t
+
+    type, extends(wxdataviewrenderer_t), public :: wxdataviewicontextrenderer_t
+    end type wxdataviewicontextrenderer_t
+
+    type, extends(wxdataviewrenderer_t), public :: wxdataviewprogressrenderer_t
+    end type wxdataviewprogressrenderer_t
+
+    type, extends(wxdataviewrenderer_t), public :: wxdataviewtextrenderer_t
+    end type wxdataviewtextrenderer_t
+
+    type, extends(wxdataviewrenderer_t), public :: wxdataviewtogglerenderer_t
+    end type wxdataviewtogglerenderer_t
+
+    type, extends(wxdebugreport_t), public :: wxdebugreportcompress_t
+    end type wxdebugreportcompress_t
+
+    type, extends(wxdoctemplate_t), public :: kwxdoctemplate_t
+    end type kwxdoctemplate_t
 
     type, extends(wxdroptarget_t), public :: kwxdroptarget_t
     end type kwxdroptarget_t
@@ -1169,6 +1259,9 @@ module kwx_types
     type, extends(wxevent_t), public :: wxsyscolourchangedevent_t
     end type wxsyscolourchangedevent_t
 
+    type, extends(wxevent_t), public :: wxsysmetricchangedevent_t
+    end type wxsysmetricchangedevent_t
+
     type, extends(wxevent_t), public :: wxtaskbariconevent_t
     end type wxtaskbariconevent_t
 
@@ -1267,6 +1360,9 @@ module kwx_types
 
     type, extends(wxgdiobject_t), public :: wxregion_t
     end type wxregion_t
+
+    type, extends(wxgraphicscontext_t), public :: wxsvggraphicscontext_t
+    end type wxsvggraphicscontext_t
 
     type, extends(wxgraphicsobject_t), public :: wxgraphicsbitmap_t
     end type wxgraphicsbitmap_t
@@ -1445,6 +1541,9 @@ module kwx_types
     type, extends(wxrichtextobject_t), public :: wxrichtextimage_t
     end type wxrichtextimage_t
 
+    type, extends(wxrichtextobject_t), public :: wxrichtextplaintext_t
+    end type wxrichtextplaintext_t
+
     type, extends(wxrichtextstyledefinition_t), public :: wxrichtextboxstyledefinition_t
     end type wxrichtextboxstyledefinition_t
 
@@ -1514,11 +1613,17 @@ module kwx_types
     type, extends(wxconnection_t), public :: kwxconnection_t
     end type kwxconnection_t
 
+    type, extends(wxmemorydc_t), public :: wxbuffereddc_t
+    end type wxbuffereddc_t
+
     type, extends(wxwindowdc_t), public :: wxclientdc_t
     end type wxclientdc_t
 
     type, extends(wxwindowdc_t), public :: wxpaintdc_t
     end type wxpaintdc_t
+
+    type, extends(wxdataobjectcomposite_t), public :: wxurldataobject_t
+    end type wxurldataobject_t
 
     type, extends(wxdataobjectsimple_t), public :: wxbitmapdataobject_t
     end type wxbitmapdataobject_t
@@ -1532,11 +1637,29 @@ module kwx_types
     type, extends(wxdataobjectsimple_t), public :: wxhtmldataobject_t
     end type wxhtmldataobject_t
 
+    type, extends(wxdataobjectsimple_t), public :: wxmetafiledataobject_t
+    end type wxmetafiledataobject_t
+
     type, extends(wxdataobjectsimple_t), public :: wxrichtextbufferdataobject_t
     end type wxrichtextbufferdataobject_t
 
     type, extends(wxdataobjectsimple_t), public :: wxtextdataobject_t
     end type wxtextdataobject_t
+
+    type, extends(wxdataobjectsimple_t), public :: wxvirtualfiledataobject_t
+    end type wxvirtualfiledataobject_t
+
+    type, extends(wxdataviewcustomrenderer_t), public :: wxdataviewcheckicontextrenderer_t
+    end type wxdataviewcheckicontextrenderer_t
+
+    type, extends(wxdataviewcustomrenderer_t), public :: wxdataviewchoicerenderer_t
+    end type wxdataviewchoicerenderer_t
+
+    type, extends(wxdataviewcustomrenderer_t), public :: wxdataviewspinrenderer_t
+    end type wxdataviewspinrenderer_t
+
+    type, extends(wxdebugreportcompress_t), public :: wxdebugreportupload_t
+    end type wxdebugreportupload_t
 
     type, extends(wxfiledroptarget_t), public :: kwxfiledroptarget_t
     end type kwxfiledroptarget_t
@@ -1778,6 +1901,9 @@ module kwx_types
     type, extends(wxrichtextfieldtypestandard_t), public :: kwxrichtextfieldtypestandard_t
     end type kwxrichtextfieldtypestandard_t
 
+    type, extends(wxrichtextcompositeobject_t), public :: wxrichtextparagraph_t
+    end type wxrichtextparagraph_t
+
     type, extends(wxrichtextcompositeobject_t), public :: wxrichtextparagraphlayoutbox_t
     end type wxrichtextparagraphlayoutbox_t
 
@@ -1820,6 +1946,9 @@ module kwx_types
     type, extends(wxinputstream_t), public :: wxsocketinputstream_t
     end type wxsocketinputstream_t
 
+    type, extends(wxinputstream_t), public :: wxstringinputstream_t
+    end type wxstringinputstream_t
+
     type, extends(wxoutputstream_t), public :: wxcountingoutputstream_t
     end type wxcountingoutputstream_t
 
@@ -1844,11 +1973,23 @@ module kwx_types
     type, extends(wxoutputstream_t), public :: wxtempfileoutputstream_t
     end type wxtempfileoutputstream_t
 
+    type, extends(wxbuffereddc_t), public :: wxbufferedpaintdc_t
+    end type wxbufferedpaintdc_t
+
+    type, extends(wxdataviewchoicerenderer_t), public :: wxdataviewchoicebyindexrenderer_t
+    end type wxdataviewchoicebyindexrenderer_t
+
+    type, extends(wxdebugreportupload_t), public :: kwxdebugreportupload_t
+    end type kwxdebugreportupload_t
+
     type, extends(wxnotifyevent_t), public :: wxauitoolbarevent_t
     end type wxauitoolbarevent_t
 
     type, extends(wxnotifyevent_t), public :: wxbookctrlevent_t
     end type wxbookctrlevent_t
+
+    type, extends(wxnotifyevent_t), public :: wxdataviewevent_t
+    end type wxdataviewevent_t
 
     type, extends(wxnotifyevent_t), public :: wxgridevent_t
     end type wxgridevent_t
@@ -1948,6 +2089,9 @@ module kwx_types
 
     type, extends(wxcontrol_t), public :: wxcomboctrl_t
     end type wxcomboctrl_t
+
+    type, extends(wxcontrol_t), public :: wxdataviewctrl_t
+    end type wxdataviewctrl_t
 
     type, extends(wxcontrol_t), public :: wxdatepickerctrl_t
     end type wxdatepickerctrl_t
@@ -2225,6 +2369,12 @@ module kwx_types
     type, extends(wxcomboctrl_t), public :: wxrichtextstylecomboctrl_t
     end type wxrichtextstylecomboctrl_t
 
+    type, extends(wxdataviewctrl_t), public :: wxdataviewlistctrl_t
+    end type wxdataviewlistctrl_t
+
+    type, extends(wxdataviewctrl_t), public :: wxdataviewtreectrl_t
+    end type wxdataviewtreectrl_t
+
     type, extends(wxheaderctrl_t), public :: wxheaderctrlsimple_t
     end type wxheaderctrlsimple_t
 
@@ -2273,6 +2423,9 @@ module kwx_types
     type, extends(wxpreviewcontrolbar_t), public :: kwxpreviewcontrolbar_t
     end type kwxpreviewcontrolbar_t
 
+    type, extends(wxscrolledwindow_t), public :: kwxcustombackgroundwindow_t
+    end type kwxcustombackgroundwindow_t
+
     type, extends(wxscrolledwindow_t), public :: wxglcanvas_t
     end type wxglcanvas_t
 
@@ -2299,6 +2452,9 @@ module kwx_types
 
     type, extends(wxpopuptransientwindow_t), public :: wxtipwindow_t
     end type wxtipwindow_t
+
+    type, extends(wxdialog_t), public :: kwxdialog_t
+    end type kwxdialog_t
 
     type, extends(wxdialog_t), public :: wxcolourdialog_t
     end type wxcolourdialog_t
@@ -2378,6 +2534,9 @@ module kwx_types
     type, extends(wxdialog_t), public :: wxwizard_t
     end type wxwizard_t
 
+    type, extends(wxframe_t), public :: kwxframe_t
+    end type kwxframe_t
+
     type, extends(wxframe_t), public :: wxauifloatingframe_t
     end type wxauifloatingframe_t
 
@@ -2453,11 +2612,23 @@ module kwx_types
     type, extends(wxvlistbox_t), public :: wxhtmllistbox_t
     end type wxhtmllistbox_t
 
+    type, extends(wxwizardpagesimple_t), public :: kwxwizardpagesimple_t
+    end type kwxwizardpagesimple_t
+
     type, extends(wxmessagedialog_t), public :: wxrichmessagedialog_t
     end type wxrichmessagedialog_t
 
     type, extends(wxpropertysheetdialog_t), public :: wxrichtextformattingdialog_t
     end type wxrichtextformattingdialog_t
+
+    type, extends(wxtextentrydialog_t), public :: wxpasswordentrydialog_t
+    end type wxpasswordentrydialog_t
+
+    type, extends(wxauimdichildframe_t), public :: kwxdocauichildframe_t
+    end type kwxdocauichildframe_t
+
+    type, extends(wxauimdiparentframe_t), public :: kwxdocauiparentframe_t
+    end type kwxdocauiparentframe_t
 
     type, extends(wxmdichildframe_t), public :: wxdocmdichildframe_t
     end type wxdocmdichildframe_t
@@ -2480,15 +2651,18 @@ module kwx_types
     type, extends(wxrichtextformattingdialog_t), public :: wxrichtextobjectpropertiesdialog_t
     end type wxrichtextobjectpropertiesdialog_t
 
+    public :: kwxaccstring_from_ptr
     public :: kwxaddremoveadaptor_from_ptr
     public :: kwxauicallbackresult_from_ptr
     public :: kwxauiorphanedpage_from_ptr
     public :: kwxcmdlinedesc_from_ptr
     public :: kwxdragdataobject_from_ptr
+    public :: kwxdynamiclibrarylist_from_ptr
     public :: kwxgridtablebase_from_ptr
     public :: kwxhtmlevent_from_ptr
     public :: kwxhtmlwindow_from_ptr
     public :: kwxlistviewcombopopup_from_ptr
+    public :: kwxmsaa_from_ptr
     public :: kwxobject_from_ptr
     public :: kwxprintout_from_ptr
     public :: kwxtreectrlcombopopup_from_ptr
@@ -2546,6 +2720,7 @@ module kwx_types
     public :: wxcmdlineparser_from_ptr
     public :: wxcolour_from_ptr
     public :: wxcolourdata_from_ptr
+    public :: wxcolourdatabase_from_ptr
     public :: wxcolourpropertyvalue_from_ptr
     public :: wxcombopopup_from_ptr
     public :: wxcommand_from_ptr
@@ -2557,21 +2732,31 @@ module kwx_types
     public :: wxcontexthelp_from_ptr
     public :: wxcriticalsection_from_ptr
     public :: wxcriticalsectionlocker_from_ptr
+    public :: wxcursorbundle_from_ptr
     public :: wxdc_from_ptr
+    public :: wxdcbrushchanger_from_ptr
     public :: wxdcclipper_from_ptr
+    public :: wxdcfontchanger_from_ptr
     public :: wxdcoverlay_from_ptr
+    public :: wxdcpenchanger_from_ptr
+    public :: wxdctextbgcolourchanger_from_ptr
+    public :: wxdctextbgmodechanger_from_ptr
+    public :: wxdctextcolourchanger_from_ptr
     public :: wxdataformat_from_ptr
     public :: wxdatainputstream_from_ptr
     public :: wxdataobject_from_ptr
     public :: wxdataoutputstream_from_ptr
     public :: wxdataviewcolumn_from_ptr
-    public :: wxdataviewctrl_from_ptr
+    public :: wxdataviewicontext_from_ptr
     public :: wxdataviewitem_from_ptr
     public :: wxdataviewitemarray_from_ptr
-    public :: wxdataviewlistctrl_from_ptr
+    public :: wxdataviewitemattr_from_ptr
     public :: wxdataviewmodel_from_ptr
+    public :: wxdataviewrenderer_from_ptr
     public :: wxdatespan_from_ptr
     public :: wxdatetime_from_ptr
+    public :: wxdebugreport_from_ptr
+    public :: wxdebugreportpreviewstd_from_ptr
     public :: wxdir_from_ptr
     public :: wxdirtraverser_from_ptr
     public :: wxdisplay_from_ptr
@@ -2580,6 +2765,7 @@ module kwx_types
     public :: wxdropsource_from_ptr
     public :: wxdroptarget_from_ptr
     public :: wxdynamiclibrary_from_ptr
+    public :: wxdynamiclibrarydetails_from_ptr
     public :: wxencodingconverter_from_ptr
     public :: wxevent_from_ptr
     public :: wxeventfilter_from_ptr
@@ -2607,10 +2793,12 @@ module kwx_types
     public :: wxgraphicsbrush_from_ptr
     public :: wxgraphicscontext_from_ptr
     public :: wxgraphicsfont_from_ptr
+    public :: wxgraphicsgradientstops_from_ptr
     public :: wxgraphicsmatrix_from_ptr
     public :: wxgraphicsobject_from_ptr
     public :: wxgraphicspath_from_ptr
     public :: wxgraphicspen_from_ptr
+    public :: wxgraphicspeninfo_from_ptr
     public :: wxgraphicsrenderer_from_ptr
     public :: wxgridblockcoordsarray_from_ptr
     public :: wxgridcellattr_from_ptr
@@ -2717,6 +2905,7 @@ module kwx_types
     public :: wxrichtextstyledefinition_from_ptr
     public :: wxrichtextstylesheet_from_ptr
     public :: wxrichtooltip_from_ptr
+    public :: wxsvgattributes_from_ptr
     public :: wxsecretstore_from_ptr
     public :: wxsecretvalue_from_ptr
     public :: wxsemaphore_from_ptr
@@ -2813,12 +3002,11 @@ module kwx_types
     public :: wxconnection_from_ptr
     public :: wxddeconnection_from_ptr
     public :: wxautobufferedpaintdc_from_ptr
-    public :: wxbuffereddc_from_ptr
-    public :: wxbufferedpaintdc_from_ptr
     public :: wxgcdc_from_ptr
     public :: wxmemorydc_from_ptr
     public :: wxmetafiledc_from_ptr
     public :: wxmirrordc_from_ptr
+    public :: wxoverlaydc_from_ptr
     public :: wxpostscriptdc_from_ptr
     public :: wxprinterdc_from_ptr
     public :: wxsvgfiledc_from_ptr
@@ -2826,7 +3014,20 @@ module kwx_types
     public :: wxwindowdc_from_ptr
     public :: wxdataobjectcomposite_from_ptr
     public :: wxdataobjectsimple_from_ptr
+    public :: wxdataviewcheckicontext_from_ptr
+    public :: wxdataviewindexlistmodel_from_ptr
     public :: wxdataviewliststore_from_ptr
+    public :: wxdataviewtreestore_from_ptr
+    public :: wxdataviewvirtuallistmodel_from_ptr
+    public :: wxdataviewbitmaprenderer_from_ptr
+    public :: wxdataviewcustomrenderer_from_ptr
+    public :: wxdataviewdaterenderer_from_ptr
+    public :: wxdataviewicontextrenderer_from_ptr
+    public :: wxdataviewprogressrenderer_from_ptr
+    public :: wxdataviewtextrenderer_from_ptr
+    public :: wxdataviewtogglerenderer_from_ptr
+    public :: wxdebugreportcompress_from_ptr
+    public :: kwxdoctemplate_from_ptr
     public :: kwxdroptarget_from_ptr
     public :: wxfiledroptarget_from_ptr
     public :: wxprivatedroptarget_from_ptr
@@ -2866,6 +3067,7 @@ module kwx_types
     public :: wxsizeevent_from_ptr
     public :: wxsocketevent_from_ptr
     public :: wxsyscolourchangedevent_from_ptr
+    public :: wxsysmetricchangedevent_from_ptr
     public :: wxtaskbariconevent_from_ptr
     public :: wxthreadevent_from_ptr
     public :: wxtimerevent_from_ptr
@@ -2899,6 +3101,7 @@ module kwx_types
     public :: wxpalette_from_ptr
     public :: wxpen_from_ptr
     public :: wxregion_from_ptr
+    public :: wxsvggraphicscontext_from_ptr
     public :: wxgraphicsbitmap_from_ptr
     public :: wxgridcelleditor_from_ptr
     public :: wxgridcellrenderer_from_ptr
@@ -2958,6 +3161,7 @@ module kwx_types
     public :: wxrichtextxmlhandler_from_ptr
     public :: wxrichtextcompositeobject_from_ptr
     public :: wxrichtextimage_from_ptr
+    public :: wxrichtextplaintext_from_ptr
     public :: wxrichtextboxstyledefinition_from_ptr
     public :: wxrichtextcharacterstyledefinition_from_ptr
     public :: wxrichtextparagraphstyledefinition_from_ptr
@@ -2981,14 +3185,22 @@ module kwx_types
     public :: kwxclient_from_ptr
     public :: kwxgridcellattrproviderhook_from_ptr
     public :: kwxconnection_from_ptr
+    public :: wxbuffereddc_from_ptr
     public :: wxclientdc_from_ptr
     public :: wxpaintdc_from_ptr
+    public :: wxurldataobject_from_ptr
     public :: wxbitmapdataobject_from_ptr
     public :: wxcustomdataobject_from_ptr
     public :: wxfiledataobject_from_ptr
     public :: wxhtmldataobject_from_ptr
+    public :: wxmetafiledataobject_from_ptr
     public :: wxrichtextbufferdataobject_from_ptr
     public :: wxtextdataobject_from_ptr
+    public :: wxvirtualfiledataobject_from_ptr
+    public :: wxdataviewcheckicontextrenderer_from_ptr
+    public :: wxdataviewchoicerenderer_from_ptr
+    public :: wxdataviewspinrenderer_from_ptr
+    public :: wxdebugreportupload_from_ptr
     public :: kwxfiledroptarget_from_ptr
     public :: kwxtextdroptarget_from_ptr
     public :: wxcalendarevent_from_ptr
@@ -3069,6 +3281,7 @@ module kwx_types
     public :: wxsystemcolourproperty_from_ptr
     public :: wximagefileproperty_from_ptr
     public :: kwxrichtextfieldtypestandard_from_ptr
+    public :: wxrichtextparagraph_from_ptr
     public :: wxrichtextparagraphlayoutbox_from_ptr
     public :: wxrichtextliststyledefinition_from_ptr
     public :: kwxserver_from_ptr
@@ -3083,6 +3296,7 @@ module kwx_types
     public :: wxfilterinputstream_from_ptr
     public :: wxmemoryinputstream_from_ptr
     public :: wxsocketinputstream_from_ptr
+    public :: wxstringinputstream_from_ptr
     public :: wxcountingoutputstream_from_ptr
     public :: wxffileoutputstream_from_ptr
     public :: wxfileoutputstream_from_ptr
@@ -3091,8 +3305,12 @@ module kwx_types
     public :: wxsocketoutputstream_from_ptr
     public :: wxstringoutputstream_from_ptr
     public :: wxtempfileoutputstream_from_ptr
+    public :: wxbufferedpaintdc_from_ptr
+    public :: wxdataviewchoicebyindexrenderer_from_ptr
+    public :: kwxdebugreportupload_from_ptr
     public :: wxauitoolbarevent_from_ptr
     public :: wxbookctrlevent_from_ptr
+    public :: wxdataviewevent_from_ptr
     public :: wxgridevent_from_ptr
     public :: wxgridrangeselectevent_from_ptr
     public :: wxgridsizeevent_from_ptr
@@ -3126,6 +3344,7 @@ module kwx_types
     public :: wxcollapsiblepane_from_ptr
     public :: wxcolorpickerctrl_from_ptr
     public :: wxcomboctrl_from_ptr
+    public :: wxdataviewctrl_from_ptr
     public :: wxdatepickerctrl_from_ptr
     public :: wxdrawcontrol_from_ptr
     public :: wxfilectrl_from_ptr
@@ -3218,6 +3437,8 @@ module kwx_types
     public :: wxgenericcomboctrl_from_ptr
     public :: wxownerdrawncombobox_from_ptr
     public :: wxrichtextstylecomboctrl_from_ptr
+    public :: wxdataviewlistctrl_from_ptr
+    public :: wxdataviewtreectrl_from_ptr
     public :: wxheaderctrlsimple_from_ptr
     public :: wxchecklistbox_from_ptr
     public :: wxlistview_from_ptr
@@ -3234,6 +3455,7 @@ module kwx_types
     public :: wxbitmaptogglebutton_from_ptr
     public :: wxtoolbar_from_ptr
     public :: kwxpreviewcontrolbar_from_ptr
+    public :: kwxcustombackgroundwindow_from_ptr
     public :: wxglcanvas_from_ptr
     public :: wxgrid_from_ptr
     public :: wxhtmlwindow_from_ptr
@@ -3243,6 +3465,7 @@ module kwx_types
     public :: wxwizardpagesimple_from_ptr
     public :: kwxpopuptransientwindow_from_ptr
     public :: wxtipwindow_from_ptr
+    public :: kwxdialog_from_ptr
     public :: wxcolourdialog_from_ptr
     public :: wxcredentialentrydialog_from_ptr
     public :: wxdirdialog_from_ptr
@@ -3269,6 +3492,7 @@ module kwx_types
     public :: wxsymbolpickerdialog_from_ptr
     public :: wxtextentrydialog_from_ptr
     public :: wxwizard_from_ptr
+    public :: kwxframe_from_ptr
     public :: wxauifloatingframe_from_ptr
     public :: wxauimdichildframe_from_ptr
     public :: wxauimdiparentframe_from_ptr
@@ -3294,8 +3518,12 @@ module kwx_types
     public :: wxrearrangelist_from_ptr
     public :: kwxvlistbox_from_ptr
     public :: wxhtmllistbox_from_ptr
+    public :: kwxwizardpagesimple_from_ptr
     public :: wxrichmessagedialog_from_ptr
     public :: wxrichtextformattingdialog_from_ptr
+    public :: wxpasswordentrydialog_from_ptr
+    public :: kwxdocauichildframe_from_ptr
+    public :: kwxdocauiparentframe_from_ptr
     public :: wxdocmdichildframe_from_ptr
     public :: wxdocmdiparentframe_from_ptr
     public :: kwxpreviewframe_from_ptr
@@ -3319,6 +3547,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxobject_from_ptr
+
+    function kwxaccstring_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(kwxaccstring_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function kwxaccstring_from_ptr
 
     function kwxaddremoveadaptor_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -3360,6 +3596,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function kwxdragdataobject_from_ptr
 
+    function kwxdynamiclibrarylist_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(kwxdynamiclibrarylist_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function kwxdynamiclibrarylist_from_ptr
+
     function kwxgridtablebase_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -3391,6 +3635,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function kwxlistviewcombopopup_from_ptr
+
+    function kwxmsaa_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(kwxmsaa_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function kwxmsaa_from_ptr
 
     function kwxobject_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -3848,6 +4100,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxcolourdata_from_ptr
 
+    function wxcolourdatabase_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxcolourdatabase_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxcolourdatabase_from_ptr
+
     function wxcolourpropertyvalue_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -3936,6 +4196,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxcriticalsectionlocker_from_ptr
 
+    function wxcursorbundle_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxcursorbundle_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxcursorbundle_from_ptr
+
     function wxdc_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -3943,6 +4211,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxdc_from_ptr
+
+    function wxdcbrushchanger_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdcbrushchanger_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdcbrushchanger_from_ptr
 
     function wxdcclipper_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -3952,6 +4228,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxdcclipper_from_ptr
 
+    function wxdcfontchanger_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdcfontchanger_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdcfontchanger_from_ptr
+
     function wxdcoverlay_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -3959,6 +4243,38 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxdcoverlay_from_ptr
+
+    function wxdcpenchanger_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdcpenchanger_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdcpenchanger_from_ptr
+
+    function wxdctextbgcolourchanger_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdctextbgcolourchanger_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdctextbgcolourchanger_from_ptr
+
+    function wxdctextbgmodechanger_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdctextbgmodechanger_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdctextbgmodechanger_from_ptr
+
+    function wxdctextcolourchanger_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdctextcolourchanger_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdctextcolourchanger_from_ptr
 
     function wxdataformat_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -4000,13 +4316,13 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxdataviewcolumn_from_ptr
 
-    function wxdataviewctrl_from_ptr(ptr, owned) result(obj)
+    function wxdataviewicontext_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
-        type(wxdataviewctrl_t) :: obj
+        type(wxdataviewicontext_t) :: obj
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
-    end function wxdataviewctrl_from_ptr
+    end function wxdataviewicontext_from_ptr
 
     function wxdataviewitem_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -4024,13 +4340,13 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxdataviewitemarray_from_ptr
 
-    function wxdataviewlistctrl_from_ptr(ptr, owned) result(obj)
+    function wxdataviewitemattr_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
-        type(wxdataviewlistctrl_t) :: obj
+        type(wxdataviewitemattr_t) :: obj
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
-    end function wxdataviewlistctrl_from_ptr
+    end function wxdataviewitemattr_from_ptr
 
     function wxdataviewmodel_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -4039,6 +4355,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxdataviewmodel_from_ptr
+
+    function wxdataviewrenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewrenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewrenderer_from_ptr
 
     function wxdatespan_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -4055,6 +4379,22 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxdatetime_from_ptr
+
+    function wxdebugreport_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdebugreport_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdebugreport_from_ptr
+
+    function wxdebugreportpreviewstd_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdebugreportpreviewstd_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdebugreportpreviewstd_from_ptr
 
     function wxdir_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -4119,6 +4459,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxdynamiclibrary_from_ptr
+
+    function wxdynamiclibrarydetails_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdynamiclibrarydetails_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdynamiclibrarydetails_from_ptr
 
     function wxencodingconverter_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -4336,6 +4684,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxgraphicsfont_from_ptr
 
+    function wxgraphicsgradientstops_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxgraphicsgradientstops_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxgraphicsgradientstops_from_ptr
+
     function wxgraphicsmatrix_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -4367,6 +4723,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxgraphicspen_from_ptr
+
+    function wxgraphicspeninfo_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxgraphicspeninfo_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxgraphicspeninfo_from_ptr
 
     function wxgraphicsrenderer_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -5216,6 +5580,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxrichtooltip_from_ptr
 
+    function wxsvgattributes_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxsvgattributes_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxsvgattributes_from_ptr
+
     function wxsecretstore_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -5984,22 +6356,6 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxautobufferedpaintdc_from_ptr
 
-    function wxbuffereddc_from_ptr(ptr, owned) result(obj)
-        type(c_ptr), intent(in), value :: ptr
-        logical, intent(in), optional :: owned
-        type(wxbuffereddc_t) :: obj
-        obj%ptr = ptr
-        if (present(owned)) obj%owned = owned
-    end function wxbuffereddc_from_ptr
-
-    function wxbufferedpaintdc_from_ptr(ptr, owned) result(obj)
-        type(c_ptr), intent(in), value :: ptr
-        logical, intent(in), optional :: owned
-        type(wxbufferedpaintdc_t) :: obj
-        obj%ptr = ptr
-        if (present(owned)) obj%owned = owned
-    end function wxbufferedpaintdc_from_ptr
-
     function wxgcdc_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -6031,6 +6387,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxmirrordc_from_ptr
+
+    function wxoverlaydc_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxoverlaydc_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxoverlaydc_from_ptr
 
     function wxpostscriptdc_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -6088,6 +6452,22 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxdataobjectsimple_from_ptr
 
+    function wxdataviewcheckicontext_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewcheckicontext_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewcheckicontext_from_ptr
+
+    function wxdataviewindexlistmodel_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewindexlistmodel_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewindexlistmodel_from_ptr
+
     function wxdataviewliststore_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -6095,6 +6475,94 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxdataviewliststore_from_ptr
+
+    function wxdataviewtreestore_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewtreestore_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewtreestore_from_ptr
+
+    function wxdataviewvirtuallistmodel_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewvirtuallistmodel_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewvirtuallistmodel_from_ptr
+
+    function wxdataviewbitmaprenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewbitmaprenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewbitmaprenderer_from_ptr
+
+    function wxdataviewcustomrenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewcustomrenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewcustomrenderer_from_ptr
+
+    function wxdataviewdaterenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewdaterenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewdaterenderer_from_ptr
+
+    function wxdataviewicontextrenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewicontextrenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewicontextrenderer_from_ptr
+
+    function wxdataviewprogressrenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewprogressrenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewprogressrenderer_from_ptr
+
+    function wxdataviewtextrenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewtextrenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewtextrenderer_from_ptr
+
+    function wxdataviewtogglerenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewtogglerenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewtogglerenderer_from_ptr
+
+    function wxdebugreportcompress_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdebugreportcompress_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdebugreportcompress_from_ptr
+
+    function kwxdoctemplate_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(kwxdoctemplate_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function kwxdoctemplate_from_ptr
 
     function kwxdroptarget_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -6408,6 +6876,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxsyscolourchangedevent_from_ptr
 
+    function wxsysmetricchangedevent_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxsysmetricchangedevent_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxsysmetricchangedevent_from_ptr
+
     function wxtaskbariconevent_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -6671,6 +7147,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxregion_from_ptr
+
+    function wxsvggraphicscontext_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxsvggraphicscontext_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxsvggraphicscontext_from_ptr
 
     function wxgraphicsbitmap_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -7144,6 +7628,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxrichtextimage_from_ptr
 
+    function wxrichtextplaintext_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxrichtextplaintext_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxrichtextplaintext_from_ptr
+
     function wxrichtextboxstyledefinition_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -7328,6 +7820,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function kwxconnection_from_ptr
 
+    function wxbuffereddc_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxbuffereddc_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxbuffereddc_from_ptr
+
     function wxclientdc_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -7343,6 +7843,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxpaintdc_from_ptr
+
+    function wxurldataobject_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxurldataobject_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxurldataobject_from_ptr
 
     function wxbitmapdataobject_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -7376,6 +7884,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxhtmldataobject_from_ptr
 
+    function wxmetafiledataobject_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxmetafiledataobject_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxmetafiledataobject_from_ptr
+
     function wxrichtextbufferdataobject_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -7391,6 +7907,46 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxtextdataobject_from_ptr
+
+    function wxvirtualfiledataobject_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxvirtualfiledataobject_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxvirtualfiledataobject_from_ptr
+
+    function wxdataviewcheckicontextrenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewcheckicontextrenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewcheckicontextrenderer_from_ptr
+
+    function wxdataviewchoicerenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewchoicerenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewchoicerenderer_from_ptr
+
+    function wxdataviewspinrenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewspinrenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewspinrenderer_from_ptr
+
+    function wxdebugreportupload_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdebugreportupload_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdebugreportupload_from_ptr
 
     function kwxfiledroptarget_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -8032,6 +8588,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function kwxrichtextfieldtypestandard_from_ptr
 
+    function wxrichtextparagraph_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxrichtextparagraph_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxrichtextparagraph_from_ptr
+
     function wxrichtextparagraphlayoutbox_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -8144,6 +8708,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxsocketinputstream_from_ptr
 
+    function wxstringinputstream_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxstringinputstream_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxstringinputstream_from_ptr
+
     function wxcountingoutputstream_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -8208,6 +8780,30 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxtempfileoutputstream_from_ptr
 
+    function wxbufferedpaintdc_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxbufferedpaintdc_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxbufferedpaintdc_from_ptr
+
+    function wxdataviewchoicebyindexrenderer_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewchoicebyindexrenderer_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewchoicebyindexrenderer_from_ptr
+
+    function kwxdebugreportupload_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(kwxdebugreportupload_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function kwxdebugreportupload_from_ptr
+
     function wxauitoolbarevent_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -8223,6 +8819,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxbookctrlevent_from_ptr
+
+    function wxdataviewevent_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewevent_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewevent_from_ptr
 
     function wxgridevent_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -8487,6 +9091,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxcomboctrl_from_ptr
+
+    function wxdataviewctrl_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewctrl_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewctrl_from_ptr
 
     function wxdatepickerctrl_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -9224,6 +9836,22 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxrichtextstylecomboctrl_from_ptr
 
+    function wxdataviewlistctrl_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewlistctrl_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewlistctrl_from_ptr
+
+    function wxdataviewtreectrl_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxdataviewtreectrl_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxdataviewtreectrl_from_ptr
+
     function wxheaderctrlsimple_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -9352,6 +9980,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function kwxpreviewcontrolbar_from_ptr
 
+    function kwxcustombackgroundwindow_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(kwxcustombackgroundwindow_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function kwxcustombackgroundwindow_from_ptr
+
     function wxglcanvas_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -9423,6 +10059,14 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxtipwindow_from_ptr
+
+    function kwxdialog_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(kwxdialog_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function kwxdialog_from_ptr
 
     function wxcolourdialog_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
@@ -9632,6 +10276,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxwizard_from_ptr
 
+    function kwxframe_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(kwxframe_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function kwxframe_from_ptr
+
     function wxauifloatingframe_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -9832,6 +10484,14 @@ contains
         if (present(owned)) obj%owned = owned
     end function wxhtmllistbox_from_ptr
 
+    function kwxwizardpagesimple_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(kwxwizardpagesimple_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function kwxwizardpagesimple_from_ptr
+
     function wxrichmessagedialog_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr
         logical, intent(in), optional :: owned
@@ -9847,6 +10507,30 @@ contains
         obj%ptr = ptr
         if (present(owned)) obj%owned = owned
     end function wxrichtextformattingdialog_from_ptr
+
+    function wxpasswordentrydialog_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(wxpasswordentrydialog_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function wxpasswordentrydialog_from_ptr
+
+    function kwxdocauichildframe_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(kwxdocauichildframe_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function kwxdocauichildframe_from_ptr
+
+    function kwxdocauiparentframe_from_ptr(ptr, owned) result(obj)
+        type(c_ptr), intent(in), value :: ptr
+        logical, intent(in), optional :: owned
+        type(kwxdocauiparentframe_t) :: obj
+        obj%ptr = ptr
+        if (present(owned)) obj%owned = owned
+    end function kwxdocauiparentframe_from_ptr
 
     function wxdocmdichildframe_from_ptr(ptr, owned) result(obj)
         type(c_ptr), intent(in), value :: ptr

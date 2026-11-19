@@ -7,6 +7,7 @@ module wx_caret
     private
 
     public :: wx_caret_create
+    public :: wx_caret_delete
     public :: wx_caret_get_blink_time
     public :: wx_caret_get_position
     public :: wx_caret_get_size
@@ -30,6 +31,15 @@ contains
         result_object%owned = .true.
     end function wx_caret_create
 
+    subroutine wx_caret_delete(self)
+        class(wxcaret_t), intent(inout) :: self
+        if (self%owned .and. c_associated(self%ptr)) then
+            call wxCaret_Delete(self%ptr)
+        end if
+        self%ptr = c_null_ptr
+        self%owned = .false.
+    end subroutine wx_caret_delete
+
     function wx_caret_get_blink_time() result(result_value)
         integer(c_int) :: result_value
         result_value = wxCaret_GetBlinkTime()
@@ -38,13 +48,13 @@ contains
     function wx_caret_get_position(self) result(result_object)
         class(wxcaret_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxCaret_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxCaret_GetPosition(self%ptr), .true.)
     end function wx_caret_get_position
 
     function wx_caret_get_size(self) result(result_object)
         class(wxcaret_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxCaret_GetSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxCaret_GetSize(self%ptr), .true.)
     end function wx_caret_get_size
 
     function wx_caret_get_window(self) result(result_object)

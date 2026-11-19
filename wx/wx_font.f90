@@ -82,7 +82,7 @@ contains
     function wx_font_get_pixel_size(self) result(result_object)
         class(wxfont_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxFont_GetPixelSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxFont_GetPixelSize(self%ptr), .true.)
     end function wx_font_get_pixel_size
 
     function wx_font_is_using_size_in_pixels(self) result(result_value)
@@ -243,50 +243,50 @@ contains
     function wx_font_bold(self) result(result_object)
         class(wxfont_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxFont_Bold(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxFont_Bold(self%ptr), .true.)
     end function wx_font_bold
 
     function wx_font_italic(self) result(result_object)
         class(wxfont_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxFont_Italic(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxFont_Italic(self%ptr), .true.)
     end function wx_font_italic
 
     function wx_font_underlined(self) result(result_object)
         class(wxfont_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxFont_Underlined(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxFont_Underlined(self%ptr), .true.)
     end function wx_font_underlined
 
     function wx_font_strikethrough(self) result(result_object)
         class(wxfont_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxFont_Strikethrough(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxFont_Strikethrough(self%ptr), .true.)
     end function wx_font_strikethrough
 
     function wx_font_larger(self) result(result_object)
         class(wxfont_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxFont_Larger(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxFont_Larger(self%ptr), .true.)
     end function wx_font_larger
 
     function wx_font_smaller(self) result(result_object)
         class(wxfont_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxFont_Smaller(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxFont_Smaller(self%ptr), .true.)
     end function wx_font_smaller
 
     function wx_font_scaled(self, factor) result(result_object)
         class(wxfont_t), intent(in) :: self
         real(c_float), intent(in) :: factor
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxFont_Scaled(self%ptr, factor), .false.)
+        result_object = wxfont_from_ptr(wxFont_Scaled(self%ptr, factor), .true.)
     end function wx_font_scaled
 
     function wx_font_get_base_font(self) result(result_object)
         class(wxfont_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxFont_GetBaseFont(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxFont_GetBaseFont(self%ptr), .true.)
     end function wx_font_get_base_font
 
     function wx_font_add_private_font(filename) result(result_value)

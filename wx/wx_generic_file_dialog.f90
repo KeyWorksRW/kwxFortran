@@ -13,6 +13,9 @@ module wx_generic_file_dialog
     public :: wx_generic_file_dialog_get_paths
     public :: wx_generic_file_dialog_get_filenames
     public :: wx_generic_file_dialog_get_directory
+    public :: wx_generic_file_dialog_set_directory
+    public :: wx_generic_file_dialog_get_message
+    public :: wx_generic_file_dialog_set_message
     public :: wx_generic_file_dialog_get_filename
     public :: wx_generic_file_dialog_set_filename
     public :: wx_generic_file_dialog_get_wildcard
@@ -20,6 +23,7 @@ module wx_generic_file_dialog
     public :: wx_generic_file_dialog_get_filter_index
     public :: wx_generic_file_dialog_set_filter_index
     public :: wx_generic_file_dialog_set_customize_hook
+    public :: wx_generic_file_dialog_get_currently_selected_filename
     public :: wx_generic_file_dialog_delete
 
 contains
@@ -91,6 +95,33 @@ contains
         call wxString_Delete(result_text_ptr)
     end function wx_generic_file_dialog_get_directory
 
+    subroutine wx_generic_file_dialog_set_directory(self, dir)
+        class(wxgenericfiledialog_t), intent(in) :: self
+        character(len=*), intent(in) :: dir
+        type(c_ptr) :: dir_ptr
+        dir_ptr = to_wxstring(dir)
+        call wxGenericFileDialog_SetDirectory(self%ptr, dir_ptr)
+        call wxString_Delete(dir_ptr)
+    end subroutine wx_generic_file_dialog_set_directory
+
+    function wx_generic_file_dialog_get_message(self) result(result_text)
+        class(wxgenericfiledialog_t), intent(in) :: self
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = wxGenericFileDialog_GetMessage(self%ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wx_generic_file_dialog_get_message
+
+    subroutine wx_generic_file_dialog_set_message(self, message)
+        class(wxgenericfiledialog_t), intent(in) :: self
+        character(len=*), intent(in) :: message
+        type(c_ptr) :: message_ptr
+        message_ptr = to_wxstring(message)
+        call wxGenericFileDialog_SetMessage(self%ptr, message_ptr)
+        call wxString_Delete(message_ptr)
+    end subroutine wx_generic_file_dialog_set_message
+
     function wx_generic_file_dialog_get_filename(self) result(result_text)
         class(wxgenericfiledialog_t), intent(in) :: self
         type(c_ptr) :: result_text_ptr
@@ -145,6 +176,15 @@ contains
         logical :: result_value
         result_value = (wxGenericFileDialog_SetCustomizeHook(self%ptr, customizehook%ptr) /= 0)
     end function wx_generic_file_dialog_set_customize_hook
+
+    function wx_generic_file_dialog_get_currently_selected_filename(self) result(result_text)
+        class(wxgenericfiledialog_t), intent(in) :: self
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = wxGenericFileDialog_GetCurrentlySelectedFilename(self%ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wx_generic_file_dialog_get_currently_selected_filename
 
     subroutine wx_generic_file_dialog_delete(self)
         class(wxgenericfiledialog_t), intent(inout) :: self

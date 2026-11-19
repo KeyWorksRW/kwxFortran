@@ -74,7 +74,7 @@ contains
 
     function wx_top_level_window_get_default_size() result(result_object)
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxTopLevelWindow_GetDefaultSize(), .false.)
+        result_object = wxsize_from_ptr(wxTopLevelWindow_GetDefaultSize(), .true.)
     end function wx_top_level_window_get_default_size
 
     function wx_top_level_window_enable_close_button(self, enable) result(result_value)

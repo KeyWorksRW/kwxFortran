@@ -32,6 +32,10 @@ module wx_scrolled_window
     public :: wx_scrolled_window_is_scrollbar_shown
     public :: wx_scrolled_window_disable_keyboard_scrolling
     public :: wx_scrolled_window_get_view_start_pixels
+    public :: wx_scrolled_window_enable_auto_scroll_inside
+    public :: wx_scrolled_window_disable_auto_scroll_outside
+    public :: wx_scrolled_window_enable_autoscroll_without_capture
+    public :: wx_scrolled_window_disable_autoscroll_without_capture
 
 contains
 
@@ -221,5 +225,26 @@ contains
         integer(c_int), intent(out), target :: y
         call wxScrolledWindow_GetViewStartPixels(self%ptr, c_loc(x), c_loc(y))
     end subroutine wx_scrolled_window_get_view_start_pixels
+
+    subroutine wx_scrolled_window_enable_auto_scroll_inside(self, insidewidth)
+        class(wxscrolledwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: insidewidth
+        call wxScrolledWindow_EnableAutoScrollInside(self%ptr, insidewidth)
+    end subroutine wx_scrolled_window_enable_auto_scroll_inside
+
+    subroutine wx_scrolled_window_disable_auto_scroll_outside(self)
+        class(wxscrolledwindow_t), intent(in) :: self
+        call wxScrolledWindow_DisableAutoScrollOutside(self%ptr)
+    end subroutine wx_scrolled_window_disable_auto_scroll_outside
+
+    subroutine wx_scrolled_window_enable_autoscroll_without_capture(self)
+        class(wxscrolledwindow_t), intent(in) :: self
+        call wxScrolledWindow_EnableAutoscrollWithoutCapture(self%ptr)
+    end subroutine wx_scrolled_window_enable_autoscroll_without_capture
+
+    subroutine wx_scrolled_window_disable_autoscroll_without_capture(self)
+        class(wxscrolledwindow_t), intent(in) :: self
+        call wxScrolledWindow_DisableAutoscrollWithoutCapture(self%ptr)
+    end subroutine wx_scrolled_window_disable_autoscroll_without_capture
 
 end module wx_scrolled_window

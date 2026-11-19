@@ -43,7 +43,7 @@ contains
     function kwx_html_event_get_logical_position(self) result(result_object)
         class(kwxhtmlevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(kwxHtmlEvent_GetLogicalPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(kwxHtmlEvent_GetLogicalPosition(self%ptr), .true.)
     end function kwx_html_event_get_logical_position
 
     function kwx_html_event_get_mouse_event(self) result(result_value)

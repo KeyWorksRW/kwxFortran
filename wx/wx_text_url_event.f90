@@ -3,6 +3,7 @@ module wx_text_url_event
     use, intrinsic :: iso_c_binding
     use kwx_types
     use kwxffi
+    use wx_string, only: from_wxstring
     implicit none
     private
 
@@ -11,6 +12,7 @@ module wx_text_url_event
     public :: wx_text_url_event_get_mouse_event
     public :: wx_text_url_event_get_url_start
     public :: wx_text_url_event_get_url_end
+    public :: wx_text_url_event_get_string
 
 contains
 
@@ -50,5 +52,14 @@ contains
         integer(c_long) :: result_value
         result_value = wxTextUrlEvent_GetURLEnd(self%ptr)
     end function wx_text_url_event_get_url_end
+
+    function wx_text_url_event_get_string(self) result(result_text)
+        class(wxtexturlevent_t), intent(in) :: self
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = wxTextUrlEvent_GetString(self%ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wx_text_url_event_get_string
 
 end module wx_text_url_event

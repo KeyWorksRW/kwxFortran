@@ -12,6 +12,9 @@ module wx_string_methods
     public :: wx_string_delete
     public :: wx_string_get_string
     public :: wx_string_length
+    public :: wx_string_to_long
+    public :: wx_string_to_long_long
+    public :: wx_string_to_double
 
 contains
 
@@ -38,7 +41,7 @@ contains
         integer(c_int), intent(in) :: len
         character(kind=c_char, len=:), allocatable, target :: buffer_c
         type(wxstring_t) :: result_object
-        buffer_c = trim(buffer) // c_null_char
+        buffer_c = buffer // c_null_char
         result_object%ptr = wxString_CreateLen(c_loc(buffer_c), len)
         result_object%owned = .true.
     end function wx_string_create_len
@@ -64,5 +67,26 @@ contains
         integer(c_size_t) :: result_value
         result_value = wxString_Length(self%ptr)
     end function wx_string_length
+
+    function wx_string_to_long(self, value) result(result_value)
+        class(wxstring_t), intent(in) :: self
+        integer(c_long), intent(out), target :: value
+        logical :: result_value
+        result_value = (wxString_ToLong(self%ptr, c_loc(value)) /= 0)
+    end function wx_string_to_long
+
+    function wx_string_to_long_long(self, value) result(result_value)
+        class(wxstring_t), intent(in) :: self
+        integer(c_int64_t), intent(out), target :: value
+        logical :: result_value
+        result_value = (wxString_ToLongLong(self%ptr, c_loc(value)) /= 0)
+    end function wx_string_to_long_long
+
+    function wx_string_to_double(self, value) result(result_value)
+        class(wxstring_t), intent(in) :: self
+        real(c_double), intent(out), target :: value
+        logical :: result_value
+        result_value = (wxString_ToDouble(self%ptr, c_loc(value)) /= 0)
+    end function wx_string_to_double
 
 end module wx_string_methods

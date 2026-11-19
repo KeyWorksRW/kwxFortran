@@ -114,6 +114,8 @@ module wx_rich_text_ctrl
     public :: wx_rich_text_ctrl_hit_test
     public :: wx_rich_text_ctrl_set_caret_position
     public :: wx_rich_text_ctrl_get_adjusted_caret_position
+    public :: wx_rich_text_ctrl_get_caret_position
+    public :: wx_rich_text_ctrl_set_margins
     public :: wx_rich_text_ctrl_find_next_word_position
     public :: wx_rich_text_ctrl_is_position_visible
     public :: wx_rich_text_ctrl_get_first_visible_position
@@ -217,11 +219,12 @@ module wx_rich_text_ctrl
     public :: wx_rich_text_ctrl_force_upper
     public :: wx_rich_text_ctrl_set_hint
     public :: wx_rich_text_ctrl_get_hint
-    public :: wx_rich_text_ctrl_set_margins
     public :: wx_rich_text_ctrl_get_margins
     public :: wx_rich_text_ctrl_auto_complete
+    public :: wx_rich_text_ctrl_auto_complete_strings
     public :: wx_rich_text_ctrl_auto_complete_file_names
     public :: wx_rich_text_ctrl_auto_complete_directories
+    public :: wx_rich_text_ctrl_auto_complete_completer
 
 contains
 
@@ -243,10 +246,10 @@ contains
         result_value = (wxRichTextCtrl_EndSuppressUndo(self%ptr) /= 0)
     end function wx_rich_text_ctrl_end_suppress_undo
 
-    function wx_rich_text_ctrl_get_command_processor(self) result(result_value)
+    function wx_rich_text_ctrl_get_command_processor(self) result(result_object)
         class(wxrichtextctrl_t), intent(in) :: self
-        type(c_ptr) :: result_value
-        result_value = wxRichTextCtrl_GetCommandProcessor(self%ptr)
+        type(wxcommandprocessor_t) :: result_object
+        result_object = wxcommandprocessor_from_ptr(wxRichTextCtrl_GetCommandProcessor(self%ptr), .false.)
     end function wx_rich_text_ctrl_get_command_processor
 
     function wx_rich_text_ctrl_write_field(self, fieldtype, properties, textattr) result(result_object)
@@ -998,6 +1001,20 @@ contains
         result_value = wxRichTextCtrl_GetAdjustedCaretPosition(self%ptr, caretposition)
     end function wx_rich_text_ctrl_get_adjusted_caret_position
 
+    function wx_rich_text_ctrl_get_caret_position(self) result(result_value)
+        class(wxrichtextctrl_t), intent(in) :: self
+        integer(c_long) :: result_value
+        result_value = wxRichTextCtrl_GetCaretPosition(self%ptr)
+    end function wx_rich_text_ctrl_get_caret_position
+
+    function wx_rich_text_ctrl_set_margins(self, left, top) result(result_value)
+        class(wxrichtextctrl_t), intent(in) :: self
+        integer(c_int), intent(in) :: left
+        integer(c_int), intent(in) :: top
+        logical :: result_value
+        result_value = (wxRichTextCtrl_SetMargins(self%ptr, left, top) /= 0)
+    end function wx_rich_text_ctrl_set_margins
+
     function wx_rich_text_ctrl_find_next_word_position(self, direction) result(result_value)
         class(wxrichtextctrl_t), intent(in) :: self
         integer(c_int), intent(in) :: direction
@@ -1333,7 +1350,7 @@ contains
     function wx_rich_text_ctrl_get_style(self, position, style) result(result_value)
         class(wxrichtextctrl_t), intent(in) :: self
         integer(c_long), intent(in) :: position
-        class(wxtextattr_t), intent(in) :: style
+        class(wxrichtextattr_t), intent(in) :: style
         logical :: result_value
         result_value = (wxRichTextCtrl_GetStyle(self%ptr, position, style%ptr) /= 0)
     end function wx_rich_text_ctrl_get_style
@@ -1348,7 +1365,7 @@ contains
     function wx_rich_text_ctrl_get_default_style(self) result(result_object)
         class(wxrichtextctrl_t), intent(in) :: self
         type(wxtextattr_t) :: result_object
-        result_object = wxtextattr_from_ptr(wxRichTextCtrl_GetDefaultStyle(self%ptr), .false.)
+        result_object = wxtextattr_from_ptr(wxRichTextCtrl_GetDefaultStyle(self%ptr), .true.)
     end function wx_rich_text_ctrl_get_default_style
 
     function wx_rich_text_ctrl_set_font(self, font) result(result_value)
@@ -1725,14 +1742,6 @@ contains
         call wxString_Delete(result_text_ptr)
     end function wx_rich_text_ctrl_get_hint
 
-    function wx_rich_text_ctrl_set_margins(self, left, top) result(result_value)
-        class(wxrichtextctrl_t), intent(in) :: self
-        integer(c_int), intent(in) :: left
-        integer(c_int), intent(in) :: top
-        logical :: result_value
-        result_value = (wxTextEntry_SetMargins(self%ptr, left, top) /= 0)
-    end function wx_rich_text_ctrl_set_margins
-
     subroutine wx_rich_text_ctrl_get_margins(self, left, top)
         class(wxrichtextctrl_t), intent(in) :: self
         integer(c_int), intent(out), target :: left
@@ -1748,6 +1757,13 @@ contains
         result_value = (wxTextEntry_AutoComplete(self%ptr, count, items) /= 0)
     end function wx_rich_text_ctrl_auto_complete
 
+    function wx_rich_text_ctrl_auto_complete_strings(self, items) result(result_value)
+        class(wxrichtextctrl_t), intent(in) :: self
+        class(wxarraystring_t), intent(in) :: items
+        logical :: result_value
+        result_value = (wxTextEntry_AutoCompleteStrings(self%ptr, items%ptr) /= 0)
+    end function wx_rich_text_ctrl_auto_complete_strings
+
     function wx_rich_text_ctrl_auto_complete_file_names(self) result(result_value)
         class(wxrichtextctrl_t), intent(in) :: self
         logical :: result_value
@@ -1759,5 +1775,12 @@ contains
         logical :: result_value
         result_value = (wxTextEntry_AutoCompleteDirectories(self%ptr) /= 0)
     end function wx_rich_text_ctrl_auto_complete_directories
+
+    function wx_rich_text_ctrl_auto_complete_completer(self, completer) result(result_value)
+        class(wxrichtextctrl_t), intent(in) :: self
+        class(wxtextcompletersimple_t), intent(in) :: completer
+        logical :: result_value
+        result_value = (wxTextEntry_AutoCompleteCompleter(self%ptr, completer%ptr) /= 0)
+    end function wx_rich_text_ctrl_auto_complete_completer
 
 end module wx_rich_text_ctrl

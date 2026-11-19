@@ -34,7 +34,7 @@ contains
         integer(c_int), intent(in) :: row
         integer(c_int), intent(in) :: col
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxGridCellStringRenderer_GetPreferredSize(self%ptr, grid%ptr, attr%ptr, dc%ptr, row, col), .false.)
+        result_object = wxsize_from_ptr(wxGridCellStringRenderer_GetPreferredSize(self%ptr, grid%ptr, attr%ptr, dc%ptr, row, col), .true.)
     end function wx_grid_cell_string_renderer_get_preferred_size
 
 end module wx_grid_cell_string_renderer

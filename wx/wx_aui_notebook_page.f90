@@ -49,7 +49,7 @@ contains
     function wx_aui_notebook_page_rect(self) result(result_object)
         class(wxauinotebookpage_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxAuiNotebookPage_Rect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxAuiNotebookPage_Rect(self%ptr), .true.)
     end function wx_aui_notebook_page_rect
 
     function wx_aui_notebook_page_active(self) result(result_value)

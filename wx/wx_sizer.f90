@@ -100,21 +100,21 @@ contains
         class(wxsizer_t), intent(in) :: self
         class(wxwindow_t), intent(in) :: window
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSizer_ComputeFittingClientSize(self%ptr, window%ptr), .false.)
+        result_object = wxsize_from_ptr(wxSizer_ComputeFittingClientSize(self%ptr, window%ptr), .true.)
     end function wx_sizer_compute_fitting_client_size
 
     function wx_sizer_compute_fitting_window_size(self, window) result(result_object)
         class(wxsizer_t), intent(in) :: self
         class(wxwindow_t), intent(in) :: window
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSizer_ComputeFittingWindowSize(self%ptr, window%ptr), .false.)
+        result_object = wxsize_from_ptr(wxSizer_ComputeFittingWindowSize(self%ptr, window%ptr), .true.)
     end function wx_sizer_compute_fitting_window_size
 
     function wx_sizer_fit_with_size(self, window) result(result_object)
         class(wxsizer_t), intent(in) :: self
         class(wxwindow_t), intent(in) :: window
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSizer_FitWithSize(self%ptr, window%ptr), .false.)
+        result_object = wxsize_from_ptr(wxSizer_FitWithSize(self%ptr, window%ptr), .true.)
     end function wx_sizer_fit_with_size
 
     function wx_sizer_get_item_count(self) result(result_value)
@@ -203,7 +203,7 @@ contains
     function wx_sizer_calc_min(self) result(result_object)
         class(wxsizer_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSizer_CalcMin(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxSizer_CalcMin(self%ptr), .true.)
     end function wx_sizer_calc_min
 
     subroutine wx_sizer_fit(self, window)
@@ -223,19 +223,19 @@ contains
     function wx_sizer_get_min_size(self) result(result_object)
         class(wxsizer_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSizer_GetMinSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxSizer_GetMinSize(self%ptr), .true.)
     end function wx_sizer_get_min_size
 
     function wx_sizer_get_position(self) result(result_object)
         class(wxsizer_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxSizer_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxSizer_GetPosition(self%ptr), .true.)
     end function wx_sizer_get_position
 
     function wx_sizer_get_size(self) result(result_object)
         class(wxsizer_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSizer_GetSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxSizer_GetSize(self%ptr), .true.)
     end function wx_sizer_get_size
 
     subroutine wx_sizer_insert(self, before, width, height, option, flag, border, userdata)

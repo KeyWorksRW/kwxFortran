@@ -13,6 +13,16 @@ module kwx_drop_target
     public :: kwx_drop_target_set_on_drop
     public :: kwx_drop_target_set_on_enter
     public :: kwx_drop_target_set_on_leave
+    public :: kwx_drop_target_set_on_data_with_data
+    public :: kwx_drop_target_set_on_drop_with_data
+    public :: kwx_drop_target_set_on_enter_with_data
+    public :: kwx_drop_target_set_on_drag_over_with_data
+    public :: kwx_drop_target_set_on_leave_with_data
+    public :: kwx_drop_target_set_data_result
+    public :: kwx_drop_target_set_drop_result
+    public :: kwx_drop_target_set_enter_result
+    public :: kwx_drop_target_set_drag_over_result
+    public :: kwx_drop_target_get_drop_result
 
 contains
 
@@ -61,5 +71,70 @@ contains
         type(c_ptr), intent(in), value :: pfunction
         call kwxDropTarget_SetOnLeave(self%ptr, pfunction)
     end subroutine kwx_drop_target_set_on_leave
+
+    subroutine kwx_drop_target_set_on_data_with_data(self, pfunction, data)
+        class(kwxdroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxDropTarget_SetOnDataWithData(self%ptr, pfunction, data)
+    end subroutine kwx_drop_target_set_on_data_with_data
+
+    subroutine kwx_drop_target_set_on_drop_with_data(self, pfunction, data)
+        class(kwxdroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxDropTarget_SetOnDropWithData(self%ptr, pfunction, data)
+    end subroutine kwx_drop_target_set_on_drop_with_data
+
+    subroutine kwx_drop_target_set_on_enter_with_data(self, pfunction, data)
+        class(kwxdroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxDropTarget_SetOnEnterWithData(self%ptr, pfunction, data)
+    end subroutine kwx_drop_target_set_on_enter_with_data
+
+    subroutine kwx_drop_target_set_on_drag_over_with_data(self, pfunction, data)
+        class(kwxdroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxDropTarget_SetOnDragOverWithData(self%ptr, pfunction, data)
+    end subroutine kwx_drop_target_set_on_drag_over_with_data
+
+    subroutine kwx_drop_target_set_on_leave_with_data(self, pfunction, data)
+        class(kwxdroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxDropTarget_SetOnLeaveWithData(self%ptr, pfunction, data)
+    end subroutine kwx_drop_target_set_on_leave_with_data
+
+    subroutine kwx_drop_target_set_data_result(self, result)
+        class(kwxdroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxDropTarget_SetDataResult(self%ptr, result)
+    end subroutine kwx_drop_target_set_data_result
+
+    subroutine kwx_drop_target_set_drop_result(self, result)
+        class(kwxdroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxDropTarget_SetDropResult(self%ptr, result)
+    end subroutine kwx_drop_target_set_drop_result
+
+    subroutine kwx_drop_target_set_enter_result(self, result)
+        class(kwxdroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxDropTarget_SetEnterResult(self%ptr, result)
+    end subroutine kwx_drop_target_set_enter_result
+
+    subroutine kwx_drop_target_set_drag_over_result(self, result)
+        class(kwxdroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxDropTarget_SetDragOverResult(self%ptr, result)
+    end subroutine kwx_drop_target_set_drag_over_result
+
+    function kwx_drop_target_get_drop_result(self) result(result_value)
+        class(kwxdroptarget_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = kwxDropTarget_GetDropResult(self%ptr)
+    end function kwx_drop_target_get_drop_result
 
 end module kwx_drop_target

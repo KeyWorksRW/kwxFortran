@@ -79,7 +79,7 @@ contains
     function wx_media_ctrl_get_best_size(self) result(result_object)
         class(wxmediactrl_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxMediaCtrl_GetBestSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxMediaCtrl_GetBestSize(self%ptr), .true.)
     end function wx_media_ctrl_get_best_size
 
     function wx_media_ctrl_get_playback_rate(self) result(result_value)

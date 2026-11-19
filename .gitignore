@@ -17,7 +17,9 @@ lib-ifx/
 # Fortran compiled module interface files — generated in build/modules/, never in src/
 *.mod
 
-tests/quick
+tests/
+samples/
+kwxSamples/
 
 # cmake
 build/

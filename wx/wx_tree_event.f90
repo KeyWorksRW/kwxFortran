@@ -65,7 +65,7 @@ contains
     function wx_tree_event_get_point(self) result(result_object)
         class(wxtreeevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxTreeEvent_GetPoint(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxTreeEvent_GetPoint(self%ptr), .true.)
     end function wx_tree_event_get_point
 
 end module wx_tree_event

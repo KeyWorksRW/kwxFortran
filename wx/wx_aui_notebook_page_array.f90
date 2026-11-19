@@ -38,7 +38,7 @@ contains
         class(wxauinotebookpagearray_t), intent(in) :: self
         integer(c_int), intent(in) :: index
         type(wxauinotebookpage_t) :: result_object
-        result_object = wxauinotebookpage_from_ptr(wxAuiNotebookPageArray_Item(self%ptr, index), .false.)
+        result_object = wxauinotebookpage_from_ptr(wxAuiNotebookPageArray_Item(self%ptr, index), .true.)
     end function wx_aui_notebook_page_array_item
 
 end module wx_aui_notebook_page_array

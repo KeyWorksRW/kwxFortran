@@ -235,14 +235,14 @@ contains
         class(wxhtmlcell_t), intent(in) :: self
         type(c_ptr), intent(in), value :: rootcell
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxHtmlCell_GetAbsPos(self%ptr, rootcell), .false.)
+        result_object = wxpoint_from_ptr(wxHtmlCell_GetAbsPos(self%ptr, rootcell), .true.)
     end function wx_html_cell_get_abs_pos
 
     function wx_html_cell_get_rect(self, rootcell) result(result_object)
         class(wxhtmlcell_t), intent(in) :: self
         type(c_ptr), intent(in), value :: rootcell
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxHtmlCell_GetRect(self%ptr, rootcell), .false.)
+        result_object = wxrect_from_ptr(wxHtmlCell_GetRect(self%ptr, rootcell), .true.)
     end function wx_html_cell_get_rect
 
     function wx_html_cell_get_root_cell(self) result(result_value)

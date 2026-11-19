@@ -11,8 +11,18 @@ module kwx_rich_text_ctrl
     public :: kwx_rich_text_ctrl_set_on_prepare_content
     public :: kwx_rich_text_ctrl_set_on_can_delete_range
     public :: kwx_rich_text_ctrl_set_on_can_insert_content
+    public :: kwx_rich_text_ctrl_set_on_prepare_content_with_data
+    public :: kwx_rich_text_ctrl_set_on_can_delete_range_with_data
+    public :: kwx_rich_text_ctrl_set_on_can_insert_content_with_data
     public :: kwx_rich_text_ctrl_set_can_delete_range_result
     public :: kwx_rich_text_ctrl_set_can_insert_content_result
+    public :: kwx_rich_text_ctrl_set_callback_object
+    public :: kwx_rich_text_ctrl_get_callback_object
+    public :: kwx_rich_text_ctrl_set_lock_id
+    public :: kwx_rich_text_ctrl_get_lock_id
+    public :: kwx_rich_text_ctrl_begin_lock
+    public :: kwx_rich_text_ctrl_end_lock
+    public :: kwx_rich_text_ctrl_is_locked
 
 contains
 
@@ -56,6 +66,27 @@ contains
         call kwxRichTextCtrl_SetOnCanInsertContent(self%ptr, pfunction)
     end subroutine kwx_rich_text_ctrl_set_on_can_insert_content
 
+    subroutine kwx_rich_text_ctrl_set_on_prepare_content_with_data(self, pfunction, data)
+        class(kwxrichtextctrl_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextCtrl_SetOnPrepareContentWithData(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_ctrl_set_on_prepare_content_with_data
+
+    subroutine kwx_rich_text_ctrl_set_on_can_delete_range_with_data(self, pfunction, data)
+        class(kwxrichtextctrl_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextCtrl_SetOnCanDeleteRangeWithData(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_ctrl_set_on_can_delete_range_with_data
+
+    subroutine kwx_rich_text_ctrl_set_on_can_insert_content_with_data(self, pfunction, data)
+        class(kwxrichtextctrl_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxRichTextCtrl_SetOnCanInsertContentWithData(self%ptr, pfunction, data)
+    end subroutine kwx_rich_text_ctrl_set_on_can_insert_content_with_data
+
     subroutine kwx_rich_text_ctrl_set_can_delete_range_result(self, result)
         class(kwxrichtextctrl_t), intent(in) :: self
         logical, intent(in) :: result
@@ -67,5 +98,45 @@ contains
         logical, intent(in) :: result
         call kwxRichTextCtrl_SetCanInsertContentResult(self%ptr, merge(1_c_int, 0_c_int, result))
     end subroutine kwx_rich_text_ctrl_set_can_insert_content_result
+
+    subroutine kwx_rich_text_ctrl_set_callback_object(self, object)
+        class(kwxrichtextctrl_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: object
+        call kwxRichTextCtrl_SetCallbackObject(self%ptr, object)
+    end subroutine kwx_rich_text_ctrl_set_callback_object
+
+    function kwx_rich_text_ctrl_get_callback_object(self) result(result_value)
+        class(kwxrichtextctrl_t), intent(in) :: self
+        type(c_ptr) :: result_value
+        result_value = kwxRichTextCtrl_GetCallbackObject(self%ptr)
+    end function kwx_rich_text_ctrl_get_callback_object
+
+    subroutine kwx_rich_text_ctrl_set_lock_id(self, id)
+        class(kwxrichtextctrl_t), intent(in) :: self
+        integer(c_long), intent(in) :: id
+        call kwxRichTextCtrl_SetLockId(self%ptr, id)
+    end subroutine kwx_rich_text_ctrl_set_lock_id
+
+    function kwx_rich_text_ctrl_get_lock_id(self) result(result_value)
+        class(kwxrichtextctrl_t), intent(in) :: self
+        integer(c_long) :: result_value
+        result_value = kwxRichTextCtrl_GetLockId(self%ptr)
+    end function kwx_rich_text_ctrl_get_lock_id
+
+    subroutine kwx_rich_text_ctrl_begin_lock(self)
+        class(kwxrichtextctrl_t), intent(in) :: self
+        call kwxRichTextCtrl_BeginLock(self%ptr)
+    end subroutine kwx_rich_text_ctrl_begin_lock
+
+    subroutine kwx_rich_text_ctrl_end_lock(self)
+        class(kwxrichtextctrl_t), intent(in) :: self
+        call kwxRichTextCtrl_EndLock(self%ptr)
+    end subroutine kwx_rich_text_ctrl_end_lock
+
+    function kwx_rich_text_ctrl_is_locked(self) result(result_value)
+        class(kwxrichtextctrl_t), intent(in) :: self
+        logical :: result_value
+        result_value = (kwxRichTextCtrl_IsLocked(self%ptr) /= 0)
+    end function kwx_rich_text_ctrl_is_locked
 
 end module kwx_rich_text_ctrl

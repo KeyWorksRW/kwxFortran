@@ -475,14 +475,14 @@ contains
         class(wxstyledtextctrl_t), intent(in) :: self
         integer(c_int), intent(in) :: style
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxStyledTextCtrl_StyleGetBackground(self%ptr, style), .false.)
+        result_object = wxcolour_from_ptr(wxStyledTextCtrl_StyleGetBackground(self%ptr, style), .true.)
     end function wx_styled_text_ctrl_style_get_background
 
     function wx_styled_text_ctrl_style_get_foreground(self, style) result(result_object)
         class(wxstyledtextctrl_t), intent(in) :: self
         integer(c_int), intent(in) :: style
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxStyledTextCtrl_StyleGetForeground(self%ptr, style), .false.)
+        result_object = wxcolour_from_ptr(wxStyledTextCtrl_StyleGetForeground(self%ptr, style), .true.)
     end function wx_styled_text_ctrl_style_get_foreground
 
     function wx_styled_text_ctrl_style_get_size_fractional(self, style) result(result_value)

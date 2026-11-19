@@ -7,6 +7,7 @@ module wx_data_object_composite
     private
 
     public :: wx_data_object_composite_add
+    public :: wx_data_object_composite_get_received_format
     public :: wx_data_object_composite_create
     public :: wx_data_object_composite_delete
 
@@ -18,6 +19,12 @@ contains
         integer(c_int), intent(in) :: preferred
         call wxDataObjectComposite_Add(self%ptr, data, preferred)
     end subroutine wx_data_object_composite_add
+
+    function wx_data_object_composite_get_received_format(self) result(result_object)
+        class(wxdataobjectcomposite_t), intent(in) :: self
+        type(wxdataformat_t) :: result_object
+        result_object = wxdataformat_from_ptr(wxDataObjectComposite_GetReceivedFormat(self%ptr), .true.)
+    end function wx_data_object_composite_get_received_format
 
     function wx_data_object_composite_create() result(result_object)
         type(wxdataobjectcomposite_t) :: result_object

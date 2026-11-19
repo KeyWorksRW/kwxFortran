@@ -90,9 +90,9 @@ contains
         call kwxLog_FlushActive(self%ptr)
     end subroutine kwx_log_flush_active
 
-    function kwx_log_get_active_target() result(result_value)
-        type(c_ptr) :: result_value
-        result_value = kwxLog_GetActiveTarget()
+    function kwx_log_get_active_target() result(result_object)
+        type(wxlog_t) :: result_object
+        result_object = wxlog_from_ptr(kwxLog_GetActiveTarget(), .false.)
     end function kwx_log_get_active_target
 
     function kwx_log_get_timestamp(self) result(result_value)

@@ -58,7 +58,7 @@ contains
     function wx_frame_get_icon(self) result(result_object)
         class(wxframe_t), intent(in) :: self
         type(wxicon_t) :: result_object
-        result_object = wxicon_from_ptr(wxFrame_GetIcon(self%ptr), .false.)
+        result_object = wxicon_from_ptr(wxFrame_GetIcon(self%ptr), .true.)
     end function wx_frame_get_icon
 
     function wx_frame_get_title(self) result(result_text)
@@ -132,7 +132,7 @@ contains
     function wx_frame_get_client_area_origin_point(self) result(result_object)
         class(wxframe_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxFrame_GetClientAreaOriginPoint(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxFrame_GetClientAreaOriginPoint(self%ptr), .true.)
     end function wx_frame_get_client_area_origin_point
 
     subroutine wx_frame_set_window_modality(self, modality)

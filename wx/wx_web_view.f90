@@ -176,7 +176,7 @@ contains
         type(c_ptr) :: backend_ptr
         type(wxwebviewconfiguration_t) :: result_object
         backend_ptr = to_wxstring(backend)
-        result_object = wxwebviewconfiguration_from_ptr(wxWebView_NewConfiguration(backend_ptr), .false.)
+        result_object = wxwebviewconfiguration_from_ptr(wxWebView_NewConfiguration(backend_ptr), .true.)
         call wxString_Delete(backend_ptr)
     end function wx_web_view_new_configuration
 

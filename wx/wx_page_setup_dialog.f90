@@ -24,7 +24,7 @@ contains
     function wx_page_setup_dialog_get_page_setup_dialog_data(self) result(result_object)
         class(wxpagesetupdialog_t), intent(in) :: self
         type(wxpagesetupdialogdata_t) :: result_object
-        result_object = wxpagesetupdialogdata_from_ptr(wxPageSetupDialog_GetPageSetupDialogData(self%ptr), .false.)
+        result_object = wxpagesetupdialogdata_from_ptr(wxPageSetupDialog_GetPageSetupDialogData(self%ptr), .true.)
     end function wx_page_setup_dialog_get_page_setup_dialog_data
 
     subroutine wx_page_setup_dialog_get_page_setup_data(self, ref)

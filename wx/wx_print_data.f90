@@ -131,7 +131,7 @@ contains
     function wx_print_data_get_paper_size(self) result(result_object)
         class(wxprintdata_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxPrintData_GetPaperSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxPrintData_GetPaperSize(self%ptr), .true.)
     end function wx_print_data_get_paper_size
 
     function wx_print_data_get_preview_command(self) result(result_text)

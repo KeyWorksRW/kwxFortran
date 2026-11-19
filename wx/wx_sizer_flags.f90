@@ -32,6 +32,7 @@ module wx_sizer_flags
     public :: wx_sizer_flags_get_flags
     public :: wx_sizer_flags_get_border_in_pixels
     public :: wx_sizer_flags_get_default_border_fractional
+    public :: wx_sizer_flags_get_default_border
     public :: wx_sizer_flags_disable_consistency_checks
 
 contains
@@ -182,6 +183,11 @@ contains
         real(c_double) :: result_value
         result_value = wxSizerFlags_GetDefaultBorderFractional()
     end function wx_sizer_flags_get_default_border_fractional
+
+    function wx_sizer_flags_get_default_border() result(result_value)
+        integer(c_int) :: result_value
+        result_value = wxSizerFlags_GetDefaultBorder()
+    end function wx_sizer_flags_get_default_border
 
     subroutine wx_sizer_flags_disable_consistency_checks()
         call wxSizerFlags_DisableConsistencyChecks()

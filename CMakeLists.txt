@@ -109,8 +109,6 @@ message(STATUS "Fetching kwxFFI and wxWidgets (this may take awhile) ...")
 FetchContent_Declare(
     kwxFFI
     # TEMPORARY: use the local sibling checkout so source changes show up immediately.
-    # Restore the GIT_REPOSITORY line below to fetch from GitHub again.
-    # GIT_REPOSITORY https://github.com/KeyWorksRW/kwxFFI.git
     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../kwxFFI
     GIT_TAG origin/main
     GIT_SHALLOW TRUE
@@ -123,7 +121,7 @@ message(NOTICE "Configuring kwxFFI...")
 # exists in exactly one copy inside the final executable. Force both options
 # before kwxFFI's CMakeLists defines its targets, overriding any cached value.
 set(KWXFFI_BUILD_SHARED OFF CACHE BOOL "Build kwxFFI as shared library" FORCE)
-set(KWXFFI_BUILD_BOTH   OFF CACHE BOOL "Build both static and shared kwxFFI" FORCE)
+set(KWXFFI_BUILD_BOTH OFF CACHE BOOL "Build both static and shared kwxFFI" FORCE)
 
 FetchContent_MakeAvailable(kwxFFI)
 
@@ -247,13 +245,14 @@ endif()
 
 # Samples live in samples/<name>/<name>.f90. Only names whose entry file exists
 # are built, so a sample that has not been ported yet never breaks configure.
-set(SAMPLE_TARGETS about animate archive artprov calendar collpane combo font grid minimal notebook preferences widgets wizard)
+set(SAMPLE_TARGETS access about animate archive artprov aui calendar caret collpane combo config console dataview debugrpt dialogs display dnd docview dragimag font grid minimal notebook
+    preferences richtext widgets wizard)
 
 # Samples that use the wxAppConsole lifecycle (kwxConsoleInitialize /
 # kwxConsoleRun / kwxConsoleShutdown) are console-subsystem executables: they
 # must keep stdout/stderr attached, so the GUI-subsystem linker flags below are
 # not applied to them.
-set(SAMPLE_CONSOLE_TARGETS archive)
+set(SAMPLE_CONSOLE_TARGETS archive console)
 
 # Samples are EXCLUDE_FROM_ALL: a plain build of the default target builds the
 # library and the examples but no sample. Build one sample with

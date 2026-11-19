@@ -31,7 +31,7 @@ contains
     function wx_font_picker_ctrl_get_selected_font(self) result(result_object)
         class(wxfontpickerctrl_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxFontPickerCtrl_GetSelectedFont(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxFontPickerCtrl_GetSelectedFont(self%ptr), .true.)
     end function wx_font_picker_ctrl_get_selected_font
 
     subroutine wx_font_picker_ctrl_set_selected_font(self, font)

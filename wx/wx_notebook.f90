@@ -65,7 +65,7 @@ contains
     function wx_notebook_get_controller_size(self) result(result_object)
         class(wxnotebook_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxNotebook_GetControllerSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxNotebook_GetControllerSize(self%ptr), .true.)
     end function wx_notebook_get_controller_size
 
     function wx_notebook_calc_size_from_page(self, width, height) result(result_object)
@@ -73,7 +73,7 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxNotebook_CalcSizeFromPage(self%ptr, width, height), .false.)
+        result_object = wxsize_from_ptr(wxNotebook_CalcSizeFromPage(self%ptr, width, height), .true.)
     end function wx_notebook_calc_size_from_page
 
     function wx_notebook_get_internal_border(self) result(result_value)
@@ -143,7 +143,7 @@ contains
         class(wxnotebook_t), intent(in) :: self
         integer(c_int), intent(in) :: page
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxNotebook_GetTabRect(self%ptr, page), .false.)
+        result_object = wxrect_from_ptr(wxNotebook_GetTabRect(self%ptr, page), .true.)
     end function wx_notebook_get_tab_rect
 
     function wx_notebook_get_tab_orientation(self) result(result_value)
@@ -155,7 +155,7 @@ contains
     function wx_notebook_get_theme_background_colour(self) result(result_object)
         class(wxnotebook_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxNotebook_GetThemeBackgroundColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxNotebook_GetThemeBackgroundColour(self%ptr), .true.)
     end function wx_notebook_get_theme_background_colour
 
     function wx_notebook_send_page_changing_event(self, npage) result(result_value)

@@ -36,7 +36,7 @@ contains
     function wx_wizard_page_get_bitmap(self) result(result_object)
         class(wxwizardpage_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxWizardPage_GetBitmap(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxWizardPage_GetBitmap(self%ptr), .true.)
     end function wx_wizard_page_get_bitmap
 
     subroutine wx_wizard_page_set_on_get_next(self, pfunction)

@@ -11,8 +11,15 @@ module wx_document
     public :: wx_document_get_command_processor
     public :: wx_document_get_filename
     public :: wx_document_get_first_view
+    public :: wx_document_is_modified
     public :: wx_document_set_filename
     public :: wx_document_update_all_views
+    public :: wx_document_close
+    public :: wx_document_save
+    public :: wx_document_save_as
+    public :: wx_document_revert
+    public :: wx_document_already_saved
+    public :: wx_document_can_close
     public :: wx_document_set_on_do_open_document
     public :: wx_document_set_on_do_save_document
     public :: wx_document_set_on_get_class_info
@@ -20,6 +27,22 @@ module wx_document
     public :: wx_document_set_on_modify
     public :: wx_document_set_on_on_create
     public :: wx_document_set_on_on_open_document
+    public :: wx_document_set_on_do_open_document_with_data
+    public :: wx_document_set_do_open_document_result
+    public :: wx_document_set_on_do_save_document_with_data
+    public :: wx_document_set_do_save_document_result
+    public :: wx_document_set_on_is_modified_with_data
+    public :: wx_document_set_is_modified_result
+    public :: wx_document_set_on_modify_with_data
+    public :: wx_document_set_on_on_create_with_data
+    public :: wx_document_set_on_create_result
+    public :: wx_document_set_on_on_open_document_with_data
+    public :: wx_document_set_on_open_document_result
+    public :: wx_document_on_create_base
+    public :: wx_document_on_open_document_base
+    public :: wx_document_is_modified_base
+    public :: wx_document_modify_base
+    public :: wx_document_create_with_parent
 
 contains
 
@@ -50,6 +73,12 @@ contains
         result_object = wxview_from_ptr(wxDocument_GetFirstView(self%ptr), .false.)
     end function wx_document_get_first_view
 
+    function wx_document_is_modified(self) result(result_value)
+        class(wxdocument_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxDocument_IsModified(self%ptr) /= 0)
+    end function wx_document_is_modified
+
     subroutine wx_document_set_filename(self, filename, notifyviews)
         class(wxdocument_t), intent(in) :: self
         character(len=*), intent(in) :: filename
@@ -66,6 +95,42 @@ contains
         type(c_ptr), intent(in), value :: hint
         call wxDocument_UpdateAllViews(self%ptr, sender, hint)
     end subroutine wx_document_update_all_views
+
+    function wx_document_close(self) result(result_value)
+        class(wxdocument_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxDocument_Close(self%ptr) /= 0)
+    end function wx_document_close
+
+    function wx_document_save(self) result(result_value)
+        class(wxdocument_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxDocument_Save(self%ptr) /= 0)
+    end function wx_document_save
+
+    function wx_document_save_as(self) result(result_value)
+        class(wxdocument_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxDocument_SaveAs(self%ptr) /= 0)
+    end function wx_document_save_as
+
+    function wx_document_revert(self) result(result_value)
+        class(wxdocument_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxDocument_Revert(self%ptr) /= 0)
+    end function wx_document_revert
+
+    function wx_document_already_saved(self) result(result_value)
+        class(wxdocument_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxDocument_AlreadySaved(self%ptr) /= 0)
+    end function wx_document_already_saved
+
+    function wx_document_can_close(self) result(result_value)
+        class(wxdocument_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxDocument_CanClose(self%ptr) /= 0)
+    end function wx_document_can_close
 
     subroutine wx_document_set_on_do_open_document(self, pfunction)
         class(wxdocument_t), intent(in) :: self
@@ -108,5 +173,117 @@ contains
         type(c_ptr), intent(in), value :: pfunction
         call wxDocument_SetOnOnOpenDocument(self%ptr, pfunction)
     end subroutine wx_document_set_on_on_open_document
+
+    subroutine wx_document_set_on_do_open_document_with_data(self, pfunction, data)
+        class(wxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxDocument_SetOnDoOpenDocumentWithData(self%ptr, pfunction, data)
+    end subroutine wx_document_set_on_do_open_document_with_data
+
+    subroutine wx_document_set_do_open_document_result(self, result)
+        class(wxdocument_t), intent(in) :: self
+        logical, intent(in) :: result
+        call wxDocument_SetDoOpenDocumentResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine wx_document_set_do_open_document_result
+
+    subroutine wx_document_set_on_do_save_document_with_data(self, pfunction, data)
+        class(wxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxDocument_SetOnDoSaveDocumentWithData(self%ptr, pfunction, data)
+    end subroutine wx_document_set_on_do_save_document_with_data
+
+    subroutine wx_document_set_do_save_document_result(self, result)
+        class(wxdocument_t), intent(in) :: self
+        logical, intent(in) :: result
+        call wxDocument_SetDoSaveDocumentResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine wx_document_set_do_save_document_result
+
+    subroutine wx_document_set_on_is_modified_with_data(self, pfunction, data)
+        class(wxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxDocument_SetOnIsModifiedWithData(self%ptr, pfunction, data)
+    end subroutine wx_document_set_on_is_modified_with_data
+
+    subroutine wx_document_set_is_modified_result(self, result)
+        class(wxdocument_t), intent(in) :: self
+        logical, intent(in) :: result
+        call wxDocument_SetIsModifiedResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine wx_document_set_is_modified_result
+
+    subroutine wx_document_set_on_modify_with_data(self, pfunction, data)
+        class(wxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxDocument_SetOnModifyWithData(self%ptr, pfunction, data)
+    end subroutine wx_document_set_on_modify_with_data
+
+    subroutine wx_document_set_on_on_create_with_data(self, pfunction, data)
+        class(wxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxDocument_SetOnOnCreateWithData(self%ptr, pfunction, data)
+    end subroutine wx_document_set_on_on_create_with_data
+
+    subroutine wx_document_set_on_create_result(self, result)
+        class(wxdocument_t), intent(in) :: self
+        logical, intent(in) :: result
+        call wxDocument_SetOnCreateResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine wx_document_set_on_create_result
+
+    subroutine wx_document_set_on_on_open_document_with_data(self, pfunction, data)
+        class(wxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxDocument_SetOnOnOpenDocumentWithData(self%ptr, pfunction, data)
+    end subroutine wx_document_set_on_on_open_document_with_data
+
+    subroutine wx_document_set_on_open_document_result(self, result)
+        class(wxdocument_t), intent(in) :: self
+        logical, intent(in) :: result
+        call wxDocument_SetOnOpenDocumentResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine wx_document_set_on_open_document_result
+
+    function wx_document_on_create_base(self, path, flags) result(result_value)
+        class(wxdocument_t), intent(in) :: self
+        character(len=*), intent(in) :: path
+        integer(c_long), intent(in) :: flags
+        type(c_ptr) :: path_ptr
+        logical :: result_value
+        path_ptr = to_wxstring(path)
+        result_value = (wxDocument_OnCreateBase(self%ptr, path_ptr, flags) /= 0)
+        call wxString_Delete(path_ptr)
+    end function wx_document_on_create_base
+
+    function wx_document_on_open_document_base(self, filename) result(result_value)
+        class(wxdocument_t), intent(in) :: self
+        character(len=*), intent(in) :: filename
+        type(c_ptr) :: filename_ptr
+        logical :: result_value
+        filename_ptr = to_wxstring(filename)
+        result_value = (wxDocument_OnOpenDocumentBase(self%ptr, filename_ptr) /= 0)
+        call wxString_Delete(filename_ptr)
+    end function wx_document_on_open_document_base
+
+    function wx_document_is_modified_base(self) result(result_value)
+        class(wxdocument_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxDocument_IsModifiedBase(self%ptr) /= 0)
+    end function wx_document_is_modified_base
+
+    subroutine wx_document_modify_base(self, modified)
+        class(wxdocument_t), intent(in) :: self
+        logical, intent(in) :: modified
+        call wxDocument_ModifyBase(self%ptr, merge(1_c_int, 0_c_int, modified))
+    end subroutine wx_document_modify_base
+
+    function wx_document_create_with_parent(pobject, parent) result(result_value)
+        type(c_ptr), intent(in), value :: pobject
+        class(wxdocument_t), intent(in) :: parent
+        type(c_ptr) :: result_value
+        result_value = wxDocument_CreateWithParent(pobject, parent%ptr)
+    end function wx_document_create_with_parent
 
 end module wx_document

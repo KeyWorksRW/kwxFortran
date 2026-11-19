@@ -17,6 +17,7 @@ module wx_list_ctrl
     public :: wx_list_ctrl_get_column_index_from_order
     public :: wx_list_ctrl_set_item_column_image
     public :: wx_list_ctrl_set_item_ptr_data
+    public :: wx_list_ctrl_get_item_ptr_data
     public :: wx_list_ctrl_get_item_text_colour
     public :: wx_list_ctrl_set_item_text_colour
     public :: wx_list_ctrl_get_item_background_colour
@@ -129,7 +130,7 @@ contains
         class(wxlistctrl_t), intent(in) :: self
         integer(c_int), intent(in) :: item
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxListCtrl_GetItemPosition2(self%ptr, item), .false.)
+        result_object = wxpoint_from_ptr(wxListCtrl_GetItemPosition2(self%ptr, item), .true.)
     end function wx_list_ctrl_get_item_position2
 
     subroutine wx_list_ctrl_refresh_items(self, from, topos)
@@ -177,11 +178,18 @@ contains
         result_value = (wxListCtrl_SetItemPtrData(self%ptr, item, data) /= 0)
     end function wx_list_ctrl_set_item_ptr_data
 
+    function wx_list_ctrl_get_item_ptr_data(self, item) result(result_value)
+        class(wxlistctrl_t), intent(in) :: self
+        integer(c_long), intent(in) :: item
+        integer(c_size_t) :: result_value
+        result_value = wxListCtrl_GetItemPtrData(self%ptr, item)
+    end function wx_list_ctrl_get_item_ptr_data
+
     function wx_list_ctrl_get_item_text_colour(self, item) result(result_object)
         class(wxlistctrl_t), intent(in) :: self
         integer(c_long), intent(in) :: item
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxListCtrl_GetItemTextColour(self%ptr, item), .false.)
+        result_object = wxcolour_from_ptr(wxListCtrl_GetItemTextColour(self%ptr, item), .true.)
     end function wx_list_ctrl_get_item_text_colour
 
     subroutine wx_list_ctrl_set_item_text_colour(self, item, col)
@@ -195,7 +203,7 @@ contains
         class(wxlistctrl_t), intent(in) :: self
         integer(c_long), intent(in) :: item
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxListCtrl_GetItemBackgroundColour(self%ptr, item), .false.)
+        result_object = wxcolour_from_ptr(wxListCtrl_GetItemBackgroundColour(self%ptr, item), .true.)
     end function wx_list_ctrl_get_item_background_colour
 
     subroutine wx_list_ctrl_set_item_background_colour(self, item, col)
@@ -257,7 +265,7 @@ contains
     function wx_list_ctrl_get_alternate_row_colour(self) result(result_object)
         class(wxlistctrl_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxListCtrl_GetAlternateRowColour(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxListCtrl_GetAlternateRowColour(self%ptr), .true.)
     end function wx_list_ctrl_get_alternate_row_colour
 
     subroutine wx_list_ctrl_extend_rules_and_alternate_colour(self, extend)
@@ -443,14 +451,14 @@ contains
         class(wxlistctrl_t), intent(in) :: self
         integer(c_long), intent(in) :: item
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxListCtrl_GetItemFont(self%ptr, item), .false.)
+        result_object = wxfont_from_ptr(wxListCtrl_GetItemFont(self%ptr, item), .true.)
     end function wx_list_ctrl_get_item_font
 
     function wx_list_ctrl_get_item_position(self, item) result(result_object)
         class(wxlistctrl_t), intent(in) :: self
         integer(c_int), intent(in) :: item
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxListCtrl_GetItemPosition(self%ptr, item), .false.)
+        result_object = wxpoint_from_ptr(wxListCtrl_GetItemPosition(self%ptr, item), .true.)
     end function wx_list_ctrl_get_item_position
 
     function wx_list_ctrl_get_item_rect(self, item, code) result(result_object)
@@ -458,14 +466,14 @@ contains
         integer(c_int), intent(in) :: item
         integer(c_int), intent(in) :: code
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxListCtrl_GetItemRect(self%ptr, item, code), .false.)
+        result_object = wxrect_from_ptr(wxListCtrl_GetItemRect(self%ptr, item, code), .true.)
     end function wx_list_ctrl_get_item_rect
 
     function wx_list_ctrl_get_item_spacing(self, issmall) result(result_object)
         class(wxlistctrl_t), intent(in) :: self
         logical, intent(in) :: issmall
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxListCtrl_GetItemSpacing(self%ptr, merge(1_c_int, 0_c_int, issmall)), .false.)
+        result_object = wxsize_from_ptr(wxListCtrl_GetItemSpacing(self%ptr, merge(1_c_int, 0_c_int, issmall)), .true.)
     end function wx_list_ctrl_get_item_spacing
 
     function wx_list_ctrl_get_item_state(self, item, statemask) result(result_value)

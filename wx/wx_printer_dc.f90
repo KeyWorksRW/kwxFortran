@@ -31,7 +31,7 @@ contains
     function wx_printer_dc_get_paper_rect(self) result(result_object)
         class(wxprinterdc_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxPrinterDC_GetPaperRect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxPrinterDC_GetPaperRect(self%ptr), .true.)
     end function wx_printer_dc_get_paper_rect
 
 end module wx_printer_dc

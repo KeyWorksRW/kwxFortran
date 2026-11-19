@@ -309,7 +309,7 @@ contains
         integer(c_int), intent(in) :: bottom
         integer(c_int), intent(in) :: right
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxGrid_BlockToDeviceRect(self%ptr, top, left, bottom, right), .false.)
+        result_object = wxrect_from_ptr(wxGrid_BlockToDeviceRect(self%ptr, top, left, bottom, right), .true.)
     end function wx_grid_block_to_device_rect
 
     function wx_grid_can_drag_col_size(self, col) result(result_value)
@@ -343,7 +343,7 @@ contains
         integer(c_int), intent(in) :: row
         integer(c_int), intent(in) :: col
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxGrid_CellToRect(self%ptr, row, col), .false.)
+        result_object = wxrect_from_ptr(wxGrid_CellToRect(self%ptr, row, col), .true.)
     end function wx_grid_cell_to_rect
 
     subroutine wx_grid_clear_grid(self)

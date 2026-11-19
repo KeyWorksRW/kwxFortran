@@ -28,6 +28,35 @@ module wx_accessible
     public :: wx_accessible_set_on_get_value
     public :: wx_accessible_set_on_select
     public :: wx_accessible_set_on_get_focus
+    public :: wx_accessible_set_on_get_selections
+    public :: wx_accessible_set_on_hit_test_with_data
+    public :: wx_accessible_set_on_get_location_with_data
+    public :: wx_accessible_set_on_navigate_with_data
+    public :: wx_accessible_set_on_get_name_with_data
+    public :: wx_accessible_set_on_get_child_count_with_data
+    public :: wx_accessible_set_on_get_child_with_data
+    public :: wx_accessible_set_on_get_parent_with_data
+    public :: wx_accessible_set_on_do_default_action_with_data
+    public :: wx_accessible_set_on_get_default_action_with_data
+    public :: wx_accessible_set_on_get_description_with_data
+    public :: wx_accessible_set_on_get_help_text_with_data
+    public :: wx_accessible_set_on_get_keyboard_shortcut_with_data
+    public :: wx_accessible_set_on_get_role_with_data
+    public :: wx_accessible_set_on_get_state_with_data
+    public :: wx_accessible_set_on_get_value_with_data
+    public :: wx_accessible_set_on_select_with_data
+    public :: wx_accessible_set_on_get_focus_with_data
+    public :: wx_accessible_set_on_get_selections_with_data
+    public :: wx_accessible_set_hook_result
+    public :: wx_accessible_set_hit_test_result
+    public :: wx_accessible_set_get_location_result
+    public :: wx_accessible_set_navigate_result
+    public :: wx_accessible_set_get_child_count_result
+    public :: wx_accessible_set_get_child_result
+    public :: wx_accessible_set_get_parent_result
+    public :: wx_accessible_set_get_role_result
+    public :: wx_accessible_set_get_state_result
+    public :: wx_accessible_set_get_focus_result
 
 contains
 
@@ -170,5 +199,203 @@ contains
         type(c_ptr), intent(in), value :: pfunction
         call wxAccessible_SetOnGetFocus(self%ptr, pfunction)
     end subroutine wx_accessible_set_on_get_focus
+
+    subroutine wx_accessible_set_on_get_selections(self, pfunction)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        call wxAccessible_SetOnGetSelections(self%ptr, pfunction)
+    end subroutine wx_accessible_set_on_get_selections
+
+    subroutine wx_accessible_set_on_hit_test_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnHitTestWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_hit_test_with_data
+
+    subroutine wx_accessible_set_on_get_location_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetLocationWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_location_with_data
+
+    subroutine wx_accessible_set_on_navigate_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnNavigateWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_navigate_with_data
+
+    subroutine wx_accessible_set_on_get_name_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetNameWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_name_with_data
+
+    subroutine wx_accessible_set_on_get_child_count_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetChildCountWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_child_count_with_data
+
+    subroutine wx_accessible_set_on_get_child_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetChildWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_child_with_data
+
+    subroutine wx_accessible_set_on_get_parent_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetParentWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_parent_with_data
+
+    subroutine wx_accessible_set_on_do_default_action_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnDoDefaultActionWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_do_default_action_with_data
+
+    subroutine wx_accessible_set_on_get_default_action_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetDefaultActionWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_default_action_with_data
+
+    subroutine wx_accessible_set_on_get_description_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetDescriptionWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_description_with_data
+
+    subroutine wx_accessible_set_on_get_help_text_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetHelpTextWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_help_text_with_data
+
+    subroutine wx_accessible_set_on_get_keyboard_shortcut_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetKeyboardShortcutWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_keyboard_shortcut_with_data
+
+    subroutine wx_accessible_set_on_get_role_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetRoleWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_role_with_data
+
+    subroutine wx_accessible_set_on_get_state_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetStateWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_state_with_data
+
+    subroutine wx_accessible_set_on_get_value_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetValueWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_value_with_data
+
+    subroutine wx_accessible_set_on_select_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnSelectWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_select_with_data
+
+    subroutine wx_accessible_set_on_get_focus_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetFocusWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_focus_with_data
+
+    subroutine wx_accessible_set_on_get_selections_with_data(self, pfunction, data)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxAccessible_SetOnGetSelectionsWithData(self%ptr, pfunction, data)
+    end subroutine wx_accessible_set_on_get_selections_with_data
+
+    subroutine wx_accessible_set_hook_result(self, result)
+        class(wxaccessible_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call wxAccessible_SetHookResult(self%ptr, result)
+    end subroutine wx_accessible_set_hook_result
+
+    subroutine wx_accessible_set_hit_test_result(self, childid, childobject)
+        class(wxaccessible_t), intent(in) :: self
+        integer(c_int), intent(in) :: childid
+        type(c_ptr), intent(in), value :: childobject
+        call wxAccessible_SetHitTestResult(self%ptr, childid, childobject)
+    end subroutine wx_accessible_set_hit_test_result
+
+    subroutine wx_accessible_set_get_location_result(self, x, y, width, height)
+        class(wxaccessible_t), intent(in) :: self
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxAccessible_SetGetLocationResult(self%ptr, x, y, width, height)
+    end subroutine wx_accessible_set_get_location_result
+
+    subroutine wx_accessible_set_navigate_result(self, toid, toobject)
+        class(wxaccessible_t), intent(in) :: self
+        integer(c_int), intent(in) :: toid
+        type(c_ptr), intent(in), value :: toobject
+        call wxAccessible_SetNavigateResult(self%ptr, toid, toobject)
+    end subroutine wx_accessible_set_navigate_result
+
+    subroutine wx_accessible_set_get_child_count_result(self, childcount)
+        class(wxaccessible_t), intent(in) :: self
+        integer(c_int), intent(in) :: childcount
+        call wxAccessible_SetGetChildCountResult(self%ptr, childcount)
+    end subroutine wx_accessible_set_get_child_count_result
+
+    subroutine wx_accessible_set_get_child_result(self, child)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: child
+        call wxAccessible_SetGetChildResult(self%ptr, child)
+    end subroutine wx_accessible_set_get_child_result
+
+    subroutine wx_accessible_set_get_parent_result(self, parent)
+        class(wxaccessible_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: parent
+        call wxAccessible_SetGetParentResult(self%ptr, parent)
+    end subroutine wx_accessible_set_get_parent_result
+
+    subroutine wx_accessible_set_get_role_result(self, role)
+        class(wxaccessible_t), intent(in) :: self
+        integer(c_int), intent(in) :: role
+        call wxAccessible_SetGetRoleResult(self%ptr, role)
+    end subroutine wx_accessible_set_get_role_result
+
+    subroutine wx_accessible_set_get_state_result(self, state)
+        class(wxaccessible_t), intent(in) :: self
+        integer(c_int), intent(in) :: state
+        call wxAccessible_SetGetStateResult(self%ptr, state)
+    end subroutine wx_accessible_set_get_state_result
+
+    subroutine wx_accessible_set_get_focus_result(self, childid, child)
+        class(wxaccessible_t), intent(in) :: self
+        integer(c_int), intent(in) :: childid
+        type(c_ptr), intent(in), value :: child
+        call wxAccessible_SetGetFocusResult(self%ptr, childid, child)
+    end subroutine wx_accessible_set_get_focus_result
 
 end module wx_accessible

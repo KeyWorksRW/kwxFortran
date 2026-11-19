@@ -25,6 +25,12 @@ module wx_wizard
     public :: wx_wizard_create2
     public :: wx_wizard_set_bitmap
     public :: wx_wizard_get_bitmap_placement
+    public :: wx_wizard_is_running
+    public :: wx_wizard_set_bitmap_background_colour
+    public :: wx_wizard_get_bitmap_background_colour
+    public :: wx_wizard_set_minimum_bitmap_width
+    public :: wx_wizard_get_minimum_bitmap_width
+    public :: wx_wizard_tile_bitmap
 
 contains
 
@@ -75,7 +81,7 @@ contains
     function wx_wizard_get_page_size(self) result(result_object)
         class(wxwizard_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWizard_GetPageSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWizard_GetPageSize(self%ptr), .true.)
     end function wx_wizard_get_page_size
 
     function wx_wizard_run_wizard(self, firstpage) result(result_value)
@@ -163,5 +169,46 @@ contains
         integer(c_int) :: result_value
         result_value = wxWizard_GetBitmapPlacement(self%ptr)
     end function wx_wizard_get_bitmap_placement
+
+    function wx_wizard_is_running(self) result(result_value)
+        class(wxwizard_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxWizard_IsRunning(self%ptr) /= 0)
+    end function wx_wizard_is_running
+
+    subroutine wx_wizard_set_bitmap_background_colour(self, colour)
+        class(wxwizard_t), intent(in) :: self
+        class(wxcolour_t), intent(in) :: colour
+        call wxWizard_SetBitmapBackgroundColour(self%ptr, colour%ptr)
+    end subroutine wx_wizard_set_bitmap_background_colour
+
+    subroutine wx_wizard_get_bitmap_background_colour(self, ref)
+        class(wxwizard_t), intent(in) :: self
+        class(wxcolour_t), intent(in) :: ref
+        call wxWizard_GetBitmapBackgroundColour(self%ptr, ref%ptr)
+    end subroutine wx_wizard_get_bitmap_background_colour
+
+    subroutine wx_wizard_set_minimum_bitmap_width(self, width)
+        class(wxwizard_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        call wxWizard_SetMinimumBitmapWidth(self%ptr, width)
+    end subroutine wx_wizard_set_minimum_bitmap_width
+
+    function wx_wizard_get_minimum_bitmap_width(self) result(result_value)
+        class(wxwizard_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxWizard_GetMinimumBitmapWidth(self%ptr)
+    end function wx_wizard_get_minimum_bitmap_width
+
+    function wx_wizard_tile_bitmap(left, top, width, height, dc, bitmap) result(result_value)
+        integer(c_int), intent(in) :: left
+        integer(c_int), intent(in) :: top
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        class(wxdc_t), intent(in) :: dc
+        class(wxbitmap_t), intent(in) :: bitmap
+        logical :: result_value
+        result_value = (wxWizard_TileBitmap(left, top, width, height, dc%ptr, bitmap%ptr) /= 0)
+    end function wx_wizard_tile_bitmap
 
 end module wx_wizard

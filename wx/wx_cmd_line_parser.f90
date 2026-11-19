@@ -22,6 +22,7 @@ module wx_cmd_line_parser
     public :: wx_cmd_line_parser_parse_string
     public :: wx_cmd_line_parser_parse_args
     public :: wx_cmd_line_parser_parse_string_args
+    public :: wx_cmd_line_parser_parse_argv
     public :: wx_cmd_line_parser_found
     public :: wx_cmd_line_parser_get_param_count
     public :: wx_cmd_line_parser_get_param
@@ -182,6 +183,25 @@ contains
         result_value = wxCmdLineParser_ParseStringArgs(self%ptr, command_line_ptr)
         call wxString_Delete(command_line_ptr)
     end function wx_cmd_line_parser_parse_string_args
+
+    function wx_cmd_line_parser_parse_argv(self, arg) result(result_value)
+        class(wxcmdlineparser_t), intent(in) :: self
+        character(len=*), intent(in) :: arg(:)
+        integer :: arg_count, arg_index, arg_maxlen
+        character(kind=c_char, len=:), allocatable, target :: arg_buffer(:)
+        type(c_ptr), allocatable, target :: arg_ptrs(:)
+        integer(c_int) :: result_value
+        arg_count = int(size(arg), c_int)
+        arg_maxlen = 1
+        if (arg_count > 0) arg_maxlen = maxval(len_trim(arg)) + 1
+        allocate(character(len=arg_maxlen) :: arg_buffer(max(1, arg_count)))
+        allocate(arg_ptrs(max(1, arg_count)))
+        do arg_index = 1, arg_count
+            arg_buffer(arg_index) = trim(arg(arg_index)) // c_null_char
+            arg_ptrs(arg_index) = c_loc(arg_buffer(arg_index))
+        end do
+        result_value = wxCmdLineParser_ParseArgv(self%ptr, arg_count, c_loc(arg_ptrs))
+    end function wx_cmd_line_parser_parse_argv
 
     function wx_cmd_line_parser_found(self, name) result(result_value)
         class(wxcmdlineparser_t), intent(in) :: self

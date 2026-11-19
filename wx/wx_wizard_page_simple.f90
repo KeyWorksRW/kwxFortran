@@ -12,6 +12,7 @@ module wx_wizard_page_simple
     public :: wx_wizard_page_simple_get_prev
     public :: wx_wizard_page_simple_set_next
     public :: wx_wizard_page_simple_set_prev
+    public :: wx_wizard_page_simple_chain
     public :: wx_wizard_page_simple_create_with_bundle
 
 contains
@@ -29,32 +30,39 @@ contains
     function wx_wizard_page_simple_get_bitmap(self) result(result_object)
         class(wxwizardpagesimple_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxWizardPageSimple_GetBitmap(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxWizardPageSimple_GetBitmap(self%ptr), .true.)
     end function wx_wizard_page_simple_get_bitmap
 
     function wx_wizard_page_simple_get_next(self) result(result_object)
         class(wxwizardpagesimple_t), intent(in) :: self
-        type(wxwizardpagesimple_t) :: result_object
-        result_object = wxwizardpagesimple_from_ptr(wxWizardPageSimple_GetNext(self%ptr), .false.)
+        type(wxwizardpage_t) :: result_object
+        result_object = wxwizardpage_from_ptr(wxWizardPageSimple_GetNext(self%ptr), .false.)
     end function wx_wizard_page_simple_get_next
 
     function wx_wizard_page_simple_get_prev(self) result(result_object)
         class(wxwizardpagesimple_t), intent(in) :: self
-        type(wxwizardpagesimple_t) :: result_object
-        result_object = wxwizardpagesimple_from_ptr(wxWizardPageSimple_GetPrev(self%ptr), .false.)
+        type(wxwizardpage_t) :: result_object
+        result_object = wxwizardpage_from_ptr(wxWizardPageSimple_GetPrev(self%ptr), .false.)
     end function wx_wizard_page_simple_get_prev
 
     subroutine wx_wizard_page_simple_set_next(self, next)
         class(wxwizardpagesimple_t), intent(in) :: self
-        class(wxwizardpagesimple_t), intent(in) :: next
+        class(wxwizardpage_t), intent(in) :: next
         call wxWizardPageSimple_SetNext(self%ptr, next%ptr)
     end subroutine wx_wizard_page_simple_set_next
 
     subroutine wx_wizard_page_simple_set_prev(self, prev)
         class(wxwizardpagesimple_t), intent(in) :: self
-        class(wxwizardpagesimple_t), intent(in) :: prev
+        class(wxwizardpage_t), intent(in) :: prev
         call wxWizardPageSimple_SetPrev(self%ptr, prev%ptr)
     end subroutine wx_wizard_page_simple_set_prev
+
+    function wx_wizard_page_simple_chain(self, next) result(result_object)
+        class(wxwizardpagesimple_t), intent(in) :: self
+        class(wxwizardpagesimple_t), intent(in) :: next
+        type(wxwizardpagesimple_t) :: result_object
+        result_object = wxwizardpagesimple_from_ptr(wxWizardPageSimple_Chain(self%ptr, next%ptr), .false.)
+    end function wx_wizard_page_simple_chain
 
     function wx_wizard_page_simple_create_with_bundle(parent, prev, next, bitmap) result(result_object)
         class(wxwizard_t), intent(in) :: parent

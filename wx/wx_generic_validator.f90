@@ -3,13 +3,19 @@ module wx_generic_validator
     use, intrinsic :: iso_c_binding
     use kwx_types
     use kwxffi
-    use wx_string, only: to_wxstring
     implicit none
     private
 
     public :: wx_generic_validator_create_int
     public :: wx_generic_validator_create_bool
     public :: wx_generic_validator_create_string
+    public :: wx_generic_validator_create_array_int
+    public :: wx_generic_validator_create_date_time
+    public :: wx_generic_validator_create_file_name
+    public :: wx_generic_validator_create_float
+    public :: wx_generic_validator_create_double
+    public :: wx_generic_validator_create_colour
+    public :: wx_generic_validator_create_check_box_state
     public :: wx_generic_validator_delete
 
 contains
@@ -29,14 +35,60 @@ contains
     end function wx_generic_validator_create_bool
 
     function wx_generic_validator_create_string(value) result(result_object)
-        character(len=*), intent(in) :: value
-        type(c_ptr) :: value_ptr
+        type(c_ptr), intent(in), value :: value
         type(wxgenericvalidator_t) :: result_object
-        value_ptr = to_wxstring(value)
-        result_object%ptr = wxGenericValidator_CreateString(value_ptr)
+        result_object%ptr = wxGenericValidator_CreateString(value)
         result_object%owned = .true.
-        call wxString_Delete(value_ptr)
     end function wx_generic_validator_create_string
+
+    function wx_generic_validator_create_array_int(value) result(result_object)
+        type(c_ptr), intent(in), value :: value
+        type(wxgenericvalidator_t) :: result_object
+        result_object%ptr = wxGenericValidator_CreateArrayInt(value)
+        result_object%owned = .true.
+    end function wx_generic_validator_create_array_int
+
+    function wx_generic_validator_create_date_time(value) result(result_object)
+        type(c_ptr), intent(in), value :: value
+        type(wxgenericvalidator_t) :: result_object
+        result_object%ptr = wxGenericValidator_CreateDateTime(value)
+        result_object%owned = .true.
+    end function wx_generic_validator_create_date_time
+
+    function wx_generic_validator_create_file_name(value) result(result_object)
+        type(c_ptr), intent(in), value :: value
+        type(wxgenericvalidator_t) :: result_object
+        result_object%ptr = wxGenericValidator_CreateFileName(value)
+        result_object%owned = .true.
+    end function wx_generic_validator_create_file_name
+
+    function wx_generic_validator_create_float(value) result(result_object)
+        type(c_ptr), intent(in), value :: value
+        type(wxgenericvalidator_t) :: result_object
+        result_object%ptr = wxGenericValidator_CreateFloat(value)
+        result_object%owned = .true.
+    end function wx_generic_validator_create_float
+
+    function wx_generic_validator_create_double(value) result(result_object)
+        type(c_ptr), intent(in), value :: value
+        type(wxgenericvalidator_t) :: result_object
+        result_object%ptr = wxGenericValidator_CreateDouble(value)
+        result_object%owned = .true.
+    end function wx_generic_validator_create_double
+
+    function wx_generic_validator_create_colour(value) result(result_object)
+        type(c_ptr), intent(in), value :: value
+        type(wxgenericvalidator_t) :: result_object
+        result_object%ptr = wxGenericValidator_CreateColour(value)
+        result_object%owned = .true.
+    end function wx_generic_validator_create_colour
+
+    function wx_generic_validator_create_check_box_state(value) result(result_object)
+        type(c_ptr), intent(in), value :: value
+        type(wxgenericvalidator_t) :: result_object
+        result_object%ptr = wxGenericValidator_CreateCheckBoxState(value)
+        result_object%owned = .true.
+    end function wx_generic_validator_create_check_box_state
 
     subroutine wx_generic_validator_delete(self)
         class(wxgenericvalidator_t), intent(inout) :: self

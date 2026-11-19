@@ -34,7 +34,7 @@ contains
     function wx_font_picker_event_get_font(self) result(result_object)
         class(wxfontpickerevent_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxFontPickerEvent_GetFont(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxFontPickerEvent_GetFont(self%ptr), .true.)
     end function wx_font_picker_event_get_font
 
     subroutine wx_font_picker_event_set_font(self, font)

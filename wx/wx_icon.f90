@@ -15,6 +15,7 @@ module wx_icon
     public :: wx_icon_from_raw
     public :: wx_icon_from_xpm
     public :: wx_icon_create_from_xpm_data
+    public :: wx_icon_create_from_xpm_string
     public :: wx_icon_get_depth
     public :: wx_icon_get_height
     public :: wx_icon_get_width
@@ -84,6 +85,15 @@ contains
         result_object%ptr = wxIcon_CreateFromXPMData(xpm)
         result_object%owned = .true.
     end function wx_icon_create_from_xpm_data
+
+    function wx_icon_create_from_xpm_string(xpm) result(result_object)
+        character(len=*), intent(in) :: xpm
+        character(kind=c_char, len=:), allocatable, target :: xpm_c
+        type(wxicon_t) :: result_object
+        xpm_c = trim(xpm) // c_null_char
+        result_object%ptr = wxIcon_CreateFromXPMString(c_loc(xpm_c))
+        result_object%owned = .true.
+    end function wx_icon_create_from_xpm_string
 
     function wx_icon_get_depth(self) result(result_value)
         class(wxicon_t), intent(in) :: self

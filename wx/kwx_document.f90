@@ -3,6 +3,7 @@ module kwx_document
     use, intrinsic :: iso_c_binding
     use kwx_types
     use kwxffi
+    use wx_string, only: to_wxstring
     implicit none
     private
 
@@ -15,6 +16,22 @@ module kwx_document
     public :: kwx_document_set_on_modify
     public :: kwx_document_set_on_on_create
     public :: kwx_document_set_on_on_open_document
+    public :: kwx_document_set_on_do_open_document_with_data
+    public :: kwx_document_set_do_open_document_result
+    public :: kwx_document_set_on_do_save_document_with_data
+    public :: kwx_document_set_do_save_document_result
+    public :: kwx_document_set_on_is_modified_with_data
+    public :: kwx_document_set_is_modified_result
+    public :: kwx_document_set_on_modify_with_data
+    public :: kwx_document_set_on_on_create_with_data
+    public :: kwx_document_set_on_create_result
+    public :: kwx_document_set_on_on_open_document_with_data
+    public :: kwx_document_set_on_open_document_result
+    public :: kwx_document_on_create_base
+    public :: kwx_document_on_open_document_base
+    public :: kwx_document_is_modified_base
+    public :: kwx_document_modify_base
+    public :: kwx_document_create_with_parent
 
 contains
 
@@ -74,5 +91,117 @@ contains
         type(c_ptr), intent(in), value :: pfunction
         call kwxDocument_SetOnOnOpenDocument(self%ptr, pfunction)
     end subroutine kwx_document_set_on_on_open_document
+
+    subroutine kwx_document_set_on_do_open_document_with_data(self, pfunction, data)
+        class(kwxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxDocument_SetOnDoOpenDocumentWithData(self%ptr, pfunction, data)
+    end subroutine kwx_document_set_on_do_open_document_with_data
+
+    subroutine kwx_document_set_do_open_document_result(self, result)
+        class(kwxdocument_t), intent(in) :: self
+        logical, intent(in) :: result
+        call kwxDocument_SetDoOpenDocumentResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine kwx_document_set_do_open_document_result
+
+    subroutine kwx_document_set_on_do_save_document_with_data(self, pfunction, data)
+        class(kwxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxDocument_SetOnDoSaveDocumentWithData(self%ptr, pfunction, data)
+    end subroutine kwx_document_set_on_do_save_document_with_data
+
+    subroutine kwx_document_set_do_save_document_result(self, result)
+        class(kwxdocument_t), intent(in) :: self
+        logical, intent(in) :: result
+        call kwxDocument_SetDoSaveDocumentResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine kwx_document_set_do_save_document_result
+
+    subroutine kwx_document_set_on_is_modified_with_data(self, pfunction, data)
+        class(kwxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxDocument_SetOnIsModifiedWithData(self%ptr, pfunction, data)
+    end subroutine kwx_document_set_on_is_modified_with_data
+
+    subroutine kwx_document_set_is_modified_result(self, result)
+        class(kwxdocument_t), intent(in) :: self
+        logical, intent(in) :: result
+        call kwxDocument_SetIsModifiedResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine kwx_document_set_is_modified_result
+
+    subroutine kwx_document_set_on_modify_with_data(self, pfunction, data)
+        class(kwxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxDocument_SetOnModifyWithData(self%ptr, pfunction, data)
+    end subroutine kwx_document_set_on_modify_with_data
+
+    subroutine kwx_document_set_on_on_create_with_data(self, pfunction, data)
+        class(kwxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxDocument_SetOnOnCreateWithData(self%ptr, pfunction, data)
+    end subroutine kwx_document_set_on_on_create_with_data
+
+    subroutine kwx_document_set_on_create_result(self, result)
+        class(kwxdocument_t), intent(in) :: self
+        logical, intent(in) :: result
+        call kwxDocument_SetOnCreateResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine kwx_document_set_on_create_result
+
+    subroutine kwx_document_set_on_on_open_document_with_data(self, pfunction, data)
+        class(kwxdocument_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxDocument_SetOnOnOpenDocumentWithData(self%ptr, pfunction, data)
+    end subroutine kwx_document_set_on_on_open_document_with_data
+
+    subroutine kwx_document_set_on_open_document_result(self, result)
+        class(kwxdocument_t), intent(in) :: self
+        logical, intent(in) :: result
+        call kwxDocument_SetOnOpenDocumentResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine kwx_document_set_on_open_document_result
+
+    function kwx_document_on_create_base(self, path, flags) result(result_value)
+        class(kwxdocument_t), intent(in) :: self
+        character(len=*), intent(in) :: path
+        integer(c_long), intent(in) :: flags
+        type(c_ptr) :: path_ptr
+        logical :: result_value
+        path_ptr = to_wxstring(path)
+        result_value = (kwxDocument_OnCreateBase(self%ptr, path_ptr, flags) /= 0)
+        call wxString_Delete(path_ptr)
+    end function kwx_document_on_create_base
+
+    function kwx_document_on_open_document_base(self, filename) result(result_value)
+        class(kwxdocument_t), intent(in) :: self
+        character(len=*), intent(in) :: filename
+        type(c_ptr) :: filename_ptr
+        logical :: result_value
+        filename_ptr = to_wxstring(filename)
+        result_value = (kwxDocument_OnOpenDocumentBase(self%ptr, filename_ptr) /= 0)
+        call wxString_Delete(filename_ptr)
+    end function kwx_document_on_open_document_base
+
+    function kwx_document_is_modified_base(self) result(result_value)
+        class(kwxdocument_t), intent(in) :: self
+        logical :: result_value
+        result_value = (kwxDocument_IsModifiedBase(self%ptr) /= 0)
+    end function kwx_document_is_modified_base
+
+    subroutine kwx_document_modify_base(self, modified)
+        class(kwxdocument_t), intent(in) :: self
+        logical, intent(in) :: modified
+        call kwxDocument_ModifyBase(self%ptr, merge(1_c_int, 0_c_int, modified))
+    end subroutine kwx_document_modify_base
+
+    function kwx_document_create_with_parent(pobject, parent) result(result_value)
+        type(c_ptr), intent(in), value :: pobject
+        class(wxdocument_t), intent(in) :: parent
+        type(c_ptr) :: result_value
+        result_value = kwxDocument_CreateWithParent(pobject, parent%ptr)
+    end function kwx_document_create_with_parent
 
 end module kwx_document

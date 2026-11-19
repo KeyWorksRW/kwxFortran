@@ -12,6 +12,9 @@ module wx_metafile
     public :: wx_metafile_is_ok
     public :: wx_metafile_play
     public :: wx_metafile_set_clipboard
+    public :: wx_metafile_get_width
+    public :: wx_metafile_get_height
+    public :: wx_metafile_get_size
 
 contains
 
@@ -54,5 +57,23 @@ contains
         logical :: result_value
         result_value = (wxMetafile_SetClipboard(self%ptr, width, height) /= 0)
     end function wx_metafile_set_clipboard
+
+    function wx_metafile_get_width(self) result(result_value)
+        class(wxmetafile_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxMetafile_GetWidth(self%ptr)
+    end function wx_metafile_get_width
+
+    function wx_metafile_get_height(self) result(result_value)
+        class(wxmetafile_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxMetafile_GetHeight(self%ptr)
+    end function wx_metafile_get_height
+
+    function wx_metafile_get_size(self) result(result_object)
+        class(wxmetafile_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxMetafile_GetSize(self%ptr), .true.)
+    end function wx_metafile_get_size
 
 end module wx_metafile

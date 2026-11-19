@@ -42,14 +42,14 @@ contains
     function wx_system_colour_property_get_val(self) result(result_object)
         class(wxsystemcolourproperty_t), intent(in) :: self
         type(wxcolourpropertyvalue_t) :: result_object
-        result_object = wxcolourpropertyvalue_from_ptr(wxSystemColourProperty_GetVal(self%ptr), .false.)
+        result_object = wxcolourpropertyvalue_from_ptr(wxSystemColourProperty_GetVal(self%ptr), .true.)
     end function wx_system_colour_property_get_val
 
     function wx_system_colour_property_get_colour(self, index) result(result_object)
         class(wxsystemcolourproperty_t), intent(in) :: self
         integer(c_int), intent(in) :: index
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxSystemColourProperty_GetColour(self%ptr, index), .false.)
+        result_object = wxcolour_from_ptr(wxSystemColourProperty_GetColour(self%ptr, index), .true.)
     end function wx_system_colour_property_get_colour
 
     function wx_system_colour_property_col_to_ind(self, colour) result(result_value)

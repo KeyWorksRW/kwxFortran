@@ -3,15 +3,27 @@ module wx_svg_file_dc
     use, intrinsic :: iso_c_binding
     use kwx_types
     use kwxffi
-    use wx_string, only: to_wxstring
+    use wx_string, only: to_wxstring, from_wxstring
     implicit none
     private
 
     public :: wx_svg_file_dc_create
+    public :: wx_svg_file_dc_begin_accessible_group
     public :: wx_svg_file_dc_end_accessible_group
+    public :: wx_svg_file_dc_begin_layer
+    public :: wx_svg_file_dc_end_layer
+    public :: wx_svg_file_dc_save
+    public :: wx_svg_file_dc_get_svg_document
+    public :: wx_svg_file_dc_set_shape_rendering_mode
     public :: wx_svg_file_dc_set_bitmap_handler
     public :: wx_svg_file_dc_create_with_size
     public :: wx_svg_file_dc_create_with_size_and_resolution
+    public :: wx_svg_file_dc_create_with_title
+    public :: wx_svg_file_dc_create_with_size_and_title
+    public :: wx_svg_file_dc_create_with_size_resolution_and_title
+    public :: wx_svg_file_dc_create_from_size
+    public :: wx_svg_file_dc_create_from_size_with_file_and_title
+    public :: wx_svg_file_dc_create_from_size_with_file_title_and_res
     public :: wx_svg_file_dc_delete
 
 contains
@@ -26,10 +38,56 @@ contains
         call wxString_Delete(filename_ptr)
     end function wx_svg_file_dc_create
 
+    subroutine wx_svg_file_dc_begin_accessible_group(self, attributes, title, desc)
+        class(wxsvgfiledc_t), intent(in) :: self
+        class(wxsvgattributes_t), intent(in) :: attributes
+        character(len=*), intent(in) :: title
+        character(len=*), intent(in) :: desc
+        type(c_ptr) :: title_ptr
+        type(c_ptr) :: desc_ptr
+        title_ptr = to_wxstring(title)
+        desc_ptr = to_wxstring(desc)
+        call wxSVGFileDC_BeginAccessibleGroup(self%ptr, attributes%ptr, title_ptr, desc_ptr)
+        call wxString_Delete(title_ptr)
+        call wxString_Delete(desc_ptr)
+    end subroutine wx_svg_file_dc_begin_accessible_group
+
     subroutine wx_svg_file_dc_end_accessible_group(self)
         class(wxsvgfiledc_t), intent(in) :: self
         call wxSVGFileDC_EndAccessibleGroup(self%ptr)
     end subroutine wx_svg_file_dc_end_accessible_group
+
+    subroutine wx_svg_file_dc_begin_layer(self, opacity)
+        class(wxsvgfiledc_t), intent(in) :: self
+        real(c_double), intent(in) :: opacity
+        call wxSVGFileDC_BeginLayer(self%ptr, opacity)
+    end subroutine wx_svg_file_dc_begin_layer
+
+    subroutine wx_svg_file_dc_end_layer(self)
+        class(wxsvgfiledc_t), intent(in) :: self
+        call wxSVGFileDC_EndLayer(self%ptr)
+    end subroutine wx_svg_file_dc_end_layer
+
+    function wx_svg_file_dc_save(self) result(result_value)
+        class(wxsvgfiledc_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxSVGFileDC_Save(self%ptr) /= 0)
+    end function wx_svg_file_dc_save
+
+    function wx_svg_file_dc_get_svg_document(self) result(result_text)
+        class(wxsvgfiledc_t), intent(in) :: self
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = wxSVGFileDC_GetSVGDocument(self%ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wx_svg_file_dc_get_svg_document
+
+    subroutine wx_svg_file_dc_set_shape_rendering_mode(self, mode)
+        class(wxsvgfiledc_t), intent(in) :: self
+        integer(c_int), intent(in) :: mode
+        call wxSVGFileDC_SetShapeRenderingMode(self%ptr, mode)
+    end subroutine wx_svg_file_dc_set_shape_rendering_mode
 
     subroutine wx_svg_file_dc_set_bitmap_handler(self, handler)
         class(wxsvgfiledc_t), intent(in) :: self
@@ -61,6 +119,94 @@ contains
         result_object%owned = .true.
         call wxString_Delete(filename_ptr)
     end function wx_svg_file_dc_create_with_size_and_resolution
+
+    function wx_svg_file_dc_create_with_title(filename, title) result(result_object)
+        character(len=*), intent(in) :: filename
+        character(len=*), intent(in) :: title
+        type(c_ptr) :: filename_ptr
+        type(c_ptr) :: title_ptr
+        type(wxsvgfiledc_t) :: result_object
+        filename_ptr = to_wxstring(filename)
+        title_ptr = to_wxstring(title)
+        result_object%ptr = wxSVGFileDC_CreateWithTitle(filename_ptr, title_ptr)
+        result_object%owned = .true.
+        call wxString_Delete(filename_ptr)
+        call wxString_Delete(title_ptr)
+    end function wx_svg_file_dc_create_with_title
+
+    function wx_svg_file_dc_create_with_size_and_title(filename, width, height, title) result(result_object)
+        character(len=*), intent(in) :: filename
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        character(len=*), intent(in) :: title
+        type(c_ptr) :: filename_ptr
+        type(c_ptr) :: title_ptr
+        type(wxsvgfiledc_t) :: result_object
+        filename_ptr = to_wxstring(filename)
+        title_ptr = to_wxstring(title)
+        result_object%ptr = wxSVGFileDC_CreateWithSizeAndTitle(filename_ptr, width, height, title_ptr)
+        result_object%owned = .true.
+        call wxString_Delete(filename_ptr)
+        call wxString_Delete(title_ptr)
+    end function wx_svg_file_dc_create_with_size_and_title
+
+    function wx_svg_file_dc_create_with_size_resolution_and_title(filename, width, height, a_dpi, title) result(result_object)
+        character(len=*), intent(in) :: filename
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        real(c_float), intent(in) :: a_dpi
+        character(len=*), intent(in) :: title
+        type(c_ptr) :: filename_ptr
+        type(c_ptr) :: title_ptr
+        type(wxsvgfiledc_t) :: result_object
+        filename_ptr = to_wxstring(filename)
+        title_ptr = to_wxstring(title)
+        result_object%ptr = wxSVGFileDC_CreateWithSizeResolutionAndTitle(filename_ptr, width, height, a_dpi, title_ptr)
+        result_object%owned = .true.
+        call wxString_Delete(filename_ptr)
+        call wxString_Delete(title_ptr)
+    end function wx_svg_file_dc_create_with_size_resolution_and_title
+
+    function wx_svg_file_dc_create_from_size(width, height) result(result_object)
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        type(wxsvgfiledc_t) :: result_object
+        result_object%ptr = wxSVGFileDC_CreateFromSize(width, height)
+        result_object%owned = .true.
+    end function wx_svg_file_dc_create_from_size
+
+    function wx_svg_file_dc_create_from_size_with_file_and_title(width, height, filename, title) result(result_object)
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        character(len=*), intent(in) :: filename
+        character(len=*), intent(in) :: title
+        type(c_ptr) :: filename_ptr
+        type(c_ptr) :: title_ptr
+        type(wxsvgfiledc_t) :: result_object
+        filename_ptr = to_wxstring(filename)
+        title_ptr = to_wxstring(title)
+        result_object%ptr = wxSVGFileDC_CreateFromSizeWithFileAndTitle(width, height, filename_ptr, title_ptr)
+        result_object%owned = .true.
+        call wxString_Delete(filename_ptr)
+        call wxString_Delete(title_ptr)
+    end function wx_svg_file_dc_create_from_size_with_file_and_title
+
+    function wx_svg_file_dc_create_from_size_with_file_title_and_res(width, height, filename, title, a_dpi) result(result_object)
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        character(len=*), intent(in) :: filename
+        character(len=*), intent(in) :: title
+        real(c_float), intent(in) :: a_dpi
+        type(c_ptr) :: filename_ptr
+        type(c_ptr) :: title_ptr
+        type(wxsvgfiledc_t) :: result_object
+        filename_ptr = to_wxstring(filename)
+        title_ptr = to_wxstring(title)
+        result_object%ptr = wxSVGFileDC_CreateFromSizeWithFileTitleAndResolution(width, height, filename_ptr, title_ptr, a_dpi)
+        result_object%owned = .true.
+        call wxString_Delete(filename_ptr)
+        call wxString_Delete(title_ptr)
+    end function wx_svg_file_dc_create_from_size_with_file_title_and_res
 
     subroutine wx_svg_file_dc_delete(self)
         class(wxsvgfiledc_t), intent(inout) :: self

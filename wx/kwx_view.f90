@@ -12,6 +12,11 @@ module kwx_view
     public :: kwx_view_set_on_on_close
     public :: kwx_view_set_on_on_create
     public :: kwx_view_set_on_on_update
+    public :: kwx_view_set_on_on_create_with_data
+    public :: kwx_view_set_on_create_result
+    public :: kwx_view_set_on_on_close_with_data
+    public :: kwx_view_set_on_close_result
+    public :: kwx_view_on_close_base
 
 contains
 
@@ -53,5 +58,38 @@ contains
         type(c_ptr), intent(in), value :: pfunction
         call kwxView_SetOnOnUpdate(self%ptr, pfunction)
     end subroutine kwx_view_set_on_on_update
+
+    subroutine kwx_view_set_on_on_create_with_data(self, pfunction, data)
+        class(kwxview_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxView_SetOnOnCreateWithData(self%ptr, pfunction, data)
+    end subroutine kwx_view_set_on_on_create_with_data
+
+    subroutine kwx_view_set_on_create_result(self, result)
+        class(kwxview_t), intent(in) :: self
+        logical, intent(in) :: result
+        call kwxView_SetOnCreateResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine kwx_view_set_on_create_result
+
+    subroutine kwx_view_set_on_on_close_with_data(self, pfunction, data)
+        class(kwxview_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxView_SetOnOnCloseWithData(self%ptr, pfunction, data)
+    end subroutine kwx_view_set_on_on_close_with_data
+
+    subroutine kwx_view_set_on_close_result(self, result)
+        class(kwxview_t), intent(in) :: self
+        logical, intent(in) :: result
+        call kwxView_SetOnCloseResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine kwx_view_set_on_close_result
+
+    function kwx_view_on_close_base(self, deletewindow) result(result_value)
+        class(kwxview_t), intent(in) :: self
+        logical, intent(in) :: deletewindow
+        logical :: result_value
+        result_value = (kwxView_OnCloseBase(self%ptr, merge(1_c_int, 0_c_int, deletewindow)) /= 0)
+    end function kwx_view_on_close_base
 
 end module kwx_view

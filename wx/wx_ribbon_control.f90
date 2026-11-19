@@ -49,14 +49,14 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxRibbonControl_GetBestSizeForParentSize(self%ptr, width, height), .false.)
+        result_object = wxsize_from_ptr(wxRibbonControl_GetBestSizeForParentSize(self%ptr, width, height), .true.)
     end function wx_ribbon_control_get_best_size_for_parent_size
 
     function wx_ribbon_control_get_next_larger_size(self, direction) result(result_object)
         class(wxribboncontrol_t), intent(in) :: self
         integer(c_int), intent(in) :: direction
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxRibbonControl_GetNextLargerSize(self%ptr, direction), .false.)
+        result_object = wxsize_from_ptr(wxRibbonControl_GetNextLargerSize(self%ptr, direction), .true.)
     end function wx_ribbon_control_get_next_larger_size
 
     function wx_ribbon_control_get_next_larger_size_relative(self, direction, width, height) result(result_object)
@@ -65,14 +65,14 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxRibbonControl_GetNextLargerSize_Relative(self%ptr, direction, width, height), .false.)
+        result_object = wxsize_from_ptr(wxRibbonControl_GetNextLargerSize_Relative(self%ptr, direction, width, height), .true.)
     end function wx_ribbon_control_get_next_larger_size_relative
 
     function wx_ribbon_control_get_next_smaller_size(self, direction) result(result_object)
         class(wxribboncontrol_t), intent(in) :: self
         integer(c_int), intent(in) :: direction
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxRibbonControl_GetNextSmallerSize(self%ptr, direction), .false.)
+        result_object = wxsize_from_ptr(wxRibbonControl_GetNextSmallerSize(self%ptr, direction), .true.)
     end function wx_ribbon_control_get_next_smaller_size
 
     function wx_ribbon_control_get_next_smaller_size_relative(self, direction, width, height) result(result_object)
@@ -81,7 +81,7 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxRibbonControl_GetNextSmallerSize_Relative(self%ptr, direction, width, height), .false.)
+        result_object = wxsize_from_ptr(wxRibbonControl_GetNextSmallerSize_Relative(self%ptr, direction, width, height), .true.)
     end function wx_ribbon_control_get_next_smaller_size_relative
 
     function wx_ribbon_control_is_sizing_continuous(self) result(result_value)

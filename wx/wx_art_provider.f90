@@ -3,7 +3,7 @@ module wx_art_provider
     use, intrinsic :: iso_c_binding
     use kwx_types
     use kwxffi
-    use wx_string, only: to_wxstring
+    use wx_string, only: to_wxstring, from_cstring, free_cstring
     implicit none
     private
 
@@ -11,6 +11,8 @@ module wx_art_provider
     public :: wx_art_provider_pop
     public :: wx_art_provider_push
     public :: wx_art_provider_get_bitmap_bundle
+    public :: wx_art_provider_get_bitmap_bundle_default
+    public :: wx_art_provider_make_client_id
     public :: wx_art_provider_get_icon
     public :: wx_art_provider_get_icon_bundle
     public :: wx_art_provider_get_native_size_hint
@@ -61,6 +63,26 @@ contains
         call wxString_Delete(id_ptr)
         call wxString_Delete(client_ptr)
     end function wx_art_provider_get_bitmap_bundle
+
+    function wx_art_provider_get_bitmap_bundle_default(id) result(result_object)
+        character(len=*), intent(in) :: id
+        type(c_ptr) :: id_ptr
+        type(wxbitmapbundle_t) :: result_object
+        id_ptr = to_wxstring(id)
+        result_object = wxbitmapbundle_from_ptr(wxArtProvider_GetBitmapBundleDefault(id_ptr), .true.)
+        call wxString_Delete(id_ptr)
+    end function wx_art_provider_get_bitmap_bundle_default
+
+    function wx_art_provider_make_client_id(id) result(result_text)
+        character(len=*), intent(in) :: id
+        character(kind=c_char, len=:), allocatable, target :: id_c
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        id_c = trim(id) // c_null_char
+        result_text_ptr = wxArtProvider_MakeClientId(c_loc(id_c))
+        result_text = from_cstring(result_text_ptr)
+        call free_cstring(result_text_ptr)
+    end function wx_art_provider_make_client_id
 
     function wx_art_provider_get_icon(id, client, width, height) result(result_object)
         character(len=*), intent(in) :: id

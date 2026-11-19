@@ -58,8 +58,10 @@ module wx_search_ctrl
     public :: wx_search_ctrl_set_margins
     public :: wx_search_ctrl_get_margins
     public :: wx_search_ctrl_auto_complete
+    public :: wx_search_ctrl_auto_complete_strings
     public :: wx_search_ctrl_auto_complete_file_names
     public :: wx_search_ctrl_auto_complete_directories
+    public :: wx_search_ctrl_auto_complete_completer
 
 contains
 
@@ -417,6 +419,13 @@ contains
         result_value = (wxTextEntry_AutoComplete(self%ptr, count, items) /= 0)
     end function wx_search_ctrl_auto_complete
 
+    function wx_search_ctrl_auto_complete_strings(self, items) result(result_value)
+        class(wxsearchctrl_t), intent(in) :: self
+        class(wxarraystring_t), intent(in) :: items
+        logical :: result_value
+        result_value = (wxTextEntry_AutoCompleteStrings(self%ptr, items%ptr) /= 0)
+    end function wx_search_ctrl_auto_complete_strings
+
     function wx_search_ctrl_auto_complete_file_names(self) result(result_value)
         class(wxsearchctrl_t), intent(in) :: self
         logical :: result_value
@@ -428,5 +437,12 @@ contains
         logical :: result_value
         result_value = (wxTextEntry_AutoCompleteDirectories(self%ptr) /= 0)
     end function wx_search_ctrl_auto_complete_directories
+
+    function wx_search_ctrl_auto_complete_completer(self, completer) result(result_value)
+        class(wxsearchctrl_t), intent(in) :: self
+        class(wxtextcompletersimple_t), intent(in) :: completer
+        logical :: result_value
+        result_value = (wxTextEntry_AutoCompleteCompleter(self%ptr, completer%ptr) /= 0)
+    end function wx_search_ctrl_auto_complete_completer
 
 end module wx_search_ctrl

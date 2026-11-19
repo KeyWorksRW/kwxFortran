@@ -8,8 +8,11 @@ module wx_system_appearance
     private
 
     public :: wx_system_appearance_is_dark
+    public :: wx_system_appearance_is_system_dark
+    public :: wx_system_appearance_are_apps_dark
     public :: wx_system_appearance_is_using_dark_background
     public :: wx_system_appearance_get_name
+    public :: wx_system_appearance_delete
 
 contains
 
@@ -18,6 +21,18 @@ contains
         logical :: result_value
         result_value = (wxSystemAppearance_IsDark(self%ptr) /= 0)
     end function wx_system_appearance_is_dark
+
+    function wx_system_appearance_is_system_dark(self) result(result_value)
+        class(wxsystemappearance_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxSystemAppearance_IsSystemDark(self%ptr) /= 0)
+    end function wx_system_appearance_is_system_dark
+
+    function wx_system_appearance_are_apps_dark(self) result(result_value)
+        class(wxsystemappearance_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxSystemAppearance_AreAppsDark(self%ptr) /= 0)
+    end function wx_system_appearance_are_apps_dark
 
     function wx_system_appearance_is_using_dark_background(self) result(result_value)
         class(wxsystemappearance_t), intent(in) :: self
@@ -33,5 +48,14 @@ contains
         result_text = from_wxstring(result_text_ptr)
         call wxString_Delete(result_text_ptr)
     end function wx_system_appearance_get_name
+
+    subroutine wx_system_appearance_delete(self)
+        class(wxsystemappearance_t), intent(inout) :: self
+        if (self%owned .and. c_associated(self%ptr)) then
+            call wxSystemAppearance_Delete(self%ptr)
+        end if
+        self%ptr = c_null_ptr
+        self%owned = .false.
+    end subroutine wx_system_appearance_delete
 
 end module wx_system_appearance

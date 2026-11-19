@@ -13,6 +13,19 @@ module kwx_file_drop_target
     public :: kwx_file_drop_target_set_on_drop
     public :: kwx_file_drop_target_set_on_enter
     public :: kwx_file_drop_target_set_on_leave
+    public :: kwx_file_drop_target_set_on_data_with_data
+    public :: kwx_file_drop_target_set_on_drop_with_data
+    public :: kwx_file_drop_target_set_on_enter_with_data
+    public :: kwx_file_drop_target_set_on_drag_over_with_data
+    public :: kwx_file_drop_target_set_on_leave_with_data
+    public :: kwx_file_drop_target_set_data_result
+    public :: kwx_file_drop_target_set_drop_result
+    public :: kwx_file_drop_target_set_enter_result
+    public :: kwx_file_drop_target_set_drag_over_result
+    public :: kwx_file_drop_target_get_drop_result
+    public :: kwx_file_drop_target_set_on_drop_files_with_data
+    public :: kwx_file_drop_target_set_drop_files_result
+    public :: kwx_file_drop_target_get_drop_files
 
 contains
 
@@ -62,5 +75,89 @@ contains
         type(c_ptr), intent(in), value :: pfunction
         call kwxFileDropTarget_SetOnLeave(self%ptr, pfunction)
     end subroutine kwx_file_drop_target_set_on_leave
+
+    subroutine kwx_file_drop_target_set_on_data_with_data(self, pfunction, data)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxFileDropTarget_SetOnDataWithData(self%ptr, pfunction, data)
+    end subroutine kwx_file_drop_target_set_on_data_with_data
+
+    subroutine kwx_file_drop_target_set_on_drop_with_data(self, pfunction, data)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxFileDropTarget_SetOnDropWithData(self%ptr, pfunction, data)
+    end subroutine kwx_file_drop_target_set_on_drop_with_data
+
+    subroutine kwx_file_drop_target_set_on_enter_with_data(self, pfunction, data)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxFileDropTarget_SetOnEnterWithData(self%ptr, pfunction, data)
+    end subroutine kwx_file_drop_target_set_on_enter_with_data
+
+    subroutine kwx_file_drop_target_set_on_drag_over_with_data(self, pfunction, data)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxFileDropTarget_SetOnDragOverWithData(self%ptr, pfunction, data)
+    end subroutine kwx_file_drop_target_set_on_drag_over_with_data
+
+    subroutine kwx_file_drop_target_set_on_leave_with_data(self, pfunction, data)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxFileDropTarget_SetOnLeaveWithData(self%ptr, pfunction, data)
+    end subroutine kwx_file_drop_target_set_on_leave_with_data
+
+    subroutine kwx_file_drop_target_set_data_result(self, result)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxFileDropTarget_SetDataResult(self%ptr, result)
+    end subroutine kwx_file_drop_target_set_data_result
+
+    subroutine kwx_file_drop_target_set_drop_result(self, result)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxFileDropTarget_SetDropResult(self%ptr, result)
+    end subroutine kwx_file_drop_target_set_drop_result
+
+    subroutine kwx_file_drop_target_set_enter_result(self, result)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxFileDropTarget_SetEnterResult(self%ptr, result)
+    end subroutine kwx_file_drop_target_set_enter_result
+
+    subroutine kwx_file_drop_target_set_drag_over_result(self, result)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxFileDropTarget_SetDragOverResult(self%ptr, result)
+    end subroutine kwx_file_drop_target_set_drag_over_result
+
+    function kwx_file_drop_target_get_drop_result(self) result(result_value)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = kwxFileDropTarget_GetDropResult(self%ptr)
+    end function kwx_file_drop_target_get_drop_result
+
+    subroutine kwx_file_drop_target_set_on_drop_files_with_data(self, pfunction, data)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxFileDropTarget_SetOnDropFilesWithData(self%ptr, pfunction, data)
+    end subroutine kwx_file_drop_target_set_on_drop_files_with_data
+
+    subroutine kwx_file_drop_target_set_drop_files_result(self, result)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxFileDropTarget_SetDropFilesResult(self%ptr, result)
+    end subroutine kwx_file_drop_target_set_drop_files_result
+
+    function kwx_file_drop_target_get_drop_files(self) result(result_object)
+        class(kwxfiledroptarget_t), intent(in) :: self
+        type(wxarraystring_t) :: result_object
+        result_object = wxarraystring_from_ptr(kwxFileDropTarget_GetDropFiles(self%ptr), .false.)
+    end function kwx_file_drop_target_get_drop_files
 
 end module kwx_file_drop_target

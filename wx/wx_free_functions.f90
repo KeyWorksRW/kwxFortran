@@ -3,7 +3,7 @@ module wx_free_functions
     use, intrinsic :: iso_c_binding
     use kwx_types
     use kwxffi
-    use wx_string, only: to_wxstring, from_wxstring, from_cstring
+    use wx_string, only: to_wxstring, from_wxstring, from_cstring, free_cstring
     implicit none
     private
 
@@ -99,14 +99,20 @@ module wx_free_functions
     public :: kwx_begin_busy_cursor
     public :: kwx_bell
     public :: kwx_bitmap_from_base64
+    public :: kwx_console_check_build_options
     public :: kwx_console_exit_main_loop
     public :: kwx_console_get_app
     public :: kwx_console_initialize
+    public :: kwx_console_initialize_from_args
     public :: kwx_console_is_initialized
+    public :: kwx_console_on_cmd_line_parsed_base
+    public :: kwx_console_on_init_cmd_line_base
     public :: kwx_console_process_pending_events
     public :: kwx_console_run
     public :: kwx_console_shutdown
     public :: kwx_console_yield
+    public :: kwx_dialog_on_transfer_data_from_window_
+    public :: kwx_dialog_on_transfer_data_to_window_ba
     public :: kwx_end_busy_cursor
     public :: kwx_free
     public :: kwx_get_mouse_position
@@ -116,6 +122,7 @@ module wx_free_functions
     public :: kwx_init_pixels_rgb
     public :: kwx_init_pixels_rgba
     public :: kwx_is_busy
+    public :: kwx_log_use_stderr
     public :: kwx_malloc
     public :: kwx_message_box
     public :: kwx_message_output_reset
@@ -126,6 +133,9 @@ module wx_free_functions
     public :: kwx_set_pixel_rgba
     public :: kwx_set_pixel_row_rgb
     public :: kwx_set_pixel_row_rgba
+    public :: kwx_stderr
+    public :: kwx_stdin
+    public :: kwx_stdout
     public :: kwx_svg_string_from_base64
     public :: kwx_sys_error_code
     public :: kwx_sys_error_msg
@@ -148,12 +158,15 @@ module wx_free_functions
     public :: wx_check_for_interrupt
     public :: wx_check_os_version
     public :: wx_create_file_tip_provider
+    public :: wx_create_svg_bitmap_embed_handler
     public :: wx_dec_to_hex
     public :: wx_deg_to_rad
     public :: wx_dir_selector
     public :: wx_drag_icon
+    public :: wx_drag_icon_with_cursor
     public :: wx_drag_list_item
     public :: wx_drag_string
+    public :: wx_drag_string_with_cursor
     public :: wx_drag_tree_item
     public :: wx_enable_top_level_windows
     public :: wx_end_busy_cursor
@@ -171,10 +184,21 @@ module wx_free_functions
     public :: wx_find_window_at_point
     public :: wx_find_window_by_label
     public :: wx_find_window_by_name
+    public :: wx_floating_point_validator_get_max
+    public :: wx_floating_point_validator_get_min
+    public :: wx_floating_point_validator_set_factor
+    public :: wx_floating_point_validator_set_max
+    public :: wx_floating_point_validator_set_min
+    public :: wx_floating_point_validator_set_precisio
+    public :: wx_floating_point_validator_set_range
+    public :: wx_floating_point_validator_set_style
     public :: wx_flush_events
+    public :: wx_fputs
     public :: wx_generic_drag_icon
+    public :: wx_generic_drag_icon_with_cursor
     public :: wx_generic_drag_list_item
     public :: wx_generic_drag_string
+    public :: wx_generic_drag_string_with_cursor
     public :: wx_generic_drag_tree_item
     public :: wx_generic_find_window_at_point
     public :: wx_get_app
@@ -193,6 +217,7 @@ module wx_free_functions
     public :: wx_get_email_address
     public :: wx_get_env
     public :: wx_get_env_map
+    public :: wx_get_env_value
     public :: wx_get_font_from_user
     public :: wx_get_free_memory
     public :: wx_get_full_host_name
@@ -216,6 +241,7 @@ module wx_free_functions
     public :: wx_get_single_choice_data
     public :: wx_get_single_choice_data_ex
     public :: wx_get_single_choice_index
+    public :: wx_get_single_choice_index_array
     public :: wx_get_single_choice_index_ex
     public :: wx_get_stock_accelerator
     public :: wx_get_stock_help_string
@@ -254,6 +280,7 @@ module wx_free_functions
     public :: wx_load_file_selector
     public :: wx_msw_is_on_secure_screen
     public :: wx_make_floating_point_validator
+    public :: wx_make_floating_point_validator_with_pr
     public :: wx_micro_sleep
     public :: wx_milli_sleep
     public :: wx_mutex_gui_enter
@@ -269,6 +296,7 @@ module wx_free_functions
     public :: wx_point_ref_from_variant
     public :: wx_post_event
     public :: wx_printf
+    public :: wx_printf_len
     public :: wx_ptr_to_u_int
     public :: wx_puts
     public :: wx_queue_event
@@ -292,6 +320,7 @@ module wx_free_functions
     public :: wx_strcmp
     public :: wx_strdup
     public :: wx_strip_menu_codes
+    public :: wx_strlen
     public :: wx_strtod
     public :: wx_strtol
     public :: wx_swap
@@ -303,6 +332,105 @@ module wx_free_functions
     public :: wx_wake_up_idle
     public :: wx_yield
     public :: wx_yield_if_needed
+    public :: wxART_ADD_BOOKMARK
+    public :: wxART_BUTTON
+    public :: wxART_CDROM
+    public :: wxART_CLOSE
+    public :: wxART_CMN_DIALOG
+    public :: wxART_COPY
+    public :: wxART_CROSS_MARK
+    public :: wxART_CUT
+    public :: wxART_DELETE
+    public :: wxART_DEL_BOOKMARK
+    public :: wxART_EDIT
+    public :: wxART_ERROR
+    public :: wxART_EXECUTABLE_FILE
+    public :: wxART_FILE_OPEN
+    public :: wxART_FILE_SAVE
+    public :: wxART_FILE_SAVE_AS
+    public :: wxART_FIND
+    public :: wxART_FIND_AND_REPLACE
+    public :: wxART_FLOPPY
+    public :: wxART_FOLDER
+    public :: wxART_FOLDER_OPEN
+    public :: wxART_FRAME_ICON
+    public :: wxART_FULL_SCREEN
+    public :: wxART_GOTO_FIRST
+    public :: wxART_GOTO_LAST
+    public :: wxART_GO_BACK
+    public :: wxART_GO_DIR_UP
+    public :: wxART_GO_DOWN
+    public :: wxART_GO_FORWARD
+    public :: wxART_GO_HOME
+    public :: wxART_GO_TO_PARENT
+    public :: wxART_GO_UP
+    public :: wxART_HARDDISK
+    public :: wxART_HELP
+    public :: wxART_HELP_BOOK
+    public :: wxART_HELP_BROWSER
+    public :: wxART_HELP_FOLDER
+    public :: wxART_HELP_PAGE
+    public :: wxART_HELP_SETTINGS
+    public :: wxART_HELP_SIDE_PANEL
+    public :: wxART_INFORMATION
+    public :: wxART_LIST
+    public :: wxART_LIST_VIEW
+    public :: wxART_MENU
+    public :: wxART_MESSAGE_BOX
+    public :: wxART_MINUS
+    public :: wxART_MISSING_IMAGE
+    public :: wxART_NEW
+    public :: wxART_NEW_DIR
+    public :: wxART_NORMAL_FILE
+    public :: wxART_OTHER
+    public :: wxART_PASTE
+    public :: wxART_PLUS
+    public :: wxART_PRINT
+    public :: wxART_QUESTION
+    public :: wxART_QUIT
+    public :: wxART_REDO
+    public :: wxART_REFRESH
+    public :: wxART_REMOVABLE
+    public :: wxART_REPORT_VIEW
+    public :: wxART_STOP
+    public :: wxART_TICK_MARK
+    public :: wxART_TIP
+    public :: wxART_TOOLBAR
+    public :: wxART_UNDO
+    public :: wxART_WARNING
+    public :: wxART_WX_LOGO
+    public :: wxDirDialogDefaultFolderStr
+    public :: wxFileSelectorDefaultWildcardStr
+    public :: wxPG_ARRAY_DELIMITER
+    public :: wxPG_ATTR_AUTOCOMPLETE
+    public :: wxPG_ATTR_DEFAULT_VALUE
+    public :: wxPG_ATTR_HINT
+    public :: wxPG_ATTR_MAX
+    public :: wxPG_ATTR_MIN
+    public :: wxPG_ATTR_MULTICHOICE_USERSTRINGMODE
+    public :: wxPG_ATTR_SPINCTRL_MOTION
+    public :: wxPG_ATTR_SPINCTRL_STEP
+    public :: wxPG_ATTR_SPINCTRL_WRAP
+    public :: wxPG_ATTR_UNITS
+    public :: wxPG_BOOL_USE_CHECKBOX
+    public :: wxPG_BOOL_USE_DOUBLE_CLICK_CYCLING
+    public :: wxPG_COLOUR_ALLOW_CUSTOM
+    public :: wxPG_COLOUR_HAS_ALPHA
+    public :: wxPG_DATE_FORMAT
+    public :: wxPG_DATE_PICKER_STYLE
+    public :: wxPG_DIALOG_TITLE
+    public :: wxPG_FILE_DIALOG_STYLE
+    public :: wxPG_FILE_INITIAL_PATH
+    public :: wxPG_FILE_SHOW_FULL_PATH
+    public :: wxPG_FILE_SHOW_RELATIVE_PATH
+    public :: wxPG_FILE_WILDCARD
+    public :: wxPG_FLOAT_PRECISION
+    public :: wxPG_LABEL
+    public :: wxPG_STRING_PASSWORD
+    public :: wxPG_UINT_BASE
+    public :: wxPG_UINT_PREFIX
+    public :: wxTRACE_OleCalls
+    public :: wxVERSION_NUM_DOT_STRING
     interface wx_persistent_register_and_restore_treeb
         module procedure wx_persistent_register_and_restore_treeb
         module procedure wx_persistent_register_and_restore_treeb_2
@@ -831,6 +959,14 @@ contains
         result_object = wxbitmap_from_ptr(kwxBitmapFromBase64(c_loc(base64), len), .true.)
     end function kwx_bitmap_from_base64
 
+    function kwx_console_check_build_options(componentname) result(result_value)
+        character(len=*), intent(in) :: componentname
+        character(kind=c_char, len=:), allocatable, target :: componentname_c
+        logical :: result_value
+        componentname_c = trim(componentname) // c_null_char
+        result_value = (kwxConsoleCheckBuildOptions(c_loc(componentname_c)) /= 0)
+    end function kwx_console_check_build_options
+
     subroutine kwx_console_exit_main_loop()
         call kwxConsoleExitMainLoop()
     end subroutine kwx_console_exit_main_loop
@@ -847,10 +983,39 @@ contains
         result_value = kwxConsoleInitialize(argc, argv)
     end function kwx_console_initialize
 
+    function kwx_console_initialize_from_args(arg) result(result_value)
+        character(len=*), intent(in) :: arg(:)
+        integer :: arg_count, arg_index, arg_maxlen
+        character(kind=c_char, len=:), allocatable, target :: arg_buffer(:)
+        type(c_ptr), allocatable, target :: arg_ptrs(:)
+        integer(c_int) :: result_value
+        arg_count = int(size(arg), c_int)
+        arg_maxlen = 1
+        if (arg_count > 0) arg_maxlen = maxval(len_trim(arg)) + 1
+        allocate(character(len=arg_maxlen) :: arg_buffer(max(1, arg_count)))
+        allocate(arg_ptrs(max(1, arg_count)))
+        do arg_index = 1, arg_count
+            arg_buffer(arg_index) = trim(arg(arg_index)) // c_null_char
+            arg_ptrs(arg_index) = c_loc(arg_buffer(arg_index))
+        end do
+        result_value = kwxConsoleInitializeFromArgs(arg_count, c_loc(arg_ptrs))
+    end function kwx_console_initialize_from_args
+
     function kwx_console_is_initialized() result(result_value)
         integer(c_int) :: result_value
         result_value = kwxConsoleIsInitialized()
     end function kwx_console_is_initialized
+
+    function kwx_console_on_cmd_line_parsed_base(parser) result(result_value)
+        class(wxcmdlineparser_t), intent(in) :: parser
+        logical :: result_value
+        result_value = (kwxConsoleOnCmdLineParsedBase(parser%ptr) /= 0)
+    end function kwx_console_on_cmd_line_parsed_base
+
+    subroutine kwx_console_on_init_cmd_line_base(parser)
+        class(wxcmdlineparser_t), intent(in) :: parser
+        call kwxConsoleOnInitCmdLineBase(parser%ptr)
+    end subroutine kwx_console_on_init_cmd_line_base
 
     subroutine kwx_console_process_pending_events()
         call kwxConsoleProcessPendingEvents()
@@ -870,6 +1035,18 @@ contains
         result_value = kwxConsoleYield()
     end function kwx_console_yield
 
+    function kwx_dialog_on_transfer_data_from_window_(pobject) result(result_value)
+        class(kwxdialog_t), intent(in) :: pobject
+        logical :: result_value
+        result_value = (kwxDialogOnTransferDataFromWindowBase(pobject%ptr) /= 0)
+    end function kwx_dialog_on_transfer_data_from_window_
+
+    function kwx_dialog_on_transfer_data_to_window_ba(pobject) result(result_value)
+        class(kwxdialog_t), intent(in) :: pobject
+        logical :: result_value
+        result_value = (kwxDialogOnTransferDataToWindowBase(pobject%ptr) /= 0)
+    end function kwx_dialog_on_transfer_data_to_window_ba
+
     subroutine kwx_end_busy_cursor()
         call kwxEndBusyCursor()
     end subroutine kwx_end_busy_cursor
@@ -881,12 +1058,12 @@ contains
 
     function kwx_get_mouse_position() result(result_object)
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(kwxGetMousePosition(), .false.)
+        result_object = wxpoint_from_ptr(kwxGetMousePosition(), .true.)
     end function kwx_get_mouse_position
 
     function kwx_get_mouse_position_point() result(result_object)
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(kwxGetMousePositionPoint(), .false.)
+        result_object = wxpoint_from_ptr(kwxGetMousePositionPoint(), .true.)
     end function kwx_get_mouse_position_point
 
     function kwx_get_pixel_rgb(buffer, width, x, y) result(result_value)
@@ -927,6 +1104,10 @@ contains
         integer(c_int) :: result_value
         result_value = kwxIsBusy()
     end function kwx_is_busy
+
+    subroutine kwx_log_use_stderr()
+        call kwxLogUseStderr()
+    end subroutine kwx_log_use_stderr
 
     function kwx_malloc(size) result(result_value)
         integer(c_int), intent(in) :: size
@@ -1009,6 +1190,21 @@ contains
         call kwxSetPixelRowRGBA(buffer, width, x, y, rgba0, rgba1, count)
     end subroutine kwx_set_pixel_row_rgba
 
+    function kwx_stderr() result(result_value)
+        type(c_ptr) :: result_value
+        result_value = kwxStderr()
+    end function kwx_stderr
+
+    function kwx_stdin() result(result_value)
+        type(c_ptr) :: result_value
+        result_value = kwxStdin()
+    end function kwx_stdin
+
+    function kwx_stdout() result(result_value)
+        type(c_ptr) :: result_value
+        result_value = kwxStdout()
+    end function kwx_stdout
+
     function kwx_svg_string_from_base64(base64, len) result(result_text)
         integer(c_int8_t), dimension(:), intent(in), target, contiguous :: base64
         integer(c_size_t), intent(in) :: len
@@ -1016,6 +1212,7 @@ contains
         character(len=:), allocatable :: result_text
         result_text_ptr = kwxSvgStringFromBase64(c_loc(base64), len)
         result_text = from_cstring(result_text_ptr)
+        call free_cstring(result_text_ptr)
     end function kwx_svg_string_from_base64
 
     function kwx_sys_error_code() result(result_value)
@@ -1032,7 +1229,7 @@ contains
     function kwx_system_settings_get_colour(systemcolour) result(result_object)
         integer(c_int), intent(in) :: systemcolour
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(kwxSystemSettingsGetColour(systemcolour), .false.)
+        result_object = wxcolour_from_ptr(kwxSystemSettingsGetColour(systemcolour), .true.)
     end function kwx_system_settings_get_colour
 
     function kwx_utf8buffer_create(str) result(result_value)
@@ -1160,6 +1357,11 @@ contains
         call wxString_Delete(filename_ptr)
     end function wx_create_file_tip_provider
 
+    function wx_create_svg_bitmap_embed_handler() result(result_value)
+        type(c_ptr) :: result_value
+        result_value = wxCreateSVGBitmapEmbedHandler()
+    end function wx_create_svg_bitmap_embed_handler
+
     function wx_dec_to_hex(dec) result(result_text)
         integer(c_int), intent(in) :: dec
         type(c_ptr) :: result_text_ptr
@@ -1200,14 +1402,21 @@ contains
         integer(c_int), intent(in) :: x
         integer(c_int), intent(in) :: y
         type(wxdragimage_t) :: result_object
-        result_object = wxdragimage_from_ptr(wxDragIcon(icon%ptr, x, y), .false.)
+        result_object = wxdragimage_from_ptr(wxDragIcon(icon%ptr, x, y), .true.)
     end function wx_drag_icon
+
+    function wx_drag_icon_with_cursor(icon, cursor) result(result_object)
+        class(wxicon_t), intent(in) :: icon
+        class(wxcursor_t), intent(in) :: cursor
+        type(wxdragimage_t) :: result_object
+        result_object = wxdragimage_from_ptr(wxDragIconWithCursor(icon%ptr, cursor%ptr), .true.)
+    end function wx_drag_icon_with_cursor
 
     function wx_drag_list_item(listctrl, id) result(result_object)
         class(wxlistctrl_t), intent(in) :: listctrl
         integer(c_long), intent(in) :: id
         type(wxdragimage_t) :: result_object
-        result_object = wxdragimage_from_ptr(wxDragListItem(listctrl%ptr, id), .false.)
+        result_object = wxdragimage_from_ptr(wxDragListItem(listctrl%ptr, id), .true.)
     end function wx_drag_list_item
 
     function wx_drag_string(text, x, y) result(result_object)
@@ -1217,15 +1426,25 @@ contains
         type(c_ptr) :: text_ptr
         type(wxdragimage_t) :: result_object
         text_ptr = to_wxstring(text)
-        result_object = wxdragimage_from_ptr(wxDragString(text_ptr, x, y), .false.)
+        result_object = wxdragimage_from_ptr(wxDragString(text_ptr, x, y), .true.)
         call wxString_Delete(text_ptr)
     end function wx_drag_string
+
+    function wx_drag_string_with_cursor(text, cursor) result(result_object)
+        character(len=*), intent(in) :: text
+        class(wxcursor_t), intent(in) :: cursor
+        type(c_ptr) :: text_ptr
+        type(wxdragimage_t) :: result_object
+        text_ptr = to_wxstring(text)
+        result_object = wxdragimage_from_ptr(wxDragStringWithCursor(text_ptr, cursor%ptr), .true.)
+        call wxString_Delete(text_ptr)
+    end function wx_drag_string_with_cursor
 
     function wx_drag_tree_item(treectrl, id) result(result_object)
         class(wxtreectrl_t), intent(in) :: treectrl
         class(wxtreeitemid_t), intent(in) :: id
         type(wxdragimage_t) :: result_object
-        result_object = wxdragimage_from_ptr(wxDragTreeItem(treectrl%ptr, id%ptr), .false.)
+        result_object = wxdragimage_from_ptr(wxDragTreeItem(treectrl%ptr, id%ptr), .true.)
     end function wx_drag_tree_item
 
     subroutine wx_enable_top_level_windows(enable)
@@ -1313,14 +1532,12 @@ contains
     end function wx_execute_with_output_and_error
 
     function wx_fgets(buffer, size, stream) result(result_text)
-        character(len=*), intent(in) :: buffer
+        character(kind=c_char), dimension(:), intent(out), target, contiguous :: buffer
         integer(c_int), intent(in) :: size
         type(c_ptr), intent(in), value :: stream
-        character(kind=c_char, len=:), allocatable, target :: buffer_c
         type(c_ptr) :: result_text_ptr
         character(len=:), allocatable :: result_text
-        buffer_c = trim(buffer) // c_null_char
-        result_text_ptr = wxFgets(c_loc(buffer_c), size, stream)
+        result_text_ptr = wxFgets(c_loc(buffer), size, stream)
         result_text = from_cstring(result_text_ptr)
     end function wx_fgets
 
@@ -1441,15 +1658,81 @@ contains
         call wxString_Delete(name_ptr)
     end function wx_find_window_by_name
 
+    function wx_floating_point_validator_get_max(validator) result(result_value)
+        type(c_ptr), intent(in), value :: validator
+        real(c_double) :: result_value
+        result_value = wxFloatingPointValidator_GetMax(validator)
+    end function wx_floating_point_validator_get_max
+
+    function wx_floating_point_validator_get_min(validator) result(result_value)
+        type(c_ptr), intent(in), value :: validator
+        real(c_double) :: result_value
+        result_value = wxFloatingPointValidator_GetMin(validator)
+    end function wx_floating_point_validator_get_min
+
+    subroutine wx_floating_point_validator_set_factor(validator, factor)
+        type(c_ptr), intent(in), value :: validator
+        real(c_double), intent(in) :: factor
+        call wxFloatingPointValidator_SetFactor(validator, factor)
+    end subroutine wx_floating_point_validator_set_factor
+
+    subroutine wx_floating_point_validator_set_max(validator, max)
+        type(c_ptr), intent(in), value :: validator
+        real(c_double), intent(in) :: max
+        call wxFloatingPointValidator_SetMax(validator, max)
+    end subroutine wx_floating_point_validator_set_max
+
+    subroutine wx_floating_point_validator_set_min(validator, min)
+        type(c_ptr), intent(in), value :: validator
+        real(c_double), intent(in) :: min
+        call wxFloatingPointValidator_SetMin(validator, min)
+    end subroutine wx_floating_point_validator_set_min
+
+    subroutine wx_floating_point_validator_set_precisio(validator, precision)
+        type(c_ptr), intent(in), value :: validator
+        integer(c_int), intent(in) :: precision
+        call wxFloatingPointValidator_SetPrecision(validator, precision)
+    end subroutine wx_floating_point_validator_set_precisio
+
+    subroutine wx_floating_point_validator_set_range(validator, min, max)
+        type(c_ptr), intent(in), value :: validator
+        real(c_double), intent(in) :: min
+        real(c_double), intent(in) :: max
+        call wxFloatingPointValidator_SetRange(validator, min, max)
+    end subroutine wx_floating_point_validator_set_range
+
+    subroutine wx_floating_point_validator_set_style(validator, style)
+        type(c_ptr), intent(in), value :: validator
+        integer(c_int), intent(in) :: style
+        call wxFloatingPointValidator_SetStyle(validator, style)
+    end subroutine wx_floating_point_validator_set_style
+
     subroutine wx_flush_events()
         call wxFlushEvents()
     end subroutine wx_flush_events
+
+    function wx_fputs(str, stream) result(result_value)
+        character(len=*), intent(in) :: str
+        type(c_ptr), intent(in), value :: stream
+        type(c_ptr) :: str_ptr
+        integer(c_int) :: result_value
+        str_ptr = to_wxstring(str)
+        result_value = wxFputs(str_ptr, stream)
+        call wxString_Delete(str_ptr)
+    end function wx_fputs
 
     function wx_generic_drag_icon(icon) result(result_object)
         class(wxicon_t), intent(in) :: icon
         type(wxgenericdragimage_t) :: result_object
         result_object = wxgenericdragimage_from_ptr(wxGenericDragIcon(icon%ptr), .false.)
     end function wx_generic_drag_icon
+
+    function wx_generic_drag_icon_with_cursor(icon, cursor) result(result_object)
+        class(wxicon_t), intent(in) :: icon
+        class(wxcursor_t), intent(in) :: cursor
+        type(wxgenericdragimage_t) :: result_object
+        result_object = wxgenericdragimage_from_ptr(wxGenericDragIconWithCursor(icon%ptr, cursor%ptr), .false.)
+    end function wx_generic_drag_icon_with_cursor
 
     function wx_generic_drag_list_item(listctrl, id) result(result_object)
         class(wxlistctrl_t), intent(in) :: listctrl
@@ -1466,6 +1749,16 @@ contains
         result_object = wxgenericdragimage_from_ptr(wxGenericDragString(text_ptr), .false.)
         call wxString_Delete(text_ptr)
     end function wx_generic_drag_string
+
+    function wx_generic_drag_string_with_cursor(text, cursor) result(result_object)
+        character(len=*), intent(in) :: text
+        class(wxcursor_t), intent(in) :: cursor
+        type(c_ptr) :: text_ptr
+        type(wxgenericdragimage_t) :: result_object
+        text_ptr = to_wxstring(text)
+        result_object = wxgenericdragimage_from_ptr(wxGenericDragStringWithCursor(text_ptr, cursor%ptr), .false.)
+        call wxString_Delete(text_ptr)
+    end function wx_generic_drag_string_with_cursor
 
     function wx_generic_drag_tree_item(treectrl, id) result(result_object)
         class(wxtreectrl_t), intent(in) :: treectrl
@@ -1509,7 +1802,7 @@ contains
 
     function wx_get_client_display_rect() result(result_object)
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxGetClientDisplayRect(), .false.)
+        result_object = wxrect_from_ptr(wxGetClientDisplayRect(), .true.)
     end function wx_get_client_display_rect
 
     subroutine wx_get_colour_from_user(parent, colinit, colour)
@@ -1572,7 +1865,7 @@ contains
 
     function wx_get_display_size() result(result_object)
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxGetDisplaySize(), .false.)
+        result_object = wxsize_from_ptr(wxGetDisplaySize(), .true.)
     end function wx_get_display_size
 
     function wx_get_email_address() result(result_text)
@@ -1601,6 +1894,18 @@ contains
         logical :: result_value
         result_value = (wxGetEnvMap(env_map%ptr) /= 0)
     end function wx_get_env_map
+
+    function wx_get_env_value(var) result(result_text)
+        character(len=*), intent(in) :: var
+        type(c_ptr) :: var_ptr
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        var_ptr = to_wxstring(var)
+        result_text_ptr = wxGetEnvValue(var_ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+        call wxString_Delete(var_ptr)
+    end function wx_get_env_value
 
     subroutine wx_get_font_from_user(parent, fontinit, font)
         class(wxwindow_t), intent(in) :: parent
@@ -1756,22 +2061,30 @@ contains
         result_value = wxGetProcessId()
     end function wx_get_process_id
 
-    function wx_get_selected_choices(selections, choices, count, message, caption, parent) result(result_value)
+    function wx_get_selected_choices(selections, arg, message, caption, parent) result(result_value)
         type(c_ptr), intent(in), value :: selections
-        character(len=*), intent(in) :: choices
-        integer(c_int), intent(in) :: count
+        character(len=*), intent(in) :: arg(:)
         character(len=*), intent(in) :: message
         character(len=*), intent(in) :: caption
         class(wxwindow_t), intent(in) :: parent
-        type(c_ptr) :: choices_ptr
+        integer :: arg_count, arg_index, arg_maxlen
+        character(kind=c_char, len=:), allocatable, target :: arg_buffer(:)
+        type(c_ptr), allocatable, target :: arg_ptrs(:)
         type(c_ptr) :: message_ptr
         type(c_ptr) :: caption_ptr
         integer(c_int) :: result_value
-        choices_ptr = to_wxstring(choices)
+        arg_count = int(size(arg), c_int)
+        arg_maxlen = 1
+        if (arg_count > 0) arg_maxlen = maxval(len_trim(arg)) + 1
+        allocate(character(len=arg_maxlen) :: arg_buffer(max(1, arg_count)))
+        allocate(arg_ptrs(max(1, arg_count)))
+        do arg_index = 1, arg_count
+            arg_buffer(arg_index) = trim(arg(arg_index)) // c_null_char
+            arg_ptrs(arg_index) = c_loc(arg_buffer(arg_index))
+        end do
         message_ptr = to_wxstring(message)
         caption_ptr = to_wxstring(caption)
-        result_value = wxGetSelectedChoices(selections, choices_ptr, count, message_ptr, caption_ptr, parent%ptr)
-        call wxString_Delete(choices_ptr)
+        result_value = wxGetSelectedChoices(selections, arg_count, c_loc(arg_ptrs), message_ptr, caption_ptr, parent%ptr)
         call wxString_Delete(message_ptr)
         call wxString_Delete(caption_ptr)
     end function wx_get_selected_choices
@@ -1798,46 +2111,62 @@ contains
         call wxString_Delete(caption_ptr)
     end function wx_get_selected_choices_ex
 
-    function wx_get_single_choice(message, caption, choices, count, parent) result(result_text)
+    function wx_get_single_choice(message, caption, arg, parent) result(result_text)
         character(len=*), intent(in) :: message
         character(len=*), intent(in) :: caption
-        character(len=*), intent(in) :: choices
-        integer(c_int), intent(in) :: count
+        character(len=*), intent(in) :: arg(:)
         class(wxwindow_t), intent(in) :: parent
         type(c_ptr) :: message_ptr
         type(c_ptr) :: caption_ptr
-        type(c_ptr) :: choices_ptr
+        integer :: arg_count, arg_index, arg_maxlen
+        character(kind=c_char, len=:), allocatable, target :: arg_buffer(:)
+        type(c_ptr), allocatable, target :: arg_ptrs(:)
         type(c_ptr) :: result_text_ptr
         character(len=:), allocatable :: result_text
         message_ptr = to_wxstring(message)
         caption_ptr = to_wxstring(caption)
-        choices_ptr = to_wxstring(choices)
-        result_text_ptr = wxGetSingleChoice(message_ptr, caption_ptr, choices_ptr, count, parent%ptr)
+        arg_count = int(size(arg), c_int)
+        arg_maxlen = 1
+        if (arg_count > 0) arg_maxlen = maxval(len_trim(arg)) + 1
+        allocate(character(len=arg_maxlen) :: arg_buffer(max(1, arg_count)))
+        allocate(arg_ptrs(max(1, arg_count)))
+        do arg_index = 1, arg_count
+            arg_buffer(arg_index) = trim(arg(arg_index)) // c_null_char
+            arg_ptrs(arg_index) = c_loc(arg_buffer(arg_index))
+        end do
+        result_text_ptr = wxGetSingleChoice(message_ptr, caption_ptr, arg_count, c_loc(arg_ptrs), parent%ptr)
         result_text = from_wxstring(result_text_ptr)
         call wxString_Delete(result_text_ptr)
         call wxString_Delete(message_ptr)
         call wxString_Delete(caption_ptr)
-        call wxString_Delete(choices_ptr)
     end function wx_get_single_choice
 
-    function wx_get_single_choice_data(message, caption, choices, count, client_data, parent) result(result_value)
+    function wx_get_single_choice_data(message, caption, arg, client_data, parent) result(result_value)
         character(len=*), intent(in) :: message
         character(len=*), intent(in) :: caption
-        character(len=*), intent(in) :: choices
-        integer(c_int), intent(in) :: count
+        character(len=*), intent(in) :: arg(:)
         type(c_ptr), intent(in), value :: client_data
         class(wxwindow_t), intent(in) :: parent
         type(c_ptr) :: message_ptr
         type(c_ptr) :: caption_ptr
-        type(c_ptr) :: choices_ptr
+        integer :: arg_count, arg_index, arg_maxlen
+        character(kind=c_char, len=:), allocatable, target :: arg_buffer(:)
+        type(c_ptr), allocatable, target :: arg_ptrs(:)
         type(c_ptr) :: result_value
         message_ptr = to_wxstring(message)
         caption_ptr = to_wxstring(caption)
-        choices_ptr = to_wxstring(choices)
-        result_value = wxGetSingleChoiceData(message_ptr, caption_ptr, choices_ptr, count, client_data, parent%ptr)
+        arg_count = int(size(arg), c_int)
+        arg_maxlen = 1
+        if (arg_count > 0) arg_maxlen = maxval(len_trim(arg)) + 1
+        allocate(character(len=arg_maxlen) :: arg_buffer(max(1, arg_count)))
+        allocate(arg_ptrs(max(1, arg_count)))
+        do arg_index = 1, arg_count
+            arg_buffer(arg_index) = trim(arg(arg_index)) // c_null_char
+            arg_ptrs(arg_index) = c_loc(arg_buffer(arg_index))
+        end do
+        result_value = wxGetSingleChoiceData(message_ptr, caption_ptr, arg_count, c_loc(arg_ptrs), client_data, parent%ptr)
         call wxString_Delete(message_ptr)
         call wxString_Delete(caption_ptr)
-        call wxString_Delete(choices_ptr)
     end function wx_get_single_choice_data
 
     function wx_get_single_choice_data_ex(message, caption, n, choices, client_data, parent, x, y, centre, width, height, initialselection) result(result_value)
@@ -1882,6 +2211,21 @@ contains
         call wxString_Delete(choices_ptr)
     end function wx_get_single_choice_index
 
+    function wx_get_single_choice_index_array(message, caption, choices, parent) result(result_value)
+        character(len=*), intent(in) :: message
+        character(len=*), intent(in) :: caption
+        class(wxarraystring_t), intent(in) :: choices
+        class(wxwindow_t), intent(in) :: parent
+        type(c_ptr) :: message_ptr
+        type(c_ptr) :: caption_ptr
+        integer(c_int) :: result_value
+        message_ptr = to_wxstring(message)
+        caption_ptr = to_wxstring(caption)
+        result_value = wxGetSingleChoiceIndexArray(message_ptr, caption_ptr, choices%ptr, parent%ptr)
+        call wxString_Delete(message_ptr)
+        call wxString_Delete(caption_ptr)
+    end function wx_get_single_choice_index_array
+
     function wx_get_single_choice_index_ex(message, caption, n, choices, parent, x, y, centre, width, height, initialselection) result(result_value)
         character(len=*), intent(in) :: message
         character(len=*), intent(in) :: caption
@@ -1907,7 +2251,7 @@ contains
     function wx_get_stock_accelerator(id) result(result_object)
         integer(c_int), intent(in) :: id
         type(wxacceleratorentry_t) :: result_object
-        result_object = wxacceleratorentry_from_ptr(wxGetStockAccelerator(id), .false.)
+        result_object = wxacceleratorentry_from_ptr(wxGetStockAccelerator(id), .true.)
     end function wx_get_stock_accelerator
 
     function wx_get_stock_help_string(id, client) result(result_text)
@@ -2211,6 +2555,14 @@ contains
         result_value = wxMakeFloatingPointValidator(c_loc(value), style)
     end function wx_make_floating_point_validator
 
+    function wx_make_floating_point_validator_with_pr(precision, value, style) result(result_value)
+        integer(c_int), intent(in) :: precision
+        real(c_double), intent(inout), target :: value
+        integer(c_int), intent(in) :: style
+        type(c_ptr) :: result_value
+        result_value = wxMakeFloatingPointValidatorWithPrecision(precision, c_loc(value), style)
+    end function wx_make_floating_point_validator_with_pr
+
     subroutine wx_micro_sleep(microseconds)
         integer(c_long), intent(in) :: microseconds
         call wxMicroSleep(microseconds)
@@ -2305,6 +2657,15 @@ contains
         result_value = wxPrintf(text_ptr)
         call wxString_Delete(text_ptr)
     end function wx_printf
+
+    function wx_printf_len(text, len) result(result_value)
+        character(len=*), intent(in) :: text
+        integer(c_int), intent(in) :: len
+        character(kind=c_char, len=:), allocatable, target :: text_c
+        integer(c_int) :: result_value
+        text_c = text // c_null_char
+        result_value = wxPrintfLen(c_loc(text_c), len)
+    end function wx_printf_len
 
     function wx_ptr_to_u_int(pointer) result(result_value)
         type(c_ptr), intent(in), value :: pointer
@@ -2468,7 +2829,7 @@ contains
         type(c_ptr) :: str_ptr
         type(wxarraystring_t) :: result_object
         str_ptr = to_wxstring(str)
-        result_object = wxarraystring_from_ptr(wxSplit(str_ptr, separator), .false.)
+        result_object = wxarraystring_from_ptr(wxSplit(str_ptr, separator), .true.)
         call wxString_Delete(str_ptr)
     end function wx_split
 
@@ -2493,6 +2854,7 @@ contains
         str_ptr = to_wxstring(str)
         result_text_ptr = wxStrdup(str_ptr)
         result_text = from_cstring(result_text_ptr)
+        call free_cstring(result_text_ptr)
         call wxString_Delete(str_ptr)
     end function wx_strdup
 
@@ -2508,6 +2870,14 @@ contains
         call wxString_Delete(result_text_ptr)
         call wxString_Delete(text_ptr)
     end function wx_strip_menu_codes
+
+    function wx_strlen(str) result(result_value)
+        character(len=*), intent(in) :: str
+        character(kind=c_char, len=:), allocatable, target :: str_c
+        integer(c_size_t) :: result_value
+        str_c = trim(str) // c_null_char
+        result_value = wxStrlen(c_loc(str_c))
+    end function wx_strlen
 
     function wx_strtod(nptr) result(result_value)
         character(len=*), intent(in) :: nptr
@@ -2581,5 +2951,896 @@ contains
         logical :: result_value
         result_value = (wxYieldIfNeeded() /= 0)
     end function wx_yield_if_needed
+
+    function wxART_ADD_BOOKMARK() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_ADD_BOOKMARK()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_ADD_BOOKMARK
+
+    function wxART_BUTTON() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_BUTTON()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_BUTTON
+
+    function wxART_CDROM() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_CDROM()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_CDROM
+
+    function wxART_CLOSE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_CLOSE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_CLOSE
+
+    function wxART_CMN_DIALOG() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_CMN_DIALOG()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_CMN_DIALOG
+
+    function wxART_COPY() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_COPY()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_COPY
+
+    function wxART_CROSS_MARK() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_CROSS_MARK()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_CROSS_MARK
+
+    function wxART_CUT() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_CUT()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_CUT
+
+    function wxART_DELETE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_DELETE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_DELETE
+
+    function wxART_DEL_BOOKMARK() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_DEL_BOOKMARK()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_DEL_BOOKMARK
+
+    function wxART_EDIT() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_EDIT()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_EDIT
+
+    function wxART_ERROR() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_ERROR()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_ERROR
+
+    function wxART_EXECUTABLE_FILE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_EXECUTABLE_FILE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_EXECUTABLE_FILE
+
+    function wxART_FILE_OPEN() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_FILE_OPEN()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_FILE_OPEN
+
+    function wxART_FILE_SAVE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_FILE_SAVE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_FILE_SAVE
+
+    function wxART_FILE_SAVE_AS() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_FILE_SAVE_AS()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_FILE_SAVE_AS
+
+    function wxART_FIND() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_FIND()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_FIND
+
+    function wxART_FIND_AND_REPLACE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_FIND_AND_REPLACE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_FIND_AND_REPLACE
+
+    function wxART_FLOPPY() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_FLOPPY()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_FLOPPY
+
+    function wxART_FOLDER() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_FOLDER()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_FOLDER
+
+    function wxART_FOLDER_OPEN() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_FOLDER_OPEN()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_FOLDER_OPEN
+
+    function wxART_FRAME_ICON() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_FRAME_ICON()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_FRAME_ICON
+
+    function wxART_FULL_SCREEN() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_FULL_SCREEN()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_FULL_SCREEN
+
+    function wxART_GOTO_FIRST() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_GOTO_FIRST()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_GOTO_FIRST
+
+    function wxART_GOTO_LAST() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_GOTO_LAST()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_GOTO_LAST
+
+    function wxART_GO_BACK() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_GO_BACK()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_GO_BACK
+
+    function wxART_GO_DIR_UP() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_GO_DIR_UP()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_GO_DIR_UP
+
+    function wxART_GO_DOWN() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_GO_DOWN()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_GO_DOWN
+
+    function wxART_GO_FORWARD() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_GO_FORWARD()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_GO_FORWARD
+
+    function wxART_GO_HOME() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_GO_HOME()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_GO_HOME
+
+    function wxART_GO_TO_PARENT() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_GO_TO_PARENT()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_GO_TO_PARENT
+
+    function wxART_GO_UP() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_GO_UP()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_GO_UP
+
+    function wxART_HARDDISK() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_HARDDISK()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_HARDDISK
+
+    function wxART_HELP() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_HELP()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_HELP
+
+    function wxART_HELP_BOOK() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_HELP_BOOK()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_HELP_BOOK
+
+    function wxART_HELP_BROWSER() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_HELP_BROWSER()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_HELP_BROWSER
+
+    function wxART_HELP_FOLDER() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_HELP_FOLDER()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_HELP_FOLDER
+
+    function wxART_HELP_PAGE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_HELP_PAGE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_HELP_PAGE
+
+    function wxART_HELP_SETTINGS() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_HELP_SETTINGS()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_HELP_SETTINGS
+
+    function wxART_HELP_SIDE_PANEL() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_HELP_SIDE_PANEL()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_HELP_SIDE_PANEL
+
+    function wxART_INFORMATION() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_INFORMATION()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_INFORMATION
+
+    function wxART_LIST() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_LIST()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_LIST
+
+    function wxART_LIST_VIEW() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_LIST_VIEW()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_LIST_VIEW
+
+    function wxART_MENU() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_MENU()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_MENU
+
+    function wxART_MESSAGE_BOX() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_MESSAGE_BOX()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_MESSAGE_BOX
+
+    function wxART_MINUS() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_MINUS()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_MINUS
+
+    function wxART_MISSING_IMAGE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_MISSING_IMAGE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_MISSING_IMAGE
+
+    function wxART_NEW() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_NEW()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_NEW
+
+    function wxART_NEW_DIR() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_NEW_DIR()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_NEW_DIR
+
+    function wxART_NORMAL_FILE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_NORMAL_FILE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_NORMAL_FILE
+
+    function wxART_OTHER() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_OTHER()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_OTHER
+
+    function wxART_PASTE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_PASTE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_PASTE
+
+    function wxART_PLUS() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_PLUS()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_PLUS
+
+    function wxART_PRINT() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_PRINT()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_PRINT
+
+    function wxART_QUESTION() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_QUESTION()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_QUESTION
+
+    function wxART_QUIT() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_QUIT()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_QUIT
+
+    function wxART_REDO() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_REDO()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_REDO
+
+    function wxART_REFRESH() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_REFRESH()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_REFRESH
+
+    function wxART_REMOVABLE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_REMOVABLE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_REMOVABLE
+
+    function wxART_REPORT_VIEW() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_REPORT_VIEW()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_REPORT_VIEW
+
+    function wxART_STOP() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_STOP()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_STOP
+
+    function wxART_TICK_MARK() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_TICK_MARK()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_TICK_MARK
+
+    function wxART_TIP() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_TIP()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_TIP
+
+    function wxART_TOOLBAR() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_TOOLBAR()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_TOOLBAR
+
+    function wxART_UNDO() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_UNDO()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_UNDO
+
+    function wxART_WARNING() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_WARNING()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_WARNING
+
+    function wxART_WX_LOGO() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxART_WX_LOGO()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxART_WX_LOGO
+
+    function wxDirDialogDefaultFolderStr() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxDirDialogDefaultFolderStr()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxDirDialogDefaultFolderStr
+
+    function wxFileSelectorDefaultWildcardStr() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxFileSelectorDefaultWildcardStr()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxFileSelectorDefaultWildcardStr
+
+    function wxPG_ARRAY_DELIMITER() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_ARRAY_DELIMITER()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_ARRAY_DELIMITER
+
+    function wxPG_ATTR_AUTOCOMPLETE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_ATTR_AUTOCOMPLETE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_ATTR_AUTOCOMPLETE
+
+    function wxPG_ATTR_DEFAULT_VALUE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_ATTR_DEFAULT_VALUE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_ATTR_DEFAULT_VALUE
+
+    function wxPG_ATTR_HINT() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_ATTR_HINT()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_ATTR_HINT
+
+    function wxPG_ATTR_MAX() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_ATTR_MAX()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_ATTR_MAX
+
+    function wxPG_ATTR_MIN() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_ATTR_MIN()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_ATTR_MIN
+
+    function wxPG_ATTR_MULTICHOICE_USERSTRINGMODE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_ATTR_MULTICHOICE_USERSTRINGMODE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_ATTR_MULTICHOICE_USERSTRINGMODE
+
+    function wxPG_ATTR_SPINCTRL_MOTION() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_ATTR_SPINCTRL_MOTION()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_ATTR_SPINCTRL_MOTION
+
+    function wxPG_ATTR_SPINCTRL_STEP() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_ATTR_SPINCTRL_STEP()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_ATTR_SPINCTRL_STEP
+
+    function wxPG_ATTR_SPINCTRL_WRAP() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_ATTR_SPINCTRL_WRAP()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_ATTR_SPINCTRL_WRAP
+
+    function wxPG_ATTR_UNITS() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_ATTR_UNITS()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_ATTR_UNITS
+
+    function wxPG_BOOL_USE_CHECKBOX() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_BOOL_USE_CHECKBOX()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_BOOL_USE_CHECKBOX
+
+    function wxPG_BOOL_USE_DOUBLE_CLICK_CYCLING() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_BOOL_USE_DOUBLE_CLICK_CYCLING()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_BOOL_USE_DOUBLE_CLICK_CYCLING
+
+    function wxPG_COLOUR_ALLOW_CUSTOM() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_COLOUR_ALLOW_CUSTOM()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_COLOUR_ALLOW_CUSTOM
+
+    function wxPG_COLOUR_HAS_ALPHA() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_COLOUR_HAS_ALPHA()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_COLOUR_HAS_ALPHA
+
+    function wxPG_DATE_FORMAT() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_DATE_FORMAT()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_DATE_FORMAT
+
+    function wxPG_DATE_PICKER_STYLE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_DATE_PICKER_STYLE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_DATE_PICKER_STYLE
+
+    function wxPG_DIALOG_TITLE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_DIALOG_TITLE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_DIALOG_TITLE
+
+    function wxPG_FILE_DIALOG_STYLE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_FILE_DIALOG_STYLE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_FILE_DIALOG_STYLE
+
+    function wxPG_FILE_INITIAL_PATH() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_FILE_INITIAL_PATH()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_FILE_INITIAL_PATH
+
+    function wxPG_FILE_SHOW_FULL_PATH() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_FILE_SHOW_FULL_PATH()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_FILE_SHOW_FULL_PATH
+
+    function wxPG_FILE_SHOW_RELATIVE_PATH() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_FILE_SHOW_RELATIVE_PATH()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_FILE_SHOW_RELATIVE_PATH
+
+    function wxPG_FILE_WILDCARD() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_FILE_WILDCARD()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_FILE_WILDCARD
+
+    function wxPG_FLOAT_PRECISION() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_FLOAT_PRECISION()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_FLOAT_PRECISION
+
+    function wxPG_LABEL() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_LABEL()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_LABEL
+
+    function wxPG_STRING_PASSWORD() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_STRING_PASSWORD()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_STRING_PASSWORD
+
+    function wxPG_UINT_BASE() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_UINT_BASE()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_UINT_BASE
+
+    function wxPG_UINT_PREFIX() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxPG_UINT_PREFIX()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxPG_UINT_PREFIX
+
+    function wxTRACE_OleCalls() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxTRACE_OleCalls()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxTRACE_OleCalls
+
+    function wxVERSION_NUM_DOT_STRING() result(result_text)
+        character(len=:), allocatable :: result_text
+        type(c_ptr) :: result_text_ptr
+
+        result_text_ptr = expwxVERSION_NUM_DOT_STRING()
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function wxVERSION_NUM_DOT_STRING
 
 end module wx_free_functions

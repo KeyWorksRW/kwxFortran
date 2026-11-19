@@ -10,11 +10,17 @@ module wx_view
     public :: wx_view_set_on_on_close
     public :: wx_view_set_on_on_create
     public :: wx_view_set_on_on_update
+    public :: wx_view_set_on_on_create_with_data
+    public :: wx_view_set_on_create_result
+    public :: wx_view_set_on_on_close_with_data
+    public :: wx_view_set_on_close_result
     public :: wx_view_activate
     public :: wx_view_get_document
     public :: wx_view_get_frame
     public :: wx_view_set_document
     public :: wx_view_set_frame
+    public :: wx_view_close
+    public :: wx_view_close_default
 
 contains
 
@@ -42,6 +48,32 @@ contains
         call wxView_SetOnOnUpdate(self%ptr, pfunction)
     end subroutine wx_view_set_on_on_update
 
+    subroutine wx_view_set_on_on_create_with_data(self, pfunction, data)
+        class(wxview_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxView_SetOnOnCreateWithData(self%ptr, pfunction, data)
+    end subroutine wx_view_set_on_on_create_with_data
+
+    subroutine wx_view_set_on_create_result(self, result)
+        class(wxview_t), intent(in) :: self
+        logical, intent(in) :: result
+        call wxView_SetOnCreateResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine wx_view_set_on_create_result
+
+    subroutine wx_view_set_on_on_close_with_data(self, pfunction, data)
+        class(wxview_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call wxView_SetOnOnCloseWithData(self%ptr, pfunction, data)
+    end subroutine wx_view_set_on_on_close_with_data
+
+    subroutine wx_view_set_on_close_result(self, result)
+        class(wxview_t), intent(in) :: self
+        logical, intent(in) :: result
+        call wxView_SetOnCloseResult(self%ptr, merge(1_c_int, 0_c_int, result))
+    end subroutine wx_view_set_on_close_result
+
     subroutine wx_view_activate(self, activate)
         class(wxview_t), intent(in) :: self
         logical, intent(in) :: activate
@@ -62,8 +94,8 @@ contains
 
     subroutine wx_view_set_document(self, doc)
         class(wxview_t), intent(in) :: self
-        type(c_ptr), intent(in), value :: doc
-        call wxView_SetDocument(self%ptr, doc)
+        class(wxdocument_t), intent(in) :: doc
+        call wxView_SetDocument(self%ptr, doc%ptr)
     end subroutine wx_view_set_document
 
     subroutine wx_view_set_frame(self, frame)
@@ -71,5 +103,18 @@ contains
         type(c_ptr), intent(in), value :: frame
         call wxView_SetFrame(self%ptr, frame)
     end subroutine wx_view_set_frame
+
+    function wx_view_close(self, deletewindow) result(result_value)
+        class(wxview_t), intent(in) :: self
+        logical, intent(in) :: deletewindow
+        logical :: result_value
+        result_value = (wxView_Close(self%ptr, merge(1_c_int, 0_c_int, deletewindow)) /= 0)
+    end function wx_view_close
+
+    function wx_view_close_default(self) result(result_value)
+        class(wxview_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxView_CloseDefault(self%ptr) /= 0)
+    end function wx_view_close_default
 
 end module wx_view

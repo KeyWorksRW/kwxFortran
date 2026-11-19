@@ -47,7 +47,7 @@ contains
     function wx_sizer_item_calc_min(self) result(result_object)
         class(wxsizeritem_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSizerItem_CalcMin(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxSizerItem_CalcMin(self%ptr), .true.)
     end function wx_sizer_item_calc_min
 
     subroutine wx_sizer_item_set_min_size(self, size)
@@ -103,13 +103,13 @@ contains
     function wx_sizer_item_get_min_size(self) result(result_object)
         class(wxsizeritem_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSizerItem_GetMinSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxSizerItem_GetMinSize(self%ptr), .true.)
     end function wx_sizer_item_get_min_size
 
     function wx_sizer_item_get_position(self) result(result_object)
         class(wxsizeritem_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxSizerItem_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxSizerItem_GetPosition(self%ptr), .true.)
     end function wx_sizer_item_get_position
 
     function wx_sizer_item_get_ratio(self) result(result_value)
@@ -121,7 +121,7 @@ contains
     function wx_sizer_item_get_size(self) result(result_object)
         class(wxsizeritem_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSizerItem_GetSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxSizerItem_GetSize(self%ptr), .true.)
     end function wx_sizer_item_get_size
 
     function wx_sizer_item_get_sizer(self) result(result_object)
@@ -241,13 +241,13 @@ contains
     function wx_sizer_item_get_rect(self) result(result_object)
         class(wxsizeritem_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxSizerItem_GetRect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxSizerItem_GetRect(self%ptr), .true.)
     end function wx_sizer_item_get_rect
 
     function wx_sizer_item_get_spacer(self) result(result_object)
         class(wxsizeritem_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxSizerItem_GetSpacer(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxSizerItem_GetSpacer(self%ptr), .true.)
     end function wx_sizer_item_get_spacer
 
     function wx_sizer_item_is_shown(self) result(result_value)

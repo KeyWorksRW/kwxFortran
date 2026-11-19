@@ -86,8 +86,10 @@ module wx_combo_ctrl
     public :: wx_combo_ctrl_force_upper
     public :: wx_combo_ctrl_set_margins_2
     public :: wx_combo_ctrl_auto_complete
+    public :: wx_combo_ctrl_auto_complete_strings
     public :: wx_combo_ctrl_auto_complete_file_names
     public :: wx_combo_ctrl_auto_complete_directories
+    public :: wx_combo_ctrl_auto_complete_completer
 
 contains
 
@@ -131,31 +133,31 @@ contains
     function wx_combo_ctrl_get_bitmap_disabled(self) result(result_object)
         class(wxcomboctrl_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxComboCtrl_GetBitmapDisabled(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxComboCtrl_GetBitmapDisabled(self%ptr), .true.)
     end function wx_combo_ctrl_get_bitmap_disabled
 
     function wx_combo_ctrl_get_bitmap_hover(self) result(result_object)
         class(wxcomboctrl_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxComboCtrl_GetBitmapHover(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxComboCtrl_GetBitmapHover(self%ptr), .true.)
     end function wx_combo_ctrl_get_bitmap_hover
 
     function wx_combo_ctrl_get_bitmap_normal(self) result(result_object)
         class(wxcomboctrl_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxComboCtrl_GetBitmapNormal(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxComboCtrl_GetBitmapNormal(self%ptr), .true.)
     end function wx_combo_ctrl_get_bitmap_normal
 
     function wx_combo_ctrl_get_bitmap_pressed(self) result(result_object)
         class(wxcomboctrl_t), intent(in) :: self
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxComboCtrl_GetBitmapPressed(self%ptr), .false.)
+        result_object = wxbitmap_from_ptr(wxComboCtrl_GetBitmapPressed(self%ptr), .true.)
     end function wx_combo_ctrl_get_bitmap_pressed
 
     function wx_combo_ctrl_get_button_size(self) result(result_object)
         class(wxcomboctrl_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxComboCtrl_GetButtonSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxComboCtrl_GetButtonSize(self%ptr), .true.)
     end function wx_combo_ctrl_get_button_size
 
     function wx_combo_ctrl_get_custom_paint_width(self) result(result_value)
@@ -224,7 +226,7 @@ contains
     function wx_combo_ctrl_get_text_rect(self) result(result_object)
         class(wxcomboctrl_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxComboCtrl_GetTextRect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxComboCtrl_GetTextRect(self%ptr), .true.)
     end function wx_combo_ctrl_get_text_rect
 
     function wx_combo_ctrl_get_value(self) result(result_text)
@@ -624,6 +626,13 @@ contains
         result_value = (wxTextEntry_AutoComplete(self%ptr, count, items) /= 0)
     end function wx_combo_ctrl_auto_complete
 
+    function wx_combo_ctrl_auto_complete_strings(self, items) result(result_value)
+        class(wxcomboctrl_t), intent(in) :: self
+        class(wxarraystring_t), intent(in) :: items
+        logical :: result_value
+        result_value = (wxTextEntry_AutoCompleteStrings(self%ptr, items%ptr) /= 0)
+    end function wx_combo_ctrl_auto_complete_strings
+
     function wx_combo_ctrl_auto_complete_file_names(self) result(result_value)
         class(wxcomboctrl_t), intent(in) :: self
         logical :: result_value
@@ -635,5 +644,12 @@ contains
         logical :: result_value
         result_value = (wxTextEntry_AutoCompleteDirectories(self%ptr) /= 0)
     end function wx_combo_ctrl_auto_complete_directories
+
+    function wx_combo_ctrl_auto_complete_completer(self, completer) result(result_value)
+        class(wxcomboctrl_t), intent(in) :: self
+        class(wxtextcompletersimple_t), intent(in) :: completer
+        logical :: result_value
+        result_value = (wxTextEntry_AutoCompleteCompleter(self%ptr, completer%ptr) /= 0)
+    end function wx_combo_ctrl_auto_complete_completer
 
 end module wx_combo_ctrl

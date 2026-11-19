@@ -68,7 +68,7 @@ contains
     function wx_fs_file_get_modification_time(self) result(result_object)
         class(wxfsfile_t), intent(in) :: self
         type(wxdatetime_t) :: result_object
-        result_object = wxdatetime_from_ptr(wxFSFile_GetModificationTime(self%ptr), .false.)
+        result_object = wxdatetime_from_ptr(wxFSFile_GetModificationTime(self%ptr), .true.)
     end function wx_fs_file_get_modification_time
 
 end module wx_fs_file

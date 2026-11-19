@@ -1,0 +1,87 @@
+name: Build
+
+# Builds kwxFortran's own library plus the generated bindings, then builds
+# tests/quick_port. No wxUiEditor binary and no generated tree is required.
+#
+# The compilers are the ones the local lane uses: clang/clang++ from msys64
+# clang64 and gfortran from msys64 ucrt64 (cmake/gfortran-toolchain.cmake
+# prepends gfortran's bin directory and clears the conflicting MSYS2
+# environment variables itself).
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-kwxfortran-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: library and quick port
+    runs-on: windows-2025-vs2026
+    timeout-minutes: 350
+    env:
+      CI: true
+    steps:
+      - name: Checkout kwxFortran
+        uses: actions/checkout@v7
+        with:
+          path: kwxFortran
+
+      - name: Checkout kwxFFI (sibling sources, headers, kwxgen)
+        uses: actions/checkout@v7
+        with:
+          repository: KeyWorksRW/kwxFFI
+          path: kwxFFI
+
+      - name: Setup CMake 4.2+
+        uses: lukka/get-cmake@latest
+        with:
+          cmakeVersion: '~4.2.0'
+          ninjaVersion: 'latest'
+
+      - name: Setup MSYS2 toolchain (clang64 + ucrt64 gfortran)
+        shell: pwsh
+        run: |
+          $msys_bash = 'C:\msys64\usr\bin\bash.exe'
+          if (-not (Test-Path $msys_bash)) {
+            choco install msys2 --params="/InstallDir:C:\msys64" -y --no-progress
+          }
+          if (-not (Test-Path $msys_bash)) {
+            throw "MSYS2 is not installed at C:\msys64."
+          }
+          & $msys_bash -lc "pacman -Sy --noconfirm --needed mingw-w64-clang-x86_64-toolchain mingw-w64-ucrt-x86_64-gcc-fortran"
+          if ($LASTEXITCODE -ne 0) { throw "pacman failed (exit $LASTEXITCODE)." }
+          "C:\msys64\clang64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          "C:\msys64\ucrt64\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Report the compilers
+        shell: pwsh
+        run: |
+          & 'C:\msys64\clang64\bin\clang.exe' --version | Select-Object -First 1
+          & 'C:\msys64\ucrt64\bin\gfortran.exe' --version | Select-Object -First 1
+
+      - name: Configure
+        working-directory: kwxFortran
+        run: cmake --preset ninja-gfortran
+
+      - name: Build library and bindings (Debug)
+        working-directory: kwxFortran
+        run: cmake --build build --config Debug
+
+      - name: Build tests/quick_port when present
+        working-directory: kwxFortran
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -d tests/quick_port ]; then
+            echo "tests/quick_port is not present; nothing to build."
+            exit 0
+          fi
+          ./build_quick_port.cmd

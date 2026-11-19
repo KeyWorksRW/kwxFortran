@@ -15,6 +15,11 @@ module kwx_app
     public :: kwx_app_set_on_get_class_info
     public :: kwx_app_set_on_on_assert_failure
     public :: kwx_app_set_on_create_traits
+    public :: kwx_app_set_on_on_fatal_exception
+    public :: kwx_app_set_on_on_unhandled_exception
+    public :: kwx_app_set_on_store_current_exception
+    public :: kwx_app_set_on_on_exception_in_main_loop
+    public :: kwx_app_set_on_rethrow_stored_exception
 
 contains
 
@@ -74,5 +79,35 @@ contains
         type(c_ptr), intent(in), value :: pfunction
         call kwxApp_SetOnCreateTraits(self%ptr, pfunction)
     end subroutine kwx_app_set_on_create_traits
+
+    subroutine kwx_app_set_on_on_fatal_exception(self, pfunction)
+        class(kwxapp_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        call kwxApp_SetOnOnFatalException(self%ptr, pfunction)
+    end subroutine kwx_app_set_on_on_fatal_exception
+
+    subroutine kwx_app_set_on_on_unhandled_exception(self, pfunction)
+        class(kwxapp_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        call kwxApp_SetOnOnUnhandledException(self%ptr, pfunction)
+    end subroutine kwx_app_set_on_on_unhandled_exception
+
+    subroutine kwx_app_set_on_store_current_exception(self, pfunction)
+        class(kwxapp_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        call kwxApp_SetOnStoreCurrentException(self%ptr, pfunction)
+    end subroutine kwx_app_set_on_store_current_exception
+
+    subroutine kwx_app_set_on_on_exception_in_main_loop(self, pfunction)
+        class(kwxapp_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        call kwxApp_SetOnOnExceptionInMainLoop(self%ptr, pfunction)
+    end subroutine kwx_app_set_on_on_exception_in_main_loop
+
+    subroutine kwx_app_set_on_rethrow_stored_exception(self, pfunction)
+        class(kwxapp_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        call kwxApp_SetOnRethrowStoredException(self%ptr, pfunction)
+    end subroutine kwx_app_set_on_rethrow_stored_exception
 
 end module kwx_app

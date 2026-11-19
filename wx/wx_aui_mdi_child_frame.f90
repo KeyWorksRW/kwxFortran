@@ -115,7 +115,7 @@ contains
     function wx_aui_mdi_child_frame_get_icons(self) result(result_object)
         class(wxauimdichildframe_t), intent(in) :: self
         type(wxiconbundle_t) :: result_object
-        result_object = wxiconbundle_from_ptr(wxAuiMDIChildFrame_GetIcons(self%ptr), .false.)
+        result_object = wxiconbundle_from_ptr(wxAuiMDIChildFrame_GetIcons(self%ptr), .true.)
     end function wx_aui_mdi_child_frame_get_icons
 
     subroutine wx_aui_mdi_child_frame_set_icon(self, icon)
@@ -127,7 +127,7 @@ contains
     function wx_aui_mdi_child_frame_get_icon(self) result(result_object)
         class(wxauimdichildframe_t), intent(in) :: self
         type(wxicon_t) :: result_object
-        result_object = wxicon_from_ptr(wxAuiMDIChildFrame_GetIcon(self%ptr), .false.)
+        result_object = wxicon_from_ptr(wxAuiMDIChildFrame_GetIcon(self%ptr), .true.)
     end function wx_aui_mdi_child_frame_get_icon
 
     function wx_aui_mdi_child_frame_get_mdi_parent(self) result(result_object)

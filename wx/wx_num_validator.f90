@@ -20,6 +20,7 @@ module wx_num_validator
     public :: wx_num_validator_set_max_double
     public :: wx_num_validator_set_min
     public :: wx_num_validator_set_min_double
+    public :: wx_num_validator_set_precision
     public :: wx_num_validator_set_range
     public :: wx_num_validator_set_range_double
     public :: wx_num_validator_set_style
@@ -116,6 +117,12 @@ contains
         real(c_double), intent(in) :: min_value
         call wxNumValidator_SetMinDouble(self%ptr, min_value)
     end subroutine wx_num_validator_set_min_double
+
+    subroutine wx_num_validator_set_precision(self, precision)
+        class(wxnumvalidator_t), intent(in) :: self
+        integer(c_int), intent(in) :: precision
+        call wxNumValidator_SetPrecision(self%ptr, precision)
+    end subroutine wx_num_validator_set_precision
 
     subroutine wx_num_validator_set_range(self, min_value, max_value)
         class(wxnumvalidator_t), intent(in) :: self

@@ -400,7 +400,7 @@ contains
         class(wxpropertygridinterface_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxvariant_t) :: result_object
-        result_object = wxvariant_from_ptr(wxPropertyGridInterface_GetPropertyValue(self%ptr, id%ptr), .false.)
+        result_object = wxvariant_from_ptr(wxPropertyGridInterface_GetPropertyValue(self%ptr, id%ptr), .true.)
     end function wx_property_grid_interface_get_property_value
 
     function wx_property_grid_interface_get_property_value_as_string(self, id) result(result_text)
@@ -693,7 +693,7 @@ contains
         type(c_ptr) :: attrname_ptr
         type(wxvariant_t) :: result_object
         attrname_ptr = to_wxstring(attrname)
-        result_object = wxvariant_from_ptr(wxPropertyGridInterface_GetPropertyAttribute(self%ptr, id%ptr, attrname_ptr), .false.)
+        result_object = wxvariant_from_ptr(wxPropertyGridInterface_GetPropertyAttribute(self%ptr, id%ptr, attrname_ptr), .true.)
         call wxString_Delete(attrname_ptr)
     end function wx_property_grid_interface_get_property_attribute
 
@@ -745,7 +745,7 @@ contains
         type(c_ptr) :: listname_ptr
         type(wxvariant_t) :: result_object
         listname_ptr = to_wxstring(listname)
-        result_object = wxvariant_from_ptr(wxPropertyGridInterface_GetPropertyValues(self%ptr, listname_ptr, baseparent%ptr, flags), .false.)
+        result_object = wxvariant_from_ptr(wxPropertyGridInterface_GetPropertyValues(self%ptr, listname_ptr, baseparent%ptr, flags), .true.)
         call wxString_Delete(listname_ptr)
     end function wx_property_grid_interface_get_property_values
 
@@ -783,14 +783,14 @@ contains
         class(wxpropertygridinterface_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGridInterface_GetPropertyBackgroundColour(self%ptr, id%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGridInterface_GetPropertyBackgroundColour(self%ptr, id%ptr), .true.)
     end function wx_property_grid_interface_get_property_background_colour
 
     function wx_property_grid_interface_get_property_text_colour(self, id) result(result_object)
         class(wxpropertygridinterface_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPropertyGridInterface_GetPropertyTextColour(self%ptr, id%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPropertyGridInterface_GetPropertyTextColour(self%ptr, id%ptr), .true.)
     end function wx_property_grid_interface_get_property_text_colour
 
     function wx_property_grid_interface_set_property_max_length(self, id, maxlen) result(result_value)
@@ -825,21 +825,21 @@ contains
         class(wxpropertygridinterface_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxarraystring_t) :: result_object
-        result_object = wxarraystring_from_ptr(wxPropertyGridInterface_GetPropertyValueAsArrayString(self%ptr, id%ptr), .false.)
+        result_object = wxarraystring_from_ptr(wxPropertyGridInterface_GetPropertyValueAsArrayString(self%ptr, id%ptr), .true.)
     end function wx_property_grid_interface_get_property_value_as_array_string
 
     function wx_property_grid_interface_get_property_value_as_array_int(self, id) result(result_object)
         class(wxpropertygridinterface_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxarrayint_t) :: result_object
-        result_object = wxarrayint_from_ptr(wxPropertyGridInterface_GetPropertyValueAsArrayInt(self%ptr, id%ptr), .false.)
+        result_object = wxarrayint_from_ptr(wxPropertyGridInterface_GetPropertyValueAsArrayInt(self%ptr, id%ptr), .true.)
     end function wx_property_grid_interface_get_property_value_as_array_int
 
     function wx_property_grid_interface_get_property_value_as_date_time(self, id) result(result_object)
         class(wxpropertygridinterface_t), intent(in) :: self
         class(wxpgproperty_t), intent(in) :: id
         type(wxdatetime_t) :: result_object
-        result_object = wxdatetime_from_ptr(wxPropertyGridInterface_GetPropertyValueAsDateTime(self%ptr, id%ptr), .false.)
+        result_object = wxdatetime_from_ptr(wxPropertyGridInterface_GetPropertyValueAsDateTime(self%ptr, id%ptr), .true.)
     end function wx_property_grid_interface_get_property_value_as_date_time
 
     function wx_property_grid_interface_get_editor_by_name(name) result(result_object)

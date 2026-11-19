@@ -33,6 +33,10 @@ module wx_aui_tool_bar
     public :: wx_aui_tool_bar_clear
     public :: wx_aui_tool_bar_delete_tool
     public :: wx_aui_tool_bar_delete_by_index
+    public :: wx_aui_tool_bar_destroy_tool
+    public :: wx_aui_tool_bar_destroy_tool_by_index
+    public :: wx_aui_tool_bar_get_tool_client_data
+    public :: wx_aui_tool_bar_set_tool_client_data
     public :: wx_aui_tool_bar_get_tool_count
     public :: wx_aui_tool_bar_get_tool_pos
     public :: wx_aui_tool_bar_get_tool_index
@@ -78,6 +82,10 @@ module wx_aui_tool_bar
     public :: wx_aui_tool_bar_set_custom_overflow_items
     public :: wx_aui_tool_bar_get_hint_size
     public :: wx_aui_tool_bar_is_pane_valid
+    public :: wx_aui_tool_bar_add_tool_by_label_bundle
+    public :: wx_aui_tool_bar_add_tool_bundle
+    public :: wx_aui_tool_bar_add_tool_by_bitmap_bundle
+    public :: wx_aui_tool_bar_set_tool_bitmap_bundle
 
 contains
 
@@ -314,6 +322,34 @@ contains
         result_value = (wxAuiToolBar_DeleteByIndex(self%ptr, tool_id) /= 0)
     end function wx_aui_tool_bar_delete_by_index
 
+    function wx_aui_tool_bar_destroy_tool(self, tool_id) result(result_value)
+        class(wxauitoolbar_t), intent(in) :: self
+        integer(c_int), intent(in) :: tool_id
+        logical :: result_value
+        result_value = (wxAuiToolBar_DestroyTool(self%ptr, tool_id) /= 0)
+    end function wx_aui_tool_bar_destroy_tool
+
+    function wx_aui_tool_bar_destroy_tool_by_index(self, idx) result(result_value)
+        class(wxauitoolbar_t), intent(in) :: self
+        integer(c_int), intent(in) :: idx
+        logical :: result_value
+        result_value = (wxAuiToolBar_DestroyToolByIndex(self%ptr, idx) /= 0)
+    end function wx_aui_tool_bar_destroy_tool_by_index
+
+    function wx_aui_tool_bar_get_tool_client_data(self, tool_id) result(result_object)
+        class(wxauitoolbar_t), intent(in) :: self
+        integer(c_int), intent(in) :: tool_id
+        type(wxobject_t) :: result_object
+        result_object = wxobject_from_ptr(wxAuiToolBar_GetToolClientData(self%ptr, tool_id), .false.)
+    end function wx_aui_tool_bar_get_tool_client_data
+
+    subroutine wx_aui_tool_bar_set_tool_client_data(self, tool_id, clientdata)
+        class(wxauitoolbar_t), intent(in) :: self
+        integer(c_int), intent(in) :: tool_id
+        class(wxobject_t), intent(in) :: clientdata
+        call wxAuiToolBar_SetToolClientData(self%ptr, tool_id, clientdata%ptr)
+    end subroutine wx_aui_tool_bar_set_tool_client_data
+
     function wx_aui_tool_bar_get_tool_count(self) result(result_value)
         class(wxauitoolbar_t), intent(in) :: self
         integer(c_size_t) :: result_value
@@ -345,7 +381,7 @@ contains
         class(wxauitoolbar_t), intent(in) :: self
         integer(c_int), intent(in) :: tool_id
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxAuiToolBar_GetToolRect(self%ptr, tool_id), .false.)
+        result_object = wxrect_from_ptr(wxAuiToolBar_GetToolRect(self%ptr, tool_id), .true.)
     end function wx_aui_tool_bar_get_tool_rect
 
     function wx_aui_tool_bar_get_tool_fits_by_index(self, tool_id) result(result_value)
@@ -394,7 +430,7 @@ contains
     function wx_aui_tool_bar_get_tool_bitmap_size(self) result(result_object)
         class(wxauitoolbar_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxAuiToolBar_GetToolBitmapSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxAuiToolBar_GetToolBitmapSize(self%ptr), .true.)
     end function wx_aui_tool_bar_get_tool_bitmap_size
 
     function wx_aui_tool_bar_get_overflow_visible(self) result(result_value)
@@ -624,7 +660,7 @@ contains
         class(wxauitoolbar_t), intent(in) :: self
         integer(c_int), intent(in) :: dock_direction
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxAuiToolBar_GetHintSize(self%ptr, dock_direction), .false.)
+        result_object = wxsize_from_ptr(wxAuiToolBar_GetHintSize(self%ptr, dock_direction), .true.)
     end function wx_aui_tool_bar_get_hint_size
 
     function wx_aui_tool_bar_is_pane_valid(self, pane) result(result_value)
@@ -633,5 +669,71 @@ contains
         logical :: result_value
         result_value = (wxAuiToolBar_IsPaneValid(self%ptr, pane%ptr) /= 0)
     end function wx_aui_tool_bar_is_pane_valid
+
+    function wx_aui_tool_bar_add_tool_by_label_bundle(self, tool_id, label, bitmap, shorthelpstring, kind) result(result_object)
+        class(wxauitoolbar_t), intent(in) :: self
+        integer(c_int), intent(in) :: tool_id
+        character(len=*), intent(in) :: label
+        class(wxbitmapbundle_t), intent(in) :: bitmap
+        character(len=*), intent(in) :: shorthelpstring
+        integer(c_int), intent(in) :: kind
+        type(c_ptr) :: label_ptr
+        type(c_ptr) :: shorthelpstring_ptr
+        type(wxauitoolbaritem_t) :: result_object
+        label_ptr = to_wxstring(label)
+        shorthelpstring_ptr = to_wxstring(shorthelpstring)
+        result_object = wxauitoolbaritem_from_ptr(wxAuiToolBar_AddToolByLabelBundle(self%ptr, tool_id, label_ptr, bitmap%ptr, shorthelpstring_ptr, kind), .false.)
+        call wxString_Delete(label_ptr)
+        call wxString_Delete(shorthelpstring_ptr)
+    end function wx_aui_tool_bar_add_tool_by_label_bundle
+
+    function wx_aui_tool_bar_add_tool_bundle(self, tool_id, label, bitmap, disabledbitmap, kind, shorthelpstring, longhelpstring, clientdata) result(result_object)
+        class(wxauitoolbar_t), intent(in) :: self
+        integer(c_int), intent(in) :: tool_id
+        character(len=*), intent(in) :: label
+        class(wxbitmapbundle_t), intent(in) :: bitmap
+        class(wxbitmapbundle_t), intent(in) :: disabledbitmap
+        integer(c_int), intent(in) :: kind
+        character(len=*), intent(in) :: shorthelpstring
+        character(len=*), intent(in) :: longhelpstring
+        class(wxobject_t), intent(in) :: clientdata
+        type(c_ptr) :: label_ptr
+        type(c_ptr) :: shorthelpstring_ptr
+        type(c_ptr) :: longhelpstring_ptr
+        type(wxauitoolbaritem_t) :: result_object
+        label_ptr = to_wxstring(label)
+        shorthelpstring_ptr = to_wxstring(shorthelpstring)
+        longhelpstring_ptr = to_wxstring(longhelpstring)
+        result_object = wxauitoolbaritem_from_ptr(wxAuiToolBar_AddToolBundle(self%ptr, tool_id, label_ptr, bitmap%ptr, disabledbitmap%ptr, kind, shorthelpstring_ptr, longhelpstring_ptr, clientdata%ptr), .false.)
+        call wxString_Delete(label_ptr)
+        call wxString_Delete(shorthelpstring_ptr)
+        call wxString_Delete(longhelpstring_ptr)
+    end function wx_aui_tool_bar_add_tool_bundle
+
+    function wx_aui_tool_bar_add_tool_by_bitmap_bundle(self, tool_id, bitmap, disabledbitmap, toggle, clientdata, shorthelpstring, longhelpstring) result(result_object)
+        class(wxauitoolbar_t), intent(in) :: self
+        integer(c_int), intent(in) :: tool_id
+        class(wxbitmapbundle_t), intent(in) :: bitmap
+        class(wxbitmapbundle_t), intent(in) :: disabledbitmap
+        logical, intent(in) :: toggle
+        class(wxobject_t), intent(in) :: clientdata
+        character(len=*), intent(in) :: shorthelpstring
+        character(len=*), intent(in) :: longhelpstring
+        type(c_ptr) :: shorthelpstring_ptr
+        type(c_ptr) :: longhelpstring_ptr
+        type(wxauitoolbaritem_t) :: result_object
+        shorthelpstring_ptr = to_wxstring(shorthelpstring)
+        longhelpstring_ptr = to_wxstring(longhelpstring)
+        result_object = wxauitoolbaritem_from_ptr(wxAuiToolBar_AddToolByBitmapBundle(self%ptr, tool_id, bitmap%ptr, disabledbitmap%ptr, merge(1_c_int, 0_c_int, toggle), clientdata%ptr, shorthelpstring_ptr, longhelpstring_ptr), .false.)
+        call wxString_Delete(shorthelpstring_ptr)
+        call wxString_Delete(longhelpstring_ptr)
+    end function wx_aui_tool_bar_add_tool_by_bitmap_bundle
+
+    subroutine wx_aui_tool_bar_set_tool_bitmap_bundle(self, tool_id, bitmap)
+        class(wxauitoolbar_t), intent(in) :: self
+        integer(c_int), intent(in) :: tool_id
+        class(wxbitmapbundle_t), intent(in) :: bitmap
+        call wxAuiToolBar_SetToolBitmapBundle(self%ptr, tool_id, bitmap%ptr)
+    end subroutine wx_aui_tool_bar_set_tool_bitmap_bundle
 
 end module wx_aui_tool_bar

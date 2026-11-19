@@ -24,7 +24,7 @@ contains
     function wx_grid_size_event_get_position(self) result(result_object)
         class(wxgridsizeevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxGridSizeEvent_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxGridSizeEvent_GetPosition(self%ptr), .true.)
     end function wx_grid_size_event_get_position
 
     function wx_grid_size_event_control_down(self) result(result_value)

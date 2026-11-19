@@ -3,6 +3,7 @@ module kwx_text_drop_target
     use, intrinsic :: iso_c_binding
     use kwx_types
     use kwxffi
+    use wx_string, only: from_wxstring
     implicit none
     private
 
@@ -13,6 +14,19 @@ module kwx_text_drop_target
     public :: kwx_text_drop_target_set_on_drop
     public :: kwx_text_drop_target_set_on_enter
     public :: kwx_text_drop_target_set_on_leave
+    public :: kwx_text_drop_target_set_on_data_with_data
+    public :: kwx_text_drop_target_set_on_drop_with_data
+    public :: kwx_text_drop_target_set_on_enter_with_data
+    public :: kwx_text_drop_target_set_on_drag_over_with_data
+    public :: kwx_text_drop_target_set_on_leave_with_data
+    public :: kwx_text_drop_target_set_data_result
+    public :: kwx_text_drop_target_set_drop_result
+    public :: kwx_text_drop_target_set_enter_result
+    public :: kwx_text_drop_target_set_drag_over_result
+    public :: kwx_text_drop_target_get_drop_result
+    public :: kwx_text_drop_target_set_on_drop_text_with_data
+    public :: kwx_text_drop_target_set_drop_text_result
+    public :: kwx_text_drop_target_get_drop_text
 
 contains
 
@@ -62,5 +76,92 @@ contains
         type(c_ptr), intent(in), value :: pfunction
         call kwxTextDropTarget_SetOnLeave(self%ptr, pfunction)
     end subroutine kwx_text_drop_target_set_on_leave
+
+    subroutine kwx_text_drop_target_set_on_data_with_data(self, pfunction, data)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxTextDropTarget_SetOnDataWithData(self%ptr, pfunction, data)
+    end subroutine kwx_text_drop_target_set_on_data_with_data
+
+    subroutine kwx_text_drop_target_set_on_drop_with_data(self, pfunction, data)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxTextDropTarget_SetOnDropWithData(self%ptr, pfunction, data)
+    end subroutine kwx_text_drop_target_set_on_drop_with_data
+
+    subroutine kwx_text_drop_target_set_on_enter_with_data(self, pfunction, data)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxTextDropTarget_SetOnEnterWithData(self%ptr, pfunction, data)
+    end subroutine kwx_text_drop_target_set_on_enter_with_data
+
+    subroutine kwx_text_drop_target_set_on_drag_over_with_data(self, pfunction, data)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxTextDropTarget_SetOnDragOverWithData(self%ptr, pfunction, data)
+    end subroutine kwx_text_drop_target_set_on_drag_over_with_data
+
+    subroutine kwx_text_drop_target_set_on_leave_with_data(self, pfunction, data)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxTextDropTarget_SetOnLeaveWithData(self%ptr, pfunction, data)
+    end subroutine kwx_text_drop_target_set_on_leave_with_data
+
+    subroutine kwx_text_drop_target_set_data_result(self, result)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxTextDropTarget_SetDataResult(self%ptr, result)
+    end subroutine kwx_text_drop_target_set_data_result
+
+    subroutine kwx_text_drop_target_set_drop_result(self, result)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxTextDropTarget_SetDropResult(self%ptr, result)
+    end subroutine kwx_text_drop_target_set_drop_result
+
+    subroutine kwx_text_drop_target_set_enter_result(self, result)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxTextDropTarget_SetEnterResult(self%ptr, result)
+    end subroutine kwx_text_drop_target_set_enter_result
+
+    subroutine kwx_text_drop_target_set_drag_over_result(self, result)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxTextDropTarget_SetDragOverResult(self%ptr, result)
+    end subroutine kwx_text_drop_target_set_drag_over_result
+
+    function kwx_text_drop_target_get_drop_result(self) result(result_value)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = kwxTextDropTarget_GetDropResult(self%ptr)
+    end function kwx_text_drop_target_get_drop_result
+
+    subroutine kwx_text_drop_target_set_on_drop_text_with_data(self, pfunction, data)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxTextDropTarget_SetOnDropTextWithData(self%ptr, pfunction, data)
+    end subroutine kwx_text_drop_target_set_on_drop_text_with_data
+
+    subroutine kwx_text_drop_target_set_drop_text_result(self, result)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        integer(c_int), intent(in) :: result
+        call kwxTextDropTarget_SetDropTextResult(self%ptr, result)
+    end subroutine kwx_text_drop_target_set_drop_text_result
+
+    function kwx_text_drop_target_get_drop_text(self) result(result_text)
+        class(kwxtextdroptarget_t), intent(in) :: self
+        type(c_ptr) :: result_text_ptr
+        character(len=:), allocatable :: result_text
+        result_text_ptr = kwxTextDropTarget_GetDropText(self%ptr)
+        result_text = from_wxstring(result_text_ptr)
+        call wxString_Delete(result_text_ptr)
+    end function kwx_text_drop_target_get_drop_text
 
 end module kwx_text_drop_target

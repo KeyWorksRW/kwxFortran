@@ -77,7 +77,7 @@ contains
     function wx_key_event_get_position(self) result(result_object)
         class(wxkeyevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxKeyEvent_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxKeyEvent_GetPosition(self%ptr), .true.)
     end function wx_key_event_get_position
 
     function wx_key_event_get_x(self) result(result_value)

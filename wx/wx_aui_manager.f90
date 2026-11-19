@@ -40,6 +40,19 @@ module wx_aui_manager
     public :: wx_aui_manager_get_pane_by_window
     public :: wx_aui_manager_get_pane_by_name
     public :: wx_aui_manager_get_manager
+    public :: wx_aui_manager_can_dock_panel
+    public :: wx_aui_manager_calculate_new_split_size
+    public :: wx_aui_manager_calculate_hint_rect
+    public :: wx_aui_manager_close_pane
+    public :: wx_aui_manager_draw_hint_rect
+    public :: wx_aui_manager_has_live_resize
+    public :: wx_aui_manager_maximize_pane
+    public :: wx_aui_manager_minimize_pane
+    public :: wx_aui_manager_restore_maximized_pane
+    public :: wx_aui_manager_restore_pane
+    public :: wx_aui_manager_split_pane
+    public :: wx_aui_manager_start_pane_drag
+    public :: wx_aui_manager_update_hint
 
 contains
 
@@ -282,5 +295,99 @@ contains
         type(wxauimanager_t) :: result_object
         result_object = wxauimanager_from_ptr(wxAuiManager_GetManager(window%ptr), .false.)
     end function wx_aui_manager_get_manager
+
+    function wx_aui_manager_can_dock_panel(self, pane) result(result_value)
+        class(wxauimanager_t), intent(in) :: self
+        class(wxauipaneinfo_t), intent(in) :: pane
+        logical :: result_value
+        result_value = (wxAuiManager_CanDockPanel(self%ptr, pane%ptr) /= 0)
+    end function wx_aui_manager_can_dock_panel
+
+    function wx_aui_manager_calculate_new_split_size(self) result(result_object)
+        class(wxauimanager_t), intent(in) :: self
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxAuiManager_CalculateNewSplitSize(self%ptr), .true.)
+    end function wx_aui_manager_calculate_new_split_size
+
+    function wx_aui_manager_calculate_hint_rect(self, panewindow, x, y, offsetx, offsety) result(result_object)
+        class(wxauimanager_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: panewindow
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: offsetx
+        integer(c_int), intent(in) :: offsety
+        type(wxrect_t) :: result_object
+        result_object = wxrect_from_ptr(wxAuiManager_CalculateHintRect(self%ptr, panewindow%ptr, x, y, offsetx, offsety), .true.)
+    end function wx_aui_manager_calculate_hint_rect
+
+    subroutine wx_aui_manager_close_pane(self, paneinfo)
+        class(wxauimanager_t), intent(in) :: self
+        class(wxauipaneinfo_t), intent(in) :: paneinfo
+        call wxAuiManager_ClosePane(self%ptr, paneinfo%ptr)
+    end subroutine wx_aui_manager_close_pane
+
+    subroutine wx_aui_manager_draw_hint_rect(self, panewindow, x, y, offsetx, offsety)
+        class(wxauimanager_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: panewindow
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: offsetx
+        integer(c_int), intent(in) :: offsety
+        call wxAuiManager_DrawHintRect(self%ptr, panewindow%ptr, x, y, offsetx, offsety)
+    end subroutine wx_aui_manager_draw_hint_rect
+
+    function wx_aui_manager_has_live_resize(self) result(result_value)
+        class(wxauimanager_t), intent(in) :: self
+        logical :: result_value
+        result_value = (wxAuiManager_HasLiveResize(self%ptr) /= 0)
+    end function wx_aui_manager_has_live_resize
+
+    subroutine wx_aui_manager_maximize_pane(self, paneinfo)
+        class(wxauimanager_t), intent(in) :: self
+        class(wxauipaneinfo_t), intent(in) :: paneinfo
+        call wxAuiManager_MaximizePane(self%ptr, paneinfo%ptr)
+    end subroutine wx_aui_manager_maximize_pane
+
+    subroutine wx_aui_manager_minimize_pane(self, paneinfo)
+        class(wxauimanager_t), intent(in) :: self
+        class(wxauipaneinfo_t), intent(in) :: paneinfo
+        call wxAuiManager_MinimizePane(self%ptr, paneinfo%ptr)
+    end subroutine wx_aui_manager_minimize_pane
+
+    subroutine wx_aui_manager_restore_maximized_pane(self)
+        class(wxauimanager_t), intent(in) :: self
+        call wxAuiManager_RestoreMaximizedPane(self%ptr)
+    end subroutine wx_aui_manager_restore_maximized_pane
+
+    subroutine wx_aui_manager_restore_pane(self, paneinfo)
+        class(wxauimanager_t), intent(in) :: self
+        class(wxauipaneinfo_t), intent(in) :: paneinfo
+        call wxAuiManager_RestorePane(self%ptr, paneinfo%ptr)
+    end subroutine wx_aui_manager_restore_pane
+
+    function wx_aui_manager_split_pane(self, window, newwindow, direction, dropx, dropy) result(result_value)
+        class(wxauimanager_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: window
+        class(wxwindow_t), intent(in) :: newwindow
+        integer(c_int), intent(in) :: direction
+        integer(c_int), intent(in) :: dropx
+        integer(c_int), intent(in) :: dropy
+        logical :: result_value
+        result_value = (wxAuiManager_SplitPane(self%ptr, window%ptr, newwindow%ptr, direction, dropx, dropy) /= 0)
+    end function wx_aui_manager_split_pane
+
+    subroutine wx_aui_manager_start_pane_drag(self, panewindow, offsetx, offsety)
+        class(wxauimanager_t), intent(in) :: self
+        class(wxwindow_t), intent(in) :: panewindow
+        integer(c_int), intent(in) :: offsetx
+        integer(c_int), intent(in) :: offsety
+        call wxAuiManager_StartPaneDrag(self%ptr, panewindow%ptr, offsetx, offsety)
+    end subroutine wx_aui_manager_start_pane_drag
+
+    subroutine wx_aui_manager_update_hint(self, rect)
+        class(wxauimanager_t), intent(in) :: self
+        class(wxrect_t), intent(in) :: rect
+        call wxAuiManager_UpdateHint(self%ptr, rect%ptr)
+    end subroutine wx_aui_manager_update_hint
 
 end module wx_aui_manager

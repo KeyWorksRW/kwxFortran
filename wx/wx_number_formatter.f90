@@ -3,7 +3,7 @@ module wx_number_formatter
     use, intrinsic :: iso_c_binding
     use kwx_types
     use kwxffi
-    use wx_string, only: to_wxstring, from_wxstring, from_cstring
+    use wx_string, only: to_wxstring, from_wxstring, from_cstring, free_cstring
     implicit none
     private
 
@@ -100,6 +100,7 @@ contains
         character(len=:), allocatable :: result_text
         result_text_ptr = wxNumberFormatter_GetDecimalSeparator()
         result_text = from_cstring(result_text_ptr)
+        call free_cstring(result_text_ptr)
     end function wx_number_formatter_get_decimal_separator
 
     function wx_number_formatter_get_thousands_separator() result(result_text)
@@ -107,6 +108,7 @@ contains
         character(len=:), allocatable :: result_text
         result_text_ptr = wxNumberFormatter_GetThousandsSeparator()
         result_text = from_cstring(result_text_ptr)
+        call free_cstring(result_text_ptr)
     end function wx_number_formatter_get_thousands_separator
 
     function wx_number_formatter_to_string_double(value, precision, style) result(result_text)
@@ -117,6 +119,7 @@ contains
         character(len=:), allocatable :: result_text
         result_text_ptr = wxNumberFormatter_ToStringDouble(value, precision, style)
         result_text = from_cstring(result_text_ptr)
+        call free_cstring(result_text_ptr)
     end function wx_number_formatter_to_string_double
 
     function wx_number_formatter_to_string_long_long(value, style) result(result_text)
@@ -126,6 +129,7 @@ contains
         character(len=:), allocatable :: result_text
         result_text_ptr = wxNumberFormatter_ToStringLongLong(value, style)
         result_text = from_cstring(result_text_ptr)
+        call free_cstring(result_text_ptr)
     end function wx_number_formatter_to_string_long_long
 
 end module wx_number_formatter

@@ -46,11 +46,11 @@ contains
         result_object%owned = .true.
     end function wx_rich_text_paragraph_layout_box_create
 
-    function wx_rich_text_paragraph_layout_box_get_leaf_object_at_position(self, position) result(result_value)
+    function wx_rich_text_paragraph_layout_box_get_leaf_object_at_position(self, position) result(result_object)
         class(wxrichtextparagraphlayoutbox_t), intent(in) :: self
         integer(c_long), intent(in) :: position
-        type(c_ptr) :: result_value
-        result_value = wxRichTextParagraphLayoutBox_GetLeafObjectAtPosition(self%ptr, position)
+        type(wxrichtextobject_t) :: result_object
+        result_object = wxrichtextobject_from_ptr(wxRichTextParagraphLayoutBox_GetLeafObjectAtPosition(self%ptr, position), .false.)
     end function wx_rich_text_paragraph_layout_box_get_leaf_object_at_position
 
     subroutine wx_rich_text_paragraph_layout_box_delete(self)

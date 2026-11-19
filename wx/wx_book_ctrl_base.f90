@@ -255,7 +255,7 @@ contains
         class(wxbookctrlbase_t), intent(in) :: self
         integer(c_int), intent(in) :: iconindex
         type(wxicon_t) :: result_object
-        result_object = wxicon_from_ptr(wxBookCtrlBase_GetImage(self%ptr, iconindex), .false.)
+        result_object = wxicon_from_ptr(wxBookCtrlBase_GetImage(self%ptr, iconindex), .true.)
     end function wx_book_ctrl_base_get_image
 
 end module wx_book_ctrl_base

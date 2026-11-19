@@ -200,13 +200,13 @@ contains
         class(wxmouseevent_t), intent(in) :: self
         class(wxdc_t), intent(in) :: dc
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxMouseEvent_GetLogicalPosition(self%ptr, dc%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxMouseEvent_GetLogicalPosition(self%ptr, dc%ptr), .true.)
     end function wx_mouse_event_get_logical_position
 
     function wx_mouse_event_get_position(self) result(result_object)
         class(wxmouseevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxMouseEvent_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxMouseEvent_GetPosition(self%ptr), .true.)
     end function wx_mouse_event_get_position
 
     function wx_mouse_event_get_x(self) result(result_value)

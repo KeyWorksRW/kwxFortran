@@ -23,7 +23,7 @@ contains
 
     function wx_system_settings_get_appearance() result(result_object)
         type(wxsystemappearance_t) :: result_object
-        result_object = wxsystemappearance_from_ptr(wxSystemSettings_GetAppearance(), .false.)
+        result_object = wxsystemappearance_from_ptr(wxSystemSettings_GetAppearance(), .true.)
     end function wx_system_settings_get_appearance
 
     subroutine wx_system_settings_get_font(index, ref)
@@ -47,7 +47,7 @@ contains
         class(wxcolour_t), intent(in) :: colforlight
         class(wxcolour_t), intent(in) :: colfordark
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxSystemSettings_SelectLightDark(colforlight%ptr, colfordark%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxSystemSettings_SelectLightDark(colforlight%ptr, colfordark%ptr), .true.)
     end function wx_system_settings_select_light_dark
 
 end module wx_system_settings

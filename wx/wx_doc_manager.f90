@@ -7,16 +7,73 @@ module wx_doc_manager
     implicit none
     private
 
+    public :: wx_doc_manager_create
+    public :: wx_doc_manager_create_default
+    public :: wx_doc_manager_delete
+    public :: wx_doc_manager_add_document
+    public :: wx_doc_manager_associate_template
+    public :: wx_doc_manager_clear
     public :: wx_doc_manager_close_documents
     public :: wx_doc_manager_create_document
     public :: wx_doc_manager_create_new_document
+    public :: wx_doc_manager_disassociate_template
     public :: wx_doc_manager_file_history_load
     public :: wx_doc_manager_file_history_save
     public :: wx_doc_manager_file_history_use_menu
+    public :: wx_doc_manager_get_current_document
+    public :: wx_doc_manager_get_current_view
+    public :: wx_doc_manager_get_document_count
+    public :: wx_doc_manager_get_document_at
     public :: wx_doc_manager_get_document_manager
+    public :: wx_doc_manager_get_max_docs_open
+    public :: wx_doc_manager_get_template_at
+    public :: wx_doc_manager_get_template_count
+    public :: wx_doc_manager_remove_document
     public :: wx_doc_manager_set_max_docs_open
 
 contains
+
+    function wx_doc_manager_create(flags, initialize) result(result_object)
+        integer(c_int), intent(in) :: flags
+        logical, intent(in) :: initialize
+        type(wxdocmanager_t) :: result_object
+        result_object%ptr = wxDocManager_Create(flags, merge(1_c_int, 0_c_int, initialize))
+        result_object%owned = .true.
+    end function wx_doc_manager_create
+
+    function wx_doc_manager_create_default() result(result_object)
+        type(wxdocmanager_t) :: result_object
+        result_object%ptr = wxDocManager_CreateDefault()
+        result_object%owned = .true.
+    end function wx_doc_manager_create_default
+
+    subroutine wx_doc_manager_delete(self)
+        class(wxdocmanager_t), intent(inout) :: self
+        if (self%owned .and. c_associated(self%ptr)) then
+            call wxDocManager_Delete(self%ptr)
+        end if
+        self%ptr = c_null_ptr
+        self%owned = .false.
+    end subroutine wx_doc_manager_delete
+
+    subroutine wx_doc_manager_add_document(self, doc)
+        class(wxdocmanager_t), intent(in) :: self
+        class(wxdocument_t), intent(in) :: doc
+        call wxDocManager_AddDocument(self%ptr, doc%ptr)
+    end subroutine wx_doc_manager_add_document
+
+    subroutine wx_doc_manager_associate_template(self, doctemplate)
+        class(wxdocmanager_t), intent(in) :: self
+        class(wxdoctemplate_t), intent(in) :: doctemplate
+        call wxDocManager_AssociateTemplate(self%ptr, doctemplate%ptr)
+    end subroutine wx_doc_manager_associate_template
+
+    function wx_doc_manager_clear(self, force) result(result_value)
+        class(wxdocmanager_t), intent(in) :: self
+        logical, intent(in) :: force
+        logical :: result_value
+        result_value = (wxDocManager_Clear(self%ptr, merge(1_c_int, 0_c_int, force)) /= 0)
+    end function wx_doc_manager_clear
 
     function wx_doc_manager_close_documents(self, force) result(result_value)
         class(wxdocmanager_t), intent(in) :: self
@@ -42,6 +99,12 @@ contains
         result_object = wxdocument_from_ptr(wxDocManager_CreateNewDocument(self%ptr), .false.)
     end function wx_doc_manager_create_new_document
 
+    subroutine wx_doc_manager_disassociate_template(self, doctemplate)
+        class(wxdocmanager_t), intent(in) :: self
+        class(wxdoctemplate_t), intent(in) :: doctemplate
+        call wxDocManager_DisassociateTemplate(self%ptr, doctemplate%ptr)
+    end subroutine wx_doc_manager_disassociate_template
+
     subroutine wx_doc_manager_file_history_load(self, config)
         class(wxdocmanager_t), intent(in) :: self
         class(wxconfigbase_t), intent(in) :: config
@@ -56,14 +119,64 @@ contains
 
     subroutine wx_doc_manager_file_history_use_menu(self, menu)
         class(wxdocmanager_t), intent(in) :: self
-        type(c_ptr), intent(in), value :: menu
-        call wxDocManager_FileHistoryUseMenu(self%ptr, menu)
+        class(wxmenu_t), intent(in) :: menu
+        call wxDocManager_FileHistoryUseMenu(self%ptr, menu%ptr)
     end subroutine wx_doc_manager_file_history_use_menu
 
-    function wx_doc_manager_get_document_manager() result(result_value)
-        type(c_ptr) :: result_value
-        result_value = wxDocManager_GetDocumentManager()
+    function wx_doc_manager_get_current_document(self) result(result_object)
+        class(wxdocmanager_t), intent(in) :: self
+        type(wxdocument_t) :: result_object
+        result_object = wxdocument_from_ptr(wxDocManager_GetCurrentDocument(self%ptr), .false.)
+    end function wx_doc_manager_get_current_document
+
+    function wx_doc_manager_get_current_view(self) result(result_object)
+        class(wxdocmanager_t), intent(in) :: self
+        type(wxview_t) :: result_object
+        result_object = wxview_from_ptr(wxDocManager_GetCurrentView(self%ptr), .false.)
+    end function wx_doc_manager_get_current_view
+
+    function wx_doc_manager_get_document_count(self) result(result_value)
+        class(wxdocmanager_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxDocManager_GetDocumentCount(self%ptr)
+    end function wx_doc_manager_get_document_count
+
+    function wx_doc_manager_get_document_at(self, pos) result(result_object)
+        class(wxdocmanager_t), intent(in) :: self
+        integer(c_int), intent(in) :: pos
+        type(wxdocument_t) :: result_object
+        result_object = wxdocument_from_ptr(wxDocManager_GetDocumentAt(self%ptr, pos), .false.)
+    end function wx_doc_manager_get_document_at
+
+    function wx_doc_manager_get_document_manager() result(result_object)
+        type(wxdocmanager_t) :: result_object
+        result_object = wxdocmanager_from_ptr(wxDocManager_GetDocumentManager(), .false.)
     end function wx_doc_manager_get_document_manager
+
+    function wx_doc_manager_get_max_docs_open(self) result(result_value)
+        class(wxdocmanager_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxDocManager_GetMaxDocsOpen(self%ptr)
+    end function wx_doc_manager_get_max_docs_open
+
+    function wx_doc_manager_get_template_at(self, pos) result(result_object)
+        class(wxdocmanager_t), intent(in) :: self
+        integer(c_int), intent(in) :: pos
+        type(wxdoctemplate_t) :: result_object
+        result_object = wxdoctemplate_from_ptr(wxDocManager_GetTemplateAt(self%ptr, pos), .false.)
+    end function wx_doc_manager_get_template_at
+
+    function wx_doc_manager_get_template_count(self) result(result_value)
+        class(wxdocmanager_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = wxDocManager_GetTemplateCount(self%ptr)
+    end function wx_doc_manager_get_template_count
+
+    subroutine wx_doc_manager_remove_document(self, doc)
+        class(wxdocmanager_t), intent(in) :: self
+        class(wxdocument_t), intent(in) :: doc
+        call wxDocManager_RemoveDocument(self%ptr, doc%ptr)
+    end subroutine wx_doc_manager_remove_document
 
     subroutine wx_doc_manager_set_max_docs_open(self, n)
         class(wxdocmanager_t), intent(in) :: self

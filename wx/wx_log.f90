@@ -107,9 +107,9 @@ contains
         call wxLog_FlushActive(self%ptr)
     end subroutine wx_log_flush_active
 
-    function wx_log_get_active_target() result(result_value)
-        type(c_ptr) :: result_value
-        result_value = wxLog_GetActiveTarget()
+    function wx_log_get_active_target() result(result_object)
+        type(wxlog_t) :: result_object
+        result_object = wxlog_from_ptr(wxLog_GetActiveTarget(), .false.)
     end function wx_log_get_active_target
 
     function wx_log_set_active_target(self) result(result_object)

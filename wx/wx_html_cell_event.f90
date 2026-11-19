@@ -23,7 +23,7 @@ contains
     function wx_html_cell_event_get_point(self) result(result_object)
         class(wxhtmlcellevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxHtmlCellEvent_GetPoint(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxHtmlCellEvent_GetPoint(self%ptr), .true.)
     end function wx_html_cell_event_get_point
 
     function wx_html_cell_event_get_mouse_event(self) result(result_value)

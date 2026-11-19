@@ -12,6 +12,7 @@ module wx_string_client_data
     public :: wx_string_client_data_delete
     public :: wx_string_client_data_get_data
     public :: wx_string_client_data_set_data
+    public :: wx_string_client_data_from_client_data
 
 contains
 
@@ -57,5 +58,11 @@ contains
         call wxStringClientData_SetData(self%ptr, data_ptr)
         call wxString_Delete(data_ptr)
     end subroutine wx_string_client_data_set_data
+
+    function wx_string_client_data_from_client_data(data) result(result_object)
+        class(wxclientdata_t), intent(in) :: data
+        type(wxstringclientdata_t) :: result_object
+        result_object = wxstringclientdata_from_ptr(wxStringClientData_FromClientData(data%ptr), .false.)
+    end function wx_string_client_data_from_client_data
 
 end module wx_string_client_data

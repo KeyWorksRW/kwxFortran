@@ -179,7 +179,7 @@ contains
         integer(c_int), intent(in) :: g
         integer(c_int), intent(in) :: b
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_Size(self%ptr, width, height, x, y, r, g, b), .false.)
+        result_object = wximage_from_ptr(wxImage_Size(self%ptr, width, height, x, y, r, g, b), .true.)
     end function wx_image_size
 
     function wx_image_resample_nearest(self, width, height) result(result_object)
@@ -187,7 +187,7 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_ResampleNearest(self%ptr, width, height), .false.)
+        result_object = wximage_from_ptr(wxImage_ResampleNearest(self%ptr, width, height), .true.)
     end function wx_image_resample_nearest
 
     function wx_image_resample_box(self, width, height) result(result_object)
@@ -195,7 +195,7 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_ResampleBox(self%ptr, width, height), .false.)
+        result_object = wximage_from_ptr(wxImage_ResampleBox(self%ptr, width, height), .true.)
     end function wx_image_resample_box
 
     function wx_image_resample_bilinear(self, width, height) result(result_object)
@@ -203,7 +203,7 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_ResampleBilinear(self%ptr, width, height), .false.)
+        result_object = wximage_from_ptr(wxImage_ResampleBilinear(self%ptr, width, height), .true.)
     end function wx_image_resample_bilinear
 
     function wx_image_resample_bicubic(self, width, height) result(result_object)
@@ -211,28 +211,28 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_ResampleBicubic(self%ptr, width, height), .false.)
+        result_object = wximage_from_ptr(wxImage_ResampleBicubic(self%ptr, width, height), .true.)
     end function wx_image_resample_bicubic
 
     function wx_image_blur(self, radius) result(result_object)
         class(wximage_t), intent(in) :: self
         integer(c_int), intent(in) :: radius
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_Blur(self%ptr, radius), .false.)
+        result_object = wximage_from_ptr(wxImage_Blur(self%ptr, radius), .true.)
     end function wx_image_blur
 
     function wx_image_blur_horizontal(self, radius) result(result_object)
         class(wximage_t), intent(in) :: self
         integer(c_int), intent(in) :: radius
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_BlurHorizontal(self%ptr, radius), .false.)
+        result_object = wximage_from_ptr(wxImage_BlurHorizontal(self%ptr, radius), .true.)
     end function wx_image_blur_horizontal
 
     function wx_image_blur_vertical(self, radius) result(result_object)
         class(wximage_t), intent(in) :: self
         integer(c_int), intent(in) :: radius
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_BlurVertical(self%ptr, radius), .false.)
+        result_object = wximage_from_ptr(wxImage_BlurVertical(self%ptr, radius), .true.)
     end function wx_image_blur_vertical
 
     function wx_image_shrink_by(self, xfactor, yfactor) result(result_object)
@@ -240,7 +240,7 @@ contains
         integer(c_int), intent(in) :: xfactor
         integer(c_int), intent(in) :: yfactor
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_ShrinkBy(self%ptr, xfactor, yfactor), .false.)
+        result_object = wximage_from_ptr(wxImage_ShrinkBy(self%ptr, xfactor, yfactor), .true.)
     end function wx_image_shrink_by
 
     subroutine wx_image_resize(self, width, height, x, y, r, g, b)
@@ -258,13 +258,13 @@ contains
     function wx_image_rotate180(self) result(result_object)
         class(wximage_t), intent(in) :: self
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_Rotate180(self%ptr), .false.)
+        result_object = wximage_from_ptr(wxImage_Rotate180(self%ptr), .true.)
     end function wx_image_rotate180
 
     function wx_image_convert_to_greyscale(self) result(result_object)
         class(wximage_t), intent(in) :: self
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_ConvertToGreyscale(self%ptr), .false.)
+        result_object = wximage_from_ptr(wxImage_ConvertToGreyscale(self%ptr), .true.)
     end function wx_image_convert_to_greyscale
 
     function wx_image_convert_to_greyscale_ex(self, weightr, weightg, weightb) result(result_object)
@@ -273,7 +273,7 @@ contains
         real(c_double), intent(in) :: weightg
         real(c_double), intent(in) :: weightb
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_ConvertToGreyscaleEx(self%ptr, weightr, weightg, weightb), .false.)
+        result_object = wximage_from_ptr(wxImage_ConvertToGreyscaleEx(self%ptr, weightr, weightg, weightb), .true.)
     end function wx_image_convert_to_greyscale_ex
 
     function wx_image_convert_to_mono(self, r, g, b) result(result_object)
@@ -282,21 +282,21 @@ contains
         integer(c_int8_t), intent(in) :: g
         integer(c_int8_t), intent(in) :: b
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_ConvertToMono(self%ptr, r, g, b), .false.)
+        result_object = wximage_from_ptr(wxImage_ConvertToMono(self%ptr, r, g, b), .true.)
     end function wx_image_convert_to_mono
 
     function wx_image_convert_to_disabled(self, brightness) result(result_object)
         class(wximage_t), intent(in) :: self
         character(c_char), intent(in) :: brightness
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_ConvertToDisabled(self%ptr, brightness), .false.)
+        result_object = wximage_from_ptr(wxImage_ConvertToDisabled(self%ptr, brightness), .true.)
     end function wx_image_convert_to_disabled
 
     function wx_image_change_lightness(self, alpha) result(result_object)
         class(wximage_t), intent(in) :: self
         integer(c_int), intent(in) :: alpha
         type(wximage_t) :: result_object
-        result_object = wximage_from_ptr(wxImage_ChangeLightness(self%ptr, alpha), .false.)
+        result_object = wximage_from_ptr(wxImage_ChangeLightness(self%ptr, alpha), .true.)
     end function wx_image_change_lightness
 
     subroutine wx_image_set_rgb_rect(self, x, y, width, height, r, g, b)
@@ -462,7 +462,7 @@ contains
     function wx_image_get_size(self) result(result_object)
         class(wximage_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxImage_GetSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxImage_GetSize(self%ptr), .true.)
     end function wx_image_get_size
 
     subroutine wx_image_set_data_rgba(self, data)
@@ -527,7 +527,7 @@ contains
     function wx_image_get_palette(self) result(result_object)
         class(wximage_t), intent(in) :: self
         type(wxpalette_t) :: result_object
-        result_object = wxpalette_from_ptr(wxImage_GetPalette(self%ptr), .false.)
+        result_object = wxpalette_from_ptr(wxImage_GetPalette(self%ptr), .true.)
     end function wx_image_get_palette
 
     subroutine wx_image_set_palette(self, palette)

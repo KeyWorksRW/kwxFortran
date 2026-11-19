@@ -65,7 +65,7 @@ contains
     function wx_pg_validation_info_get_value(self) result(result_object)
         class(wxpgvalidationinfo_t), intent(in) :: self
         type(wxvariant_t) :: result_object
-        result_object = wxvariant_from_ptr(wxPGValidationInfo_GetValue(self%ptr), .false.)
+        result_object = wxvariant_from_ptr(wxPGValidationInfo_GetValue(self%ptr), .true.)
     end function wx_pg_validation_info_get_value
 
 end module wx_pg_validation_info

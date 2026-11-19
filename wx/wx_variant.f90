@@ -17,6 +17,10 @@ module wx_variant
     public :: wx_variant_create_from_void_ptr
     public :: wx_variant_create_from_object
     public :: wx_variant_create_from_array_string
+    public :: wx_variant_create_from_data_view_icon_text
+    public :: wx_variant_create_from_data_view_check_icon_text
+    public :: wx_variant_get_data_view_icon_text
+    public :: wx_variant_get_data_view_check_icon_text
     public :: wx_variant_set_name
     public :: wx_variant_get_name
     public :: wx_variant_is_null
@@ -166,6 +170,51 @@ contains
         call wxString_Delete(name_ptr)
     end function wx_variant_create_from_array_string
 
+    function wx_variant_create_from_data_view_icon_text(text, icon, name) result(result_object)
+        character(len=*), intent(in) :: text
+        class(wxbitmapbundle_t), intent(in) :: icon
+        character(len=*), intent(in) :: name
+        type(c_ptr) :: text_ptr
+        type(c_ptr) :: name_ptr
+        type(wxvariant_t) :: result_object
+        text_ptr = to_wxstring(text)
+        name_ptr = to_wxstring(name)
+        result_object%ptr = wxVariant_CreateFromDataViewIconText(text_ptr, icon%ptr, name_ptr)
+        result_object%owned = .true.
+        call wxString_Delete(text_ptr)
+        call wxString_Delete(name_ptr)
+    end function wx_variant_create_from_data_view_icon_text
+
+    function wx_variant_create_from_data_view_check_icon_text(text, icon, checkedstate, name) result(result_object)
+        character(len=*), intent(in) :: text
+        class(wxbitmapbundle_t), intent(in) :: icon
+        integer(c_int), intent(in) :: checkedstate
+        character(len=*), intent(in) :: name
+        type(c_ptr) :: text_ptr
+        type(c_ptr) :: name_ptr
+        type(wxvariant_t) :: result_object
+        text_ptr = to_wxstring(text)
+        name_ptr = to_wxstring(name)
+        result_object%ptr = wxVariant_CreateFromDataViewCheckIconText(text_ptr, icon%ptr, checkedstate, name_ptr)
+        result_object%owned = .true.
+        call wxString_Delete(text_ptr)
+        call wxString_Delete(name_ptr)
+    end function wx_variant_create_from_data_view_check_icon_text
+
+    function wx_variant_get_data_view_icon_text(self, result) result(result_value)
+        class(wxvariant_t), intent(in) :: self
+        class(wxdataviewicontext_t), intent(in) :: result
+        logical :: result_value
+        result_value = (wxVariant_GetDataViewIconText(self%ptr, result%ptr) /= 0)
+    end function wx_variant_get_data_view_icon_text
+
+    function wx_variant_get_data_view_check_icon_text(self, result) result(result_value)
+        class(wxvariant_t), intent(in) :: self
+        class(wxdataviewcheckicontext_t), intent(in) :: result
+        logical :: result_value
+        result_value = (wxVariant_GetDataViewCheckIconText(self%ptr, result%ptr) /= 0)
+    end function wx_variant_get_data_view_check_icon_text
+
     subroutine wx_variant_set_name(self, name)
         class(wxvariant_t), intent(in) :: self
         character(len=*), intent(in) :: name
@@ -282,7 +331,7 @@ contains
     function wx_variant_get_array_string(self) result(result_object)
         class(wxvariant_t), intent(in) :: self
         type(wxarraystring_t) :: result_object
-        result_object = wxarraystring_from_ptr(wxVariant_GetArrayString(self%ptr), .false.)
+        result_object = wxarraystring_from_ptr(wxVariant_GetArrayString(self%ptr), .true.)
     end function wx_variant_get_array_string
 
     function wx_variant_get_count(self) result(result_value)
@@ -345,19 +394,19 @@ contains
         class(wxvariant_t), intent(in) :: self
         integer(c_size_t), intent(in) :: index
         type(wxvariant_t) :: result_object
-        result_object = wxvariant_from_ptr(wxVariant_Item(self%ptr, index), .false.)
+        result_object = wxvariant_from_ptr(wxVariant_Item(self%ptr, index), .true.)
     end function wx_variant_item
 
     function wx_variant_get_font(self) result(result_object)
         class(wxvariant_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxVariant_GetFont(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxVariant_GetFont(self%ptr), .true.)
     end function wx_variant_get_font
 
     function wx_variant_get_colour_property_value(self) result(result_object)
         class(wxvariant_t), intent(in) :: self
         type(wxcolourpropertyvalue_t) :: result_object
-        result_object = wxcolourpropertyvalue_from_ptr(wxVariant_GetColourPropertyValue(self%ptr), .false.)
+        result_object = wxcolourpropertyvalue_from_ptr(wxVariant_GetColourPropertyValue(self%ptr), .true.)
     end function wx_variant_get_colour_property_value
 
     function wx_variant_create() result(result_object)

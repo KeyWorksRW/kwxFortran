@@ -67,7 +67,7 @@ contains
     function wx_joystick_event_get_position(self) result(result_object)
         class(wxjoystickevent_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxJoystickEvent_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxJoystickEvent_GetPosition(self%ptr), .true.)
     end function wx_joystick_event_get_position
 
     function wx_joystick_event_get_z_position(self) result(result_value)

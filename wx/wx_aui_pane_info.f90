@@ -101,6 +101,7 @@ module wx_aui_pane_info
     public :: wx_aui_pane_info_max_size_xy
     public :: wx_aui_pane_info_min_size
     public :: wx_aui_pane_info_min_size_xy
+    public :: wx_aui_pane_info_icon_bundle
 
 contains
 
@@ -735,5 +736,12 @@ contains
         type(wxauipaneinfo_t) :: result_object
         result_object = wxauipaneinfo_from_ptr(wxAuiPaneInfo_MinSizeXY(self%ptr, x, y), .false.)
     end function wx_aui_pane_info_min_size_xy
+
+    function wx_aui_pane_info_icon_bundle(self, bitmap) result(result_object)
+        class(wxauipaneinfo_t), intent(in) :: self
+        class(wxbitmapbundle_t), intent(in) :: bitmap
+        type(wxauipaneinfo_t) :: result_object
+        result_object = wxauipaneinfo_from_ptr(wxAuiPaneInfo_IconBundle(self%ptr, bitmap%ptr), .false.)
+    end function wx_aui_pane_info_icon_bundle
 
 end module wx_aui_pane_info

@@ -37,7 +37,7 @@ contains
     function wx_rearrange_dialog_get_order(self) result(result_object)
         class(wxrearrangedialog_t), intent(in) :: self
         type(wxarrayint_t) :: result_object
-        result_object = wxarrayint_from_ptr(wxRearrangeDialog_GetOrder(self%ptr), .false.)
+        result_object = wxarrayint_from_ptr(wxRearrangeDialog_GetOrder(self%ptr), .true.)
     end function wx_rearrange_dialog_get_order
 
     function wx_rearrange_dialog_get_list(self) result(result_object)

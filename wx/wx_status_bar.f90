@@ -30,7 +30,7 @@ contains
     function wx_status_bar_get_borders(self) result(result_object)
         class(wxstatusbar_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxStatusBar_GetBorders(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxStatusBar_GetBorders(self%ptr), .true.)
     end function wx_status_bar_get_borders
 
     function wx_status_bar_add_field_control(self, n, win) result(result_value)

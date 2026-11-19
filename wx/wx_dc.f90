@@ -192,7 +192,7 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxDC_FromDIPSize(self%ptr, width, height), .false.)
+        result_object = wxsize_from_ptr(wxDC_FromDIPSize(self%ptr, width, height), .true.)
     end function wx_dc_from_dip_size
 
     function wx_dc_to_dip_size(self, width, height) result(result_object)
@@ -200,7 +200,7 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxDC_ToDIPSize(self%ptr, width, height), .false.)
+        result_object = wxsize_from_ptr(wxDC_ToDIPSize(self%ptr, width, height), .true.)
     end function wx_dc_to_dip_size
 
     subroutine wx_dc_set_layout_direction(self, direction)
@@ -221,7 +221,7 @@ contains
         type(c_ptr) :: string_ptr
         type(wxsize_t) :: result_object
         string_ptr = to_wxstring(string)
-        result_object = wxsize_from_ptr(wxDC_GetTextExtentSize(self%ptr, string_ptr), .false.)
+        result_object = wxsize_from_ptr(wxDC_GetTextExtentSize(self%ptr, string_ptr), .true.)
         call wxString_Delete(string_ptr)
     end function wx_dc_get_text_extent_size
 
@@ -231,7 +231,7 @@ contains
         type(c_ptr) :: string_ptr
         type(wxsize_t) :: result_object
         string_ptr = to_wxstring(string)
-        result_object = wxsize_from_ptr(wxDC_GetMultiLineTextExtentSize(self%ptr, string_ptr), .false.)
+        result_object = wxsize_from_ptr(wxDC_GetMultiLineTextExtentSize(self%ptr, string_ptr), .true.)
         call wxString_Delete(string_ptr)
     end function wx_dc_get_multi_line_text_extent_size
 
@@ -252,7 +252,7 @@ contains
         integer(c_int), intent(in) :: x
         integer(c_int), intent(in) :: y
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxDC_DeviceToLogical(self%ptr, x, y), .false.)
+        result_object = wxpoint_from_ptr(wxDC_DeviceToLogical(self%ptr, x, y), .true.)
     end function wx_dc_device_to_logical
 
     function wx_dc_logical_to_device(self, x, y) result(result_object)
@@ -260,7 +260,7 @@ contains
         integer(c_int), intent(in) :: x
         integer(c_int), intent(in) :: y
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxDC_LogicalToDevice(self%ptr, x, y), .false.)
+        result_object = wxpoint_from_ptr(wxDC_LogicalToDevice(self%ptr, x, y), .true.)
     end function wx_dc_logical_to_device
 
     function wx_dc_device_to_logical_rel(self, width, height) result(result_object)
@@ -268,7 +268,7 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxDC_DeviceToLogicalRel(self%ptr, width, height), .false.)
+        result_object = wxsize_from_ptr(wxDC_DeviceToLogicalRel(self%ptr, width, height), .true.)
     end function wx_dc_device_to_logical_rel
 
     function wx_dc_logical_to_device_rel(self, width, height) result(result_object)
@@ -276,19 +276,19 @@ contains
         integer(c_int), intent(in) :: width
         integer(c_int), intent(in) :: height
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxDC_LogicalToDeviceRel(self%ptr, width, height), .false.)
+        result_object = wxsize_from_ptr(wxDC_LogicalToDeviceRel(self%ptr, width, height), .true.)
     end function wx_dc_logical_to_device_rel
 
     function wx_dc_get_logical_origin_point(self) result(result_object)
         class(wxdc_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxDC_GetLogicalOriginPoint(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxDC_GetLogicalOriginPoint(self%ptr), .true.)
     end function wx_dc_get_logical_origin_point
 
     function wx_dc_get_device_origin_point(self) result(result_object)
         class(wxdc_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxDC_GetDeviceOriginPoint(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxDC_GetDeviceOriginPoint(self%ptr), .true.)
     end function wx_dc_get_device_origin_point
 
     subroutine wx_dc_copy_attributes(self, dc)
@@ -406,7 +406,7 @@ contains
         integer(c_int), intent(in) :: height
         logical, intent(in) :: userect
         type(wxbitmap_t) :: result_object
-        result_object = wxbitmap_from_ptr(wxDC_GetAsBitmap(self%ptr, x, y, width, height, merge(1_c_int, 0_c_int, userect)), .false.)
+        result_object = wxbitmap_from_ptr(wxDC_GetAsBitmap(self%ptr, x, y, width, height, merge(1_c_int, 0_c_int, userect)), .true.)
     end function wx_dc_get_as_bitmap
 
     subroutine wx_dc_draw_spline(self, x1, y1, x2, y2, x3, y3)
@@ -636,7 +636,7 @@ contains
         type(c_ptr) :: str_ptr
         type(wxrect_t) :: result_object
         str_ptr = to_wxstring(str)
-        result_object = wxrect_from_ptr(wxDC_DrawLabelBitmap(self%ptr, str_ptr, bmp%ptr, x, y, width, height, align, indexaccel), .false.)
+        result_object = wxrect_from_ptr(wxDC_DrawLabelBitmap(self%ptr, str_ptr, bmp%ptr, x, y, width, height, align, indexaccel), .true.)
         call wxString_Delete(str_ptr)
     end function wx_dc_draw_label_bitmap
 
@@ -837,7 +837,7 @@ contains
     function wx_dc_get_ppi(self) result(result_object)
         class(wxdc_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxDC_GetPPI(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxDC_GetPPI(self%ptr), .true.)
     end function wx_dc_get_ppi
 
     subroutine wx_dc_get_pen(self, ref)
@@ -858,13 +858,13 @@ contains
     function wx_dc_get_size(self) result(result_object)
         class(wxdc_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxDC_GetSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxDC_GetSize(self%ptr), .true.)
     end function wx_dc_get_size
 
     function wx_dc_get_size_mm(self) result(result_object)
         class(wxdc_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxDC_GetSizeMM(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxDC_GetSizeMM(self%ptr), .true.)
     end function wx_dc_get_size_mm
 
     subroutine wx_dc_get_text_background(self, ref)

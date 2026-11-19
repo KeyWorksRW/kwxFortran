@@ -8,6 +8,12 @@ module kwx_art_prov
 
     public :: kwx_art_prov_create
     public :: kwx_art_prov_release
+    public :: kwx_art_prov_push
+    public :: kwx_art_prov_push_back
+    public :: kwx_art_prov_set_on_create_bitmap_with_data
+    public :: kwx_art_prov_get_requested_width
+    public :: kwx_art_prov_get_requested_height
+    public :: kwx_art_prov_set_create_bitmap_result
 
 contains
 
@@ -23,5 +29,40 @@ contains
         class(kwxartprov_t), intent(in) :: self
         call kwxArtProv_Release(self%ptr)
     end subroutine kwx_art_prov_release
+
+    subroutine kwx_art_prov_push(self)
+        class(kwxartprov_t), intent(in) :: self
+        call kwxArtProv_Push(self%ptr)
+    end subroutine kwx_art_prov_push
+
+    subroutine kwx_art_prov_push_back(self)
+        class(kwxartprov_t), intent(in) :: self
+        call kwxArtProv_PushBack(self%ptr)
+    end subroutine kwx_art_prov_push_back
+
+    subroutine kwx_art_prov_set_on_create_bitmap_with_data(self, pfunction, data)
+        class(kwxartprov_t), intent(in) :: self
+        type(c_ptr), intent(in), value :: pfunction
+        type(c_ptr), intent(in), value :: data
+        call kwxArtProv_SetOnCreateBitmapWithData(self%ptr, pfunction, data)
+    end subroutine kwx_art_prov_set_on_create_bitmap_with_data
+
+    function kwx_art_prov_get_requested_width(self) result(result_value)
+        class(kwxartprov_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = kwxArtProv_GetRequestedWidth(self%ptr)
+    end function kwx_art_prov_get_requested_width
+
+    function kwx_art_prov_get_requested_height(self) result(result_value)
+        class(kwxartprov_t), intent(in) :: self
+        integer(c_int) :: result_value
+        result_value = kwxArtProv_GetRequestedHeight(self%ptr)
+    end function kwx_art_prov_get_requested_height
+
+    subroutine kwx_art_prov_set_create_bitmap_result(self, bitmap)
+        class(kwxartprov_t), intent(in) :: self
+        class(wxbitmap_t), intent(in) :: bitmap
+        call kwxArtProv_SetCreateBitmapResult(self%ptr, bitmap%ptr)
+    end subroutine kwx_art_prov_set_create_bitmap_result
 
 end module kwx_art_prov

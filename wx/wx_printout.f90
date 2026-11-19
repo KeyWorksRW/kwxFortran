@@ -43,7 +43,7 @@ contains
         class(wxprintout_t), intent(in) :: self
         class(wxpagesetupdialogdata_t), intent(in) :: pagesetupdata
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxPrintout_GetLogicalPageMarginsRect(self%ptr, pagesetupdata%ptr), .false.)
+        result_object = wxrect_from_ptr(wxPrintout_GetLogicalPageMarginsRect(self%ptr, pagesetupdata%ptr), .true.)
     end function wx_printout_get_logical_page_margins_rect
 
     subroutine wx_printout_map_screen_size_to_page(self)

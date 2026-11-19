@@ -19,7 +19,7 @@ contains
         class(wxdataobject_t), intent(in) :: self
         integer(c_int), intent(in) :: direction
         type(wxdataformat_t) :: result_object
-        result_object = wxdataformat_from_ptr(wxDataObject_GetPreferredFormat(self%ptr, direction), .false.)
+        result_object = wxdataformat_from_ptr(wxDataObject_GetPreferredFormat(self%ptr, direction), .true.)
     end function wx_data_object_get_preferred_format
 
     function wx_data_object_get_format_count(self, direction) result(result_value)

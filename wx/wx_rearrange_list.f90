@@ -44,7 +44,7 @@ contains
     function wx_rearrange_list_get_current_order(self) result(result_object)
         class(wxrearrangelist_t), intent(in) :: self
         type(wxarrayint_t) :: result_object
-        result_object = wxarrayint_from_ptr(wxRearrangeList_GetCurrentOrder(self%ptr), .false.)
+        result_object = wxarrayint_from_ptr(wxRearrangeList_GetCurrentOrder(self%ptr), .true.)
     end function wx_rearrange_list_get_current_order
 
     function wx_rearrange_list_can_move_current_up(self) result(result_value)

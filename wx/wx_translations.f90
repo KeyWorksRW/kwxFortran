@@ -73,7 +73,7 @@ contains
         type(c_ptr) :: domain_ptr
         type(wxarraystring_t) :: result_object
         domain_ptr = to_wxstring(domain)
-        result_object = wxarraystring_from_ptr(wxTranslations_GetAvailableTranslations(self%ptr, domain_ptr), .false.)
+        result_object = wxarraystring_from_ptr(wxTranslations_GetAvailableTranslations(self%ptr, domain_ptr), .true.)
         call wxString_Delete(domain_ptr)
     end function wx_translations_get_available_translations
 

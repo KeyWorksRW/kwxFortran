@@ -8,7 +8,9 @@ module wx_drag_image
 
     public :: wx_drag_image_begin_drag
     public :: wx_drag_image_begin_drag_full_screen
+    public :: wx_drag_image_begin_drag_full_screen_default
     public :: wx_drag_image_create
+    public :: wx_drag_image_create_with_cursor
     public :: wx_drag_image_delete
     public :: wx_drag_image_end_drag
     public :: wx_drag_image_hide
@@ -38,6 +40,16 @@ contains
         result_value = (wxDragImage_BeginDragFullScreen(self%ptr, x_pos, y_pos, window%ptr, merge(1_c_int, 0_c_int, fullscreen), rect%ptr) /= 0)
     end function wx_drag_image_begin_drag_full_screen
 
+    function wx_drag_image_begin_drag_full_screen_default(self, x_pos, y_pos, window, fullscreen) result(result_value)
+        class(wxdragimage_t), intent(in) :: self
+        integer(c_int), intent(in) :: x_pos
+        integer(c_int), intent(in) :: y_pos
+        class(wxwindow_t), intent(in) :: window
+        logical, intent(in) :: fullscreen
+        logical :: result_value
+        result_value = (wxDragImage_BeginDragFullScreenDefault(self%ptr, x_pos, y_pos, window%ptr, merge(1_c_int, 0_c_int, fullscreen)) /= 0)
+    end function wx_drag_image_begin_drag_full_screen_default
+
     function wx_drag_image_create(image, x, y) result(result_object)
         class(wxbitmap_t), intent(in) :: image
         integer(c_int), intent(in) :: x
@@ -46,6 +58,14 @@ contains
         result_object%ptr = wxDragImage_Create(image%ptr, x, y)
         result_object%owned = .true.
     end function wx_drag_image_create
+
+    function wx_drag_image_create_with_cursor(image, cursor) result(result_object)
+        class(wxbitmap_t), intent(in) :: image
+        class(wxcursor_t), intent(in) :: cursor
+        type(wxdragimage_t) :: result_object
+        result_object%ptr = wxDragImage_CreateWithCursor(image%ptr, cursor%ptr)
+        result_object%owned = .true.
+    end function wx_drag_image_create_with_cursor
 
     subroutine wx_drag_image_delete(self)
         class(wxdragimage_t), intent(inout) :: self

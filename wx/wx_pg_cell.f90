@@ -120,25 +120,25 @@ contains
     function wx_pg_cell_get_bitmap(self) result(result_object)
         class(wxpgcell_t), intent(in) :: self
         type(wxbitmapbundle_t) :: result_object
-        result_object = wxbitmapbundle_from_ptr(wxPGCell_GetBitmap(self%ptr), .false.)
+        result_object = wxbitmapbundle_from_ptr(wxPGCell_GetBitmap(self%ptr), .true.)
     end function wx_pg_cell_get_bitmap
 
     function wx_pg_cell_get_fg_col(self) result(result_object)
         class(wxpgcell_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPGCell_GetFgCol(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPGCell_GetFgCol(self%ptr), .true.)
     end function wx_pg_cell_get_fg_col
 
     function wx_pg_cell_get_bg_col(self) result(result_object)
         class(wxpgcell_t), intent(in) :: self
         type(wxcolour_t) :: result_object
-        result_object = wxcolour_from_ptr(wxPGCell_GetBgCol(self%ptr), .false.)
+        result_object = wxcolour_from_ptr(wxPGCell_GetBgCol(self%ptr), .true.)
     end function wx_pg_cell_get_bg_col
 
     function wx_pg_cell_get_font(self) result(result_object)
         class(wxpgcell_t), intent(in) :: self
         type(wxfont_t) :: result_object
-        result_object = wxfont_from_ptr(wxPGCell_GetFont(self%ptr), .false.)
+        result_object = wxfont_from_ptr(wxPGCell_GetFont(self%ptr), .true.)
     end function wx_pg_cell_get_font
 
 end module wx_pg_cell

@@ -34,6 +34,7 @@ module wx_window
     public :: wx_window_get_client_area_origin
     public :: wx_window_get_client_rect
     public :: wx_window_client_to_window_size
+    public :: wx_window_set_size_wh
     public :: wx_window_window_to_client_size
     public :: wx_window_get_best_height
     public :: wx_window_get_best_width
@@ -94,6 +95,9 @@ module wx_window
     public :: wx_window_get_dpi
     public :: wx_window_from_dip
     public :: wx_window_to_dip
+    public :: wx_window_from_dip_size
+    public :: wx_window_from_dip_size_for_window
+    public :: wx_window_from_dip_size_default
     public :: wx_window_has_capture
     public :: wx_window_enable_touch_events
     public :: wx_window_is_frozen
@@ -165,6 +169,7 @@ module wx_window
     public :: wx_window_convert_dialog_to_pixels
     public :: wx_window_convert_pixels_to_dialog
     public :: wx_window_create
+    public :: wx_window_create_with_background_style
     public :: wx_window_destroy
     public :: wx_window_destroy_children
     public :: wx_window_disable
@@ -246,6 +251,7 @@ module wx_window
     public :: wx_window_set_client_object
     public :: wx_window_set_client_size
     public :: wx_window_set_cursor
+    public :: wx_window_set_cursor_bundle
     public :: wx_window_set_drop_target
     public :: wx_window_set_extra_style
     public :: wx_window_set_focus
@@ -315,7 +321,7 @@ contains
         integer(c_int), intent(in) :: x
         integer(c_int), intent(in) :: y
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxWindow_ConvertDialogToPixelsEx(self%ptr, x, y), .false.)
+        result_object = wxpoint_from_ptr(wxWindow_ConvertDialogToPixelsEx(self%ptr, x, y), .true.)
     end function wx_window_convert_dialog_to_pixels_ex
 
     function wx_window_convert_pixels_to_dialog_ex(self, x, y) result(result_object)
@@ -323,7 +329,7 @@ contains
         integer(c_int), intent(in) :: x
         integer(c_int), intent(in) :: y
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxWindow_ConvertPixelsToDialogEx(self%ptr, x, y), .false.)
+        result_object = wxpoint_from_ptr(wxWindow_ConvertPixelsToDialogEx(self%ptr, x, y), .true.)
     end function wx_window_convert_pixels_to_dialog_ex
 
     function wx_window_screen_to_client2(self, x, y) result(result_object)
@@ -331,7 +337,7 @@ contains
         integer(c_int), intent(in) :: x
         integer(c_int), intent(in) :: y
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxWindow_ScreenToClient2(self%ptr, x, y), .false.)
+        result_object = wxpoint_from_ptr(wxWindow_ScreenToClient2(self%ptr, x, y), .true.)
     end function wx_window_screen_to_client2
 
     function wx_window_new_control_id(count) result(result_value)
@@ -375,7 +381,7 @@ contains
         integer(c_int), intent(in) :: size
         integer(c_int), intent(in) :: availableotherdir
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetMinSizeFromKnownDirection(self%ptr, direction, size, availableotherdir), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetMinSizeFromKnownDirection(self%ptr, direction, size, availableotherdir), .true.)
     end function wx_window_get_min_size_from_known_direction
 
     function wx_window_is_transparent_background_supported(self, reason) result(result_value)
@@ -437,7 +443,7 @@ contains
     function wx_window_get_screen_rect(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxWindow_GetScreenRect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxWindow_GetScreenRect(self%ptr), .true.)
     end function wx_window_get_screen_rect
 
     subroutine wx_window_get_client_area_origin(self, x, y)
@@ -450,7 +456,7 @@ contains
     function wx_window_get_client_rect(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxWindow_GetClientRect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxWindow_GetClientRect(self%ptr), .true.)
     end function wx_window_get_client_rect
 
     subroutine wx_window_client_to_window_size(self, width, height)
@@ -459,6 +465,13 @@ contains
         integer(c_int), intent(out), target :: height
         call wxWindow_ClientToWindowSize(self%ptr, c_loc(width), c_loc(height))
     end subroutine wx_window_client_to_window_size
+
+    subroutine wx_window_set_size_wh(self, width, height)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        call wxWindow_SetSizeWH(self%ptr, width, height)
+    end subroutine wx_window_set_size_wh
 
     subroutine wx_window_window_to_client_size(self, width, height)
         class(wxwindow_t), intent(in) :: self
@@ -510,13 +523,13 @@ contains
     function wx_window_get_min_size(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetMinSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetMinSize(self%ptr), .true.)
     end function wx_window_get_min_size
 
     function wx_window_get_max_size(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetMaxSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetMaxSize(self%ptr), .true.)
     end function wx_window_get_max_size
 
     subroutine wx_window_set_min_client_size(self, width, height)
@@ -536,19 +549,19 @@ contains
     function wx_window_get_min_client_size(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetMinClientSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetMinClientSize(self%ptr), .true.)
     end function wx_window_get_min_client_size
 
     function wx_window_get_max_client_size(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetMaxClientSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetMaxClientSize(self%ptr), .true.)
     end function wx_window_get_max_client_size
 
     function wx_window_get_best_virtual_size(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetBestVirtualSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetBestVirtualSize(self%ptr), .true.)
     end function wx_window_get_best_virtual_size
 
     function wx_window_get_content_scale_factor(self) result(result_value)
@@ -566,7 +579,7 @@ contains
     function wx_window_get_window_border_size(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetWindowBorderSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetWindowBorderSize(self%ptr), .true.)
     end function wx_window_get_window_border_size
 
     subroutine wx_window_send_size_event(self, flags)
@@ -826,7 +839,7 @@ contains
     function wx_window_get_dpi(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetDPI(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetDPI(self%ptr), .true.)
     end function wx_window_get_dpi
 
     function wx_window_from_dip(self, value) result(result_value)
@@ -842,6 +855,29 @@ contains
         integer(c_int) :: result_value
         result_value = wxWindow_ToDIP(self%ptr, value)
     end function wx_window_to_dip
+
+    function wx_window_from_dip_size(self, width, height) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_FromDIPSize(self%ptr, width, height), .true.)
+    end function wx_window_from_dip_size
+
+    function wx_window_from_dip_size_for_window(width, height, window) result(result_object)
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        class(wxwindow_t), intent(in) :: window
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_FromDIPSizeForWindow(width, height, window%ptr), .true.)
+    end function wx_window_from_dip_size_for_window
+
+    function wx_window_from_dip_size_default(width, height) result(result_object)
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        type(wxsize_t) :: result_object
+        result_object = wxsize_from_ptr(wxWindow_FromDIPSizeDefault(width, height), .true.)
+    end function wx_window_from_dip_size_default
 
     function wx_window_has_capture(self) result(result_value)
         class(wxwindow_t), intent(in) :: self
@@ -877,7 +913,7 @@ contains
     function wx_window_get_update_client_rect(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxWindow_GetUpdateClientRect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxWindow_GetUpdateClientRect(self%ptr), .true.)
     end function wx_window_get_update_client_rect
 
     subroutine wx_window_set_own_background_colour(self, colour)
@@ -971,7 +1007,7 @@ contains
     function wx_window_get_input_method_cursor_rect(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxWindow_GetInputMethodCursorRect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxWindow_GetInputMethodCursorRect(self%ptr), .true.)
     end function wx_window_get_input_method_cursor_rect
 
     function wx_window_hit_test(self, x, y) result(result_value)
@@ -1128,7 +1164,7 @@ contains
     function wx_window_get_palette(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxpalette_t) :: result_object
-        result_object = wxpalette_from_ptr(wxWindow_GetPalette(self%ptr), .false.)
+        result_object = wxpalette_from_ptr(wxWindow_GetPalette(self%ptr), .true.)
     end function wx_window_get_palette
 
     subroutine wx_window_set_palette(self, palette)
@@ -1283,7 +1319,7 @@ contains
         integer(c_int), intent(in) :: x
         integer(c_int), intent(in) :: y
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxWindow_ClientToScreen(self%ptr, x, y), .false.)
+        result_object = wxpoint_from_ptr(wxWindow_ClientToScreen(self%ptr, x, y), .true.)
     end function wx_window_client_to_screen
 
     function wx_window_close(self, force) result(result_value)
@@ -1296,13 +1332,13 @@ contains
     function wx_window_convert_dialog_to_pixels(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxWindow_ConvertDialogToPixels(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxWindow_ConvertDialogToPixels(self%ptr), .true.)
     end function wx_window_convert_dialog_to_pixels
 
     function wx_window_convert_pixels_to_dialog(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxWindow_ConvertPixelsToDialog(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxWindow_ConvertPixelsToDialog(self%ptr), .true.)
     end function wx_window_convert_pixels_to_dialog
 
     function wx_window_create(self, id, x, y, width, height, style) result(result_object)
@@ -1316,6 +1352,19 @@ contains
         type(wxwindow_t) :: result_object
         result_object = wxwindow_from_ptr(wxWindow_Create(self%ptr, id, x, y, width, height, style), .false.)
     end function wx_window_create
+
+    function wx_window_create_with_background_style(self, id, x, y, width, height, style, backgroundstyle) result(result_object)
+        class(wxwindow_t), intent(in) :: self
+        integer(c_int), intent(in) :: id
+        integer(c_int), intent(in) :: x
+        integer(c_int), intent(in) :: y
+        integer(c_int), intent(in) :: width
+        integer(c_int), intent(in) :: height
+        integer(c_int), intent(in) :: style
+        integer(c_int), intent(in) :: backgroundstyle
+        type(wxwindow_t) :: result_object
+        result_object = wxwindow_from_ptr(wxWindow_CreateWithBackgroundStyle(self%ptr, id, x, y, width, height, style, backgroundstyle), .false.)
+    end function wx_window_create_with_background_style
 
     function wx_window_destroy(self) result(result_value)
         class(wxwindow_t), intent(in) :: self
@@ -1383,7 +1432,7 @@ contains
     function wx_window_get_effective_min_size(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetEffectiveMinSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetEffectiveMinSize(self%ptr), .true.)
     end function wx_window_get_effective_min_size
 
     function wx_window_get_auto_layout(self) result(result_value)
@@ -1401,7 +1450,7 @@ contains
     function wx_window_get_best_size(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetBestSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetBestSize(self%ptr), .true.)
     end function wx_window_get_best_size
 
     function wx_window_get_caret(self) result(result_object)
@@ -1439,13 +1488,13 @@ contains
     function wx_window_get_client_size(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetClientSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetClientSize(self%ptr), .true.)
     end function wx_window_get_client_size
 
     function wx_window_get_cursor(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxcursor_t) :: result_object
-        result_object = wxcursor_from_ptr(wxWindow_GetCursor(self%ptr), .false.)
+        result_object = wxcursor_from_ptr(wxWindow_GetCursor(self%ptr), .true.)
     end function wx_window_get_cursor
 
     function wx_window_get_drop_target(self) result(result_object)
@@ -1541,13 +1590,13 @@ contains
     function wx_window_get_position(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxWindow_GetPosition(self%ptr), .false.)
+        result_object = wxpoint_from_ptr(wxWindow_GetPosition(self%ptr), .true.)
     end function wx_window_get_position
 
     function wx_window_get_rect(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxrect_t) :: result_object
-        result_object = wxrect_from_ptr(wxWindow_GetRect(self%ptr), .false.)
+        result_object = wxrect_from_ptr(wxWindow_GetRect(self%ptr), .true.)
     end function wx_window_get_rect
 
     function wx_window_get_scroll_pos(self, orient) result(result_value)
@@ -1574,7 +1623,7 @@ contains
     function wx_window_get_size(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetSize(self%ptr), .true.)
     end function wx_window_get_size
 
     function wx_window_get_sizer(self) result(result_object)
@@ -1621,7 +1670,7 @@ contains
     function wx_window_get_virtual_size(self) result(result_object)
         class(wxwindow_t), intent(in) :: self
         type(wxsize_t) :: result_object
-        result_object = wxsize_from_ptr(wxWindow_GetVirtualSize(self%ptr), .false.)
+        result_object = wxsize_from_ptr(wxWindow_GetVirtualSize(self%ptr), .true.)
     end function wx_window_get_virtual_size
 
     function wx_window_get_window_style_flag(self) result(result_value)
@@ -1779,7 +1828,7 @@ contains
         integer(c_int), intent(in) :: x
         integer(c_int), intent(in) :: y
         type(wxpoint_t) :: result_object
-        result_object = wxpoint_from_ptr(wxWindow_ScreenToClient(self%ptr, x, y), .false.)
+        result_object = wxpoint_from_ptr(wxWindow_ScreenToClient(self%ptr, x, y), .true.)
     end function wx_window_screen_to_client
 
     subroutine wx_window_scroll_window(self, dx, dy)
@@ -1850,6 +1899,12 @@ contains
         integer(c_int) :: result_value
         result_value = wxWindow_SetCursor(self%ptr, cursor%ptr)
     end function wx_window_set_cursor
+
+    subroutine wx_window_set_cursor_bundle(self, bundle)
+        class(wxwindow_t), intent(in) :: self
+        class(wxcursorbundle_t), intent(in) :: bundle
+        call wxWindow_SetCursorBundle(self%ptr, bundle%ptr)
+    end subroutine wx_window_set_cursor_bundle
 
     subroutine wx_window_set_drop_target(self, droptarget)
         class(wxwindow_t), intent(in) :: self
